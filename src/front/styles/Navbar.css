@@ -1,0 +1,54 @@
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.nombreWeb {
+    margin-left: 3%;
+}
+
+.noSubrayadoLink {
+    text-decoration: none;
+}
+
+.logo {
+    font-size: 40px;
+    color: #e7a33e;
+}
+
+.botonesNavbar {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: 3%;
+}
+
+.botonNavbar {
+    margin-right: 2px;
+}
+
+.btn {
+    background: #e7a33e;
+    white-space: nowrap; /* Evita que el texto se divida en líneas */
+    font-size: 15px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 600px) {
+    /* Estilos específicos para pantallas pequeñas */
+    .botonesNavbar {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .botonNavbar {
+        margin-right: 1px;
+    }
+
+    .btn {
+        background: #e7a33e;
+        white-space: nowrap;
+        font-size: 11px;
+        border: 1px solid black;
+        border-radius: 10px;
+    }
+}
