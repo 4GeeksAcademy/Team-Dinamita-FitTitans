@@ -1,7 +1,204 @@
-/*
-    home.css: This website contains selectors only used in home.css
+body {
+  background: rgb(15, 15, 15);
+  font-family: 'Inter', sans-serif;
+}
 
-    All pages share the styles on index.css but you should create 
-    one more css for each page that will contain the selected used 
-    on that page only (the ones not reused in other pages).
-*/
+.container-fluid {
+  display: flex;
+  flex-direction: column;
+}
+
+.row-fila1 {
+  display: flex;
+  margin-top: 2%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.col-columna1 {
+  background-image: url('https://img.freepik.com/foto-gratis/pesas-barbell-rack_23-2147789571.jpg?t=st=1716491307~exp=1716494907~hmac=94105d3c8c2408c89bf35a4ad71de7930ac6d3035cb65798b067f2d9b795f86e&w=1380');
+  max-width: 100%;
+  height: auto;
+  padding: 20px;
+  color: #e7a33e;
+  text-align: center;
+  font-size: 60px;
+  min-width: 0;
+  /* Para evitar que el contenido de las columnas sobresalga */
+}
+
+.titulo1 {
+  background-color: rgba(0, 0, 0, 0.8);
+  font-size: 60px;
+  padding: 35px;
+  min-width: 0;
+}
+
+.subTitulo1 {
+  font-size: 30px;
+  min-width: 0;
+}
+
+.btn-ConoceEntrenadores {
+  background: #e7a33e;
+  white-space: nowrap;
+  /* Evita que el texto se divida en líneas */
+  font-size: 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.col-columna2 {
+  background-image: url('https://img.freepik.com/foto-gratis/concepto-levantamiento-pesas-angulo-alto-mancuernas_23-2149267002.jpg?t=st=1716491903~exp=1716495503~hmac=1483153519e8f868623db7020a6b0f4f72d57f1c5ae30a020e897d1ab7e3126c&w=740');
+  max-width: 100%;
+  height: auto;
+  padding: 20px;
+  color: #e7a33e;
+  text-align: center;
+  min-width: 0;
+  /* Para evitar que el contenido de las columnas sobresalga */
+}
+
+.titulo2 {
+  background-color: rgba(0, 0, 0, 0.8);
+  font-size: 60px;
+  padding: 35px;
+  min-width: 0;
+}
+
+.subTitulo2 {
+  font-size: 30px;
+  min-width: 0;
+}
+
+.btn-RegistrarEntrenador {
+  background: #e7a33e;
+  white-space: nowrap;
+  /* Evita que el texto se divida en líneas */
+  font-size: 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+
+.row-fila2 {
+  display: flex;
+  margin-top: 3%;
+  margin-left: 5%;
+  margin-right: 5%;
+  border: 2px solid #740f0f;
+}
+
+.col-columna3 {
+  background-image: url('https://img.freepik.com/foto-gratis/alto-angulo-pesos-suelo-gimnasio_23-2149175406.jpg?t=st=1716492834~exp=1716496434~hmac=43844d6abef2391c63a4ab0ecd357b4130bc171f577a20977d0c31d331d6fe84&w=1380');
+  background-size: cover;
+  background-repeat: no-repeat;
+  max-width: 100%;
+  height: 300px;
+  padding: 20px;
+  color: #e7a33e;
+  text-align: center;
+  min-width: 0;
+  border: 2px solid #740f0f;
+}
+
+.titulo3 {
+  background-color: rgba(0, 0, 0, 0.8);
+  font-size: 20px;
+  padding: 10px;
+  min-width: 0;
+}
+
+.col-columna4 {
+  background-image: url('https://as2.ftcdn.net/v2/jpg/03/16/59/63/1000_F_316596390_LVzIyvqhQ0q52Zr9HOpIhFgFhWTctfz5.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  max-width: 100%;
+  height: 300px;
+  padding: 20px;
+  color: #e7a33e;
+  text-align: center;
+  min-width: 0;
+  border: 2px solid #740f0f;
+}
+
+.titulo4 {
+  background-color: rgba(0, 0, 0, 0.8);
+  font-size: 20px;
+  padding: 10px;
+  min-width: 0;
+}
+
+.col-columna5 {
+  background-image: url('https://img.freepik.com/vector-gratis/conjunto-comida-pizarra_23-2147779765.jpg?t=st=1716496079~exp=1716499679~hmac=3a345c1ffe352b923064bcacc387707e2f3dc31dda7c8edf863282b2846426cb&w=740');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  max-width: 100%;
+  height: 300px;
+  padding: 20px;
+  color: #e7a33e;
+  text-align: center;
+  min-width: 0;
+  border: 2px solid #740f0f;
+}
+
+.titulo5 {
+  background-color: rgba(0, 0, 0, 0.8);
+  font-size: 20px;
+  padding: 10px;
+  min-width: 0;
+}
+
+
+
+@media (max-width: 1000px) {
+  .col-columna1 {
+    height: auto;
+  }
+
+  .titulo1 {
+    font-size: 20px;
+
+  }
+
+  .btn-ConoceEntrenadores {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .col-columna1 {
+    height: auto;
+    margin-left: 1px;
+  }
+
+  .titulo1 {
+    font-size: 20px;
+  }
+
+  .subtitulo1 {
+    font-size: 10px;
+  }
+
+  .btn-ConoceEntrenadores {
+    font-size: 12px;
+  }
+}
+
+
+
+@media (max-width: 400px) {
+  .col-columna1 {
+    height: auto;
+  }
+
+  .titulo1 {
+    font-size: 20px;
+
+  }
+
+  .btn-ConoceEntrenadores {
+    font-size: 10px;
+  }
+}
