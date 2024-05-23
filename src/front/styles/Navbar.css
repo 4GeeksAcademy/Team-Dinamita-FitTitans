@@ -25,15 +25,17 @@ body {
     margin-right: 10px;
 }
 
-.btn {
+.btn-Navbar {
     background: #e7a33e;
-    white-space: nowrap; /* Evita que el texto se divida en líneas */
+    white-space: nowrap;
+    /* Evita que el texto se divida en líneas */
     font-size: 15px;
     border: 1px solid black;
     border-radius: 10px;
 }
 
 @media screen and (max-width: 600px) {
+
     /* Estilos específicos para pantallas pequeñas */
     .botonesNavbar {
         display: flex;
@@ -44,7 +46,7 @@ body {
         margin-right: 1px;
     }
 
-    .btn {
+    .btn-Navbar {
         background: #e7a33e;
         white-space: nowrap;
         font-size: 11px;
