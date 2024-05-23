@@ -10,6 +10,7 @@ import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { perfilEntrenador } from "./pages/perfilEntrenador";
 
 // Importacioens Nuestras
 import { Registro } from "./pages/Registro";
