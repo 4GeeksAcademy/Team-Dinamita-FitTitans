@@ -4,7 +4,7 @@ import "../../styles/Navbar.css";
 import { Registro } from "../pages/Registro";
 
 export const Navbar = () => {
-  const [test, setTest] = useState(true);
+  const [test, setTest] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
