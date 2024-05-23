@@ -14,17 +14,17 @@ export const Navbar = () => {
 			<div className="botonesNavbar">
 				<div className="botonNavbar">
 					<Link to="/">
-						<button className="btn">Perfil Entrenador</button>
+						<button className="btn btn-Navbar">Perfil Entrenador</button>
 					</Link>
 				</div>
 				<div className="botonNavbar">
 					<Link to="/">
-						<button className="btn">Registrarse</button>
+						<button className="btn btn-Navbar">Registrarse</button>
 					</Link>
 				</div>
 				<div className="botonNavbar">
 					<Link to="/">
-						<button className="btn">Iniciar Sesion</button>
+						<button className="btn btn-Navbar">Iniciar Sesion</button>
 					</Link>
 				</div>
 			</div >
