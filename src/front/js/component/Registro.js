@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "/workspaces/Team-Dinamita-FitTitans/src/front/styles/index.css";
+import "/workspaces/Team-Dinamita-FitTitans/src/front/styles/registro.css"
+
 
 export const Registro = ({ closeModal }) => {
   const [usuarios, setUsuarios] = useState({
@@ -20,6 +21,11 @@ export const Registro = ({ closeModal }) => {
     closeModal(); // Cerrar la modal después de enviar el formulario
   };
 
+  const handleRoleChange = (e) => {
+    const isEntrenador = e.target.value === "2";
+    setUsuarios({ ...usuarios, esEntrenador: isEntrenador });
+    console.log(usuarios)
+  };
   return (
     <div className="modal-overlay" onClick={closeModal}>
       <div className="modal-dialog modal-dialog-centered" onClick={(e) => e.stopPropagation()}>
@@ -28,11 +34,17 @@ export const Registro = ({ closeModal }) => {
           <form onSubmit={handleSubmit}>
             <div className="container mt-5 editcontact">
             <div className="input-group mb-3">
-                <label className="input-group-text" htmlFor="inputGroupSelect01">Selecciona Rol</label>
-                <select className="form-select" id="inputGroupSelect01" required>
-                    <option defaultValue="" disabled selected>Choose...</option>
-                    <option defaultValue="1">Usuario</option>
-                    <option defaultValue="2">Entrenador</option>
+            <label className="input-group-text" htmlFor="inputGroupSelect01">Selecciona Rol</label>
+                <select 
+                  className="form-select" 
+                  id="inputGroupSelect01" 
+                  required 
+                  onChange={handleRoleChange}
+                  defaultValue=""
+                >
+                  <option value="" disabled>Choose...</option>
+                  <option value="2">Usuario</option>
+                  <option value="1">Entrenador</option>
                 </select>
             </div>
               <div className="">
