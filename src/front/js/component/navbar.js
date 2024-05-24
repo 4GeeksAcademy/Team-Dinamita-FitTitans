@@ -4,7 +4,7 @@ import "../../styles/Navbar.css";
 import { Registro } from "../pages/Registro";
 
 export const Navbar = () => {
-  const [test, setTest] = useState(false);
+  const [test, setTest] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -49,7 +49,7 @@ export const Navbar = () => {
               </Link>
             </div>
             <div className="botonNavbar">
-              <Link to="/registro">
+              <Link to="/">
                 <button className="btn btn-Navbar">Mi area</button>
               </Link>
             </div>
