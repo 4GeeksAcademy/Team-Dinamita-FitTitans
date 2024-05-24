@@ -4,16 +4,16 @@ import "../../styles/Navbar.css";
 import { Registro } from "../pages/Registro";
 
 export const Navbar = () => {
-  const [test, setTest] = useState(true);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+	const [test, setTest] = useState(true);
+	const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
+	const openModal = () => {
+		setIsModalOpen(true);
+	};
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+	const closeModal = () => {
+		setIsModalOpen(false);
+	};
 
   return (
     <>
@@ -55,7 +55,7 @@ export const Navbar = () => {
             </div>
             <div className="botonNavbar">
               <Link to="/">
-                <button className="btn btn-Navbar">Cerrar sesion</button>
+                <button className="btn btn-Navbar">Cerrar sesionnnnn</button>
               </Link>
             </div>
           </div>
