@@ -55,7 +55,7 @@ export const Navbar = () => {
             </div>
             <div className="botonNavbar">
               <Link to="/">
-                <button className="btn btn-Navbar">Cerrar sesion</button>
+                <button className="btn btn-Navbar">Cerrar sesionnnnn</button>
               </Link>
             </div>
           </div>
