@@ -10,7 +10,8 @@ import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
-import { perfilEntrenador } from "./pages/perfilEntrenador";
+import { PerfilEntrenador } from "./pages/perfilEntrenador";
+
 
 // Importacioens Nuestras
 import { Registro } from "./pages/Registro";
@@ -35,7 +36,7 @@ const Layout = () => {
                         <Route element={<h1>Not found!</h1>} />
                         <Route element={<Registro />} path="/registro" />
                         <Route element={<Perfil />} path="/perfil" />
-                        <Route element ={<perfilEntrenador/>} patch="/entrenador" />
+                        <Route element={<PerfilEntrenador />} path="/entrenador" />
                     </Routes>
                     <Footer />
                 </ScrollToTop>
