@@ -27,12 +27,12 @@ export const Registro = ({ closeModal }) => {
           
           <form onSubmit={handleSubmit}>
             <div className="container mt-5 editcontact">
-            <div class="input-group mb-3">
-                <label className="input-group-text" for="inputGroupSelect01">Selecciona Rol</label>
+            <div className="input-group mb-3">
+                <label className="input-group-text" htmlFor="inputGroupSelect01">Selecciona Rol</label>
                 <select className="form-select" id="inputGroupSelect01" required>
-                    <option value="" disabled selected>Choose...</option>
-                    <option value="1">Usuario</option>
-                    <option value="2">Entrenador</option>
+                    <option defaultValue="" disabled selected>Choose...</option>
+                    <option defaultValue="1">Usuario</option>
+                    <option defaultValue="2">Entrenador</option>
                 </select>
             </div>
               <div className="">
@@ -92,7 +92,7 @@ export const Registro = ({ closeModal }) => {
                 />
               </div>
               <div className="form-check">
-                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                <input className="form-check-input" type="checkbox"  id="flexCheckDefault" />
                 <label className="form-check-label" htmlFor="flexCheckDefault">
                   Acepto terminos y condiciones politica de privacidad
                 </label>
@@ -101,9 +101,9 @@ export const Registro = ({ closeModal }) => {
                 </div>
               </div>
               <div className="d-flex justify-content-center">
-                <input type="submit" value={"Registrarse"} className="btn btn-primary mx-3"></input>
+                <input type="submit" value={"Registrarse"} className="btn btn-primary mx-3 text-dark" style={{ background: "#E7A33E"}}></input>
 
-                <button className="close-button btn btn-primary mx-3" onClick={closeModal}>close</button>
+                <button className=" btn btn-primary mx-3 text-dark" style={{ background: "#E7A33E"}} onClick={closeModal}>close</button>
 
               </div>
             </div>
