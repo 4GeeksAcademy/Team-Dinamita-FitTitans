@@ -3,9 +3,21 @@ import { Link } from "react-router-dom";
 import "../../styles/Navbar.css";
 import { Registro } from "./Registro";
 
+import firebaseApp from "../../../firebase/credenciales";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+const auth = getAuth(firebaseApp);
+
 export const Navbar = () => {
 	const [test, setTest] = useState(true);
 	const [isModalOpen, setIsModalOpen] = useState(false);
+
+	onAuthStateChanged(auth, (usuarioFirebase) => {
+		if (usuarioFirebase) {
+			setTest(usuarioFirebase)
+		}else{
+			setTest(true)
+		}
+	})
 
 	const openModal = () => {
 		setIsModalOpen(true);
