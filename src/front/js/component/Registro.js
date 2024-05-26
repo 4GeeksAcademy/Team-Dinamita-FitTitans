@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+git pimport React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "/workspaces/Team-Dinamita-FitTitans/src/front/styles/registro.css"
 
