@@ -1,0 +1,39 @@
+.TituloContactanos {
+    color: #e7a33e;
+    font-size: 50px;
+    margin-top: 2%;
+    text-align: center;
+}
+
+.contenedorFormulario {
+    border: 3px solid #e7a33e;
+    padding: 30px;
+    margin-top: 1%;
+    margin-bottom: 2%;
+}
+
+.TituloFormulario {
+    color: #e7a33e;
+    font-size: 20px;
+    margin-top: 2%;
+}
+
+.textoFormulario {
+    margin-bottom: 1%;
+}
+
+.botonEnviarFormulario {
+    text-align: center;
+}
+
+.btn-FormContactanos {
+    background: #e7a33e;
+    white-space: nowrap;
+    /* Evita que el texto se divida en líneas */
+    font-size: 15px;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-top: 3%;
+    padding: 1%;
+    width: 80px;
+}
