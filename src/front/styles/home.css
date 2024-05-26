@@ -27,6 +27,10 @@ body {
   /* Para evitar que el contenido de las columnas sobresalga */
 }
 
+.btn:hover {
+  color: white
+}
+
 .titulo1 {
   background-color: rgba(0, 0, 0, 0.8);
   font-size: 60px;

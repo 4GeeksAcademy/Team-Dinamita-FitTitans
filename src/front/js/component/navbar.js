@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/Navbar.css";
-import { Registro } from "../pages/Registro";
+import { Registro } from "./Registro";
 
 export const Navbar = () => {
 	const [test, setTest] = useState(true);
