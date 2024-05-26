@@ -22,7 +22,7 @@ export const Contactanos = () => {
     return (
         <div className="container">
             <div className="TituloContactanos">
-                Contactanos
+                CONTÁCTANOS
             </div>
             <form onSubmit={actions.handleSubmitContactanos} className="contact-form contenedorFormulario">
                 <div className="form-group TituloFormulario">

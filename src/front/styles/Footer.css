@@ -2,4 +2,6 @@
     width: 100%;
     background-color: #575858;
     color: white;
+    position: fixed;
+    bottom: 0;
 }
