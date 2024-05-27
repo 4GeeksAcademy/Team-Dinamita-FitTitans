@@ -61,6 +61,5 @@ export const MiAreaRegistrado = () => {
 						</div>
 					</div>
 				</div>
-		</>
 	)
 };
