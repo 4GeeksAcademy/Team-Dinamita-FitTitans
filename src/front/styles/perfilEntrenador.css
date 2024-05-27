@@ -1,0 +1,17 @@
+body {
+  background: rgb(15, 15, 15);
+  font-family: 'Inter', sans-serif;
+}
+
+.btnContratame {
+  background: #e7a33e;
+  padding: 10px;
+  color: black;
+  font-size: 15px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.btnContratame:hover {
+  color: white
+}
