@@ -41,9 +41,6 @@ export const MiAreaRegistrado = () => {
         }
       });
 	return (
-<>
-{sesion && sesion.rol === "usuario" ? (
-
 	<div className="container">
 
 			<div className="row row-filaMiAreaRegistrado">
@@ -64,8 +61,5 @@ export const MiAreaRegistrado = () => {
 				</div>
 			</div>
 </div>
-): (<h1 className='text-light'> Area Entrenador</h1>)}
-
-</>
 	)
 };
