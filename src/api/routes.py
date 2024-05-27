@@ -10,6 +10,7 @@ api = Blueprint('api', __name__)
 
 # Allow CORS requests to this API
 CORS(api)
+ 
 
 
 @api.route('/hello', methods=['POST', 'GET'])

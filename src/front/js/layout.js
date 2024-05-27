@@ -13,7 +13,7 @@ import { Footer } from "./component/footer";
 
 
 
-
+import { IniciarSesion } from "./component/IniciarSesion.jsx";
 import { Registro } from "./component/Registro";
 import { PerfilUsuarios } from "./component/PerfilUsuarios.js";
 import { Contactanos } from "./pages/Contactanos.jsx";
@@ -38,6 +38,7 @@ const Layout = () => {
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<h1>Not found!</h1>} />
+                        <Route element={<IniciarSesion />} path="login" />
                         <Route element={<Registro />} path="/registro" />
                         <Route element={<PerfilUsuarios />} path="/perfil" />
                         <Route element={<perfilEntrenador />} path="/entrenador" />
