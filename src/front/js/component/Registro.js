@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import "/workspaces/Team-Dinamita-FitTitans/src/front/styles/registro.css"
 import firebaseApp from "../../../firebase/credenciales";
 import { getAuth, createUserWithEmailAndPassword  } from "firebase/auth";
