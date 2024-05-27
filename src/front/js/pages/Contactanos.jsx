@@ -20,7 +20,7 @@ export const Contactanos = () => {
     };
 
     return (
-        <div className="container">
+        <div className="container contenedorContactanos">
             <div className="TituloContactanos">
                 CONTÁCTANOS
             </div>
