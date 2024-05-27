@@ -13,9 +13,15 @@ import { Footer } from "./component/footer";
 import { PerfilEntrenador } from "./pages/perfilEntrenador";
 
 
-// Importacioens Nuestras
-import { Registro } from "./pages/Registro";
-import { Perfil } from "./pages/Perfil";
+
+
+
+import { Registro } from "./component/Registro";
+import { PerfilUsuarios } from "./component/PerfilUsuarios.js";
+import { Contactanos } from "./pages/Contactanos.jsx";
+import { MiArea } from "./pages/MiArea.jsx";
+import { MiAreaRegistrado } from "./pages/MiAreaRegistrado.jsx";
+
 //create your first component
 const Layout = () => {
     //the basename is used when your project is published in a subdirectory and not in the root of the domain
@@ -35,8 +41,11 @@ const Layout = () => {
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<h1>Not found!</h1>} />
                         <Route element={<Registro />} path="/registro" />
-                        <Route element={<Perfil />} path="/perfil" />
-                        <Route element={<PerfilEntrenador />} path="/entrenador" />
+                        <Route element={<PerfilUsuarios />} path="/perfil" />
+                        <Route element={<perfilEntrenador />} path="/entrenador" />
+                        <Route element={<Contactanos />} path="/contactanos" />
+                        <Route element={<MiArea />} path="/miarea" />
+                        <Route element={<MiAreaRegistrado />} path="/miarea/registrado" />
                     </Routes>
                     <Footer />
                 </ScrollToTop>

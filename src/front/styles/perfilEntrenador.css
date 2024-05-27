@@ -3,7 +3,11 @@ body {
     font-family: 'Inter', sans-serif;
   }
 
-  .botonContrat {
-    background-color: #e7a33e;
+  .btn btn-primary {
+    background: #e7a33e;
+    white-space: nowrap;
+    font-size: 15px;
+    border: 1px solid black;
+    border-radius: 10px;
     
   }

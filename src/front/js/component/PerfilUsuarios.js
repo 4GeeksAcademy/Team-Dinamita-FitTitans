@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export const Perfil = () => {
+export const PerfilUsuarios = () => {
   const [usuarios, setUsuarios] = useState([
     { id: 1, nombre: "Usuario 1", imagen: "", telefono : "123", altura : "13", peso : "200", genero :"H" , acepto: false},
     

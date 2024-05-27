@@ -1,11 +1,23 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/Navbar.css";
-import { Registro } from "../pages/Registro";
+import { Registro } from "./Registro";
+
+import firebaseApp from "../../../firebase/credenciales";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+const auth = getAuth(firebaseApp);
 
 export const Navbar = () => {
 	const [test, setTest] = useState(true);
 	const [isModalOpen, setIsModalOpen] = useState(false);
+
+	onAuthStateChanged(auth, (usuarioFirebase) => {
+		if (usuarioFirebase) {
+			setTest(usuarioFirebase)
+		}else{
+			setTest(true)
+		}
+	})
 
 	const openModal = () => {
 		setIsModalOpen(true);
@@ -15,53 +27,63 @@ export const Navbar = () => {
 		setIsModalOpen(false);
 	};
 
-  return (
-    <>
-      <nav className="navbar navbar-dark bg-dark p-3">
-        <div className="nombreWeb">
-          <Link className="noSubrayadoLink" to="/">
-            <span className="logo">FIT TITANS</span>
-          </Link>
-        </div>
-        {test ? (
-          <div className="botonesNavbar">
-            <div className="botonNavbar">
-              <Link to="/">
-                <button className="btn btn-Navbar">Perfil Entrenador</button>
-              </Link>
-            </div>
-            <div className="botonNavbar">
-              <button className="btn btn-Navbar" onClick={openModal}>
-                Registrarse
-              </button>
-            </div>
-            <div className="botonNavbar">
-              <Link to="/">
-                <button className="btn btn-Navbar">Iniciar Sesion</button>
-              </Link>
-            </div>
-          </div>
-        ) : (
-          <div className="botonesNavbar">
-            <div className="botonNavbar">
-              <Link to="/">
-                <button className="btn btn-Navbar">Perfil Entrenador</button>
-              </Link>
-            </div>
-            <div className="botonNavbar">
-              <Link to="/">
-                <button className="btn btn-Navbar">Mi area</button>
-              </Link>
-            </div>
-            <div className="botonNavbar">
-              <Link to="/">
-                <button className="btn btn-Navbar">Cerrar sesionnnnn</button>
-              </Link>
-            </div>
-          </div>
-        )}
-      </nav>
-      {isModalOpen && <Registro closeModal={closeModal} />}
-    </>
-  );
+	return (
+		<>
+			<nav className="navbar navbar-dark bg-dark p-3">
+				<div className="nombreWeb">
+					<Link className="noSubrayadoLink" to="/">
+						<span className="logo">FIT TITANS</span>
+					</Link>
+				</div>
+				{test ? (
+					<div className="botonesNavbar">
+						<div className="botonNavbar">
+							<Link to="/">
+								<button className="btn btn-Navbar">Perfil Entrenador</button>
+							</Link>
+						</div>
+						<div className="botonNavbar">
+							<Link to="/">
+								<button className="btn btn-Navbar">Mi Area</button>
+							</Link>
+						</div>
+						<div className="botonNavbar">
+							<Link to="/contactanos">
+								<button className="btn btn-Navbar">Contactanos</button>
+							</Link>
+						</div>
+						<div className="botonNavbar">
+							<button className="btn btn-Navbar" onClick={openModal}>
+								Registrarse
+							</button>
+						</div>
+						<div className="botonNavbar">
+							<Link to="/">
+								<button className="btn btn-Navbar">Iniciar Sesion</button>
+							</Link>
+						</div>
+					</div>
+				) : (
+					<div className="botonesNavbar">
+						<div className="botonNavbar">
+							<Link to="/">
+								<button className="btn btn-Navbar">Perfil Entrenador</button>
+							</Link>
+						</div>
+						<div className="botonNavbar">
+							<Link to="/">
+								<button className="btn btn-Navbar">Mi area</button>
+							</Link>
+						</div>
+						<div className="botonNavbar">
+							<Link to="/">
+								<button className="btn btn-Navbar">Cerrar sesionnnnn</button>
+							</Link>
+						</div>
+					</div>
+				)}
+			</nav>
+			{isModalOpen && <Registro closeModal={closeModal} />}
+		</>
+	);
 };
