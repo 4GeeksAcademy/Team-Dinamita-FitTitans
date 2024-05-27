@@ -76,7 +76,7 @@ export const Navbar = () => {
 						</div>
 						<div className="botonNavbar">
 							<Link to="/">
-								<button className="btn btn-Navbar">Mi Area</button>
+								<button className="btn btn-Navbar" onClick={openModal}>Mi Area</button>
 							</Link>
 						</div>
 						<div className="botonNavbar">
