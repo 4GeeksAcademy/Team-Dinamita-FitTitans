@@ -1,11 +1,16 @@
+.TituloMiAreaRegistrado {
+    color: #e7a33e;
+    font-size: 50px;
+    margin-top: 2%;
+    text-align: center;
+}
+
 .row-filaMiAreaRegistrado {
     display: flex;
-    margin-top: 3%;
-    margin-left: 5%;
-    margin-right: 5%;
+    margin-top: 2%;
     border: 2px solid #e7a33e;
     flex: 1;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
 }
 
 .columnaPerfilRegistrado {
@@ -19,7 +24,7 @@
     text-align: center;
     min-width: 0;
     border: 2px solid #e7a33e;
-    background-image: url('https://as2.ftcdn.net/v2/jpg/03/16/59/63/1000_F_316596390_LVzIyvqhQ0q52Zr9HOpIhFgFhWTctfz5.jpg');
+    background-image: url('https://img.freepik.com/foto-gratis/3d-morph-man-haciendo-ejercicio-pesas-gimnasia_1048-12541.jpg?t=st=1716743390~exp=1716746990~hmac=aab18fa09f2146b0b11430f4e57387c7c1f5751046e51158783dea7d3fe7226d&w=740');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -40,21 +45,18 @@
 
 .linkPerfilRegistrado:hover {
     color: #990707;
-    /* Cambia el color del enlace cuando el cursor se coloca sobre él */
 }
 
 .columnaConoceEntrenadoresRegistrado {
     display: flex;
     justify-content: center;
-    /* Centra horizontalmente */
     align-items: center;
-    /* Centra verticalmente */
     height: 600px;
     color: #e7a33e;
     text-align: center;
     min-width: 0;
     border: 2px solid #e7a33e;
-    background-image: url('https://as2.ftcdn.net/v2/jpg/03/16/59/63/1000_F_316596390_LVzIyvqhQ0q52Zr9HOpIhFgFhWTctfz5.jpg');
+    background-image: url('https://img.freepik.com/fotos-premium/entrenador-personal-ayudando-mujer-hacer-ejercicio-pesas-gimnasio-concepto-pareja-familiar-deportista-hombre-deportivo-torso-abs-deportivo-desnudo-potente-cuerpo-atletico_265223-63753.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -75,7 +77,6 @@
 
 .linkConoceEntrenadoresRegistrado:hover {
     color: #990707;
-    /* Cambia el color del enlace cuando el cursor se coloca sobre él */
 }
 
 .columnaCalculaCaloriasRegistrado {
@@ -88,7 +89,7 @@
     text-align: center;
     min-width: 0;
     border: 2px solid #e7a33e;
-    background-image: url('https://as2.ftcdn.net/v2/jpg/03/16/59/63/1000_F_316596390_LVzIyvqhQ0q52Zr9HOpIhFgFhWTctfz5.jpg');
+    background-image: url('https://static.vecteezy.com/system/resources/previews/024/276/132/non_2x/calculator-icon-or-symbol-in-black-and-white-color-vector.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -109,5 +110,4 @@
 
 .linkCalculaCaloriasRegistrado:hover {
     color: #990707;
-    /* Cambia el color del enlace cuando el cursor se coloca sobre él */
 }
