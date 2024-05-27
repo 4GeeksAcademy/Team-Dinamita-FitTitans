@@ -68,6 +68,47 @@ def serve_any_other_file(path):
     response.cache_control.max_age = 0  # avoid cache memory
     return response
 
+@app.route('/register', methods=['POST'])
+def register():
+    data = request.json
+    email = data['email']
+    password = data['password']
+    role = data['role']  # 'trainer' or 'client'
+    
+    # Crear el usuario en Firebase Authentication
+    user = auth.create_user(email=email, password=password)
+    
+    # Guardar el rol del usuario en Firestore
+    db.collection('users').document(user.uid).set({
+        'email': email,
+        'role': role
+    })
+    
+    return jsonify({'message': 'User created successfully', 'uid': user.uid}), 201
+
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.json
+    email = data['email']
+    password = data['password']
+    
+    # Aquí necesitarás verificar el usuario, en producción usarías Firebase Authentication
+    user = auth.get_user_by_email(email)
+    
+    return jsonify({'message': 'User logged in successfully', 'uid': user.uid})
+
+@app.route('/users/trainers', methods=['GET'])
+def get_trainers():
+    trainers = db.collection('users').where('role', '==', 'trainer').stream()
+    trainer_list = [{'uid': trainer.id, 'email': trainer.get('email')} for trainer in trainers]
+    return jsonify(trainer_list)
+
+@app.route('/trainers/<uid>/clients', methods=['GET'])
+def get_clients(uid):
+    clients = db.collection('users').where('role', '==', 'client').where('trainer_uid', '==', uid).stream()
+    client_list = [{'uid': client.id, 'email': client.get('email')} for client in clients]
+    return jsonify(client_list)
+
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
