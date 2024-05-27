@@ -14,11 +14,11 @@ export const Navbar = () => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const navigate = useNavigate();
-	
+
 	onAuthStateChanged(auth, (usuarioFirebase) => {
 		if (usuarioFirebase) {
 			setTest(usuarioFirebase)
-		}else{
+		} else {
 			setTest(null)
 		}
 	})
@@ -31,7 +31,7 @@ export const Navbar = () => {
 		setIsModalOpen(false);
 	};
 
-	const cerrarSesion = (e) =>{
+	const cerrarSesion = (e) => {
 		e.preventDefault();
 		signOut(auth);
 		setTest(null);
@@ -50,7 +50,7 @@ export const Navbar = () => {
 					<div className="botonesNavbar">
 						<div className="botonNavbar">
 							<Link to="/">
-								<button className="btn btn-Navbar">Perfil Entrenador</button>
+								<button className="btn btn-Navbar">Lista Entrenadores</button>
 							</Link>
 						</div>
 						<div className="botonNavbar">
@@ -59,12 +59,12 @@ export const Navbar = () => {
 							</Link>
 						</div>
 						<div className="botonNavbar">
-								<button 
+							<button
 								className="btn btn-Navbar"
 								onClick={cerrarSesion}
-								>
-									Cerrar sesionnnnn
-								</button>
+							>
+								Cerrar sesionnnnn
+							</button>
 						</div>
 					</div>
 				) : (

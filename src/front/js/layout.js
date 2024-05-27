@@ -10,10 +10,7 @@ import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
-import { PerfilEntrenador} from "./pages/perfilEntrenador.jsx"
-
-
-
+import { PerfilEntrenador } from "./pages/perfilEntrenador.jsx"
 
 
 import { IniciarSesion } from "./component/IniciarSesion.jsx";
@@ -23,6 +20,13 @@ import { Contactanos } from "./pages/Contactanos.jsx";
 import { MiArea } from "./pages/MiArea.jsx";
 import { MiAreaRegistrado } from "./pages/MiAreaRegistrado.jsx";
 import { MiAreaCliente } from "./pages/MiAreaCliente.jsx";
+import { Rutinas } from "./pages/Rutinas.jsx";
+
+
+
+
+
+
 //create your first component
 const Layout = () => {
     //the basename is used when your project is published in a subdirectory and not in the root of the domain
@@ -49,6 +53,7 @@ const Layout = () => {
                         <Route element={<MiArea />} path="/miarea" />
                         <Route element={<MiAreaRegistrado />} path="/miarea/registrado" />
                         <Route element={<MiAreaCliente />} path="/miarea/cliente" />
+                        <Route element={<Rutinas />} path="/rutinas" />
 
                     </Routes>
                     <Footer />
