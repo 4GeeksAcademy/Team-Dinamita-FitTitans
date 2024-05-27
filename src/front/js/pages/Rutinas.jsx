@@ -58,7 +58,7 @@ export const Rutinas = () => {
                 </div>
             </div>
 
-//////////////BOTON: CREAR OTRA TABLA DE EJERCICIO:
+{/* //////////////BOTON: CREAR OTRA TABLA DE EJERCICIO: */}
             <div className="container">
                 <div className="titulo">
                     <h1>Martes</h1>

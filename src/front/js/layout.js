@@ -25,6 +25,11 @@ import { MiAreaRegistrado } from "./pages/MiAreaUsuarioRegistrado.jsx";
 import { MiAreaCliente } from "./pages/MiAreaCliente.jsx";
 import { MiAreaEntrenador } from "./pages/MiAreaEntrenador.jsx";
 import { FormulaCalorias } from "./pages/FormulaCalorias.jsx";
+import { Rutinas} from "./pages/Rutinas.jsx";
+import { ListaEntrenadores } from "./pages/ListaEntrenadores.jsx";
+
+
+
 //create your first component
 const Layout = () => {
     //the basename is used when your project is published in a subdirectory and not in the root of the domain
@@ -53,6 +58,9 @@ const Layout = () => {
                         <Route element={<MiAreaCliente />} path="/miarea/cliente" />
                         <Route element={<MiAreaEntrenador />} path="/miarea/entrenador" />
                         <Route element={<FormulaCalorias />} path="/formulacalorias" />
+                        <Route element={<Rutinas />} path="/rutinas" />
+                        <Route element={<ListaEntrenadores />} path="/listaentrenadores" />
+
 
                     </Routes>
                     <Footer />
