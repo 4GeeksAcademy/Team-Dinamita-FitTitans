@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../../styles/Navbar.css";
+import "/workspaces/Team-Dinamita-FitTitans/src/front/styles/IniciarSesion.css"
 import { useNavigate } from "react-router-dom";
 import { Registro } from "./Registro";
 import { MiAreaRegistrado } from "../pages/MiAreaUsuarioRegistrado.jsx"
@@ -70,9 +71,15 @@ export const IniciarSesion = () => {
     <>
       {sesion ? (<h1>error</h1>)
         : (
+<<<<<<< HEAD
           <>
             <form className="container mt-5" onSubmit={handleSubmit}>
               <div className="my-3">
+=======
+        <>
+        <form className="container" onSubmit={handleSubmit} id="inicio">
+            <div className="my-3">
+>>>>>>> 1f06f95a42075b83c0046546ffcd80a9384533f9
                 <label className="form-label d-flex text-start text-light" id="email">
                   <i className="fas fa-envelope mx-2" style={{ color: "#E7A33E", fontSize: 24 }}></i>
                   Email
@@ -106,6 +113,7 @@ export const IniciarSesion = () => {
                   value={"iniciar Sesion"}
                   className="btn btn-Navbar mx-3 "
                 />
+<<<<<<< HEAD
               </div>
             </form>
             <div className="container d-flex justify-content-center">
@@ -117,4 +125,12 @@ export const IniciarSesion = () => {
           </>)}
     </>
   )
+=======
+		    </div>
+        
+        </form>
+         </> ) }
+        </>
+    )
+>>>>>>> 1f06f95a42075b83c0046546ffcd80a9384533f9
 }
