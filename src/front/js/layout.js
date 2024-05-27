@@ -19,11 +19,7 @@ import { PerfilUsuarios } from "./component/PerfilUsuarios.js";
 import { Contactanos } from "./pages/Contactanos.jsx";
 import { MiArea } from "./pages/MiArea.jsx";
 import { MiAreaRegistrado } from "./pages/MiAreaRegistrado.jsx";
-<<<<<<< HEAD
 import { MiAreaCliente } from "./pages/MiAreaCliente.jsx";
-=======
-
->>>>>>> f0488440e20c98d4d46a82e160066892aea2102b
 //create your first component
 const Layout = () => {
     //the basename is used when your project is published in a subdirectory and not in the root of the domain
@@ -48,11 +44,8 @@ const Layout = () => {
                         <Route element={<Contactanos />} path="/contactanos" />
                         <Route element={<MiArea />} path="/miarea" />
                         <Route element={<MiAreaRegistrado />} path="/miarea/registrado" />
-<<<<<<< HEAD
                         <Route element={<MiAreaCliente />} path="/miarea/cliente" />
 
-=======
->>>>>>> f0488440e20c98d4d46a82e160066892aea2102b
                     </Routes>
                     <Footer />
                 </ScrollToTop>
