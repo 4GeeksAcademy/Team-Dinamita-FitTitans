@@ -45,18 +45,24 @@ export const Home = () => {
 			</div>
 			<div className="row row-fila2">
 				<div className="col-md-4 col-columna3">
-					<div className="titulo3">
-						Tips de entrenamiento
+					<div className="tituloTipsEntrenamiento">
+						TIP DE ENTRENAMIENTO
+					</div>
+					<div className="tipEntrenamiento">
+						TTTTTTTTTWWWWWWWWWWWWWWWwwwww
 					</div>
 				</div>
 				<div className="col-md-4 col-columna4">
-					<div className="titulo4">
-						Formula para sacar tus calorias
+					<div className="tituloCalculaCalorias">
+						<Link to="/" className="linkHomeCalculaCalorias">CALCULA TUS CALORIAS DIARIAS</Link>
 					</div>
 				</div>
 				<div className="col-md-4 col-columna5">
-					<div className="titulo5">
-						tips de nutricion
+					<div className="tituloTipsNutricion">
+						TIP DE NUTRICIÓN
+					</div>
+					<div className="tipNutricion">
+						TRBHTTTTWWWWWWWWWWWWWwwwwww
 					</div>
 				</div>
 			</div>

@@ -10,16 +10,34 @@ import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { PerfilEntrenador } from "./pages/perfilEntrenador.jsx"
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 1f06f95a42075b83c0046546ffcd80a9384533f9
 
+
+import { IniciarSesion } from "./component/IniciarSesion.jsx";
 import { Registro } from "./component/Registro";
 import { PerfilUsuarios } from "./component/PerfilUsuarios.js";
 import { Contactanos } from "./pages/Contactanos.jsx";
 import { MiArea } from "./pages/MiArea.jsx";
-import { MiAreaRegistrado } from "./pages/MiAreaRegistrado.jsx";
+import { MiAreaRegistrado } from "./pages/MiAreaUsuarioRegistrado.jsx";
 import { MiAreaCliente } from "./pages/MiAreaCliente.jsx";
+<<<<<<< HEAD
+import { MiAreaEntrenador } from "./pages/MiAreaEntrenador.jsx";
+import { FormulaCalorias } from "./pages/FormulaCalorias.jsx";
+=======
+import { Rutinas } from "./pages/Rutinas.jsx";
+
+
+
+
+
+
+>>>>>>> 1f06f95a42075b83c0046546ffcd80a9384533f9
 //create your first component
 const Layout = () => {
     //the basename is used when your project is published in a subdirectory and not in the root of the domain
@@ -38,13 +56,20 @@ const Layout = () => {
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<h1>Not found!</h1>} />
+                        <Route element={<IniciarSesion />} path="login" />
                         <Route element={<Registro />} path="/registro" />
                         <Route element={<PerfilUsuarios />} path="/perfil" />
-                        <Route element={<perfilEntrenador />} path="/entrenador" />
+                        <Route element={<PerfilEntrenador />} path="/entrenador" />
                         <Route element={<Contactanos />} path="/contactanos" />
                         <Route element={<MiArea />} path="/miarea" />
                         <Route element={<MiAreaRegistrado />} path="/miarea/registrado" />
                         <Route element={<MiAreaCliente />} path="/miarea/cliente" />
+<<<<<<< HEAD
+                        <Route element={<MiAreaEntrenador />} path="/miarea/entrenador" />
+                        <Route element={<FormulaCalorias />} path="/formulacalorias" />
+=======
+                        <Route element={<Rutinas />} path="/rutinas" />
+>>>>>>> 1f06f95a42075b83c0046546ffcd80a9384533f9
 
                     </Routes>
                     <Footer />
