@@ -3,7 +3,7 @@
 }
 
 .TituloContactanos {
-    color: #e7a33e;
+    color: white;
     font-size: 50px;
     margin-top: 2%;
     text-align: center;
@@ -17,9 +17,10 @@
 }
 
 .TituloFormulario {
-    color: #e7a33e;
+    color: white;
     font-size: 20px;
     margin-top: 2%;
+ 
 }
 
 .textoFormulario {

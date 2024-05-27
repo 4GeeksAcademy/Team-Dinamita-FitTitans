@@ -89,7 +89,7 @@ export const PerfilEntrenador = () => {
 							<div className="card-body">
 								<h5 className="card-title">Podemos alcanzarlo juntos</h5>
 								<p className="card-text">El último paso para poder estar más cerca de tu nuevo estilo de vida</p>
-								<a href=" AQUI LINKEAMOS A LA PASARELA DE PAGO" className="btn btn-primary">Contratame </a>
+								<a href="/contactanos" className="btnContratame">Contratame </a>
 							</div>
 						</div>
 					</div>

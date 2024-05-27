@@ -2,5 +2,6 @@
     width: 100%;
     background-color: #575858;
     color: white;
-    bottom: 0;
+    position: absolute;
+    bottom: 0; /* Lo coloca al final de la ventana del navegador */
 }

@@ -7,4 +7,15 @@ i {
     color: #E7A33E;
     font-size: 24px;
 }
+
+body {
+    background-image: url("https://res.cloudinary.com/djwkdsahw/image/upload/v1716832665/Ronald_Prueba/fitTitans_zwfddq.png") !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-attachment: fixed !important;
+    min-height: 100vh !important;
+    position: relative !important;
+    padding-bottom: 3em !important;
+    background-position: center !important;
+}
   
