@@ -11,12 +11,9 @@ import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { PerfilEntrenador } from "./pages/perfilEntrenador.jsx"
-<<<<<<< HEAD
 
 
 
-=======
->>>>>>> 1f06f95a42075b83c0046546ffcd80a9384533f9
 
 
 import { IniciarSesion } from "./component/IniciarSesion.jsx";
@@ -26,18 +23,12 @@ import { Contactanos } from "./pages/Contactanos.jsx";
 import { MiArea } from "./pages/MiArea.jsx";
 import { MiAreaRegistrado } from "./pages/MiAreaUsuarioRegistrado.jsx";
 import { MiAreaCliente } from "./pages/MiAreaCliente.jsx";
-<<<<<<< HEAD
 import { MiAreaEntrenador } from "./pages/MiAreaEntrenador.jsx";
 import { FormulaCalorias } from "./pages/FormulaCalorias.jsx";
-=======
-import { Rutinas } from "./pages/Rutinas.jsx";
+import { Rutinas} from "./pages/Rutinas.jsx"
 
 
 
-
-
-
->>>>>>> 1f06f95a42075b83c0046546ffcd80a9384533f9
 //create your first component
 const Layout = () => {
     //the basename is used when your project is published in a subdirectory and not in the root of the domain
@@ -66,6 +57,8 @@ const Layout = () => {
                         <Route element={<MiAreaCliente />} path="/miarea/cliente" />
                         <Route element={<MiAreaEntrenador />} path="/miarea/entrenador" />
                         <Route element={<FormulaCalorias />} path="/formulacalorias" />
+                        <Route element={<Rutinas />} path="/rutinas" />
+
 
                     </Routes>
                     <Footer />
