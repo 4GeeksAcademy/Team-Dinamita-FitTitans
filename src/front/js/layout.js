@@ -25,7 +25,8 @@ import { MiAreaRegistrado } from "./pages/MiAreaUsuarioRegistrado.jsx";
 import { MiAreaCliente } from "./pages/MiAreaCliente.jsx";
 import { MiAreaEntrenador } from "./pages/MiAreaEntrenador.jsx";
 import { FormulaCalorias } from "./pages/FormulaCalorias.jsx";
-import { Rutinas} from "./pages/Rutinas.jsx"
+import { Rutinas} from "./pages/Rutinas.jsx";
+import { ListaEntrenadores } from "./pages/ListaEntrenadores.jsx";
 
 
 
@@ -58,6 +59,7 @@ const Layout = () => {
                         <Route element={<MiAreaEntrenador />} path="/miarea/entrenador" />
                         <Route element={<FormulaCalorias />} path="/formulacalorias" />
                         <Route element={<Rutinas />} path="/rutinas" />
+                        <Route element={<ListaEntrenadores />} path="/listaentrenadores" />
 
 
                     </Routes>

@@ -49,7 +49,7 @@ export const Navbar = () => {
 				{test ? (
 					<div className="botonesNavbar">
 						<div className="botonNavbar">
-							<Link to="/">
+							<Link to="/listaentrenadores">
 								<button className="btn btn-Navbar">Lista Entrenadores</button>
 							</Link>
 						</div>
