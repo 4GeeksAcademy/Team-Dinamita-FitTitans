@@ -10,7 +10,8 @@ import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
-import { PerfilEntrenador } from "./pages/perfilEntrenador";
+import { PerfilEntrenador} from "./pages/perfilEntrenador.jsx"
+
 
 
 
@@ -42,7 +43,7 @@ const Layout = () => {
                         <Route element={<h1>Not found!</h1>} />
                         <Route element={<Registro />} path="/registro" />
                         <Route element={<PerfilUsuarios />} path="/perfil" />
-                        <Route element={<perfilEntrenador />} path="/entrenador" />
+                        <Route element={<PerfilEntrenador />} path="/entrenador" />
                         <Route element={<Contactanos />} path="/contactanos" />
                         <Route element={<MiArea />} path="/miarea" />
                         <Route element={<MiAreaRegistrado />} path="/miarea/registrado" />
