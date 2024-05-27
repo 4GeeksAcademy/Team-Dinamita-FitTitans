@@ -64,12 +64,8 @@ const Layout = () => {
                         <Route element={<MiArea />} path="/miarea" />
                         <Route element={<MiAreaRegistrado />} path="/miarea/registrado" />
                         <Route element={<MiAreaCliente />} path="/miarea/cliente" />
-<<<<<<< HEAD
                         <Route element={<MiAreaEntrenador />} path="/miarea/entrenador" />
                         <Route element={<FormulaCalorias />} path="/formulacalorias" />
-=======
-                        <Route element={<Rutinas />} path="/rutinas" />
->>>>>>> 1f06f95a42075b83c0046546ffcd80a9384533f9
 
                     </Routes>
                     <Footer />

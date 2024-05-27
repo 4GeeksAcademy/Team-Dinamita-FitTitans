@@ -71,7 +71,7 @@ export const Navbar = () => {
 					<div className="botonesNavbar">
 						<div className="botonNavbar">
 							<Link to="/">
-								<button className="btn btn-Navbar">Perfil Entrenador</button>
+								<button className="btn btn-Navbar">Lista Entrenadores</button>
 							</Link>
 						</div>
 						<div className="botonNavbar">
