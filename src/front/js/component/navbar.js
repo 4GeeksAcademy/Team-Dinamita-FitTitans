@@ -1,21 +1,25 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../../styles/Navbar.css";
 import { Registro } from "./Registro";
 
 import firebaseApp from "../../../firebase/credenciales";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+
 const auth = getAuth(firebaseApp);
 
 export const Navbar = () => {
-	const [test, setTest] = useState(true);
+	const [test, setTest] = useState(null);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
+	const navigate = useNavigate();
+	
 	onAuthStateChanged(auth, (usuarioFirebase) => {
 		if (usuarioFirebase) {
 			setTest(usuarioFirebase)
 		}else{
-			setTest(true)
+			setTest(null)
 		}
 	})
 
@@ -27,6 +31,13 @@ export const Navbar = () => {
 		setIsModalOpen(false);
 	};
 
+	const cerrarSesion = (e) =>{
+		e.preventDefault();
+		signOut(auth);
+		setTest(null);
+		navigate("/")
+	}
+
 	return (
 		<>
 			<nav className="navbar navbar-dark bg-dark p-3">
@@ -36,6 +47,27 @@ export const Navbar = () => {
 					</Link>
 				</div>
 				{test ? (
+					<div className="botonesNavbar">
+						<div className="botonNavbar">
+							<Link to="/">
+								<button className="btn btn-Navbar">Perfil Entrenador</button>
+							</Link>
+						</div>
+						<div className="botonNavbar">
+							<Link to="/miarea/registrado">
+								<button className="btn btn-Navbar">Mi area</button>
+							</Link>
+						</div>
+						<div className="botonNavbar">
+								<button 
+								className="btn btn-Navbar"
+								onClick={cerrarSesion}
+								>
+									Cerrar sesionnnnn
+								</button>
+						</div>
+					</div>
+				) : (
 					<div className="botonesNavbar">
 						<div className="botonNavbar">
 							<Link to="/">
@@ -58,26 +90,8 @@ export const Navbar = () => {
 							</button>
 						</div>
 						<div className="botonNavbar">
-							<Link to="/">
+							<Link to="/login">
 								<button className="btn btn-Navbar">Iniciar Sesion</button>
-							</Link>
-						</div>
-					</div>
-				) : (
-					<div className="botonesNavbar">
-						<div className="botonNavbar">
-							<Link to="/">
-								<button className="btn btn-Navbar">Perfil Entrenador</button>
-							</Link>
-						</div>
-						<div className="botonNavbar">
-							<Link to="/">
-								<button className="btn btn-Navbar">Mi area</button>
-							</Link>
-						</div>
-						<div className="botonNavbar">
-							<Link to="/">
-								<button className="btn btn-Navbar">Cerrar sesionnnnn</button>
 							</Link>
 						</div>
 					</div>
