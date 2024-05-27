@@ -1,0 +1,213 @@
+.TituloMiAreaCliente {
+    color: #e7a33e;
+    font-size: 50px;
+    margin-top: 2%;
+    text-align: center;
+}
+
+.row-filaMiAreaCliente {
+    display: flex;
+    margin-top: 2%;
+    border: 2px solid #e7a33e;
+    flex: 1;
+    margin-bottom: 30px;
+}
+
+.columnaMiAreaPerfilCliente {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 320px;
+    color: #e7a33e;
+    text-align: center;
+    min-width: 0;
+    border: 2px solid #e7a33e;
+    background-image: url('https://img.freepik.com/foto-gratis/3d-morph-man-haciendo-ejercicio-pesas-gimnasia_1048-12541.jpg?t=st=1716743390~exp=1716746990~hmac=aab18fa09f2146b0b11430f4e57387c7c1f5751046e51158783dea7d3fe7226d&w=740');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.linkPerfilCliente {
+    color: black;
+    padding: 20px;
+    text-decoration: none;
+    background: #e7a33e;
+    white-space: nowrap;
+    font-size: 15px;
+    border: 2px solid black;
+    border-radius: 8px;
+    font-size: 15px;
+    min-width: 0;
+}
+
+.linkPerfilCliente:hover {
+    color: #990707;
+}
+
+.columnaDietaCliente {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 320px;
+    color: #e7a33e;
+    text-align: center;
+    min-width: 0;
+    border: 2px solid #e7a33e;
+    background-image: url('https://img.freepik.com/vector-gratis/conjunto-comida-pizarra_23-2147779765.jpg?t=st=1716496079~exp=1716499679~hmac=3a345c1ffe352b923064bcacc387707e2f3dc31dda7c8edf863282b2846426cb&w=740');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.linkDietaCliente {
+    color: black;
+    padding: 20px;
+    text-decoration: none;
+    background: #e7a33e;
+    white-space: nowrap;
+    font-size: 15px;
+    border: 2px solid black;
+    border-radius: 8px;
+    font-size: 15px;
+    min-width: 0;
+}
+
+.linkDietaCliente:hover {
+    color: #990707;
+}
+
+.columnaRutinasCliente {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 320px;
+    color: #e7a33e;
+    text-align: center;
+    min-width: 0;
+    border: 2px solid #e7a33e;
+    background-image: url('https://img.freepik.com/foto-gratis/mancuernas-suelo-gimnasio-ai-generativo_123827-23744.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.linkRutinasCliente {
+    color: black;
+    padding: 20px;
+    text-decoration: none;
+    background: #e7a33e;
+    white-space: nowrap;
+    font-size: 15px;
+    border: 2px solid black;
+    border-radius: 8px;
+    font-size: 15px;
+    min-width: 0;
+}
+
+.linkRutinasCliente:hover {
+    color: #990707;
+}
+
+.row-filaMiAreaCliente2 {
+    display: flex;
+    border: 2px solid #e7a33e;
+    flex: 1;
+    margin-bottom: 50px;
+}
+
+.columnaChatCliente {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 320px;
+    color: #e7a33e;
+    text-align: center;
+    min-width: 0;
+    border: 2px solid #e7a33e;
+    background-image: url('https://us.123rf.com/450wm/sabuhinovruzov/sabuhinovruzov1705/sabuhinovruzov170501766/78783177-icono-de-vector-de-chat-ilustraci%C3%B3n-de-mensaje-en-blanco-y-negro-icono-lineal-s%C3%B3lido.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.linkChatCliente {
+    color: black;
+    padding: 20px;
+    text-decoration: none;
+    background: #e7a33e;
+    white-space: nowrap;
+    font-size: 15px;
+    border: 2px solid black;
+    border-radius: 8px;
+    font-size: 15px;
+    min-width: 0;
+}
+
+.linkChatCliente:hover {
+    color: #990707;
+}
+
+.columnaVideosEjercicios {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 320px;
+    color: #e7a33e;
+    text-align: center;
+    min-width: 0;
+    border: 2px solid #e7a33e;
+    background-image: url('https://us.123rf.com/450wm/tverdohlib/tverdohlib2305/tverdohlib230508127/205295415-pareja-de-culturistas-en-forma-hombre-musculoso-y-hermosa-chica-con-pesas-deporte-pareja-hombre.jpg?ver=6');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.linkVideosEjercicios {
+    color: black;
+    padding: 20px;
+    text-decoration: none;
+    background: #e7a33e;
+    white-space: nowrap;
+    font-size: 15px;
+    border: 2px solid black;
+    border-radius: 8px;
+    font-size: 15px;
+    min-width: 0;
+}
+
+.linkVideosEjercicios:hover {
+    color: #990707;
+}
+
+.columnaMiAreaCalculaCalorias {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 320px;
+    color: #e7a33e;
+    text-align: center;
+    min-width: 0;
+    border: 2px solid #e7a33e;
+    background-image: url('https://png.pngtree.com/png-clipart/20230924/original/pngtree-calories-chalk-white-icon-on-black-background-count-food-daily-vector-png-image_12678629.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.linkMiAreaCalculaCalorias {
+    color: black;
+    padding: 20px;
+    text-decoration: none;
+    background: #e7a33e;
+    white-space: nowrap;
+    font-size: 15px;
+    border: 2px solid black;
+    border-radius: 8px;
+    font-size: 15px;
+    min-width: 0;
+}
+
+.linkMiAreaCalculaCalorias:hover {
+    color: #990707;
+}
