@@ -1,3 +1,7 @@
+.contenedorContactanos {
+    margin-bottom: 50px;
+}
+
 .TituloContactanos {
     color: #e7a33e;
     font-size: 50px;
@@ -29,7 +33,6 @@
 .btn-FormContactanos {
     background: #e7a33e;
     white-space: nowrap;
-    /* Evita que el texto se divida en líneas */
     font-size: 15px;
     border: 1px solid black;
     border-radius: 10px;
