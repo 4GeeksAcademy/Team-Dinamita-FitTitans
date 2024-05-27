@@ -45,6 +45,7 @@ export const MiAreaRegistrado = () => {
 {sesion && sesion.rol === "usuario" ? (
 
 	<div className="container">
+
 			<div className="row row-filaMiAreaRegistrado">
 				<div className="col-md-4 columnaPerfilRegistrado ">
 					<div className="tituloPerfilRegistrado">

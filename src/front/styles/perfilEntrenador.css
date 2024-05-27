@@ -1,0 +1,13 @@
+body {
+    background: rgb(15, 15, 15);
+    font-family: 'Inter', sans-serif;
+  }
+
+  .btn btn-primary {
+    background: #e7a33e;
+    white-space: nowrap;
+    font-size: 15px;
+    border: 1px solid black;
+    border-radius: 10px;
+    
+  }
