@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import "../../styles/MiAreaRegistrado.css";
 
 
+
+
 export const MiAreaRegistrado = () => {
 
 	return (
@@ -12,7 +14,7 @@ export const MiAreaRegistrado = () => {
 				MI AREA
 			</div>
 			<div className="row row-filaMiAreaRegistrado">
-				<div className="col-md-4 columnaPerfilRegistrado">
+				<div className="col-md-4 columnaPerfilRegistrado ">
 					<div className="tituloPerfilRegistrado">
 						<Link to="/" className="linkPerfilRegistrado">PERFIL USUARIO</Link>
 					</div>

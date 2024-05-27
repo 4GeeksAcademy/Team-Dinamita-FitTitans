@@ -15,6 +15,7 @@ body {
     color: #e7a33e;
 }
 
+
 .botonesNavbar {
     display: flex;
     flex-wrap: wrap;
@@ -24,6 +25,9 @@ body {
 .botonNavbar {
     margin-right: 10px;
 }
+.btn-Navbar:hover{
+    color:white
+}
 
 .btn-Navbar {
     background: #e7a33e;
@@ -31,7 +35,7 @@ body {
     /* Evita que el texto se divida en líneas */
     font-size: 15px;
     border: 1px solid black;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 @media screen and (max-width: 600px) {
@@ -51,6 +55,6 @@ body {
         white-space: nowrap;
         font-size: 11px;
         border: 1px solid black;
-        border-radius: 10px;
+        border-radius: 5px;
     }
 }
