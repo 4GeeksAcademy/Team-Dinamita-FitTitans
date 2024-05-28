@@ -21,7 +21,9 @@ export const Contactanos = () => {
 
     return (
         <div className="container contenedorContactanos">
-            <div className="TituloContactanos ">CONTÁCTANOS</div>
+            <div className="contenedorTituloContactanos">
+                <div className="TituloContactanos ">CONTÁCTANOS</div>
+            </div>
             <form onSubmit={actions.handleSubmitContactanos} className="contact-form contenedorFormulario">
                 <div className="form-group TituloFormulario">
                     <label className="form-label d-flex text-start textoFormulario">
