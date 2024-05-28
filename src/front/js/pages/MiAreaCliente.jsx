@@ -7,8 +7,8 @@ export const MiAreaCliente = () => {
 
     return (
         <div className="container contenedorMiAreaCliente">
-            <div className="TituloMiAreaCliente">
-                MI AREA CLIENTE
+            <div className="tituloMiAreaCliente">
+                MI AREA
             </div>
             <div className="row row-filaMiAreaCliente">
                 <div className="col-md-4 columnaMiAreaPerfilCliente">
@@ -40,7 +40,7 @@ export const MiAreaCliente = () => {
                 </div>
                 <div className="col-md-4 columnaMiAreaCalculaCalorias">
                     <div className="tituloMiAreaCalculaCalorias">
-                        <Link to="/" className="linkMiAreaCalculaCalorias">CALCULA TUS CALORIAS DIARIAS</Link>
+                        <Link to="/formulacalorias" className="linkMiAreaCalculaCalorias">CALCULA TUS CALORIAS DIARIAS</Link>
                     </div>
                 </div>
             </div>

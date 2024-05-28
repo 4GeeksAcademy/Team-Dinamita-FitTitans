@@ -7,7 +7,7 @@ import "../../styles/MiAreaEntrenador.css";
 export const MiAreaEntrenador = () => {
 
     return (
-        <div className="container">
+        <div className="container contenedorMiAreaEntrenador">
             <div className="tituloMiAreaEntrenador">
                 MI AREA
             </div>

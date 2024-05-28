@@ -1,11 +1,18 @@
-.TituloMiAreaRegistrado {
+.contenedorMiAreaEntrenador {
+    text-align: center
+}
+
+.tituloMiAreaEntrenador {
     color: #e7a33e;
+    background-color: rgba(0, 0, 0, 0.8);
     font-size: 50px;
     margin-top: 2%;
     text-align: center;
+    display: inline-block;
+    padding: 15px;
 }
 
-.row-filaMiAreaRegistrado {
+.row-filaMiAreaEntrenador {
     display: flex;
     margin-top: 2%;
     border: 2px solid #e7a33e;
@@ -13,7 +20,7 @@
     margin-bottom: 50px;
 }
 
-.columnaPerfilRegistrado {
+.columnaPerfilEntrenador {
     display: flex;
     justify-content: center;
     /* Centra horizontalmente */
@@ -30,7 +37,7 @@
     background-repeat: no-repeat;
 }
 
-.linkPerfilRegistrado {
+.linkPerfilEntrenador {
     color: black;
     padding: 20px;
     text-decoration: none;
@@ -43,11 +50,11 @@
     min-width: 0;
 }
 
-.linkPerfilRegistrado:hover {
-    color: #990707;
+.linkPerfilEntrenador:hover {
+    color: white;
 }
 
-.columnaConoceEntrenadoresRegistrado {
+.columnaClientesDelEntrenador {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -62,7 +69,7 @@
     background-repeat: no-repeat;
 }
 
-.linkConoceEntrenadoresRegistrado {
+.linkClientesDelEntrenador {
     color: black;
     padding: 20px;
     text-decoration: none;
@@ -75,11 +82,11 @@
     min-width: 0;
 }
 
-.linkConoceEntrenadoresRegistrado:hover {
-    color: #990707;
+.linkClientesDelEntrenador:hover {
+    color: white;
 }
 
-.columnaCalculaCaloriasRegistrado {
+.columnaVideosEntrenamientoEntrenador {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -95,7 +102,7 @@
     background-repeat: no-repeat;
 }
 
-.linkCalculaCaloriasRegistrado {
+.linkVideosEntrenamientoEntrenador {
     color: black;
     padding: 20px;
     text-decoration: none;
@@ -108,6 +115,6 @@
     min-width: 0;
 }
 
-.linkCalculaCaloriasRegistrado:hover {
-    color: #990707;
+.linkVideosEntrenamientoEntrenador:hover {
+    color: white;
 }
