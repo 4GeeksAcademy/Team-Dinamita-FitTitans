@@ -106,7 +106,6 @@ body {
   text-align: center;
   min-width: 0;
   border: 2px solid #e7a33e;
-  ;
 }
 
 .tituloTipsEntrenamiento {
@@ -120,11 +119,13 @@ body {
   background-color: rgba(0, 0, 0, 0.8);
   font-size: 15px;
   padding: 10px;
-  margin-top: 20px;
+  margin-top: 30px;
   min-width: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  word-wrap: break-word;
+  word-break: break-all;
 }
 
 .col-columna4 {
@@ -186,16 +187,14 @@ body {
   background-color: rgba(0, 0, 0, 0.8);
   font-size: 15px;
   padding: 10px;
-  margin-top: 20px;
+  margin-top: 30px;
   min-width: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  word-wrap: break-word;
+  word-break: break-all;
 }
-
-
-
-
 
 
 
@@ -236,9 +235,7 @@ body {
 
 
 @media (max-width: 400px) {
-  .col-columna1 {
-    height: auto;
-  }
+
 
   .titulo1 {
     font-size: 20px;
