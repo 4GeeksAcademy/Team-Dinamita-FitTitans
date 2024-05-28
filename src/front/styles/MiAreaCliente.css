@@ -1,5 +1,6 @@
 .contenedorMiAreaCliente {
-    text-align: center
+    text-align: center;
+    margin-bottom: 50px;
 }
 
 .tituloMiAreaCliente {
@@ -120,7 +121,7 @@
     display: flex;
     border: 2px solid #e7a33e;
     flex: 1;
-    margin-bottom: 50px;
+    
 }
 
 .columnaChatCliente {

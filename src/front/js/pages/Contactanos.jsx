@@ -37,7 +37,7 @@ export const Contactanos = () => {
                         value={contactoFormulario.name}
                         onChange={handleChangeFormulario}
                         placeholder="Jose Guerrero"
-                        minlength="3"
+                        minLength="3"
                         required
                         className="form-control"
                     />
@@ -54,7 +54,7 @@ export const Contactanos = () => {
                         value={contactoFormulario.email}
                         onChange={handleChangeFormulario}
                         placeholder="Nombre@ejemplo.com"
-                        minlength="5"
+                        minLength="5"
                         required
                         className="form-control"
                     />
