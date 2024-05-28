@@ -11,14 +11,14 @@ export const Home = () => {
 			<div className="row row-fila1">
 				<div className="col-md-7 col-columna1">
 					<div className="titulo1">
-						Busca entrenadores o entrenadoras personales
+						¿Buscas entrenadores o entrenadoras personales
 						<br />
-						profesionales
+						profesionales?
 						<div className="subTitulo1">
-							El espacio donde encontraras preparadores físicos y nutricionistas para cumplir tus objetivos.
+							Este es el espacio donde encontraras preparadores físicos y nutricionistas para cumplir tus objetivos.
 						</div>
 						<div className="botonConoceNuestrosEntrenadores">
-							<Link to="/">
+							<Link to="/listaentrenadores">
 								<button className="btn btn-ConoceEntrenadores">Conoce Nuestros Entrenadores</button>
 							</Link>
 						</div>
@@ -27,7 +27,7 @@ export const Home = () => {
 				<div className="col-md-1"></div>
 				<div className="col-md-4 col-columna2">
 					<div className="titulo2">
-						Eres entrenador
+						¿Eres entrenador/a?
 						<div className="subTitulo2">
 							Potencia tu entrenamiento personal con nuestra app.
 							<br />
@@ -49,12 +49,12 @@ export const Home = () => {
 						TIP DE ENTRENAMIENTO
 					</div>
 					<div className="tipEntrenamiento">
-						TTTTTTTTTWWWWWWWWWWWWWWWwwwww
+						TTTTTTTTTWWWWWWWWWWWWWWWwwwwwwwwwwwwwwwwwwwwWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 					</div>
 				</div>
 				<div className="col-md-4 col-columna4">
 					<div className="tituloCalculaCalorias">
-						<Link to="/" className="linkHomeCalculaCalorias">CALCULA TUS CALORIAS DIARIAS</Link>
+						<Link to="/formulacalorias" className="linkHomeCalculaCalorias">CALCULA TUS CALORIAS DIARIAS</Link>
 					</div>
 				</div>
 				<div className="col-md-4 col-columna5">
@@ -62,7 +62,7 @@ export const Home = () => {
 						TIP DE NUTRICIÓN
 					</div>
 					<div className="tipNutricion">
-						TRBHTTTTWWWWWWWWWWWWWwwwwww
+						TRBHTTTTWWWWWWWWWWWWWwwwwwwWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 					</div>
 				</div>
 			</div>
