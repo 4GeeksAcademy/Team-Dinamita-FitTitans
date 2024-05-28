@@ -1,8 +1,16 @@
-.TituloMiAreaCliente {
+.contenedorMiAreaCliente {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.tituloMiAreaCliente {
     color: #e7a33e;
     font-size: 50px;
     margin-top: 2%;
     text-align: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: inline-block;
+    padding: 15px;
 }
 
 .row-filaMiAreaCliente {
@@ -42,7 +50,7 @@
 }
 
 .linkPerfilCliente:hover {
-    color: #990707;
+    color: white;
 }
 
 .columnaDietaCliente {
@@ -74,7 +82,7 @@
 }
 
 .linkDietaCliente:hover {
-    color: #990707;
+    color: white;
 }
 
 .columnaRutinasCliente {
@@ -106,14 +114,14 @@
 }
 
 .linkRutinasCliente:hover {
-    color: #990707;
+    color: white;
 }
 
 .row-filaMiAreaCliente2 {
     display: flex;
     border: 2px solid #e7a33e;
     flex: 1;
-    margin-bottom: 50px;
+    
 }
 
 .columnaChatCliente {
@@ -145,7 +153,7 @@
 }
 
 .linkChatCliente:hover {
-    color: #990707;
+    color: white;
 }
 
 .columnaVideosEjercicios {
@@ -177,7 +185,7 @@
 }
 
 .linkVideosEjercicios:hover {
-    color: #990707;
+    color: white;
 }
 
 .columnaMiAreaCalculaCalorias {
@@ -209,5 +217,5 @@
 }
 
 .linkMiAreaCalculaCalorias:hover {
-    color: #990707;
+    color: white;
 }

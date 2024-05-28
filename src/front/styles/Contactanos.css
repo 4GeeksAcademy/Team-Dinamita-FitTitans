@@ -1,16 +1,23 @@
 .contenedorContactanos {
     margin-bottom: 50px;
-    background-color: black;
-    opacity: 80%;
+}
+
+.contenedorTituloContactanos {
+    text-align: center;
 }
 
 .TituloContactanos {
-    color: white;
+    color: #e7a33e;
     font-size: 50px;
     margin-top: 2%;
-    margin-right: 15px;
     text-align: center;
-    padding-top: 1%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: inline-block;
+    padding: 15px;
+}
+
+.contenedorFormulario {
+    background-color: rgba(0, 0, 0, 0.9);
 }
 
 .contenedorFormulario {
@@ -24,7 +31,7 @@
     color: white;
     font-size: 20px;
     margin-top: 2%;
- 
+
 }
 
 .textoFormulario {

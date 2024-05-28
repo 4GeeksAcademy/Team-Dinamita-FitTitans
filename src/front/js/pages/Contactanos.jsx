@@ -21,7 +21,9 @@ export const Contactanos = () => {
 
     return (
         <div className="container contenedorContactanos">
-            <div className="TituloContactanos ">CONTÁCTANOS</div>
+            <div className="contenedorTituloContactanos">
+                <div className="TituloContactanos ">CONTÁCTANOS</div>
+            </div>
             <form onSubmit={actions.handleSubmitContactanos} className="contact-form contenedorFormulario">
                 <div className="form-group TituloFormulario">
                     <label className="form-label d-flex text-start textoFormulario">
@@ -35,7 +37,7 @@ export const Contactanos = () => {
                         value={contactoFormulario.name}
                         onChange={handleChangeFormulario}
                         placeholder="Jose Guerrero"
-                        minlength="3"
+                        minLength="3"
                         required
                         className="form-control"
                     />
@@ -52,7 +54,7 @@ export const Contactanos = () => {
                         value={contactoFormulario.email}
                         onChange={handleChangeFormulario}
                         placeholder="Nombre@ejemplo.com"
-                        minlength="5"
+                        minLength="5"
                         required
                         className="form-control"
                     />
