@@ -3,19 +3,15 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 
-import { Home } from "./pages/home";
+
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 
+import { Home } from "./pages/home";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { PerfilEntrenador } from "./pages/perfilEntrenador.jsx"
-
-
-
-
-
 import { IniciarSesion } from "./component/IniciarSesion.jsx";
 import { Registro } from "./component/Registro";
 import { PerfilUsuarios } from "./component/PerfilUsuarios.js";
@@ -25,7 +21,7 @@ import { MiAreaRegistrado } from "./pages/MiAreaUsuarioRegistrado.jsx";
 import { MiAreaCliente } from "./pages/MiAreaCliente.jsx";
 import { MiAreaEntrenador } from "./pages/MiAreaEntrenador.jsx";
 import { FormulaCalorias } from "./pages/FormulaCalorias.jsx";
-import { Rutinas} from "./pages/Rutinas.jsx";
+import { Rutinas } from "./pages/Rutinas.jsx";
 import { ListaEntrenadores } from "./pages/ListaEntrenadores.jsx";
 
 
