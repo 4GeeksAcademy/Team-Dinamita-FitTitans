@@ -70,7 +70,7 @@ export const Navbar = () => {
 				) : (
 					<div className="botonesNavbar">
 						<div className="botonNavbar">
-							<Link to="/">
+							<Link to="/listaentrenadores">
 								<button className="btn btn-Navbar">Lista Entrenadores</button>
 							</Link>
 						</div>
