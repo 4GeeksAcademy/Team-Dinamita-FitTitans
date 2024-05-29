@@ -4,6 +4,7 @@ import "../../styles/Rutinas.css";
 //include images into your bundle
 //create your first component
 
+
 const RutinaBloque = ({ bloqueIndex, agregarRutina, eliminarRutina, editarRutina, rutinas }) => {
     const [inputValue, setInputValue] = useState("");
     const [isEditing, setIsEditing] = useState(false);
@@ -33,9 +34,9 @@ const RutinaBloque = ({ bloqueIndex, agregarRutina, eliminarRutina, editarRutina
     };
 
     return (
-        <div className="container contenedorRutinasPrincipal">
-            <div className="container contenedorTituloRutinas">
-                RUTINAS
+        <div className="containerMayor">
+            <div className="tituloRutina">
+                <h1>BLOQUE DE RUTINAS {bloqueIndex + 1}</h1>
             </div>
             <ul>
                 <input
@@ -83,7 +84,7 @@ const RutinaBloque = ({ bloqueIndex, agregarRutina, eliminarRutina, editarRutina
                     <button className="botonGuardar" onClick={handleEditRutina}>Guardar</button>
                 </div>
             )}
-            <div className="contenedorTasks">
+            <div className="contenedorTasksEjercicios">
                 {rutinas.length} Ejercicios
             </div>
         </div>
@@ -116,7 +117,7 @@ export const Rutinas = () => {
     };
 
     return (
-        <div className="containerPrincipal">
+        <div className="containerPrincipalRutinas">
             {bloques.map((rutinas, bloqueIndex) => (
                 <RutinaBloque
                     key={bloqueIndex}
