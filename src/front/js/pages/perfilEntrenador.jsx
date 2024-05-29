@@ -11,6 +11,7 @@ import "../../styles/perfilEntrenador.css";
 export const PerfilEntrenador = () => {
 
 	return (
+		
 		<div>
 			<nav className="navbar navbar-light bg-light">
 				<div className="container-fluid">
@@ -19,7 +20,7 @@ export const PerfilEntrenador = () => {
 			</nav>
 
 
-			<div id="carouselEntrenador" className="carousel slide" data-bs-ride="carousel">
+			<div id="carouselEntrenador" className="carouselSlide" data-bs-ride="carousel">
 				<div className="carousel-indicators">
 					<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
 					<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -48,11 +49,11 @@ export const PerfilEntrenador = () => {
 						</div>
 					</div>
 				</div>
-				<button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+				<button className="carousel-control-prev" type="button" data-bs-slide="prev">
 					<span className="carousel-control-prev-icon" aria-hidden="true"></span>
 					<span className="visually-hidden">Previous</span>
 				</button>
-				<button className="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+				<button className="carousel-control-next" type="button" data-bs-slide="next">
 					<span className="carousel-control-next-icon" aria-hidden="true"></span>
 					<span className="visually-hidden">Next</span>
 				</button>
