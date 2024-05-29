@@ -33,9 +33,9 @@ const RutinaBloque = ({ bloqueIndex, agregarRutina, eliminarRutina, editarRutina
     };
 
     return (
-        <div className="container">
-            <div className="titulo">
-                <h1>Bloque de Rutina {bloqueIndex + 1}</h1>
+        <div className="container contenedorRutinasPrincipal">
+            <div className="container contenedorTituloRutinas">
+                RUTINAS
             </div>
             <ul>
                 <input
