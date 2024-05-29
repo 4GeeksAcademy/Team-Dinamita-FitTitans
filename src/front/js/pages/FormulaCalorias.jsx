@@ -1,6 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Contexto } from "../store/appContext";
-import { Enlace, useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
 import "../../styles/FormulaCalorias.css";
 
 export const FormulaCalorias = () => {
@@ -8,7 +6,8 @@ export const FormulaCalorias = () => {
         genero: "",
         peso: "",
         altura: "",
-        edad: ""
+        edad: "",
+        factorActividad: 1.2 // Inicialmente en Poco o ningun ejercicio
     });
 
     const [resultado, setResultado] = useState("");
@@ -24,45 +23,66 @@ export const FormulaCalorias = () => {
     const enviarFormulario = (e) => {
         e.preventDefault();
 
-        const { genero, peso, altura, edad } = datosFormulario;
+        const { genero, peso, altura, edad, factorActividad } = datosFormulario;
         let rmb;
 
         if (genero === "masculino") {
-            rmb = (10 * peso) + (6.25 * altura) - (5 * edad) + 5;
+            rmb = (66 + (13.7 * peso)) + ((5 * altura) - (6.8 * edad)) * factorActividad;
         } else if (genero === "femenino") {
-            rmb = (10 * peso) + (6.25 * altura) - (5 * edad) - 161;
+            rmb = (655 + (9.6 * peso)) + ((1.8 * altura) - (4.7 * edad)) * factorActividad;
         }
 
         setResultado(`Tu RMB es: ${rmb.toFixed(2)}`);
     };
 
     return (
-        <div className="container">
-            <h1>Calculadora RMB (Ritmo Metabólico Basal)</h1>
-            <form onSubmit={enviarFormulario} className="formulario">
-                <div className="grupo-formulario">
-                    <label htmlFor="genero">Género:</label>
-                    <select name="genero" id="genero" value={datosFormulario.genero} onChange={cambiarDatos} required>
-                        <option value="">Selecciona tu género</option>
-                        <option value="masculino">Hombre</option>
-                        <option value="femenino">Mujer</option>
-                    </select>
+        <div className="container contenedorFormulaCalorias">
+            <div className="contenedorTituloFormulaCalorias ">
+                <div className="tituloFormulaCalorias">
+                    Calculadora RMB (Ritmo Metabólico Basal)
                 </div>
-                <div className="grupo-formulario">
-                    <label htmlFor="peso">Peso (kg):</label>
-                    <input type="number" name="peso" id="peso" value={datosFormulario.peso} onChange={cambiarDatos} required />
-                </div>
-                <div className="grupo-formulario">
-                    <label htmlFor="altura">Altura (cm):</label>
-                    <input type="number" name="altura" id="altura" value={datosFormulario.altura} onChange={cambiarDatos} required />
-                </div>
-                <div className="grupo-formulario">
-                    <label htmlFor="edad">Edad (años):</label>
-                    <input type="number" name="edad" id="edad" value={datosFormulario.edad} onChange={cambiarDatos} required />
-                </div>
-                <button type="submit">Calcular RMB</button>
-            </form>
-            {resultado && <div className="resultado">{resultado}</div>}
+            </div>
+            <div className="contenedorFormularioFormulaCalorias">
+                <form onSubmit={enviarFormulario} className="formularioFormulaCalorias">
+                    <div className="grupo-formulario grupo-formularioFormula">
+                        <div className="GrupoFormularioCalorias">
+                            <label htmlFor="genero">Género:</label>
+                            <select name="genero" id="genero" value={datosFormulario.genero} onChange={cambiarDatos} required>
+                                <option value="">Selecciona tu género</option>
+                                <option value="masculino">Hombre</option>
+                                <option value="femenino">Mujer</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div className="GrupoFormularioCalorias">
+                        <label htmlFor="peso">Peso (kg):</label>
+                        <input type="number" name="peso" id="peso" value={datosFormulario.peso} onChange={cambiarDatos} required />
+                    </div>
+                    <div className="GrupoFormularioCalorias">
+                        <label htmlFor="altura">Altura (cm):</label>
+                        <input type="number" name="altura" id="altura" value={datosFormulario.altura} onChange={cambiarDatos} required />
+                    </div>
+                    <div className="GrupoFormularioCalorias">
+                        <label htmlFor="edad">Edad (años):</label>
+                        <input type="number" name="edad" id="edad" value={datosFormulario.edad} onChange={cambiarDatos} required />
+                    </div>
+                    <div className="GrupoFormularioCalorias">
+                        <label htmlFor="factorActividad">Factor de actividad:</label>
+                        <select name="factorActividad" id="factorActividad" value={datosFormulario.factorActividad} onChange={cambiarDatos} required>
+                            <option value="1.2">Poco o ningún ejercicio</option>
+                            <option value="1.375">Ejercicio ligero (1-3 días a la semana)</option>
+                            <option value="1.55">Ejercicio moderado (3-5 días a la semana)</option>
+                            <option value="1.725">Ejercicio fuerte (6-7 días a la semana)</option>
+                            <option value="1.9">Ejercicio muy fuerte (dos veces al día, entrenamientos muy duros)</option>
+                        </select>
+                    </div>
+                    <div className="contenedorbotonEnviarFormularioCalcularCalorias">
+                        <button className="botonEnviarFormularioCalcularCalorias" type="submit">Calcular RMB</button>
+                    </div>
+                </form>
+                {resultado && <div className="resultado">{resultado}</div>}
+            </div>
         </div>
     );
 };
