@@ -49,6 +49,14 @@ ul li {
     cursor: pointer;
     font-size: 20px;
 }
+.icono-editar {
+    float: right;
+    margin-right: 10px;
+    margin-top: 12px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
 
 .tarea {
     background: rgb(248, 246, 246);
@@ -62,7 +70,6 @@ ul li {
 .contenedorTasks {
     color: #e7a33e;
     justify-content: center;
-    margin-top: -18px;
     padding: 10px;
     font-size: 20px;
 }
@@ -74,4 +81,19 @@ ul li {
     border-radius: 10px;
     margin-top: 3%;
     padding: 1%;
+}
+.editarRutina {
+    font-size: 20px;
+    width: 100%;
+    margin-top: 10px;
+
+}
+.botonGuardar {
+    background: #e7a33e;
+    font-size: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-top: 1%;
+    padding: 0.5%;
+
 }
