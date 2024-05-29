@@ -1,14 +1,28 @@
-.containerPrincipal {
+.contenedorRutinasPrincipal {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.contenedorTituloRutinas {
+    color: #e7a33e;
+    background-color: rgba(0, 0, 0, 0.8);
+    font-size: 50px;
+    margin-top: 2%;
+    text-align: center;
+    display: inline-block;
+    padding: 15px;
+}
+
+.containerPrincipalRutinas {
     justify-content: center;
     text-align: center;
     min-height: 700px;
     height: auto;
     margin-bottom: 50px;
     border-radius: 12px;
-    margin-top: 150px;
 }
 
-.container {
+.contenedorRutina {
     color: #e7a33e;
     font-size: 10px;
     margin-top: 2%;
@@ -18,28 +32,32 @@
     padding: 15px;
 }
 
-h1 {
+.subtituloRutina {
     color: #e7a33e;
     font-size: 50px;
     margin-top: 2%;
-    text-align: center;
+    margin-bottom: 2%;
     background-color: rgba(0, 0, 0, 0.8);
     display: inline-block;
     padding: 15px;
 }
 
-ul li {
+.listaRutinas {
     border: 1px solid rgb(172, 169, 169);
     font-size: 30px;
     list-style-type: none;
     background-color: black;
-    color: white
+    color: white;
+    margin-bottom: 1%;
+    word-wrap: break-word;
+    word-break: break-all;
 }
 
 .agregarRutina {
     font-size: 20px;
     width: 100%;
-    margin-top: 10px;
+    margin-top: 1%;
+    margin-bottom: 1%;
 }
 
 .icono-borrar {
