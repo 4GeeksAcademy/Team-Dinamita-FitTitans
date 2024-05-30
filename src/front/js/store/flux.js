@@ -47,9 +47,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 
-
-
-
+			HandleRegistro : async (usuarios) => {
+				const response = await fetch('https://opulent-doodle-977rpqgx6j64hp4p9-3001.app.github.dev/registro', {
+					method: 'POST',
+					headers: {
+					  'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(usuarios),
+				  });
+				  const data = await response.json();
+				  if (response.ok) {
+					console.log(response.ok)
+					return true
+				  } else {
+					console.log(data)
+					return false
+				  }
+			},
+			
 
 
 			exampleFunction: () => {
