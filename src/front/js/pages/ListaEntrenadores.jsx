@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState, } from "react";
 import { Context } from "../store/appContext";
 import { Link, } from "react-router-dom";
+import "../../styles/ListaEntrenadores.css";
 
 export const ListaEntrenadores = () => {
 
@@ -22,9 +23,12 @@ export const ListaEntrenadores = () => {
 
 
     {
-      nombre: "asd",
-      numero: "asd",
+      nombre: "Nombre",
+      numero: "Apellid",
       email: "asdasd@asdasd",
+      edad: "",
+      tipo entrenamiento: "",
+
       imagen: "traerla desde cloudinary"
     },
     {
