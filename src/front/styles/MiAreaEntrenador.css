@@ -6,33 +6,43 @@
 .tituloMiAreaEntrenador {
     color: #e7a33e;
     background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 5px;
     font-size: 50px;
     margin-top: 2%;
     text-align: center;
     display: inline-block;
     padding: 15px;
+    max-width: 100%;
+    overflow: hidden;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .row-filaMiAreaEntrenador {
     display: flex;
+    flex-wrap: wrap;
     margin-top: 2%;
     border: 2px solid #e7a33e;
+    border-radius: 5px;
     flex: 1;
-    margin-bottom: 50px;
+    margin-left: 5%;
+    margin-right: 5%;
+    max-width: 100%;
+    overflow: hidden;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .columnaPerfilEntrenador {
     display: flex;
     justify-content: center;
-    /* Centra horizontalmente */
     align-items: center;
-    /* Centra verticalmente */
     height: 600px;
     color: #e7a33e;
     text-align: center;
     min-width: 0;
     border: 2px solid #e7a33e;
-    background-image: url('https://img.freepik.com/foto-gratis/3d-morph-man-haciendo-ejercicio-pesas-gimnasia_1048-12541.jpg?t=st=1716743390~exp=1716746990~hmac=aab18fa09f2146b0b11430f4e57387c7c1f5751046e51158783dea7d3fe7226d&w=740');
+    background-image: url('https://res.cloudinary.com/dbqq4n3qa/image/upload/v1717008465/perfilusuario_luy4n6.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -46,7 +56,7 @@
     white-space: nowrap;
     font-size: 15px;
     border: 2px solid black;
-    border-radius: 8px;
+    border-radius: 5px;
     font-size: 15px;
     min-width: 0;
 }
@@ -64,7 +74,7 @@
     text-align: center;
     min-width: 0;
     border: 2px solid #e7a33e;
-    background-image: url('https://img.freepik.com/fotos-premium/entrenador-personal-ayudando-mujer-hacer-ejercicio-pesas-gimnasio-concepto-pareja-familiar-deportista-hombre-deportivo-torso-abs-deportivo-desnudo-potente-cuerpo-atletico_265223-63753.jpg');
+    background-image: url('https://res.cloudinary.com/dbqq4n3qa/image/upload/v1717158927/listaclientes-entrenador2_y8qddc.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -78,9 +88,9 @@
     white-space: nowrap;
     font-size: 15px;
     border: 2px solid black;
-    border-radius: 8px;
+    border-radius: 5px;
     font-size: 15px;
-    min-width: 0;
+    min-width: 100px;
 }
 
 .linkClientesDelEntrenador:hover {
@@ -97,7 +107,7 @@
     text-align: center;
     min-width: 0;
     border: 2px solid #e7a33e;
-    background-image: url('https://static.vecteezy.com/system/resources/previews/024/276/132/non_2x/calculator-icon-or-symbol-in-black-and-white-color-vector.jpg');
+    background-image: url('https://res.cloudinary.com/dbqq4n3qa/image/upload/v1717158621/videoentrenamiento-entrenador33_vcwp28.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -111,11 +121,44 @@
     white-space: nowrap;
     font-size: 15px;
     border: 2px solid black;
-    border-radius: 8px;
+    border-radius: 5px;
     font-size: 15px;
     min-width: 0;
 }
 
 .linkVideosEntrenamientoEntrenador:hover {
     color: white;
+}
+
+
+@media (max-width: 1200px) {
+
+    .linkPerfilEntrenador,
+    .linkClientesDelEntrenador,
+    .linkVideosEntrenamientoEntrenador {
+        padding: 12px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 1000px) {
+
+    .linkPerfilEntrenador,
+    .linkClientesDelEntrenador,
+    .linkVideosEntrenamientoEntrenador {
+        padding: 12px;
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 768px) {
+    .tituloMiAreaEntrenador {
+        font-size: 32px;
+    }
+}
+
+@media (max-width: 480px) {
+    .tituloMiAreaEntrenador {
+        font-size: 25px;
+    }
 }
