@@ -11,7 +11,7 @@ export const Home = () => {
 			<div className="row row-fila1">
 				<div className="col-md-7 col-columna1">
 					<div className="titulo1">
-						¿Buscas entrenadores o entrenadoras personales
+						¿Buscas entrenadores/as personales
 						<br />
 						profesionales?
 						<div className="subTitulo1">
@@ -62,7 +62,7 @@ export const Home = () => {
 						TIP DE NUTRICIÓN
 					</div>
 					<div className="tipNutricion">
-						TRBHTTTTWWWWWWWWWWWWWwwwwwwWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+						TRBHTTTTWWWWWWWWWWWWWwwwwwwWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 					</div>
 				</div>
 			</div>

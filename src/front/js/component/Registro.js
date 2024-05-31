@@ -1,33 +1,36 @@
-import React, { useState } from "react";
-import {  useNavigate } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import {  useNavigate, } from "react-router-dom";
 import "/workspaces/Team-Dinamita-FitTitans/src/front/styles/registro.css"
 import firebaseApp from "../../../firebase/credenciales";
 import { getAuth, createUserWithEmailAndPassword  } from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
-
+import { Context } from "../store/appContext";
 const auth = getAuth(firebaseApp)
 
 
 export const Registro = ({ closeModal }) => {
+  const { store, actions } = useContext(Context);
   const firestore = getFirestore(firebaseApp);
   const [usuarios, setUsuarios] = useState({
     nombre: "",
     correo: "",
     telefono: "",
     contraseña: "",
-    rol: "",
+    rol: Boolean
   });
+
   const email = usuarios.correo;
   const rol = usuarios.rol
-  const RegistrarUsuario = async () =>{
 
+  const RegistrarUsuario = async () =>{
+    navigate("/login"); // esto y la funcion van en el handle submit
     const infoUsuario = await createUserWithEmailAndPassword(auth, usuarios.correo, usuarios.contraseña).then(
       (usuarioFirebase) => {return usuarioFirebase}
     )
     console.log(infoUsuario.user.uid)
 
     const documentoRef =  doc(firestore, `/usuarios/${infoUsuario.user.uid}`)
-    setDoc(documentoRef,{email, rol})
+    setDoc(documentoRef,)//{//email, //rol})
   };
 
   const navigate = useNavigate();
@@ -35,8 +38,8 @@ export const Registro = ({ closeModal }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Aquí puedes añadir la lógica de registro, por ejemplo, enviar datos al backend
-    RegistrarUsuario()
-    navigate("/login");
+   actions.HandleRegistro(usuarios) ? alert("succes") : alert("unexpected error");
+    
     closeModal(); // Cerrar la modal después de enviar el formulario
   };
 
@@ -59,8 +62,8 @@ export const Registro = ({ closeModal }) => {
                     defaultValue=""
                   >
                     <option value="" disabled>Choose...</option>
-                    <option value="usuario">Usuario</option>
-                    <option value="entrenador">Entrenador</option>
+                    <option value="0">Usuario</option>
+                    <option value="1">Entrenador</option>
                   </select>
               </div>
 

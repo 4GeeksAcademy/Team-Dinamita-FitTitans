@@ -40,7 +40,7 @@ export const Navbar = () => {
 
 	return (
 		<>
-			<nav className="navbar navbar-dark bg-dark p-3">
+			<nav className="navbar navbarPrincipal navbar-dark bg-dark p-3">
 				<div className="nombreWeb">
 					<Link className="noSubrayadoLink" to="/">
 						<span className="logo">FIT TITANS</span>
