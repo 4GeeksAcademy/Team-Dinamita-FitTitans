@@ -11,6 +11,7 @@ from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
 from flask_cors import CORS
+import bcrypt
 # from models import Person
 
 ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
@@ -68,6 +69,59 @@ def serve_any_other_file(path):
     response.cache_control.max_age = 0  # avoid cache memory
     return response
 
+# contraseñas hasheadas
+
+def hash_password(plain_password):
+    salt = bcrypt.gensalt()
+    hashed_password = bcrypt.hashpw(plain_password.encode('utf-8'), salt)
+    return hashed_password
+
+def check_password(plain_password, hashed_password):
+    return bcrypt.checkpw(plain_password.encode('utf-8'), hashed_password)
+
+
+@app.route('/registro', methods=['POST'])
+def registro():
+    data = request.json
+    username = data['email']
+    password = data['password']
+    is_trainer = data.get('is_trainer', False)
+
+    # Verificar si el usuario ya existe
+    existing_user = User.query.filter_by(username=username).first()
+    if existing_user:
+        return jsonify({'message': 'User already exists'}), 400
+
+    # Encriptar la contraseña
+    hashed_password = hash_password(password)
+
+    # Crear un nuevo usuario
+    new_user = User(username=username, password_hash=hashed_password, is_trainer=is_trainer)
+    db.session.add(new_user)
+    db.session.commit()
+
+    return jsonify({'message': 'User registered successfully'}), 201
+
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.json
+    username = data['username']
+    password = data['password']
+    
+    user = User.query.filter_by(username=username).first()
+    if user and check_password(password, user.password_hash):
+        return jsonify({'message': 'Login successful'}), 200
+    else:
+        return jsonify({'message': 'Invalid username or password'}), 400
+
+
+# GETTING ALL THE USERS
+@app.route("/users", methods=["GET"])
+def get_all_users():
+    all_users = User.query.all()
+    mapped_users = list(map(lambda index: index.serialize(), all_users))
+    response_body = jsonify(mapped_users)
+    return response_body, 200
 
 
 # this only runs if `$ python src/main.py` is executed
