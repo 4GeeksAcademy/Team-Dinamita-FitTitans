@@ -11,20 +11,23 @@ const auth = getAuth(firebaseApp)
 export const Registro = ({ closeModal }) => {
   const { store, actions } = useContext(Context);
   const firestore = getFirestore(firebaseApp);
-  const [usuarios, setUsuarios] = useState({
-    nombre: "",
-    correo: "",
+
+  const [usuario, setUsuarios] = useState({
+    email: "",
+    password: "",
+    rol: Boolean,
     telefono: "",
-    contraseña: "",
-    rol: Boolean
+    nombre: "",
   });
 
-  const email = usuarios.correo;
-  const rol = usuarios.rol
+
+  //const email = usuarios.correo;
+  //const rol = usuarios.rol
+ 
 
   const RegistrarUsuario = async () =>{
     navigate("/login"); // esto y la funcion van en el handle submit
-    const infoUsuario = await createUserWithEmailAndPassword(auth, usuarios.correo, usuarios.contraseña).then(
+    const infoUsuario = await createUserWithEmailAndPassword(auth, usuario.email, usuario.password).then(
       (usuarioFirebase) => {return usuarioFirebase}
     )
     console.log(infoUsuario.user.uid)
@@ -35,15 +38,18 @@ export const Registro = ({ closeModal }) => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Aquí puedes añadir la lógica de registro, por ejemplo, enviar datos al backend
-   actions.HandleRegistro(usuarios) ? alert("succes") : alert("unexpected error");
-    
-    closeModal(); // Cerrar la modal después de enviar el formulario
+    const registroExitoso = await actions.HandleRegistro(usuario);
+    if (registroExitoso) {
+      alert("success");
+      closeModal();
+    } else {
+      alert("unexpected error");
+    }
   };
 
-  console.log(usuarios)
+console.log(usuario)
 
   return (
     <div className="modal-overlay" onClick={closeModal}>
@@ -58,7 +64,7 @@ export const Registro = ({ closeModal }) => {
                     className="form-select" 
                     id="rol" 
                     required 
-                    onChange={(e) => setUsuarios({ ...usuarios, rol: e.target.value })}
+                    onChange={(e) => setUsuarios({ ...usuario, rol: e.target.value })}
                     defaultValue=""
                   >
                     <option value="" disabled>Choose...</option>
@@ -77,7 +83,7 @@ export const Registro = ({ closeModal }) => {
                   className="form-control"
                   minLength={3}
                   required={true}
-                  onChange={(e) => setUsuarios({ ...usuarios, nombre: e.target.value })}
+                  onChange={(e) => setUsuarios({ ...usuario, nombre: e.target.value })}
                   placeholder="John Doe"
                 />
               </div>
@@ -92,7 +98,7 @@ export const Registro = ({ closeModal }) => {
                   className="form-control"
                   minLength={3}
                   required={true}
-                  onChange={(e) => setUsuarios({ ...usuarios, correo: e.target.value })}
+                  onChange={(e) => setUsuarios({ ...usuario, email: e.target.value })}
                   placeholder="name@example.com"
                 />
               </div>
@@ -107,7 +113,7 @@ export const Registro = ({ closeModal }) => {
                   className="form-control"
                   minLength={3}
                   required={true}
-                  onChange={(e) => setUsuarios({ ...usuarios, telefono: e.target.value })}
+                  onChange={(e) => setUsuarios({ ...usuario, telefono: e.target.value })}
                   placeholder="+34-666-66-66-66"
                 />
               </div>
@@ -123,7 +129,7 @@ export const Registro = ({ closeModal }) => {
                   minLength={3}
                   required={true}
                   placeholder="******************"
-                  onChange={(e) => setUsuarios({ ...usuarios, contraseña: e.target.value })}
+                  onChange={(e) => setUsuarios({ ...usuario, password: e.target.value })}
                 />
               </div>
 
