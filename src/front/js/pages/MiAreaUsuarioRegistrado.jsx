@@ -48,12 +48,12 @@ export const MiAreaRegistrado = () => {
 			<div className="row row-filaMiAreaRegistrado">
 				<div className="col-md-4 columnaPerfilRegistrado ">
 					<div className="tituloPerfilRegistrado">
-						<Link to="/" className="linkPerfilRegistrado">PERFIL USUARIO</Link>
+						<Link to="/" className="linkPerfilRegistrado">PERFIL</Link>
 					</div>
 				</div>
 				<div className="col-md-4 columnaConoceEntrenadoresRegistrado">
 					<div className="tituloConoceEntrenadoresRegistrado">
-						<Link to="/listaentrenadores" className="linkConoceEntrenadoresRegistrado">CONOCE NUESTROS ENTRENADORES</Link>
+						<Link to="/listaentrenadores" className="linkConoceEntrenadoresRegistrado">NUESTROS ENTRENADORES/AS</Link>
 					</div>
 				</div>
 				<div className="col-md-4 columnaCalculaCaloriasRegistrado">
