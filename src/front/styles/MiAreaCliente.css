@@ -5,20 +5,32 @@
 
 .tituloMiAreaCliente {
     color: #e7a33e;
+    border-radius: 5px;
     font-size: 50px;
     margin-top: 2%;
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.9);
     display: inline-block;
     padding: 15px;
+    max-width: 100%;
+    overflow: hidden;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .row-filaMiAreaCliente {
     display: flex;
     margin-top: 2%;
     border: 2px solid #e7a33e;
+    border-radius: 5px;
     flex: 1;
     margin-bottom: 30px;
+    margin-left: 5%;
+    margin-right: 5%;
+    max-width: 100%;
+    overflow: hidden;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .columnaMiAreaPerfilCliente {
@@ -30,7 +42,7 @@
     text-align: center;
     min-width: 0;
     border: 2px solid #e7a33e;
-    background-image: url('https://img.freepik.com/foto-gratis/3d-morph-man-haciendo-ejercicio-pesas-gimnasia_1048-12541.jpg?t=st=1716743390~exp=1716746990~hmac=aab18fa09f2146b0b11430f4e57387c7c1f5751046e51158783dea7d3fe7226d&w=740');
+    background-image: url('https://res.cloudinary.com/dbqq4n3qa/image/upload/v1717009110/perfilusuario-cliente_eyo5ak.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -62,7 +74,7 @@
     text-align: center;
     min-width: 0;
     border: 2px solid #e7a33e;
-    background-image: url('https://img.freepik.com/vector-gratis/conjunto-comida-pizarra_23-2147779765.jpg?t=st=1716496079~exp=1716499679~hmac=3a345c1ffe352b923064bcacc387707e2f3dc31dda7c8edf863282b2846426cb&w=740');
+    background-image: url('https://res.cloudinary.com/dbqq4n3qa/image/upload/v1717009386/dieta-cliente1_f2vlg8.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -120,8 +132,14 @@
 .row-filaMiAreaCliente2 {
     display: flex;
     border: 2px solid #e7a33e;
+    border-radius: 5px;
     flex: 1;
-    
+    margin-left: 5%;
+    margin-right: 5%;
+    max-width: 100%;
+    overflow: hidden;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .columnaChatCliente {
@@ -133,6 +151,7 @@
     text-align: center;
     min-width: 0;
     border: 2px solid #e7a33e;
+    background-image: url('https://res.cloudinary.com/dbqq4n3qa/image/upload/v1717009747/chat1_judp6t.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -164,7 +183,7 @@
     text-align: center;
     min-width: 0;
     border: 2px solid #e7a33e;
-    background-image: url('https://us.123rf.com/450wm/tverdohlib/tverdohlib2305/tverdohlib230508127/205295415-pareja-de-culturistas-en-forma-hombre-musculoso-y-hermosa-chica-con-pesas-deporte-pareja-hombre.jpg?ver=6');
+    background-image: url('https://res.cloudinary.com/dbqq4n3qa/image/upload/v1717010643/videos-clientee1_amwk5v.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -196,7 +215,7 @@
     text-align: center;
     min-width: 0;
     border: 2px solid #e7a33e;
-    background-image: url('https://png.pngtree.com/png-clipart/20230924/original/pngtree-calories-chalk-white-icon-on-black-background-count-food-daily-vector-png-image_12678629.png');
+    background-image: url('https://res.cloudinary.com/dbqq4n3qa/image/upload/v1717011465/calculadoracalorias1_uvbiyg.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -211,10 +230,34 @@
     font-size: 15px;
     border: 2px solid black;
     border-radius: 8px;
-    font-size: 15px;
     min-width: 0;
 }
 
 .linkMiAreaCalculaCalorias:hover {
     color: white;
+}
+
+@media (max-width: 1000px) {
+
+    .linkPerfilCliente,
+    .linkDietaCliente,
+    .linkRutinasCliente,
+    .linkChatCliente,
+    .linkVideosEjercicios,
+    .linkMiAreaCalculaCalorias {
+        padding: 15px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 768px) {
+    .tituloMiAreaCliente {
+        font-size: 32px;
+    }
+}
+
+@media (max-width: 480px) {
+    .tituloMiAreaCliente {
+        font-size: 25px;
+    }
 }

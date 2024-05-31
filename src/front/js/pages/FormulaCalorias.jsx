@@ -47,29 +47,28 @@ export const FormulaCalorias = () => {
                     <div className="grupo-formulario grupo-formularioFormula">
                         <div className="GrupoFormularioCalorias">
                             <label htmlFor="genero">Género:</label>
-                            <select name="genero" id="genero" value={datosFormulario.genero} onChange={cambiarDatos} required>
+                            <select className="inputFormulaCalorias" name="genero" id="genero" value={datosFormulario.genero} onChange={cambiarDatos} required>
                                 <option value="">Selecciona tu género</option>
                                 <option value="masculino">Hombre</option>
                                 <option value="femenino">Mujer</option>
                             </select>
                         </div>
                     </div>
-
                     <div className="GrupoFormularioCalorias">
                         <label htmlFor="peso">Peso (kg):</label>
-                        <input type="number" name="peso" id="peso" value={datosFormulario.peso} onChange={cambiarDatos} required />
+                        <input className="inputFormulaCalorias" type="number" name="peso" id="peso" value={datosFormulario.peso} onChange={cambiarDatos} required />
                     </div>
                     <div className="GrupoFormularioCalorias">
                         <label htmlFor="altura">Altura (cm):</label>
-                        <input type="number" name="altura" id="altura" value={datosFormulario.altura} onChange={cambiarDatos} required />
+                        <input className="inputFormulaCalorias" type="number" name="altura" id="altura" value={datosFormulario.altura} onChange={cambiarDatos} required />
                     </div>
                     <div className="GrupoFormularioCalorias">
                         <label htmlFor="edad">Edad (años):</label>
-                        <input type="number" name="edad" id="edad" value={datosFormulario.edad} onChange={cambiarDatos} required />
+                        <input className="inputFormulaCalorias" type="number" name="edad" id="edad" value={datosFormulario.edad} onChange={cambiarDatos} required />
                     </div>
                     <div className="GrupoFormularioCalorias">
                         <label htmlFor="factorActividad">Factor de actividad:</label>
-                        <select name="factorActividad" id="factorActividad" value={datosFormulario.factorActividad} onChange={cambiarDatos} required>
+                        <select className="inputFormulaCalorias" name="factorActividad" id="factorActividad" value={datosFormulario.factorActividad} onChange={cambiarDatos} required>
                             <option value="1.2">Poco o ningún ejercicio</option>
                             <option value="1.375">Ejercicio ligero (1-3 días a la semana)</option>
                             <option value="1.55">Ejercicio moderado (3-5 días a la semana)</option>
