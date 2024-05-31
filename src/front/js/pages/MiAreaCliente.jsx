@@ -13,7 +13,7 @@ export const MiAreaCliente = () => {
             <div className="row row-filaMiAreaCliente">
                 <div className="col-md-4 columnaMiAreaPerfilCliente">
                     <div className="tituloMiAreaPerfilCliente">
-                        <Link to="/" className="linkPerfilCliente">PERFIL USUARIO</Link>
+                        <Link to="/" className="linkPerfilCliente">PERFIL</Link>
                     </div>
                 </div>
                 <div className="col-md-4 columnaDietaCliente">
@@ -40,7 +40,7 @@ export const MiAreaCliente = () => {
                 </div>
                 <div className="col-md-4 columnaMiAreaCalculaCalorias">
                     <div className="tituloMiAreaCalculaCalorias">
-                        <Link to="/formulacalorias" className="linkMiAreaCalculaCalorias">CALCULA TUS CALORIAS DIARIAS</Link>
+                        <Link to="/formulacalorias" className="linkMiAreaCalculaCalorias">CALCULA TUS CALORIAS</Link>
                     </div>
                 </div>
             </div>
