@@ -47,26 +47,62 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 
-			HandleRegistro : async (usuarios) => {
-				const response = await fetch('https://opulent-doodle-977rpqgx6j64hp4p9-3001.app.github.dev/registro', {
+			HandleRegistro: async ({email, password, rol}) => {
+				try {
+				  const response = await fetch('https://opulent-doodle-977rpqgx6j64hp4p9-3001.app.github.dev/registro', {
 					method: 'POST',
 					headers: {
 					  'Content-Type': 'application/json',
+					  'accept': 'application/json'
 					},
-					body: JSON.stringify(usuarios),
+					body: JSON.stringify({
+					  email: email,
+					  password: password,
+					  rol : rol === 0 ? true : false
+					}),
 				  });
-				  const data = await response.json();
+		
 				  if (response.ok) {
-					console.log(response.ok)
-					return true
+					return true;
 				  } else {
-					console.log(data)
-					return false
+					const errorData = await response.json();
+					console.log(errorData);
+					return false;
+				  }
+				} catch (error) {
+				  console.log('Error:', error);
+				  return false;
+				}
+			  },
+			
+			HandleInicioSesion: async ({email, password}) =>{
+				try {
+					const response = await fetch('https://opulent-doodle-977rpqgx6j64hp4p9-3001.app.github.dev/login', {
+					  method: 'POST',
+					  headers: {
+						'Content-Type': 'application/json',
+						'accept': 'application/json'
+					  },
+					  body: JSON.stringify({
+						email: email,
+						password: password,
+					  }),
+					});
+		  
+					if (response.ok) {
+						
+						return true;
+					} else {
+						const errorData = await response.json();
+						console.log(errorData);
+						return false;
+					}
+				  } catch (error) {
+					console.log('Error:', error);
+					return false;
 				  }
 			},
 			
-
-
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
@@ -83,20 +119,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading message from backend", error)
 				}
 			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
-
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
-			}
+			
 		}
 	};
 };

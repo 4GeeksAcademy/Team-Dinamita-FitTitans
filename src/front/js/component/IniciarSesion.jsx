@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "../../styles/Navbar.css";
 import "/workspaces/Team-Dinamita-FitTitans/src/front/styles/IniciarSesion.css"
 import { useNavigate } from "react-router-dom";
@@ -7,6 +7,8 @@ import { MiAreaUsuarioRegistrado } from "//workspaces/Team-Dinamita-FitTitans/sr
 import firebaseApp from "../../../firebase/credenciales";
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { Context } from "../store/appContext";
+import { ToastContainer, toast } from 'react-toastify';
 
 const auth = getAuth(firebaseApp);
 const firestore = getFirestore(firebaseApp);
@@ -15,13 +17,13 @@ const firestore = getFirestore(firebaseApp);
 
 export const IniciarSesion = () => {
   const [usuarios, setUsuarios] = useState({
-    correo: "",
-    contraseña: "",
-    rol: "",
+    email: "",
+    password: "",
   });
   const [sesion, setSession] = useState(null)
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
+  const { store, actions } = useContext(Context);
 
 
   const getRol = async (uid) => {
@@ -64,7 +66,8 @@ export const IniciarSesion = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    signInWithEmailAndPassword(auth, usuarios.correo, usuarios.contraseña)
+    //signInWithEmailAndPassword(auth, usuarios.correo, usuarios.contraseña)
+    actions.HandleInicioSesion(usuarios) ? toast.success('Inicio de sesión exitoso') : "";
   };
 
   return (
@@ -83,7 +86,7 @@ export const IniciarSesion = () => {
                   className="form-control"
                   minLength={3}
                   required={true}
-                  onChange={(e) => setUsuarios({ ...usuarios, correo: e.target.value })}
+                  onChange={(e) => setUsuarios({ ...usuarios, email: e.target.value })}
                   placeholder="name@example.com"
                 />
               </div>
@@ -98,7 +101,7 @@ export const IniciarSesion = () => {
                   minLength={3}
                   required={true}
                   placeholder="******************"
-                  onChange={(e) => setUsuarios({ ...usuarios, contraseña: e.target.value })}
+                  onChange={(e) => setUsuarios({ ...usuarios, password: e.target.value })}
                 />
               </div>
               <div className="botonNavbar container d-flex justify-content-center">
@@ -112,6 +115,7 @@ export const IniciarSesion = () => {
             </form>
             {isModalOpen && <Registro closeModal={closeModal} />}
           </>)}
+          <ToastContainer />
     </>
   )
 }
