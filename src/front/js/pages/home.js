@@ -1,10 +1,45 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/home.css";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
+
+	const tipEntrenamiento = [
+		"Mantente hidratado durante tus entrenamientos.",
+		"Calienta antes de comenzar tu rutina de ejercicios.",
+		"Mantén una buena postura para evitar lesiones.",
+		"Incluye una variedad de ejercicios en tu rutina."
+	];
+
+	const generarTipEntrenamiento = () => {
+		return tipEntrenamiento[Math.floor(Math.random() * tipEntrenamiento.length)];
+	};
+
+	const [tipEntreno, setTipEntreno] = useState(generarTipEntrenamiento());
+
+	const clickGenerarTipEntreno = () => {
+		setTipEntreno(generarTipEntrenamiento());
+	};
+
+	const tipsNutricion = [
+		"Consume una dieta rica en frutas y verduras.",
+		"Incluye proteínas magras en cada comida.",
+		"Asegúrate de beber suficiente agua durante el día.",
+		"Limita la ingesta de alimentos procesados y azucarados."
+	];
+
+	const generarTipNutricion = () => {
+		return tipsNutricion[Math.floor(Math.random() * tipsNutricion.length)];
+	};
+
+	const [tipNutricion, setTipNutricion] = useState(generarTipNutricion());
+
+	const clickGenerarTipNutricion = () => {
+		setTipNutricion(generarTipNutricion());
+	};
+
 
 	return (
 		<div className="container-fluid">
@@ -31,8 +66,6 @@ export const Home = () => {
 						<div className="subTitulo2">
 							Potencia tu entrenamiento personal con nuestra app.
 							<br />
-
-
 							Ven y forma parte de nuestro equipo
 						</div>
 						<div className="botonRegistrarEntrenador">
@@ -49,7 +82,10 @@ export const Home = () => {
 						TIP DE ENTRENAMIENTO
 					</div>
 					<div className="tipEntrenamiento">
-						TTTTTTTTTWWWWWWWWWWWWWWWwwwwwwwwwwwwwwwwwwwwWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+						{tipEntreno}
+					</div>
+					<div className="botonNuevoTipEntrenamiento">
+						<button className="btn-tipEntrenamientoNuevo" onClick={clickGenerarTipEntreno}>Nuevo tip</button>
 					</div>
 				</div>
 				<div className="col-md-4 col-columna4">
@@ -62,7 +98,10 @@ export const Home = () => {
 						TIP DE NUTRICIÓN
 					</div>
 					<div className="tipNutricion">
-						TRBHTTTTWWWWWWWWWWWWWwwwwwwWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+						{tipNutricion}
+					</div>
+					<div className="botonNuevoTipNutricion">
+						<button className="btn-tipNutricionNuevo" onClick={clickGenerarTipNutricion}>Nuevo tip</button>
 					</div>
 				</div>
 			</div>

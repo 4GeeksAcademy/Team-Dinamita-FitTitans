@@ -20,14 +20,12 @@
   height: 550px;
 }
 
-
-
 .titulo1,
 .titulo2 {
   background-color: rgba(0, 0, 0, 0.9);
   border: 3px solid #e7a33e;
   border-radius: 5px;
-  font-size: 60px;
+  font-size: 55px;
   padding: 35px;
   overflow: hidden;
   width: 100%;
@@ -54,11 +52,10 @@
   padding: 15px;
 }
 
-.btn-ConoceEntrenadores:hover {
-  color: white;
-}
-
-.btn-RegistrarEntrenador:hover {
+.btn-ConoceEntrenadores:hover,
+.btn-RegistrarEntrenador:hover,
+.btn-tipEntrenamientoNuevo:hover,
+.btn-tipNutricionNuevo:hover {
   color: white;
 }
 
@@ -87,18 +84,22 @@
   background-size: cover;
   background-position: center;
   overflow: hidden;
+  position: relative;
 }
 
 .tituloTipsEntrenamiento {
   background-color: rgba(0, 0, 0, 0.9);
-  font-size: 20px;
+  border-radius: 5px;
+  font-size: 30px;
   padding: 10px;
   min-width: 0;
+  margin-bottom: 2%;
 }
 
 .tipEntrenamiento {
   background-color: rgba(0, 0, 0, 0.9);
-  font-size: 15px;
+  border-radius: 5px;
+  font-size: 25px;
   padding: 10px;
   margin-top: 30px;
   min-width: 0;
@@ -106,7 +107,25 @@
   justify-content: center;
   align-items: center;
   word-wrap: break-word;
-  word-break: break-all;
+  margin-bottom: 2%;
+}
+
+.botonNuevoTipEntrenamiento {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin-bottom: 20px;
+  margin-left: 20px;
+}
+
+.btn-tipEntrenamientoNuevo,
+.btn-tipNutricionNuevo {
+  background: #e7a33e;
+  white-space: nowrap;
+  font-size: 15px;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
 }
 
 .col-columna4 {
@@ -158,19 +177,22 @@
   background-size: cover;
   background-position: center;
   overflow: hidden;
-  ;
+  position: relative;
 }
 
 .tituloTipsNutricion {
   background-color: rgba(0, 0, 0, 0.9);
-  font-size: 20px;
+  border-radius: 5px;
+  font-size: 30px;
   padding: 10px;
   min-width: 0;
+  margin-bottom: 2%;
 }
 
 .tipNutricion {
   background-color: rgba(0, 0, 0, 0.9);
-  font-size: 15px;
+  border-radius: 5px;
+  font-size: 25px;
   padding: 10px;
   margin-top: 30px;
   min-width: 0;
@@ -178,7 +200,15 @@
   justify-content: center;
   align-items: center;
   word-wrap: break-word;
-  word-break: break-all;
+  margin-bottom: 2%;
+}
+
+.botonNuevoTipNutricion {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin-bottom: 20px;
+  margin-right: 20px;
 }
 
 @media (max-width: 1610px) {
@@ -201,7 +231,7 @@
 }
 
 
-@media (max-width: 1472px) {
+@media (max-width: 1495px) {
 
   .col-columna1,
   .col-columna2 {
@@ -223,7 +253,19 @@
   .btn-RegistrarEntrenador {
     font-size: 18px;
   }
+
+  .tituloTipsEntrenamiento,
+  .tituloTipsNutricion {
+    font-size: 20px;
+  }
+
+  .tipEntrenamiento,
+  .tipNutricion {
+    font-size: 18px;
+  }
 }
+
+
 
 @media (max-width: 1090px) {
   .row-fila1 {
@@ -246,6 +288,16 @@
   .btn-RegistrarEntrenador {
     font-size: 16px;
   }
+
+  .tituloTipsEntrenamiento,
+  .tituloTipsNutricion {
+    font-size: 18px;
+  }
+
+  .tipEntrenamiento,
+  .tipNutricion {
+    font-size: 16px;
+  }
 }
 
 
@@ -264,18 +316,18 @@
 
   .titulo1,
   .titulo2 {
-    font-size: 40px;
+    font-size: 50px;
     padding: 20px;
   }
 
   .subTitulo1,
   .subTitulo2 {
-    font-size: 20px;
+    font-size: 30px;
   }
 
   .btn-ConoceEntrenadores,
   .btn-RegistrarEntrenador {
-    font-size: 14px;
+    font-size: 20px;
   }
 
   .rowfila2 {
@@ -290,6 +342,69 @@
   .col-columna5 {
     flex: 0 0 100%;
     max-width: 100%;
+  }
+
+  .tituloTipsEntrenamiento,
+  .tituloTipsNutricion {
+    font-size: 30px;
+  }
+
+  .tipEntrenamiento,
+  .tipNutricion {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .row-fila1 {
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+
+  .col-columna1,
+  .col-columna2 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .titulo1,
+  .titulo2 {
+    font-size: 40px;
+  }
+
+  .subTitulo1,
+  .subTitulo2 {
+    font-size: 24px;
+  }
+
+  .btn-ConoceEntrenadores,
+  .btn-RegistrarEntrenador {
+    font-size: 20px;
+  }
+
+  .rowfila2 {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    border: none;
+  }
+
+  .col-columna3,
+  .col-columna4,
+  .col-columna5 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .tituloTipsEntrenamiento,
+  .tituloTipsNutricion {
+    font-size: 22px;
+  }
+
+  .tipEntrenamiento,
+  .tipNutricion {
+    font-size: 20px;
   }
 }
 
@@ -316,4 +431,19 @@
     font-size: 12px;
     padding: 10px;
   }
+
+  .tituloTipsEntrenamiento,
+  .tituloTipsNutricion {
+    font-size: 18px;
+  }
+
+  .tipEntrenamiento,
+  .tipNutricion {
+    font-size: 16px;
+  }
+
+  .btn-tipEntrenamientoNuevo,
+.btn-tipNutricionNuevo {
+  font-size: 12px;
+}
 }
