@@ -1,3 +1,6 @@
+// ESTE SERIA DESDE ADMIN, PUEDE MODIFICAR Y AÑADIR
+
+
 import React, { useState } from "react";
 import "../../styles/Dieta.css";
 

@@ -24,11 +24,8 @@ export const ListaEntrenadores = () => {
 
     {
       nombre: "Nombre",
-      numero: "Apellid",
+      numero: "num",
       email: "asdasd@asdasd",
-      edad: "",
-      tipo entrenamiento: "",
-
       imagen: "traerla desde cloudinary"
     },
     {
@@ -42,12 +39,12 @@ export const ListaEntrenadores = () => {
 
   return (
     <>
-      <div className="container mt-5 entrenadores">
+      <div className="container mt-5 containerEntrenadores">
         <ul className="list-group mb-5 ">
           {entrenadores.map((entrenador, index) => (
             <li key={index} className="list-group-item bg-dark text-light ">
               <div className="row align-items-center">
-                <div className="col-3">
+                <div className="fotoContainer col-3">
                   <Link to={"/"}>
                     <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="User" className="img-fluid rounded-circle" />
                   </Link>
