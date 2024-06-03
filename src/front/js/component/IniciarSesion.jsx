@@ -67,7 +67,7 @@ export const IniciarSesion = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     //signInWithEmailAndPassword(auth, usuarios.correo, usuarios.contraseña)
-    actions.HandleInicioSesion(usuarios) ? toast.success('Inicio de sesión exitoso') : "";
+    actions.HandleInicioSesion(usuarios) ? alert('Inicio de sesión exitoso') : alert('No se pudo iniciar sesión');
   };
 
   return (
@@ -115,7 +115,7 @@ export const IniciarSesion = () => {
             </form>
             {isModalOpen && <Registro closeModal={closeModal} />}
           </>)}
-          <ToastContainer />
+
     </>
   )
 }
