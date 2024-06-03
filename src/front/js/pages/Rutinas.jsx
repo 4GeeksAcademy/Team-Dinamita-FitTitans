@@ -1,8 +1,13 @@
+// DESDE ESTE SERIA EL ADMIN. PUEDE MODIFICAR Y AÑADIR
+
+
 import React, { useState } from "react";
 import "../../styles/Rutinas.css";
 
+
 //include images into your bundle
 //create your first component
+
 
 
 const RutinaBloque = ({ bloqueIndex, agregarRutina, eliminarRutina, editarRutina, rutinas }) => {
