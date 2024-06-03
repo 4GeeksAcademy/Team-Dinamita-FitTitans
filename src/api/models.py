@@ -9,7 +9,7 @@ class User(db.Model):
     password_hash = db.Column(db.String(120), nullable=False)
     is_trainer = db.Column(db.Boolean, default=False)
     telefono = db.Column(db.String(80), unique=True, nullable=False)
-
+    
     def __repr__(self):
         return f'<User {self.email}>'
 
@@ -22,4 +22,6 @@ class User(db.Model):
             "phone": self.telefono
             # do not serialize the password, its a security breach
         }
+    
+
     
