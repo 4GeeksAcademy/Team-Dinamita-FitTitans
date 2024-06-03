@@ -24,16 +24,22 @@ export const ListaEntrenadores = () => {
 
     {
       nombre: "Nombre",
-      numero: "num",
+      apellido: "Apellido",
       email: "asdasd@asdasd",
-      imagen: "traerla desde cloudinary"
+      imagen: "traerla desde cloudinary",
+      edad: "23",
+      genero: "xx",
+      tipoEntrenamiento: "fusufd"
     },
     {
-      nombre: "asd",
-      numero: "asd",
+      nombre: "Nombre",
+      apellido: "Apellido",
       email: "asdasd@asdasd",
-      imagen: "traerla desde cloudinary"
-    }
+      imagen: "traerla desde cloudinary",
+      edad: "23",
+      genero: "xx",
+      tipoEntrenamiento: "fusufd"
+    },
   ]);
 
 
@@ -44,15 +50,19 @@ export const ListaEntrenadores = () => {
           {entrenadores.map((entrenador, index) => (
             <li key={index} className="list-group-item bg-dark text-light ">
               <div className="row align-items-center">
-                <div className="fotoContainer col-3">
+                <div className="fotoContainer col-4">
                   <Link to={"/"}>
-                    <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="User" className="img-fluid rounded-circle" />
+                    <img src="https://img.freepik.com/foto-gratis/hombre-sorprendido-mirando-camara_23-2147799035.jpg?t=st=1717442553~exp=1717446153~hmac=648b6fb31775d1427c320760804a18fe780bef37999454dced282f2f5d4296c5&w=740" alt="User" className="img-fluid rounded-circle" />
                   </Link>
                 </div>
-                <div className="col-6 overflow-hidden">
-                  <h5>{entrenador.nombre}</h5>
+                <div className="col-8 overflow-hidden">
+                  <p className="Nombre">{entrenador.nombre}</p>
+                  <p className="Apellido">{entrenador.apellido}</p>
                   <p>{entrenador.email}</p>
-                  <p>{entrenador.numero}</p>
+                  <p>{entrenador.edad}</p>
+                  <p>{entrenador.genero}</p>
+                  <p>{entrenador.tipoEntrenamiento}</p>
+                  
                 </div>
               </div>
             </li>

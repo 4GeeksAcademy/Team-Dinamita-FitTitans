@@ -1,9 +1,25 @@
-.containerEntrenadores {
+.list-group {
+    border-radius: 5px;
+
 }
 .fotoContainer {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    width: 20%;
+    height: 20%; 
+    object-fit: cover;
+    border-radius: 50%; 
+    overflow: hidden;
+    margin-left: 15px;
 
+}
+p {
+    font-size: 80%;
+    padding: none;
+    margin: 0px;
+    margin-left: 15px;
+}
+.Nombre, .Apellido {
+    color: #e7a33e;
 }
