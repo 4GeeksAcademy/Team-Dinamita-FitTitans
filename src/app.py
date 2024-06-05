@@ -12,6 +12,7 @@ from api.admin import setup_admin
 from api.commands import setup_commands
 from flask_cors import CORS
 import bcrypt
+from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token, JWTManager
 # from models import Person
 
 ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
@@ -69,6 +70,10 @@ def serve_any_other_file(path):
     response.cache_control.max_age = 0  # avoid cache memory
     return response
 
+# Setup the Flask-JWT-Extended extension
+app.config["JWT_SECRET_KEY"] = "adios-coroto"  # Change this "super secret" with something else!
+jwt = JWTManager(app)
+
  # contraseña hash
 
 def hash_password(plain_password):
@@ -117,9 +122,17 @@ def login():
     if not check_password(password, user.password) : 
         return jsonify({'message': 'contrasegna incorrecta'}), 402
         
-    return jsonify({'message': 'Login successful'}), 200
+    token = create_access_token(identity= user.id)
+    return jsonify({'message': 'Login successful', "token": token, "user_rol" : user.rol}), 200
     
+# GETTING ALL THE USERS
+@app.route("/users", methods=["GET"])
+def get_all_users():
+    all_users = User.query.all()
+    mapped_users = list(map(lambda index: index.serialize(), all_users))
 
+    response_body = jsonify(mapped_users)
+    return response_body, 200
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':

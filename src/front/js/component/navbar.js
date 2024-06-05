@@ -1,27 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "../../styles/Navbar.css";
 import { Registro } from "./Registro";
+import { Context } from "../store/appContext";
 
-import firebaseApp from "../../../firebase/credenciales";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+//mport firebaseApp from "../../../firebase/credenciales";
+//import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 
-const auth = getAuth(firebaseApp);
+//const auth = getAuth(firebaseApp);
 
 export const Navbar = () => {
-	const [test, setTest] = useState(null);
+	const [inicioSesion, setInicioSesion] = useState(null);
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const { store, actions } = useContext(Context);
+
 
 	const navigate = useNavigate();
-
-	onAuthStateChanged(auth, (usuarioFirebase) => {
+	
+	/*nAuthStateChanged(auth, (usuarioFirebase) => {
 		if (usuarioFirebase) {
-			setTest(usuarioFirebase)
+			setinicioSesion(usuarioFirebase)
 		} else {
-			setTest(null)
+			setinicioSesion(null)
 		}
-	})
+	})*/
+	useEffect (() =>{
+		const token = actions.getToken();
+		if (token){
+			
+		}else
+			{actions.logout()}
+	},[actions])
 
 	const openModal = () => {
 		setIsModalOpen(true);
@@ -33,10 +43,12 @@ export const Navbar = () => {
 
 	const cerrarSesion = (e) => {
 		e.preventDefault();
-		signOut(auth);
-		setTest(null);
+		//signOut(auth);
+		actions.logout();
 		navigate("/")
 	}
+
+	
 
 	return (
 		<>
@@ -46,7 +58,7 @@ export const Navbar = () => {
 						<span className="logo">FIT TITANS</span>
 					</Link>
 				</div>
-				{test ? (
+				{store.seInicio ? (
 					<div className="botonesNavbar">
 						<div className="botonNavbar">
 							<Link to="/listaentrenadores">
@@ -63,11 +75,11 @@ export const Navbar = () => {
 								className="btn btn-Navbar"
 								onClick={cerrarSesion}
 							>
-								Cerrar sesionnnnn
+								Cerrar Sesion
 							</button>
 						</div>
 					</div>
-				) : (
+				): (
 					<div className="botonesNavbar">
 						<div className="botonNavbar">
 							<Link to="/listaentrenadores">
