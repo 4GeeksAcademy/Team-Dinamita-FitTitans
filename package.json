@@ -73,6 +73,10 @@
 		]
 	},
 	"dependencies": {
+		"@cloudinary/url-gen": "^1.19.0",
+		"axios": "^1.7.2",
+		"cloudinary": "^2.2.0",
+		"cloudinary-react": "^1.8.1",
 		"firebase": "^10.12.2",
 		"prop-types": "^15.6.1",
 		"react": "^18.3.1",

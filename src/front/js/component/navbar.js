@@ -55,7 +55,7 @@ export const Navbar = () => {
 			<nav className="navbar navbar-expand-lg navbar-dark bg-dark p-3 navbarPrincipal">
 				<div className="nombreWeb">
 					<Link className="noSubrayadoLink" to="/">
-						<span className="logo">FIT TITANS</span>
+						<span className="logo ms-2">FIT TITANS</span>
 					</Link>
 				</div>
 				<button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
