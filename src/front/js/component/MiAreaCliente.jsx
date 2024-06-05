@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "../../styles/MiAreaCliente.css";
 
 export const MiAreaCliente = () => {
-
+    
     return (
         <div className="container contenedorMiAreaCliente">
             <div className="tituloMiAreaCliente">
