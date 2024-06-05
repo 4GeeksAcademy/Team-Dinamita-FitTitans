@@ -31,7 +31,7 @@ export const Navbar = () => {
 			
 		}else
 			{actions.logout()}
-	},[actions])
+	},[])
 
 	const openModal = () => {
 		setIsModalOpen(true);

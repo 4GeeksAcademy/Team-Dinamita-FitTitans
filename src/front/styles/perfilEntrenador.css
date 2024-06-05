@@ -4,6 +4,7 @@ body {
 }
 
 .btnContratame {
+  margin-top: 10px;
   background: #e7a33e;
   padding: 10px;
   color: black;
@@ -21,4 +22,13 @@ body {
   width: 100%; 
   max-width: 1300px; 
   margin: auto;
+}
+.container-fluidEntrenador {
+
+  
+
+}
+
+.card-textEntrenador {
+  font-size: 100%;
 }
