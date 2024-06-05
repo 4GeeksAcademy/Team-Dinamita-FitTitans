@@ -1,4 +1,4 @@
-.containerPrincipalRutinas {
+.containerPrincipalDietas {
     justify-content: center;
     text-align: center;
     min-height: 700px;
@@ -8,7 +8,7 @@
     margin-top: 150px;
 }
 
-.containerMayor {
+.containerMayor1 {
     width: 80vw;
     color: #e7a33e;
     font-size: 10px;
@@ -38,7 +38,7 @@ ul li {
     color: white
 }
 
-.agregarRutina {
+.agregarDieta {
     font-size: 20px;
     width: 100%;
     margin-top: 10px;
@@ -70,14 +70,14 @@ ul li {
     word-wrap: break-word;
 }
 
-.contenedorTasksEjercicios {
+.contenedorTasksComidas {
     color: #e7a33e;
     justify-content: center;
     padding: 10px;
     font-size: 20px;
 }
 
-.btn-masRutinas {
+.btn-masDietas {
     background: #e7a33e;
     font-size: 20px;
     border: 1px solid black;
@@ -86,7 +86,7 @@ ul li {
     padding: 1%;
 }
 
-.editarRutina {
+.editarDieta {
     font-size: 20px;
     width: 100%;
     margin-top: 10px;
@@ -100,5 +100,9 @@ ul li {
     border-radius: 5px;
     margin-top: 1%;
     padding: 0.5%;
+
+}
+.fa-leaf {
+    color:green;
 
 }
