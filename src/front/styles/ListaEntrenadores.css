@@ -17,7 +17,7 @@
 }
 
 p {
-    font-size: 80%;
+    font-size: 60%;
     padding: none;
     margin: 0px;
     margin-left: 15px;
@@ -31,15 +31,29 @@ p {
 .btnConoceme {
     background-color: #e7a33e;
     color: black;
-    font-size: 80%;
+    font-size: 60%;
     padding: 0.5%;
     border-radius: 5px;
+
+}
+.btnConoceme:hover {
+    color: white;
 }
 
-.bbtn-secondaryEntrenador {
+.btnCloseEntrenador {
     background-color: #e7a33e;
     color: black;
-    padding: 0.5%;
+    padding: 1%;
     border-radius: 5px;
+    font-size: 60%;
+
+}
+
+.btnCloseEntrenador:hover {
+    color: white;
+}
+
+.modal-bodyEntrenador {
+    color: black;
 
 }

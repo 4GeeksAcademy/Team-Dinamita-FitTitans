@@ -1,14 +1,13 @@
-// ESTE SERIA DESDE ADMIN, PUEDE MODIFICAR Y AÑADIR
+// va con ternario, pq si estas como admin se puede editar y borrar, si eres user solo puedes checbox
 
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import firebaseApp from "../../../firebase/credenciales";
 import "../../styles/Dieta.css";
 
-//include images into your bundle
-//create your first component
+const auth = getAuth(firebaseApp);
 
-
-const DietaBloque = ({ bloqueIndex, agregarDieta, eliminarDieta, editarDieta, dietas }) => {
+const DietaBloque = ({ bloqueIndex, agregarDieta, eliminarDieta, editarDieta, dietas, usuarioFirebase }) => {
     const [inputValue, setInputValue] = useState("");
     const [isEditing, setIsEditing] = useState(false);
     const [editIndex, setEditIndex] = useState(null);
@@ -42,30 +41,43 @@ const DietaBloque = ({ bloqueIndex, agregarDieta, eliminarDieta, editarDieta, di
                 <h1>TABLA DE ALIMENTACIÓN <i className="fa-solid fa-leaf"></i> {bloqueIndex + 1}</h1>
             </div>
             <ul>
-                <input
-                    className="agregarDieta"
-                    type="text"
-                    onChange={(event) => setInputValue(event.target.value)}
-                    value={inputValue}
-                    onKeyUp={(event) => {
-                        if (event.key === "Enter" && !isEditing) {
-                            handleAgregarDieta();
-                        }
-                    }}
-                    placeholder="Agrega Nuevo Plato"
-                />
+                {usuarioFirebase && (
+                    <input
+                        className="agregarDieta"
+                        type="text"
+                        onChange={(event) => setInputValue(event.target.value)}
+                        value={inputValue}
+                        onKeyUp={(event) => {
+                            if (event.key === "Enter" && !isEditing) {
+                                handleAgregarDieta();
+                            }
+                        }}
+                        placeholder="Agrega Nuevo Plato"
+                    />
+                )}
                 {dietas.map((item, dietaIndex) => (
                     <div className="Dieta" key={dietaIndex}>
                         <li>
                             <span className="escritoDieta">{item} {""}</span>
-                            <i
-                                className="fas fa-trash-alt icono-borrar"
-                                onClick={() => eliminarDieta(bloqueIndex, dietaIndex)}
-                            />
-                            <i
-                                className="fas fa-edit icono-editar"
-                                onClick={() => startEditing(dietaIndex, item)}
-                            />
+                            {usuarioFirebase ? (
+                                <>
+                                    <i
+                                        className="fas fa-trash-alt icono-borrar"
+                                        onClick={() => eliminarDieta(bloqueIndex, dietaIndex)}
+                                    />
+                                    <i
+                                        className="fas fa-edit icono-editar"
+                                        onClick={() => startEditing(dietaIndex, item)}
+                                    />
+                                </>
+                            ) : (
+                                <input
+                                    type="checkbox"
+                                    onChange={(e) => {
+                                        // Lógica para manejar el cambio del checkbox
+                                    }}
+                                />
+                            )}
                         </li>
                     </div>
                 ))}
@@ -96,6 +108,17 @@ const DietaBloque = ({ bloqueIndex, agregarDieta, eliminarDieta, editarDieta, di
 
 export const Dieta = () => {
     const [bloques, setBloques] = useState([[]]);
+    const [usuarioFirebase, setIsAdmin] = useState(false);
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (usuarioFirebase) => {
+            if (usuarioFirebase) {
+                setIsAdmin(usuarioFirebase.email === "emailDelAdmin@fhgh.com"); 
+            } else {
+                setIsAdmin(false);
+            }
+        });
+    }, []);
 
     const agregarDieta = (bloqueIndex, dieta) => {
         const nuevosBloques = [...bloques];
@@ -129,13 +152,16 @@ export const Dieta = () => {
                     eliminarDieta={eliminarDieta}
                     editarDieta={editarDieta}
                     dietas={dietas}
+                    usuarioFirebase={usuarioFirebase}
                 />
             ))}
-            <div>
-                <button type="button" className="btn-masDietas" onClick={agregarBloque}>
-                    Agregar Tabla de Alimentación
-                </button>
-            </div>
+            {usuarioFirebase && (
+                <div>
+                    <button type="button" className="btn-masDietas" onClick={agregarBloque}>
+                        Agregar Tabla de Alimentación
+                    </button>
+                </div>
+            )}
         </div>
     );
 };
