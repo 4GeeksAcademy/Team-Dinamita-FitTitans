@@ -1,27 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "../../styles/Navbar.css";
 import { Registro } from "./Registro";
+import { Context } from "../store/appContext";
 
-import firebaseApp from "../../../firebase/credenciales";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+//mport firebaseApp from "../../../firebase/credenciales";
+//import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 
-const auth = getAuth(firebaseApp);
+//const auth = getAuth(firebaseApp);
 
 export const Navbar = () => {
-	const [test, setTest] = useState(null);
+	const [inicioSesion, setInicioSesion] = useState(null);
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const { store, actions } = useContext(Context);
+
 
 	const navigate = useNavigate();
-
-	onAuthStateChanged(auth, (usuarioFirebase) => {
+	
+	/*nAuthStateChanged(auth, (usuarioFirebase) => {
 		if (usuarioFirebase) {
-			setTest(usuarioFirebase)
+			setinicioSesion(usuarioFirebase)
 		} else {
-			setTest(null)
+			setinicioSesion(null)
 		}
-	})
+	})*/
+	useEffect (() =>{
+		const token = actions.getToken();
+		if (token){
+			
+		}else
+			{actions.logout()}
+	},[actions])
 
 	const openModal = () => {
 		setIsModalOpen(true);
@@ -33,17 +43,19 @@ export const Navbar = () => {
 
 	const cerrarSesion = (e) => {
 		e.preventDefault();
-		signOut(auth);
-		setTest(null);
+		//signOut(auth);
+		actions.logout();
 		navigate("/")
 	}
+
+	
 
 	return (
 		<>
 			<nav className="navbar navbar-expand-lg navbar-dark bg-dark p-3 navbarPrincipal">
 				<div className="nombreWeb">
 					<Link className="noSubrayadoLink" to="/">
-						<span className="logo">FIT TITANS</span>
+						<span className="logo ms-2">FIT TITANS</span>
 					</Link>
 				</div>
 				<button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,12 +63,13 @@ export const Navbar = () => {
 				</button>
 				<div className="collapse navbar-collapse" id="navbarNav">
 					<div className="botonesNavbar navbar-nav ms-auto">
+
 						<div className="botonNavbar">
 							<Link to="/listaentrenadores">
 								<button className="btn btn-Navbar">Lista Entrenadores</button>
 							</Link>
 						</div>
-						{test ? (
+						{store.seInicio ? (
 							<>
 								<div className="botonNavbar">
 									<Link to="/miarea/registrado">

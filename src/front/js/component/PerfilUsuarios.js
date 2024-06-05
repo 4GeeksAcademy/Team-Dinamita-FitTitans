@@ -14,7 +14,7 @@ export const PerfilUsuarios = () => {
 
     try {
       const response = await fetch(
-        "https://api.cloudinary.com/v1_1/djwkdsahw/image/upload",
+        "https://api.cloudinary.com/v1_1/djwkdsahw/image/upload", // cambiar image por video
         {
           method: "POST",
           body: data,
@@ -22,7 +22,11 @@ export const PerfilUsuarios = () => {
       );
 
       const responseData = await response.json();
-
+      console.log(responseData)
+      /*
+      const VideoGuardado = 
+      actions.VideosEntrenador(responseData.secure_url)
+      */
       const updatedUsuarios = usuarios.map((usuario) => {
         if (usuario.id === userId) {
           return { ...usuario, imagen: responseData.secure_url };
