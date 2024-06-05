@@ -75,9 +75,10 @@
 	"dependencies": {
 		"firebase": "^10.12.2",
 		"prop-types": "^15.6.1",
-		"react": "^16.8.4",
-		"react-dom": "^16.8.4",
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1",
 		"react-polyfills": "0.0.1",
-		"react-router-dom": "^6.23.1"
+		"react-router-dom": "^6.23.1",
+		"react-toastify": "^10.0.5"
 	}
 }
