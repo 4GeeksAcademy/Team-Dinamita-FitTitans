@@ -25,6 +25,7 @@ import { Rutinas } from "./pages/Rutinas.jsx";
 
 import { ListaEntrenadores } from "./pages/ListaEntrenadores.jsx";
 import { Dieta } from "./pages/Dieta.jsx"
+import { Blog } from "./pages/Blog.jsx"
 
 
 
@@ -59,6 +60,8 @@ const Layout = () => {
                         <Route element={<Rutinas />} path="/rutinas" />
                         <Route element={<ListaEntrenadores />} path="/listaentrenadores" />
                         <Route element={<Dieta />} path="/dieta" />
+                        <Route element={<Blog />} path="/blog" />
+
 
 
                     </Routes>
