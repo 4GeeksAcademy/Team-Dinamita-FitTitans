@@ -19,8 +19,17 @@ export const MiArea = () => {
       fetchUserType();
     }, []);
   
+    /*
+    const verificar = localStorage.getItem("user_rol", data.user_rol);
+    return ( 
+      <div> 
+        {verificar ? <MiAreaEntrenador/> : <MiAreaCliente/>}
+      </div>
+    )
+    */
     return (
       <div>
+        
         {userType === 'registered' && <MiAreaRegistrado />}
         {userType === 'client' && <MiAreaCliente />}
       </div>

@@ -1,19 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			message: null,
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			seInicio : null
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -74,7 +62,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				  return false;
 				}
 			  },
-			
+
+
 			HandleInicioSesion: async ({email, password}) =>{
 				try {
 					const response = await fetch('https://opulent-doodle-977rpqgx6j64hp4p9-3001.app.github.dev/login', {
@@ -89,22 +78,45 @@ const getState = ({ getStore, getActions, setStore }) => {
 					  }),
 					});
 		  
-					if (response.ok) {
-						
-						return true;
-					} else {
-						const errorData = await response.json();
-						console.log(errorData);
-						return false;
+                    if (!response.ok) {
+                        console.log('Error al enviar datos');
+						return false
+                    }else if (response.ok){
+						const data = await response.json();
+						console.log('Datos guardados correctamente:', data.user_rol);
+						localStorage.setItem("jwt-token", data.token );
+						localStorage.setItem("user_rol", data.user_rol);
+						console.log(localStorage.getItem("jwt-token"));
+						return true
 					}
+					
 				  } catch (error) {
 					console.log('Error:', error);
 					return false;
 				  }
 			},
+
+			getToken: () => {
+                const token = localStorage.getItem('jwt-token');
+				setStore({seInicio : true})
+                return !!token;
+            },
+
+			getRol: () => {
+				const rol = localStorage.getItem("user_rol")
+				return !!rol
+			},
+			logout: () => {
+                localStorage.clear();
+				setStore({seInicio : false})
+            },
 			
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
+			},
+
+			videosEntrenador : () => {
+				//post al DB del entrenador, que actualize la lista de videos
 			},
 
 			getMessage: async () => {
