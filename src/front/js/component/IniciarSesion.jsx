@@ -8,7 +8,7 @@ import firebaseApp from "../../../firebase/credenciales";
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { Context } from "../store/appContext";
-import { ToastContainer, toast } from 'react-toastify';
+
 
 const auth = getAuth(firebaseApp);
 const firestore = getFirestore(firebaseApp);
