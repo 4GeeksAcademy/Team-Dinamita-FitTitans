@@ -1,19 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			message: null,
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			seInicio : null
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -47,28 +35,88 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 
-			HandleRegistro : async (usuarios) => {
-				const response = await fetch('https://opulent-doodle-977rpqgx6j64hp4p9-3001.app.github.dev/registro', {
+			HandleRegistro: async ({email, password, rol}) => {
+				try {
+				  const response = await fetch('https://opulent-doodle-977rpqgx6j64hp4p9-3001.app.github.dev/registro', {
 					method: 'POST',
 					headers: {
 					  'Content-Type': 'application/json',
+					  'accept': 'application/json'
 					},
-					body: JSON.stringify(usuarios),
+					body: JSON.stringify({
+					  email: email,
+					  password: password,
+					  rol : rol === 0 ? true : false
+					}),
 				  });
-				  const data = await response.json();
+		
 				  if (response.ok) {
-					console.log(response.ok)
-					return true
+					return true;
 				  } else {
-					console.log(data)
-					return false
+					const errorData = await response.json();
+					console.log(errorData);
+					return false;
+				  }
+				} catch (error) {
+				  console.log('Error:', error);
+				  return false;
+				}
+			  },
+
+
+			HandleInicioSesion: async ({email, password}) =>{
+				try {
+					const response = await fetch('https://opulent-doodle-977rpqgx6j64hp4p9-3001.app.github.dev/login', {
+					  method: 'POST',
+					  headers: {
+						'Content-Type': 'application/json',
+						'accept': 'application/json'
+					  },
+					  body: JSON.stringify({
+						email: email,
+						password: password,
+					  }),
+					});
+		  
+                    if (!response.ok) {
+                        console.log('Error al enviar datos');
+						return false
+                    }else if (response.ok){
+						const data = await response.json();
+						console.log('Datos guardados correctamente:', data.user_rol);
+						localStorage.setItem("jwt-token", data.token );
+						localStorage.setItem("user_rol", data.user_rol);
+						console.log(localStorage.getItem("jwt-token"));
+						return true
+					}
+					
+				  } catch (error) {
+					console.log('Error:', error);
+					return false;
 				  }
 			},
+
+			getToken: () => {
+                const token = localStorage.getItem('jwt-token');
+				setStore({seInicio : true})
+                return !!token;
+            },
+
+			getRol: () => {
+				const rol = localStorage.getItem("user_rol")
+				return !!rol
+			},
+			logout: () => {
+                localStorage.clear();
+				setStore({seInicio : false})
+            },
 			
-
-
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
+			},
+
+			videosEntrenador : () => {
+				//post al DB del entrenador, que actualize la lista de videos
 			},
 
 			getMessage: async () => {
@@ -83,20 +131,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading message from backend", error)
 				}
 			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
-
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
-			}
+			
 		}
 	};
 };

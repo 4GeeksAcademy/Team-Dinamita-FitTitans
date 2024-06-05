@@ -18,11 +18,13 @@ import { PerfilUsuarios } from "./component/PerfilUsuarios.js";
 import { Contactanos } from "./pages/Contactanos.jsx";
 import { MiArea } from "./pages/MiArea.jsx";
 import { MiAreaRegistrado } from "./pages/MiAreaUsuarioRegistrado.jsx";
-import { MiAreaCliente } from "./pages/MiAreaCliente.jsx";
-import { MiAreaEntrenador } from "./pages/MiAreaEntrenador.jsx";
+import { MiAreaCliente } from "./component/MiAreaCliente.jsx";
+import { MiAreaEntrenador } from "./component/MiAreaEntrenador.jsx";
 import { FormulaCalorias } from "./pages/FormulaCalorias.jsx";
 import { Rutinas } from "./pages/Rutinas.jsx";
+
 import { ListaEntrenadores } from "./pages/ListaEntrenadores.jsx";
+import { Dieta } from "./pages/Dieta.jsx"
 
 
 
@@ -56,6 +58,7 @@ const Layout = () => {
                         <Route element={<FormulaCalorias />} path="/formulacalorias" />
                         <Route element={<Rutinas />} path="/rutinas" />
                         <Route element={<ListaEntrenadores />} path="/listaentrenadores" />
+                        <Route element={<Dieta />} path="/dieta" />
 
 
                     </Routes>
