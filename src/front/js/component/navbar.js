@@ -31,7 +31,7 @@ export const Navbar = () => {
 			
 		}else
 			{actions.logout()}
-	},[actions])
+	},[])
 
 	const openModal = () => {
 		setIsModalOpen(true);
@@ -46,9 +46,7 @@ export const Navbar = () => {
 		//signOut(auth);
 		actions.logout();
 		navigate("/")
-	}
-
-	
+	};
 
 	return (
 		<>
@@ -72,7 +70,7 @@ export const Navbar = () => {
 						{store.seInicio ? (
 							<>
 								<div className="botonNavbar">
-									<Link to="/miarea/registrado">
+									<Link to="/miarea">
 										<button className="btn btn-Navbar">Mi área</button>
 									</Link>
 								</div>

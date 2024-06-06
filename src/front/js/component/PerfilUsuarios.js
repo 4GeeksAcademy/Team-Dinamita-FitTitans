@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { useParams } from 'react-router-dom';
+import { Context } from "../store/appContext";
 
 export const PerfilUsuarios = () => {
-  const [usuarios, setUsuarios] = useState([
-    { id: 1, nombre: "Usuario 1", imagen: "", telefono : "123", altura : "13", peso : "200", genero :"H" , acepto: false},
-    
-    // Otros usuarios...
-  ]);
+  const [usuarios, setUsuarios] = useState([]);
+  const { id } = useParams();
+  const { store, actions } = useContext(Context);
 
   const handleSubirImagen = async (userId, file) => {
     const data = new FormData();
@@ -23,10 +23,6 @@ export const PerfilUsuarios = () => {
 
       const responseData = await response.json();
       console.log(responseData)
-      /*
-      const VideoGuardado = 
-      actions.VideosEntrenador(responseData.secure_url)
-      */
       const updatedUsuarios = usuarios.map((usuario) => {
         if (usuario.id === userId) {
           return { ...usuario, imagen: responseData.secure_url };
@@ -45,13 +41,18 @@ export const PerfilUsuarios = () => {
     console.log("Editar usuario con ID:", userId);
   };
 
+    useEffect(()=>{
+      actions.GetUsuarioUnico(id);
+      setUsuarios(store.usuarioUnico);
+    },[usuarios])
 
+    console.log(usuarios)
 
   return (
 <>
     <div className="container d-flex justify-content-center">
       <ul>
-        {usuarios.map((usuario) => (
+        {usuarios && usuarios.map((usuario) => (
           <li key={usuario.id}>
             <h1>{usuario.nombre}</h1>
             <div>
