@@ -6,7 +6,7 @@ from flask import Flask, request, jsonify, url_for, send_from_directory
 from flask_migrate import Migrate
 from flask_swagger import swagger
 from api.utils import APIException, generate_sitemap
-from api.models import db, User, usuario_cliente, usuario_entrenador
+from api.models import db, User
 from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
@@ -138,50 +138,6 @@ def get_all_users():
     return response_body, 200
 
 
-# para ver la lista de clientes por entrenador
-@app.route('/entrenador/<int:entrenador_id>/clientes')
-def ver_lista_de_clientes(entrenador_id):
-    clientes = usuario_cliente.query.filter_by(entrenador_id=entrenador_id).all()
-    lista_de_clientes = [cliente.serialize() for cliente in clientes]
-    return jsonify(lista_de_clientes)
-
-# Verificar si el usuario está autenticado
-def usuario_autenticado():
-    authorization_header = request.headers.get("Authorization")
-    if authorization_header and authorization_header.startswith("Bearer "):
-        return True
-    return False
-
-# Obtener el ID del usuario autenticado
-def obtener_id_usuario_autenticado():
-    return get_jwt_identity()
-
-# para contratar al entrenador
-@app.route('/contratar_entrenador/<int:entrenador_id>', methods=['POST'])
-def contratar_entrenador(entrenador_id):
-    # Verifico si el usuario esta autenticado y obtengo su id
-    if not usuario_autenticado():
-        return jsonify({'message': 'Debe iniciar sesión para contratar a un entrenador'}), 401
-
-    usuario_id = obtener_id_usuario_autenticado()
-
-    # Asociar al usuario como cliente del entrenador en la base de datos
-    entrenador = usuario_entrenador.query.get(entrenador_id)
-    if not entrenador:
-        return jsonify({'message': 'Entrenador no encontrado'}), 404
-
-    # Actualizar el rol del usuario a usuarioCliente
-    user = User.query.get(usuario_id)
-    user.rol = False  # Rol de usuarioCliente
-    db.session.add(user)
-
-    # Guardar la relación entre el usuario y el entrenador en la base de datos
-    cliente = usuario_cliente(usuario_id=usuario_id, entrenador_id=entrenador_id)
-    db.session.add(cliente)
-
-    db.session.commit()
-
-    return jsonify({'message': 'Entrenador contratado exitosamente'}), 200
 
 
 
