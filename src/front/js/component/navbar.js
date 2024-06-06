@@ -17,7 +17,7 @@ export const Navbar = () => {
 
 
 	const navigate = useNavigate();
-	
+
 	/*nAuthStateChanged(auth, (usuarioFirebase) => {
 		if (usuarioFirebase) {
 			setinicioSesion(usuarioFirebase)
@@ -25,13 +25,12 @@ export const Navbar = () => {
 			setinicioSesion(null)
 		}
 	})*/
-	useEffect (() =>{
+	useEffect(() => {
 		const token = actions.getToken();
-		if (token){
-			
-		}else
-			{actions.logout()}
-	},[actions])
+		if (token) {
+
+		} else { actions.logout() }
+	}, [])
 
 	const openModal = () => {
 		setIsModalOpen(true);
@@ -48,7 +47,7 @@ export const Navbar = () => {
 		navigate("/")
 	}
 
-	
+
 
 	return (
 		<>
