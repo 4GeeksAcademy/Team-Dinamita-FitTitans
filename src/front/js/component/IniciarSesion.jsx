@@ -55,6 +55,9 @@ export const IniciarSesion = () => {
     }
   });*/
 
+  const idUsuario = () =>{
+    
+  };
 
 
   const openModal = () => {
