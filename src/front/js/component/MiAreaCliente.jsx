@@ -4,7 +4,11 @@ import { Link } from "react-router-dom";
 import "../../styles/MiAreaCliente.css";
 
 export const MiAreaCliente = () => {
+    const { store, actions } = useContext(Context);
     
+
+    const usuarioID = localStorage.getItem("user_id");
+
     return (
         <div className="container contenedorMiAreaCliente">
             <div className="tituloMiAreaCliente">
@@ -13,7 +17,7 @@ export const MiAreaCliente = () => {
             <div className="row row-filaMiAreaCliente">
                 <div className="col-md-4 columnaMiAreaPerfilCliente">
                     <div className="tituloMiAreaPerfilCliente">
-                        <Link to="/" className="linkPerfilCliente">PERFIL</Link>
+                        <Link to={`/perfil/${usuarioID}`}className="linkPerfilCliente">PERFIL</Link>
                     </div>
                 </div>
                 <div className="col-md-4 columnaDietaCliente">

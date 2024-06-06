@@ -48,13 +48,13 @@ const Layout = () => {
                         <Route element={<h1>Not found!</h1>} />
                         <Route element={<IniciarSesion />} path="login" />
                         <Route element={<Registro />} path="/registro" />
-                        <Route element={<PerfilUsuarios />} path="/perfil" />
+                        <Route element={<PerfilUsuarios />} path="/perfil/:id" />
                         <Route element={<PerfilEntrenador />} path="/perfilentrenador" />
                         <Route element={<Contactanos />} path="/contactanos" />
                         <Route element={<MiArea />} path="/miarea" />
                         <Route element={<MiAreaRegistrado />} path="/miarea/registrado" />
                         <Route element={<MiAreaCliente />} path="/miarea/cliente" />
-                        <Route element={<MiAreaEntrenador />} path="/miarea/entrenador" />
+                        <Route element={<MiAreaEntrenador />} path="/miarea/entrenador/" />
                         <Route element={<FormulaCalorias />} path="/formulacalorias" />
                         <Route element={<Rutinas />} path="/rutinas" />
                         <Route element={<ListaEntrenadores />} path="/listaentrenadores" />
