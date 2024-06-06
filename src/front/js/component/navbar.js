@@ -27,10 +27,11 @@ export const Navbar = () => {
 	})*/
 	useEffect(() => {
 		const token = actions.getToken();
-		if (token) {
-
-		} else { actions.logout() }
-	}, [])
+		if (token){
+			
+		}else
+			{actions.logout()}
+	},[])
 
 	const openModal = () => {
 		setIsModalOpen(true);
@@ -45,9 +46,7 @@ export const Navbar = () => {
 		//signOut(auth);
 		actions.logout();
 		navigate("/")
-	}
-
-
+	};
 
 	return (
 		<>
@@ -71,7 +70,7 @@ export const Navbar = () => {
 						{store.seInicio ? (
 							<>
 								<div className="botonNavbar">
-									<Link to="/miarea/registrado">
+									<Link to="/miarea">
 										<button className="btn btn-Navbar">Mi área</button>
 									</Link>
 								</div>

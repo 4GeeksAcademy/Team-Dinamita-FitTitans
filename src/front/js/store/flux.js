@@ -1,7 +1,11 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			seInicio : null
+			seInicio : null,
+			rol : null,
+			usuarios: [],
+			id: [],
+			usuarioUnico: [],
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -83,10 +87,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return false
                     }else if (response.ok){
 						const data = await response.json();
-						console.log('Datos guardados correctamente:', data.user_rol);
+						console.log('Datos guardados correctamente:', data);
 						localStorage.setItem("jwt-token", data.token );
 						localStorage.setItem("user_rol", data.user_rol);
+						localStorage.setItem("user_id", data.id)
+						setStore({id : data.id})
 						console.log(localStorage.getItem("jwt-token"));
+						setStore({seInicio : true})
+						setStore({rol : data.user_rol})
 						return true
 					}
 					
@@ -98,18 +106,49 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getToken: () => {
                 const token = localStorage.getItem('jwt-token');
+
 				setStore({seInicio : true})
                 return !!token;
             },
 
-			getRol: () => {
-				const rol = localStorage.getItem("user_rol")
-				return !!rol
-			},
+			//getRol: () => {
+				//const rol = localStorage.getItem("user_rol")
+				
+			//},
 			logout: () => {
                 localStorage.clear();
 				setStore({seInicio : false})
             },
+
+			GetUsuarios : async () =>{
+				try{
+					const response = await fetch("https://opulent-doodle-977rpqgx6j64hp4p9-3001.app.github.dev/users", {
+						method : 'GET'
+					})
+					if (response.ok){
+						const data = await response.json();
+						setStore({usuarios : data})
+				}
+			
+			}catch (error) {
+				console.log('Error:', error);
+			  }
+			},
+//`/perfilusuario/${usuarioID}`
+			GetUsuarioUnico: async (id) =>{
+				try{
+					const response = await fetch(`https://opulent-doodle-977rpqgx6j64hp4p9-3001.app.github.dev/users/${id}`, {
+						method : 'GET'
+					})
+					if (response.ok){
+						const data = await response.json();
+						console.log(data)
+						setStore({usuarioUnico : data})
+					}
+				}catch (error) {
+				console.log('Error:', error);
+			  }
+			},
 			
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");

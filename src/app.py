@@ -126,7 +126,7 @@ def login():
         return jsonify({'message': 'contrasegna incorrecta'}), 402
         
     token = create_access_token(identity= user.id)
-    return jsonify({'message': 'Login successful', "token": token, "user_rol" : user.rol}), 200
+    return jsonify({'message': 'Login successful', "token": token, "user_rol" : user.rol, "id" : user.id}), 200
     
 # GETTING ALL THE USERS
 @app.route("/users", methods=["GET"])
