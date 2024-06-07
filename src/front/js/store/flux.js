@@ -50,7 +50,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: JSON.stringify({
 					  email: email,
 					  password: password,
-					  rol : rol === 0 ? true : false
+					  rol : rol ? true : false
 					}),
 				  });
 		
