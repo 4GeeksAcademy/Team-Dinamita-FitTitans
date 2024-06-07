@@ -3,7 +3,7 @@ import { Context } from "../store/appContext";
 import { Link, useNavigate } from "react-router-dom";
 import "../../styles/MiAreaEntrenador.css";
 
-//<Link to={`/Character/${personaje.uid}`}`
+//<Link to={`/perfilentrenador/${user.id}`}
 export const MiAreaEntrenador = () => {
     
     return (
@@ -14,7 +14,7 @@ export const MiAreaEntrenador = () => {
             <div className="row row-filaMiAreaEntrenador">
                 <div className="col-md-4 columnaPerfilEntrenador">
                     <div className="tituloPerfilRegistrado">
-                        <Link to={`/perfilentrenador/${user.id}`} className="linkPerfilEntrenador">PERFIL</Link>
+                        <Link to="/" className="linkPerfilEntrenador">PERFIL</Link>
                     </div>
                 </div>
                 <div className="col-md-4 columnaClientesDelEntrenador">
