@@ -138,7 +138,12 @@ def get_all_users():
     return response_body, 200
 
 
-
+@app.route("/users/<int:user_id>", methods=["GET"])
+def get_user_by_id(user_id):
+    user = User.query.get(user_id)
+    if user is None:
+        return jsonify({"message": "User not found"}), 404
+    return jsonify(user.serialize()), 200
 
 
 

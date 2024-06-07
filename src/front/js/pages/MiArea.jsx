@@ -12,8 +12,8 @@ export const MiArea = () => {
   const navigate = useNavigate();
 
   useEffect (() =>{
-		const verificar = store.rol
-		if (verificar == true){
+		const verificar = localStorage.getItem("user_rol")
+		if (verificar === "true"){
          setEstado(true)
       }else{
         return setEstado(false)
