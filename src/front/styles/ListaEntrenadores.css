@@ -28,7 +28,7 @@ p {
     color: #e7a33e;
 }
 
-.btnConoceme {
+.btnConoceme, btnCerrar {
     background-color: #e7a33e;
     color: black;
     font-size: 60%;

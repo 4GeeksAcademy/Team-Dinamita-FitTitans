@@ -29,13 +29,19 @@ export const ListaEntrenadores = () => {
                 </Link>
               </div>
               <div className="col-8 overflow-hidden">
-                <p className="Nombre">Nombre: {entrenador.nombre} {entrenador.apellido}</p>
-                <p>Email: {entrenador.email}</p>
-                <p>Edad: {entrenador.edad}</p>
-                <p>Género: {entrenador.genero}</p>
-                <p>Tipo de entrenamiento: {entrenador.tipo_entrenamiento}</p>
+              <p className="Nombre">Nombre: {entrenador.nombre} {entrenador.apellido}</p>
+              <p>Email: {entrenador.email}</p>
+              <p>Edad: {entrenador.edad}</p>
+              <p>Género: {entrenador.genero}</p>
+              <p>Tipo de entrenamiento: {entrenador.tipo_entrenamiento}</p>
+              <div className="mt-2">
+                <Link to="/perfilentrenador">
+                  {/* tendré que poner ruta /user cuando tengamos backend */}
+                  <button className="btnConoceme">Conóceme más</button>
+                </Link>
               </div>
             </div>
+          </div>
           </li>
         ))}
       </ul>
