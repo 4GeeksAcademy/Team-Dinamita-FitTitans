@@ -14,11 +14,10 @@ export const PerfilEntrenador = () => {
 		
 		<div>
 			<nav className="navbar navbar-light bg-light">
-				<div className="container-fluid">
-					<span className="navbar-brand mb-0 h1">ALEX GONZALEZ Trainer</span>
-				</div>
-			</nav>
-
+		<div className="container-fluidEntrenador d-flex justify-content-center">
+		  <span className="navbar-brand mb-0 h1">ALEX GONZALEZ Trainer</span>
+		</div>
+	  </nav>
 
 			<div id="carouselEntrenador" className="carouselSlide" data-bs-ride="carousel">
 				<div className="carousel-indicators">
@@ -68,9 +67,9 @@ export const PerfilEntrenador = () => {
 						<div className="card">
 							<div className="card-body">
 								<h5 className="card-title">Certificados y Titulaciones</h5>
-								<p className="card-text">Titulo de entrenador skjdgkjfsg</p>
-								<p className="card-text">Titulo de entrenador skjdgkjfsg</p>
-								<p className="card-text">Titulo de entrenador skjdgkjfsg</p>
+								<p className="card-textEntrenador">Titulo de entrenador skjdgkjfsg</p>
+								<p className="card-textEntrenador">Titulo de entrenador skjdgkjfsg</p>
+								<p className="card-textEntrenador">Titulo de entrenador skjdgkjfsg</p>
 							</div>
 						</div>
 					</div>
@@ -78,10 +77,10 @@ export const PerfilEntrenador = () => {
 						<div className="card">
 							<div className="card-body">
 								<h5 className="card-title">Tipos de Entrenamiento</h5>
-								<p className="card-text">Entrenamiento de fuerza</p>
-								<p className="card-text">Entrenamiento para adelgazar</p>
-								<p className="card-text">Entrenamiento Boxeo</p>
-								<p className="card-text">Entrenamiento </p>
+								<p className="card-textEntrenador">Entrenamiento de fuerza</p>
+								<p className="card-textEntrenador">Entrenamiento para adelgazar</p>
+								<p className="card-textEntrenador">Entrenamiento Boxeo</p>
+								<p className="card-textEntrenador">Entrenamiento </p>
 							</div>
 						</div>
 					</div>
@@ -89,7 +88,7 @@ export const PerfilEntrenador = () => {
 						<div className="card">
 							<div className="card-body">
 								<h5 className="card-title">Podemos alcanzarlo juntos</h5>
-								<p className="card-text">El último paso para poder estar más cerca de tu nuevo estilo de vida</p>
+								<p className="card-textEntrenador">El último paso para poder estar más cerca de tu nuevo estilo de vida</p>
 								<a href="/contactanos" className="btnContratame">Contratame </a>
 							</div>
 						</div>

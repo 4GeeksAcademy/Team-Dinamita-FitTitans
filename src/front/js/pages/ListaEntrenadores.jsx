@@ -29,7 +29,8 @@ export const ListaEntrenadores = () => {
       imagen: "traerla desde cloudinary",
       edad: "23",
       genero: "xx",
-      tipoEntrenamiento: "fusufd"
+      tipoEntrenamiento: "fusufd",
+      informacion: "",
     },
     {
       nombre: "Nombre",
@@ -38,7 +39,8 @@ export const ListaEntrenadores = () => {
       imagen: "traerla desde cloudinary",
       edad: "23",
       genero: "xx",
-      tipoEntrenamiento: "fusufd"
+      tipoEntrenamiento: "fusufd",
+      informacion: "",
     },
   ]);
 
@@ -62,7 +64,17 @@ export const ListaEntrenadores = () => {
                   <p>{entrenador.edad}</p>
                   <p>{entrenador.genero}</p>
                   <p>{entrenador.tipoEntrenamiento}</p>
-                  
+
+                  <div className="btnConocememas">
+                    <Link to="/perfilentrenador">
+                      {/* tendré que poner ruta /user cuando tengamos backend */}
+                      <button className="btnConoceme">Conóceme más</button>
+                    </Link>
+                  </div>
+
+
+
+
                 </div>
               </div>
             </li>
