@@ -82,34 +82,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}),
 					});
 
-					if (response.ok) {
-						return true;
-					} else {
-						const errorData = await response.json();
-						console.log(errorData);
-						return false;
-					}
-				} catch (error) {
-					console.log('Error:', error);
-					return false;
-				}
-			},
-
-
-			HandleInicioSesion: async ({ email, password }) => {
-				try {
-					const response = await fetch('https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/login', {
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json',
-							'accept': 'application/json'
-						},
-						body: JSON.stringify({
-							email: email,
-							password: password,
-						}),
-					});
-
 					if (!response.ok) {
 						console.log('Error al enviar datos');
 						return false
