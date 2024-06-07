@@ -1,9 +1,35 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/perfilEntrenador.css";
 
 
+export const PerfilEntrenador = () => {
+	const { store, actions } = useContext(Context);
+	const { entrenadorId } = useParams();
+	const [entrenador, setEntrenador] = useState(null);
+
+	useEffect(() => {
+		actions.obtenerPerfilEntrenador(entrenadorId)
+			.then(response => {
+				if (!response.ok) {
+					throw new Error('Error al obtener el perfil del entrenador');
+				}
+				else
+					return response.json();
+			})
+			.then(data => {
+				setEntrenador(data);
+				console.log(data)
+			})
+			.catch(error => {
+				console.error("Error al obtener el perfil del entrenador:", error);
+			});
+	}, []);
+	if (!entrenador) {
+		return <div>Cargando...</div>;
+	}
 
 export const PerfilEntrenador = () => {
 	const [showFelicidades, setShowFelicidades] = useState(false);
@@ -25,6 +51,7 @@ export const PerfilEntrenador = () => {
 			<nav className="navbarEntrenador">
 				<div className="container-fluidEntrenador d-flex justify-content-center">
 					<span className="navbarNombre">ALEX GONZALEZ Trainer</span>
+
 				</div>
 			</nav>
 
@@ -36,21 +63,27 @@ export const PerfilEntrenador = () => {
 				</div>
 				<div className="carousel-inner">
 					<div className="carousel-item active">
+
 						<img src="https://img.freepik.com/foto-gratis/personas-que-trabajan-interior-junto-pesas_23-2149175410.jpg" className="fotoEntrenador" alt="..." />
 						<div className="carousel-caption d-none d-md-block ">
+
 							<h5>Conoce a tu entrenador</h5>
 							<div className="descripcionCarrousel">Puedes entrenar desde donde quieras</div>
 						</div>
 					</div>
 					<div className="carousel-item">
+
 						<img src="https://img.freepik.com/foto-gratis/mujer-porcion-hombre-gimnasio_23-2149627070.jpg" className="fotoEntrenador" alt="..." />
+
 						<div className="carousel-caption d-none d-md-block">
 							<h5>Second slide label</h5>
 							<div className="descripcionCarrousel"> Some representative placeholder content for the second slide </div>
 						</div>
 					</div>
 					<div className="carousel-item">
+
 						<img src="https://via.placeholder.com/800x400" className="fotoEntrenador" alt="..." />
+
 						<div className="carousel-caption d-none d-md-block">
 							<h5>Third slide label</h5>
 							<p>Some representative placeholder content for the third slide.</p>
@@ -67,6 +100,7 @@ export const PerfilEntrenador = () => {
 				</button>
 			</div>
 
+
 			<blockquote className="blockquote">
 				<h1>Tu tiempo vale mucho, y cuidar tu salud es la mejor inversión;</h1>
 			</blockquote>
@@ -75,10 +109,10 @@ export const PerfilEntrenador = () => {
 					<div className="col-sm-4">
 						<div className="card">
 							<div className="card-body">
-								<h5 className="card-title">Certificados y Titulaciones</h5>
-								<p className="card-textEntrenador">Titulo de entrenador skjdgkjfsg</p>
-								<p className="card-textEntrenador">Titulo de entrenador skjdgkjfsg</p>
-								<p className="card-textEntrenador">Titulo de entrenador skjdgkjfsg</p>
+								<h5 className="card-title">Información Personal</h5>
+								<p className="card-text">Email: </p>
+								<p className="card-text">Edad: </p>
+								<p className="card-text">Género: </p>
 							</div>
 						</div>
 					</div>
@@ -86,10 +120,7 @@ export const PerfilEntrenador = () => {
 						<div className="card">
 							<div className="card-body">
 								<h5 className="card-title">Tipos de Entrenamiento</h5>
-								<p className="card-textEntrenador">Entrenamiento de fuerza</p>
-								<p className="card-textEntrenador">Entrenamiento para adelgazar</p>
-								<p className="card-textEntrenador">Entrenamiento Boxeo</p>
-								<p className="card-textEntrenador">Entrenamiento </p>
+								<p className="card-text"></p>
 							</div>
 						</div>
 					</div>
@@ -99,6 +130,7 @@ export const PerfilEntrenador = () => {
 								<h5 className="card-title">Podemos alcanzarlo juntos</h5>
 								<p className="card-textEntrenador">El último paso para poder estar más cerca de tu nuevo estilo de vida</p>
 								<button type="button" className="btnContratame" data-bs-toggle="modal" data-bs-target="#planModal">Contrátame</button>
+
 							</div>
 						</div>
 					</div>

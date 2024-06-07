@@ -163,6 +163,13 @@ def obtener_lista_entrenadores():
         return jsonify({"error": str(e)}), 500
 
 
+# para perfil entrenador mostrar cada entrenador por ID
+@app.route("/listaentrenadores/<int:user_id>", methods=["GET"])
+def get_entrenador_by_id(user_id):
+    user = User.query.get(user_id)
+    if user is None:
+        return jsonify({"message": "User not found"}), 404
+    return jsonify(user.serialize()), 200
 
 
 # this only runs if `$ python src/main.py` is executed

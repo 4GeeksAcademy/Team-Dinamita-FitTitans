@@ -22,12 +22,12 @@ class User(db.Model):
     
 class Entrenador(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    nombre = db.Column(db.String(100), nullable=False)
-    apellido = db.Column(db.String(100), nullable=False)
-    tipo_entrenamiento = db.Column(db.String(100), nullable=False)
-    edad = db.Column(db.Integer, nullable=False)
-    genero = db.Column(db.String(10), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+    nombre = db.Column(db.String(100), nullable=True)
+    apellido = db.Column(db.String(100), nullable=True)
+    tipo_entrenamiento = db.Column(db.String(100), nullable=True)
+    edad = db.Column(db.Integer, nullable=True)
+    genero = db.Column(db.String(10), nullable=True)
 
     user = db.relationship('User', backref=db.backref('entrenadores', uselist=False))
 
