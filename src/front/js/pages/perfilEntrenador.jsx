@@ -11,27 +11,28 @@ export const PerfilEntrenador = () => {
 	const [entrenador, setEntrenador] = useState(null);
 
 	useEffect(() => {
-		actions.obtenerPerfilEntrenador(entrenadorId)
-			.then(response => {
-				if (!response.ok) {
-					throw new Error('Error al obtener el perfil del entrenador');
-				}
-				else
-					return response.json();
-			})
-			.then(data => {
-				setEntrenador(data);
-				console.log(data)
-			})
-			.catch(error => {
-				console.error("Error al obtener el perfil del entrenador:", error);
-			});
-	}, []);
-	if (!entrenador) {
-		return <div>Cargando...</div>;
-	}
+        actions.obtenerPerfilEntrenador(entrenadorId)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al obtener el perfil del entrenador');
+                }
+                return response.json();
+            })
+            .then(data => {
+                setEntrenador(data);
+                console.log(data);
+            })
+            .catch(error => {
+                console.error("Error al obtener el perfil del entrenador:", error);
+            });
+    }, []);
 
-export const PerfilEntrenador = () => {
+    if (!entrenador) {
+        return <div>Cargando...</div>;
+    };
+
+
+
 	const [showFelicidades, setShowFelicidades] = useState(false);
 
 	const selectPlan = (plan) => {
@@ -172,5 +173,3 @@ export const PerfilEntrenador = () => {
 		</div>
 	);
 };
-
-
