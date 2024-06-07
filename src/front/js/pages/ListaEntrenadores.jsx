@@ -11,6 +11,7 @@ export const ListaEntrenadores = () => {
     actions.obtenerListaEntrenadores()
       .then(data => {
         setEntrenadores(data);  // Actualiza el estado con los datos de los entrenadores
+        console.log(data)
       })
       .catch(error => {
         console.error("Error al obtener la lista de entrenadores:", error);
@@ -24,7 +25,7 @@ export const ListaEntrenadores = () => {
           <li key={index} className="list-group-item bg-dark text-light">
             <div className="row align-items-center">
               <div className="fotoContainer col-4">
-                <Link to={"/"}>
+                <Link to={`/listaentrenadores/${entrenador.id}`}>
                   <img src={entrenador.imagen} alt="User" className="img-fluid rounded-circle" />
                 </Link>
               </div>
