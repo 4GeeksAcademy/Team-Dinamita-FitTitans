@@ -150,7 +150,8 @@ def get_user_by_id(user_id):
     if user is None:
         return jsonify({"message": "User not found"}), 404
     return jsonify(user.serialize()), 200 
-
+  
+# para perfil entrenador mostrar cada entrenador por ID
 @app.route("/listaentrenadores/<int:user_id>", methods=["GET"])
 def get_entrenador_by_id(user_id):
     user = User.query.get(user_id)
@@ -170,6 +171,7 @@ def obtener_lista_entrenadores():
         return jsonify({"error": str(e)}), 500
 
 
+
 @app.route('/Usuarios', methods=['GET'])
 def obtener_usuarios():
     try:
@@ -179,6 +181,7 @@ def obtener_usuarios():
         return jsonify(usuarios_data)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
 
 
 @app.route("/perfiles", methods=["GET"])

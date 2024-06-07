@@ -27,6 +27,7 @@ class User(db.Model):
     
 class Entrenador(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     nombre = db.Column(db.String(100), nullable=False)
     tipo_entrenamiento = db.Column(db.String(100), nullable=True)
