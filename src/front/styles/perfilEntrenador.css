@@ -4,12 +4,19 @@ body {
 }
 
 .btnContratame {
+  margin-top: 10px;
   background: #e7a33e;
   padding: 10px;
   color: black;
   font-size: 15px;
   border: 1px solid black;
   border-radius: 5px;
+}
+
+.container-fluidEntrenador {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .btnContratame:hover {
@@ -21,4 +28,9 @@ body {
   width: 100%; 
   max-width: 1300px; 
   margin: auto;
+}
+
+
+.card-textEntrenador {
+  font-size: 100%;
 }
