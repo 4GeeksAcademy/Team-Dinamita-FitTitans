@@ -64,27 +64,17 @@ export const ListaEntrenadores = () => {
                   <p>{entrenador.edad}</p>
                   <p>{entrenador.genero}</p>
                   <p>{entrenador.tipoEntrenamiento}</p>
-                             
-                  <button type="button" className="btnConoceme" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Conóceme más
-                  </button>
 
-                  
-                  <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div className="modal-dialog">
-                      <div className="modal-content">
-
-                        <div className="modal-bodyEntrenador">
-                        {entrenador.informacion} aquiiii toda la infooooo del entrenador seleccionado
-                        
-                        </div>
-                        <div className="modal-footer">
-                          <button type="button" className="btnCloseEntrenador" data-bs-dismiss="modal">Close</button>
-                        </div>
-                      </div>
-                    </div>
+                  <div className="btnConocememas">
+                    <Link to="/perfilentrenador">
+                      {/* tendré que poner ruta /user cuando tengamos backend */}
+                      <button className="btnConoceme">Conóceme más</button>
+                    </Link>
                   </div>
-                  
+
+
+
+
                 </div>
               </div>
             </li>
