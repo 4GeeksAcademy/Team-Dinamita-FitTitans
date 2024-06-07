@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
-import {  useNavigate, } from "react-router-dom";
+import { useNavigate, } from "react-router-dom";
 import "/workspaces/Team-Dinamita-FitTitans/src/front/styles/registro.css"
 import firebaseApp from "../../../firebase/credenciales";
-import { getAuth, createUserWithEmailAndPassword  } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { Context } from "../store/appContext";
 const auth = getAuth(firebaseApp)
@@ -23,16 +23,16 @@ export const Registro = ({ closeModal }) => {
 
   //const email = usuarios.correo;
   //const rol = usuarios.rol
- 
 
-  const RegistrarUsuario = async () =>{
+
+  const RegistrarUsuario = async () => {
     navigate("/login"); // esto y la funcion van en el handle submit
     const infoUsuario = await createUserWithEmailAndPassword(auth, usuario.email, usuario.password).then(
-      (usuarioFirebase) => {return usuarioFirebase}
+      (usuarioFirebase) => { return usuarioFirebase }
     )
     console.log(infoUsuario.user.uid)
 
-    const documentoRef =  doc(firestore, `/usuarios/${infoUsuario.user.uid}`)
+    const documentoRef = doc(firestore, `/usuarios/${infoUsuario.user.uid}`)
     setDoc(documentoRef,)//{//email, //rol})
   };
 
@@ -49,28 +49,28 @@ export const Registro = ({ closeModal }) => {
     }
   };
 
-console.log(usuario)
+  console.log(usuario)
 
   return (
     <div className="modal-overlay" onClick={closeModal}>
       <div className="modal-dialog modal-dialog-centered" onClick={(e) => e.stopPropagation()}>
         <div className="modal-content">
-          
+
           <form onSubmit={handleSubmit}>
             <div className="container mt-5 editcontact">
               <div className="input-group mb-3">
                 <label className="input-group-text" htmlFor="rol" id="rol">Selecciona Rol</label>
-                  <select 
-                    className="form-select" 
-                    id="rol" 
-                    required 
-                    onChange={(e) => setUsuarios({ ...usuario, rol: e.target.value })}
-                    defaultValue=""
-                  >
-                    <option value="" disabled>Choose...</option>
-                    <option value="0">Usuario</option>
-                    <option value="1">Entrenador</option>
-                  </select>
+                <select
+                  className="form-select"
+                  id="rol"
+                  required
+                  onChange={(e) => setUsuarios({ ...usuario, rol: e.target.value })}
+                  defaultValue=""
+                >
+                  <option value="" disabled>Choose...</option>
+                  <option value="0">Usuario</option>
+                  <option value="1">Entrenador</option>
+                </select>
               </div>
 
               <div className="">
@@ -134,7 +134,7 @@ console.log(usuario)
               </div>
 
               <div className="form-check">
-                <input className="form-check-input" type="checkbox"  id="flexCheckDefault" />
+                <input className="form-check-input" type="checkbox" id="flexCheckDefault" />
                 <label className="form-check-label" htmlFor="flexCheckDefault">
                   Acepto terminos y condiciones politica de privacidad
                 </label>
@@ -144,9 +144,9 @@ console.log(usuario)
               </div>
 
               <div className="d-flex justify-content-center">
-                <input type="submit" value={"Registrarse"} className="btn btn-primary mx-3 text-dark" style={{ background: "#E7A33E"}}></input>
+                <input type="submit" value={"Registrarse"} className="btn btn-primary mx-3 text-dark" style={{ background: "#E7A33E" }}></input>
 
-                <button className=" btn btn-primary mx-3 text-dark" style={{ background: "#E7A33E"}} onClick={closeModal}>close</button>
+                <button className=" btn btn-primary mx-3 text-dark" style={{ background: "#E7A33E" }} onClick={closeModal}>close</button>
               </div>
             </div>
           </form>
