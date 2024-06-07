@@ -6,6 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			usuarios: [],
 			id: [],
 			usuarioUnico: [],
+			entrenadores: [],
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -69,9 +70,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+
+
 			HandleInicioSesion: async ({ email, password }) => {
 				try {
-					const response = await fetch('https://opulent-doodle-977rpqgx6j64hp4p9-3001.app.github.dev/login', {
+					const response = await fetch('https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/login', {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json',
@@ -196,9 +199,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 						throw new Error('Error al obtener la lista de entrenadores');
 					}
 					const data = await response.json();
+					setStore({ entrenadores: data }); // Actualiza el estado con los datos de los entrenadores
 					return data;  // Retorna los datos de los entrenadores
 				} catch (error) {
 					console.error('Error al obtener la lista de entrenadores:', error);
+					throw error;
+				}
+			},
+
+			obtenerPerfilEntrenador: async (user_id) => {
+				try {
+					const response = await fetch(`https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/listaentrenadores/${user_id}`, {
+						method: 'GET'
+					})
+					if (!response.ok) {
+						throw new Error('Error al obtener el perfil del entrenador');
+					}
+					const data = await response.json();
+					console.log(data)
+					return data;  // Retorna los datos del entrenador
+				} catch (error) {
+					console.error('Error al obtener el perfil del entrenador:', error);
 					throw error;  // Lanza el error para manejarlo en el componente que use esta acción
 				}
 			},
