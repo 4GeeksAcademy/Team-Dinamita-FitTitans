@@ -26,6 +26,8 @@ import { Rutinas } from "./pages/Rutinas.jsx";
 import { ListaEntrenadores } from "./pages/ListaEntrenadores.jsx";
 import { Dieta } from "./pages/Dieta.jsx"
 import { Blog } from "./pages/Blog.jsx"
+import { Perfiles } from "/workspaces/Team-Dinamita-FitTitans/src/front/js/pages/Perfiles.jsx";
+import { PerfilEntrenadorPrivado } from "./component/PerfilEntrenadorPrivado.js";
 
 
 
@@ -49,8 +51,10 @@ const Layout = () => {
                         <Route element={<h1>Not found!</h1>} />
                         <Route element={<IniciarSesion />} path="login" />
                         <Route element={<Registro />} path="/registro" />
+                        <Route element={<Perfiles />} path="/perfiles/:id" />
                         <Route element={<PerfilUsuarios />} path="/perfil/:id" />
                         <Route element={<PerfilEntrenador />} path="/perfilentrenador" />
+                        <Route element={<PerfilEntrenadorPrivado />} path="/PerfilEntrenadorPrivado/:id" />
                         <Route element={<Contactanos />} path="/contactanos" />
                         <Route element={<MiArea />} path="/miarea" />
                         <Route element={<MiAreaRegistrado />} path="/miarea/registrado" />

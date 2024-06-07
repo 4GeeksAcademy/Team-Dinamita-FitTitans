@@ -39,9 +39,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 
-			HandleRegistro: async ({ email, password, rol }) => {
+			HandleRegistro: async ({ email, password, rol, nombre, telefono }) => {
 				try {
-					const response = await fetch('https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/registro', {
+					const response = await fetch('https://opulent-doodle-977rpqgx6j64hp4p9-3001.app.github.dev/registro', {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json',
@@ -50,7 +50,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 						body: JSON.stringify({
 							email: email,
 							password: password,
-							rol: rol ? true : false
+							rol: rol ? true : false,
+							nombre: nombre,
+							telefono: telefono
 						}),
 					});
 
@@ -67,38 +69,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-
 			HandleInicioSesion: async ({ email, password }) => {
 				try {
-					const response = await fetch('https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/login', {
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json',
-							'accept': 'application/json'
-						},
-						body: JSON.stringify({
-							email: email,
-							password: password,
-						}),
-					});
-
-					if (response.ok) {
-						return true;
-					} else {
-						const errorData = await response.json();
-						console.log(errorData);
-						return false;
-					}
-				} catch (error) {
-					console.log('Error:', error);
-					return false;
-				}
-			},
-
-
-			HandleInicioSesion: async ({ email, password }) => {
-				try {
-					const response = await fetch('https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/login', {
+					const response = await fetch('https://opulent-doodle-977rpqgx6j64hp4p9-3001.app.github.dev/login', {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json',
@@ -165,13 +138,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//`/perfilusuario/${usuarioID}`
 			GetUsuarioUnico: async (id) => {
 				try {
-					const response = await fetch(`https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/users/${id}`, {
+					const response = await fetch(`https://opulent-doodle-977rpqgx6j64hp4p9-3001.app.github.dev/Usuarios/${id}`, {
 						method: 'GET'
 					})
 					if (response.ok) {
 						const data = await response.json();
 						console.log(data)
-						setStore({ usuarioUnico: data })
+						return setStore({ usuarioUnico: data })
+					}
+				} catch (error) {
+					console.log('Error:', error);
+				}
+			},
+
+			GetEntrenadorUnico: async (id) => {
+				try {
+					const response = await fetch(`https://opulent-doodle-977rpqgx6j64hp4p9-3001.app.github.dev/listaentrenadores/${id}`, {
+						method: 'GET'
+					})
+					if (response.ok) {
+						const data = await response.json();
+						console.log(data)
+						return setStore({ usuarioUnico: data })
 					}
 				} catch (error) {
 					console.log('Error:', error);

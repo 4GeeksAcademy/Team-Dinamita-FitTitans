@@ -98,6 +98,8 @@ def registro():
     email = data.get('email')
     password = data.get('password')
     rol = data.get('rol', False)
+    nombre = data.get('nombre')
+    telefono = data.get('telefono')
 
     if not email or not password:
         return jsonify({'message': 'Username and password are required'}), 400
@@ -107,7 +109,7 @@ def registro():
     # Convertir el valor de rol a un booleano si es true sera entrenador, si es false usuario
     rol_booleano = True if rol else False
 
-    new_user = User(email=email, password=hashed_password, rol=rol_booleano)
+    new_user = User(email=email, password=hashed_password, rol=rol_booleano, nombre=nombre, telefono=telefono)
     db.session.add(new_user)
     db.session.commit()
     
@@ -142,14 +144,19 @@ def get_all_users():
     return response_body, 200
 
 
-@app.route("/users/<int:user_id>", methods=["GET"])
+@app.route("/Usuarios/<int:user_id>", methods=["GET"])
 def get_user_by_id(user_id):
     user = User.query.get(user_id)
     if user is None:
         return jsonify({"message": "User not found"}), 404
-    return jsonify(user.serialize()), 200
+    return jsonify(user.serialize()), 200 
 
-
+@app.route("/listaentrenadores/<int:user_id>", methods=["GET"])
+def get_entrenador_by_id(user_id):
+    user = User.query.get(user_id)
+    if user is None:
+        return jsonify({"message": "User not found"}), 404
+    return jsonify(user.serialize()), 200 
 
 # para lista entrenadores
 @app.route('/listaentrenadores', methods=['GET'])
@@ -163,7 +170,23 @@ def obtener_lista_entrenadores():
         return jsonify({"error": str(e)}), 500
 
 
+@app.route('/Usuarios', methods=['GET'])
+def obtener_usuarios():
+    try:
+        # Filtrar usuarios por su rol de usuario que seria true
+        usuarios = User.query.filter_by(rol=False).all()
+        usuarios_data = [usuarios.serialize() for usuarios in usuarios]
+        return jsonify(usuarios_data)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
+
+@app.route("/perfiles", methods=["GET"])
+@jwt_required()
+def show_email():
+    current_user_id = get_jwt_identity()
+    user = User.filter.get(current_user_id)
+    return jsonify({"email": user.email, "id": user.id, "response": "That is your data up there!"}), 200
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
