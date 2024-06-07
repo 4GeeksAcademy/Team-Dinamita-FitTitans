@@ -162,17 +162,14 @@ def obtener_lista_entrenadores():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+
 # para perfil entrenador mostrar cada entrenador por ID
-@app.route('/perfilentrenador/<int:entrenador_id>', methods=['GET'])
-def obtener_perfil_entrenador(entrenador_id):
-    try:
-        entrenador = Entrenador.query.get(entrenador_id)
-        if entrenador:
-            return jsonify(entrenador.serialize())
-        else:
-            return jsonify({"message": "Entrenador no encontrado"}), 404
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+@app.route("/listaentrenadores/<int:user_id>", methods=["GET"])
+def get_entrenador_by_id(user_id):
+    user = User.query.get(user_id)
+    if user is None:
+        return jsonify({"message": "User not found"}), 404
+    return jsonify(user.serialize()), 200
 
 
 # this only runs if `$ python src/main.py` is executed
