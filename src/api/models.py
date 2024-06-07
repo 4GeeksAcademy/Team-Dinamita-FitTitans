@@ -21,4 +21,3 @@ class User(db.Model):
         }
     
 
-    

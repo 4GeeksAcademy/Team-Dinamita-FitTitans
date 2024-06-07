@@ -17,7 +17,7 @@ export const Navbar = () => {
 
 
 	const navigate = useNavigate();
-	
+
 	/*nAuthStateChanged(auth, (usuarioFirebase) => {
 		if (usuarioFirebase) {
 			setinicioSesion(usuarioFirebase)
@@ -25,7 +25,7 @@ export const Navbar = () => {
 			setinicioSesion(null)
 		}
 	})*/
-	useEffect (() =>{
+	useEffect(() => {
 		const token = actions.getToken();
 		if (token){
 			
@@ -46,9 +46,7 @@ export const Navbar = () => {
 		//signOut(auth);
 		actions.logout();
 		navigate("/")
-	}
-
-	
+	};
 
 	return (
 		<>
@@ -72,7 +70,7 @@ export const Navbar = () => {
 						{store.seInicio ? (
 							<>
 								<div className="botonNavbar">
-									<Link to="/miarea/registrado">
+									<Link to="/miarea">
 										<button className="btn btn-Navbar">Mi área</button>
 									</Link>
 								</div>
