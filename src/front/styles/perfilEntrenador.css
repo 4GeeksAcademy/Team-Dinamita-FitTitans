@@ -1,6 +1,7 @@
 body {
   background: rgb(15, 15, 15);
   font-family: 'Inter', sans-serif;
+  
 }
 
 .btnContratame {
@@ -33,4 +34,40 @@ body {
 
 .card-textEntrenador {
   font-size: 100%;
+}
+.navbarEntrenador {
+  color: black;
+  background: rgb(0,0,0);
+  background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(159,98,39,0.8449754901960784) 35%, rgba(222,127,40,0.9598214285714286) 100%);
+}
+
+.fotoEntrenador {
+  display:block;
+  width: 80%;
+  margin-left: auto;
+   margin-right: auto;
+}
+.card-body {
+  position: relative;
+  padding: 20px;
+}
+.card-body {
+  position: relative;
+  padding: 20px;
+}
+
+.card-title {
+  margin-bottom: 15px;
+}
+
+.card-textEntrenador {
+  margin-bottom: 30px;
+}
+
+.btnContratame {
+  display: block;
+  width: 100%;
+  text-align: center;
+  position: relative; 
+  bottom: 0;
 }
