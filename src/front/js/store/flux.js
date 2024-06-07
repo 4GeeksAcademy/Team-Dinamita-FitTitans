@@ -211,12 +211,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 					const response = await fetch(`https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/listaentrenadores/${user_id}`, {
 						method: 'GET'
-					})
+					});
 					if (!response.ok) {
-						throw new Error('Error al obtener el perfil del entrenador');
+						throw await response.json(); // Lanzar el error original en forma de objeto JSON
 					}
 					const data = await response.json();
-					console.log(data)
+					console.log(data);
 					return data;  // Retorna los datos del entrenador
 				} catch (error) {
 					console.error('Error al obtener el perfil del entrenador:', error);
