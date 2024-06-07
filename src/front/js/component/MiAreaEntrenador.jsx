@@ -5,7 +5,7 @@ import "../../styles/MiAreaEntrenador.css";
 
 //<Link to={`/perfilentrenador/${user.id}`}
 export const MiAreaEntrenador = () => {
-    
+    const usuarioID = localStorage.getItem("user_id");
     return (
         <div className="container contenedorMiAreaEntrenador">
             <div className="tituloMiAreaEntrenador">
@@ -14,7 +14,7 @@ export const MiAreaEntrenador = () => {
             <div className="row row-filaMiAreaEntrenador">
                 <div className="col-md-4 columnaPerfilEntrenador">
                     <div className="tituloPerfilRegistrado">
-                        <Link to="/" className="linkPerfilEntrenador">PERFIL</Link>
+                        <Link to={`/perfiles/${usuarioID}`} className="linkPerfilEntrenador">PERFIL</Link>
                     </div>
                 </div>
                 <div className="col-md-4 columnaClientesDelEntrenador">

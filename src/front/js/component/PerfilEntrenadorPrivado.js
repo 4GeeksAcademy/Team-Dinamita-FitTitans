@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { useParams } from 'react-router-dom';
 import { Context } from "../store/appContext";
 
-export const PerfilUsuarios = () => {
+export const PerfilEntrenadorPrivado = () => {
   const [usuarios, setUsuarios] = useState([]);
   const { id } = useParams();
   const { store, actions } = useContext(Context);
@@ -43,7 +43,7 @@ export const PerfilUsuarios = () => {
   
   useEffect(() => {
     const fetchUsuarioUnico = async () => {
-      await actions.GetUsuarioUnico(id);
+      await actions.GetEntrenadorUnico(id);
       const usuariofinal = store.usuarioUnico;
       console.log(store.usuarioUnico);
       console.log(usuariofinal);
@@ -76,8 +76,8 @@ export const PerfilUsuarios = () => {
                     <ul className="list-group list-group-flush">
                         <li className="list-group-item">Nombre: {usuario.email}</li>
                         <li className="list-group-item">Movil: {usuario.telefono}</li>
-                        <li className="list-group-item">Peso: {usuario.peso}</li>
-                        <li className="list-group-item">altura: {usuario.altura}</li>
+                        <li className="list-group-item">edad: {usuario.edad}</li>
+                        <li className="list-group-item">Especialidad: {usuario.tipo_entrenamiento}</li>
                         <li className="list-group-item">Genero: {usuario.genero}</li>
                     </ul>
                     <div className="card-body">
