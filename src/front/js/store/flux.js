@@ -199,6 +199,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+
+			// para lista de entrenadores 
+			obtenerListaEntrenadores: async () => {
+				try {
+					const response = await fetch('https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/listaentrenadores');
+					if (!response.ok) {
+						throw new Error('Error al obtener la lista de entrenadores');
+					}
+					const data = await response.json();
+					return data;  // Retorna los datos de los entrenadores
+				} catch (error) {
+					console.error('Error al obtener la lista de entrenadores:', error);
+					throw error;  // Lanza el error para manejarlo en el componente que use esta acción
+				}
+			},
+
+
 		}
 	};
 };
