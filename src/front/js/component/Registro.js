@@ -15,7 +15,7 @@ export const Registro = ({ closeModal }) => {
   const [usuario, setUsuarios] = useState({
     email: "",
     password: "",
-    rol: Boolean,
+    rol: "",
     telefono: "",
     nombre: "",
   });
@@ -38,16 +38,21 @@ export const Registro = ({ closeModal }) => {
 
   const navigate = useNavigate();
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const registroExitoso = await actions.HandleRegistro(usuario);
+    // Convierte el valor de 'rol' a booleano
+    const rolBooleano = usuario.rol === "1" ? true : false;
+    // Actualiza el objeto de usuario con el valor de 'rol' convertido a booleano
+    const usuarioConRolBooleano = { ...usuario, rol: rolBooleano };
+    const registroExitoso = await actions.HandleRegistro(usuarioConRolBooleano);
     if (registroExitoso) {
-      alert("success");
-      closeModal();
+        alert("success");
+        closeModal();
     } else {
-      alert("unexpected error");
+        alert("unexpected error");
     }
-  };
+};
 
   console.log(usuario)
 

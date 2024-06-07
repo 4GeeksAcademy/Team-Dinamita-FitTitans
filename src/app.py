@@ -97,13 +97,16 @@ def registro():
     email = data.get('email')
     password = data.get('password')
     rol = data.get('rol', False)
-    
+
     if not email or not password:
         return jsonify({'message': 'Username and password are required'}), 400
 
     hashed_password = hash_password(password)
     
-    new_user = User(email=email, password=hashed_password, rol=rol)
+    # Convertir el valor de rol a un booleano si es true sera entrenador, si es false usuario
+    rol_booleano = True if rol else False
+
+    new_user = User(email=email, password=hashed_password, rol=rol_booleano)
     db.session.add(new_user)
     db.session.commit()
     

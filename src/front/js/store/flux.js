@@ -41,45 +41,45 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			HandleRegistro: async ({ email, password, rol }) => {
 				try {
-				  const response = await fetch('https://opulent-doodle-977rpqgx6j64hp4p9-3001.app.github.dev/registro', {
-					method: 'POST',
-					headers: {
-					  'Content-Type': 'application/json',
-					  'accept': 'application/json'
-					},
-					body: JSON.stringify({
-					  email: email,
-					  password: password,
-					  rol : rol ? true : false
-					}),
-				  });
-		
-				  if (response.ok) {
-					return true;
-				  } else {
-					const errorData = await response.json();
-					console.log(errorData);
-					return false;
-				  }
+					const response = await fetch('https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/registro', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+							'accept': 'application/json'
+						},
+						body: JSON.stringify({
+							email: email,
+							password: password,
+							rol: rol ? true : false
+						}),
+					});
+
+					if (response.ok) {
+						return true;
+					} else {
+						const errorData = await response.json();
+						console.log(errorData);
+						return false;
+					}
 				} catch (error) {
-				  console.log('Error:', error);
-				  return false;
+					console.log('Error:', error);
+					return false;
 				}
-			  },
+			},
 
 
-			HandleInicioSesion: async ({email, password}) =>{
+			HandleInicioSesion: async ({ email, password }) => {
 				try {
-					const response = await fetch('https://opulent-doodle-977rpqgx6j64hp4p9-3001.app.github.dev/login', {
-					  method: 'POST',
-					  headers: {
-						'Content-Type': 'application/json',
-						'accept': 'application/json'
-					  },
-					  body: JSON.stringify({
-						email: email,
-						password: password,
-					  }),
+					const response = await fetch('https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/login', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+							'accept': 'application/json'
+						},
+						body: JSON.stringify({
+							email: email,
+							password: password,
+						}),
 					});
 
 					if (response.ok) {
