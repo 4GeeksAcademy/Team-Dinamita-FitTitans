@@ -14,11 +14,10 @@ export const PerfilEntrenador = () => {
 		
 		<div>
 			<nav className="navbar navbar-light bg-light">
-				<div className="container-fluidEntrenador">
-					<span className="navbar-brand mb-0 h1">ALEX GONZALEZ Trainer</span>
-				</div>
-			</nav>
-
+		<div className="container-fluidEntrenador d-flex justify-content-center">
+		  <span className="navbar-brand mb-0 h1">ALEX GONZALEZ Trainer</span>
+		</div>
+	  </nav>
 
 			<div id="carouselEntrenador" className="carouselSlide" data-bs-ride="carousel">
 				<div className="carousel-indicators">

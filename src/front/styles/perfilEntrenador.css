@@ -13,6 +13,12 @@ body {
   border-radius: 5px;
 }
 
+.container-fluidEntrenador {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .btnContratame:hover {
   color: white
 }
@@ -23,11 +29,7 @@ body {
   max-width: 1300px; 
   margin: auto;
 }
-.container-fluidEntrenador {
 
-  
-
-}
 
 .card-textEntrenador {
   font-size: 100%;
