@@ -6,13 +6,14 @@ from flask import Flask, request, jsonify, url_for, send_from_directory
 from flask_migrate import Migrate
 from flask_swagger import swagger
 from api.utils import APIException, generate_sitemap
-from api.models import db, User
 from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
 from flask_cors import CORS
 import bcrypt
 from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token, JWTManager
+
+from api.models import db, User, Entrenador
 
 
 
@@ -147,6 +148,20 @@ def get_user_by_id(user_id):
     if user is None:
         return jsonify({"message": "User not found"}), 404
     return jsonify(user.serialize()), 200
+
+
+
+# para lista entrenadores
+@app.route('/listaentrenadores', methods=['GET'])
+def obtener_lista_entrenadores():
+    try:
+        # Filtrar usuarios por su rol de entrenador que seria true
+        entrenadores = User.query.filter_by(rol=True).all()
+        entrenadores_data = [entrenador.serialize() for entrenador in entrenadores]
+        return jsonify(entrenadores_data)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 
 
 
