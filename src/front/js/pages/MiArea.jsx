@@ -1,37 +1,46 @@
 import React, {useContext, useEffect, useState } from 'react';
 import { Context } from "../store/appContext";
 import { Link, useNavigate } from "react-router-dom";
+import {MiAreaCliente} from "/workspaces/Team-Dinamita-FitTitans/src/front/js/component/MiAreaCliente.jsx"
+import {MiAreaEntrenador} from "/workspaces/Team-Dinamita-FitTitans/src/front/js/component/MiAreaEntrenador.jsx"
 
   
 export const MiArea = () => {
-    const [userType, setUserType] = useState('usuarioRegistrado'); // Estado inicial
-    const navigate = useNavigate();
-  
-    useEffect(() => {
-      // Simular una llamada a una API para obtener el tipo de usuario
-      const fetchUserType = async () => {
-        const response = await new Promise((resolve) => {
-          setTimeout(() => resolve('usuarioRegistrado'), 1000); // Simula una respuesta de API
-        });
-        setUserType(response);
-      };
-  
-      fetchUserType();
-    }, []);
-  
-    /*
-    const verificar = localStorage.getItem("user_rol", data.user_rol);
-    return ( 
-      <div> 
-        {verificar ? <MiAreaEntrenador/> : <MiAreaCliente/>}
-      </div>
-    )
-    */
+  const { store, actions } = useContext(Context);
+  const [estado, setEstado] = useState(null)
+
+  const navigate = useNavigate();
+
+  useEffect (() =>{
+		const verificar = localStorage.getItem("user_rol")
+		if (verificar === "true"){
+         setEstado(true)
+      }else{
+        return setEstado(false)
+      }
+		
+	},[])
+
+
+    console.log(estado)
+    
+  const Return = (e) => {
+    e.preventDefault();
+    navigate("/")
+  } 
+
     return (
+  <>
+      {store.seInicio ? (
       <div>
-        
-        {userType === 'registered' && <MiAreaRegistrado />}
-        {userType === 'client' && <MiAreaCliente />}
-      </div>
+        {estado ? (<MiAreaEntrenador/>) : (<MiAreaCliente/>)}
+      </div>) : (
+        <div>
+          <button onClick={(e) => Return(e)}> Error Go Home</button>
+        </div>
+      )}
+      
+  </>
+      
     );
   };
