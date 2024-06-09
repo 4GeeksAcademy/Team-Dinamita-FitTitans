@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import "../../styles/Navbar.css";
 import "/workspaces/Team-Dinamita-FitTitans/src/front/styles/IniciarSesion.css"
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link} from "react-router-dom";
 import { Registro } from "./Registro";
 import { MiAreaUsuarioRegistrado } from "//workspaces/Team-Dinamita-FitTitans/src/front/js/pages/MiAreaUsuarioRegistrado.jsx"
 import firebaseApp from "../../../firebase/credenciales";
@@ -121,6 +121,13 @@ export const IniciarSesion = () => {
                   value={"iniciar Sesion"}
                   className="btn btn-Navbar mx-3 "
                 />
+                <Link to="/solicitud">
+                <input
+                  type="submit"
+                  value={"Recuperar Contraseña"}
+                  className="btn btn-Navbar mx-3 "
+                />
+                </Link>
               </div>
 
             </form>
