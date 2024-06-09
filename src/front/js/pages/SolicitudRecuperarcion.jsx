@@ -1,0 +1,54 @@
+import React, { useState } from "react";
+import { useContext } from "react";
+import { Context } from "../store/appContext";
+import "../../styles/Navbar.css";
+import "/workspaces/Team-Dinamita-FitTitans/src/front/styles/IniciarSesion.css"
+
+export const SolicitudRecuperacion = () => {
+  const [email, setEmail] = useState("");
+  const { store, actions } = useContext(Context);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+        const response = await actions.RecuperarContraseña(email)
+        if (response === true) {
+            alert("Se ha enviado un correo electrónico con las instrucciones para recuperar tu contraseña.");
+        } else {
+            alert("Hubo un error al procesar tu solicitud. Por favor, inténtalo de nuevo más tarde.");
+        }
+    } catch (error) {
+        console.log("Error:", error);
+        alert("Hubo un error al procesar tu solicitud n2. Por favor, inténtalo de nuevo más tarde.");
+    }
+};
+console.log(email)
+
+return (
+    <>
+        <form className="container InicioSesion" onSubmit={handleSubmit} id="inicio">
+            <div className="my-3">
+                <label className="form-label d-flex text-start text-light" id="email">
+                    <i className="fas fa-envelope mx-2"></i>
+                    Solicitud Recuperar Contraseña por Email
+                </label>
+                <input
+                    type="email"
+                    className="form-control"
+                    minLength={3}
+                    required={true}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="name@example.com"
+                />
+            </div>
+            <div className="botonNavbar container d-flex justify-content-center">
+                <input
+                    type="submit"
+                    className="btn btn-Navbar mx-3 d-flex justify-content-center"
+                    value={"Enviar"}
+                />
+            </div>
+        </form>
+    </>
+);
+};
