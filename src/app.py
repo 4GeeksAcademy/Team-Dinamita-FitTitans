@@ -13,10 +13,7 @@ from flask_cors import CORS
 import bcrypt
 from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token, JWTManager
 
-from api.models import db, User, Entrenador
-
-
-
+from api.models import db, User, Perfil_entrenador
 
 
 ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
@@ -113,7 +110,11 @@ def registro():
     db.session.add(new_user)
     db.session.commit()
     
-    return jsonify({'message': 'User registered successfully'}), 201
+    # Obtengo el id del usuario recien creado
+    user_id = new_user.id
+    
+    # Devuelvo el ID del usuario como parte de la respuesta
+    return jsonify({'message': 'User registered successfully', 'userId': user_id}), 201
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -150,26 +151,6 @@ def get_user_by_id(user_id):
     if user is None:
         return jsonify({"message": "User not found"}), 404
     return jsonify(user.serialize()), 200 
-  
-# para perfil entrenador mostrar cada entrenador por ID
-@app.route("/listaentrenadores/<int:user_id>", methods=["GET"])
-def get_entrenador_by_id(user_id):
-    user = User.query.get(user_id)
-    if user is None:
-        return jsonify({"message": "User not found"}), 404
-    return jsonify(user.serialize()), 200 
-
-# para lista entrenadores
-@app.route('/listaentrenadores', methods=['GET'])
-def obtener_lista_entrenadores():
-    try:
-        # Filtrar usuarios por su rol de entrenador que seria true
-        entrenadores = User.query.filter_by(rol=True).all()
-        entrenadores_data = [entrenador.serialize() for entrenador in entrenadores]
-        return jsonify(entrenadores_data)
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
 
 
 @app.route('/Usuarios', methods=['GET'])
@@ -183,7 +164,6 @@ def obtener_usuarios():
         return jsonify({"error": str(e)}), 500
 
 
-
 @app.route("/perfiles", methods=["GET"])
 @jwt_required()
 def show_email():
@@ -191,10 +171,32 @@ def show_email():
     user = User.filter.get(current_user_id)
     return jsonify({"email": user.email, "id": user.id, "response": "That is your data up there!"}), 200
 
+
+@app.route('/listaentrenadores', methods=['GET'])
+def obtener_entrenadores():
+    try:
+        entrenadores = User.query.filter_by(rol=True).all()
+        lista_entrenadores = [entrenador.serialize() for entrenador in entrenadores]
+        return jsonify(lista_entrenadores)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route("/listaentrenadores/<int:entrenador_id>", methods=["GET"])
+def get_entrenador_by_id(entrenador_id):
+    user = User.query.get(entrenador_id)
+    if user is None:
+        return jsonify({"message": "User not found"}), 404
+    return jsonify(user.serialize()), 200 
+
+
+
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
     PORT = int(os.environ.get('PORT', 3001))
     app.run(host='0.0.0.0', port=PORT, debug=True)
+
+
 
 
 
