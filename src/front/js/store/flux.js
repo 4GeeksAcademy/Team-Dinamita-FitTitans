@@ -42,7 +42,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			HandleRegistro: async ({ email, password, rol, nombre, telefono }) => {
 				try {
-					const response = await fetch('https://opulent-doodle-977rpqgx6j64hp4p9-3001.app.github.dev/registro', {
+					const response = await fetch('https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/registro', {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json',
@@ -58,15 +58,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 
 					if (response.ok) {
-						return true;
+						// Si el registro es exitoso, obtenemos la respuesta del backend
+						const responseData = await response.json();
+						// Extraemos el ID de usuario de la respuesta
+						const userId = responseData.userId;
+						// Devolvemos un objeto con el valor booleano y el ID de usuario
+						return { success: true, userId: userId };
 					} else {
 						const errorData = await response.json();
 						console.log(errorData);
-						return false;
+						return { success: false };
 					}
 				} catch (error) {
 					console.log('Error:', error);
-					return false;
+					return { success: false };
 				}
 			},
 
@@ -141,7 +146,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//`/perfilusuario/${usuarioID}`
 			GetUsuarioUnico: async (id) => {
 				try {
-					const response = await fetch(`https://opulent-doodle-977rpqgx6j64hp4p9-3001.app.github.dev/Usuarios/${id}`, {
+					const response = await fetch(`https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/Usuarios/${id}`, {
 						method: 'GET'
 					})
 					if (response.ok) {
@@ -156,7 +161,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			GetEntrenadorUnico: async (id) => {
 				try {
-					const response = await fetch(`https://opulent-doodle-977rpqgx6j64hp4p9-3001.app.github.dev/listaentrenadores/${id}`, {
+					const response = await fetch(`https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/listaentrenadores/${id}`, {
 						method: 'GET'
 					})
 					if (response.ok) {
@@ -207,20 +212,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			obtenerPerfilEntrenador: async (user_id) => {
+			obtenerPerfilEntrenador: async (entrenador_id) => {
 				try {
-					const response = await fetch(`https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/listaentrenadores/${user_id}`, {
-						method: 'GET'
+					const response = await fetch(`https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/listaentrenadores/${entrenador_id}`, {
+						method: 'GET',
+						headers: {
+							'Content-Type': 'application/json',
+							'accept': 'application/json',
+						},
 					});
-					if (!response.ok) {
-						throw await response.json(); // Lanzar el error original en forma de objeto JSON
-					}
-					const data = await response.json();
-					console.log(data);
-					return data;  // Retorna los datos del entrenador
+					return response;
 				} catch (error) {
 					console.error('Error al obtener el perfil del entrenador:', error);
-					throw error;  // Lanza el error para manejarlo en el componente que use esta acción
+					throw error;
 				}
 			},
 
