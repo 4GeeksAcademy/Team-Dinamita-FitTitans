@@ -17,7 +17,7 @@ export const Registro = ({ closeModal }) => {
     password: "",
     rol: "",
     telefono: "",
-    nombre: "",
+    nombre_usuario: "",
   });
 
 
@@ -47,12 +47,12 @@ export const Registro = ({ closeModal }) => {
     const usuarioConRolBooleano = { ...usuario, rol: rolBooleano };
     const registroExitoso = await actions.HandleRegistro(usuarioConRolBooleano);
     if (registroExitoso) {
-        alert("success");
-        closeModal();
+      alert("success");
+      closeModal();
     } else {
-        alert("unexpected error");
+      alert("unexpected error");
     }
-};
+  };
 
   console.log(usuario)
 
