@@ -28,8 +28,8 @@ import { Dieta } from "./pages/Dieta.jsx"
 import { Blog } from "./pages/Blog.jsx"
 import { Perfiles } from "/workspaces/Team-Dinamita-FitTitans/src/front/js/pages/Perfiles.jsx";
 import { PerfilEntrenadorPrivado } from "./component/PerfilEntrenadorPrivado.js";
-
-
+import { RecuperarContraseña } from "./pages/RecuperarContraseña.jsx";
+import { SolicitudRecuperacion } from "./pages/SolicitudRecuperarcion.jsx";
 
 //create your first component
 const Layout = () => {
@@ -51,6 +51,8 @@ const Layout = () => {
                         <Route element={<h1>Not found!</h1>} />
                         <Route element={<IniciarSesion />} path="login" />
                         <Route element={<Registro />} path="/registro" />
+                        <Route element={<RecuperarContraseña />} path="/reset-password/:token"/>
+                        <Route element={<SolicitudRecuperacion />} path="/solicitud" />
                         <Route element={<Perfiles />} path="/perfiles/:id" />
                         <Route element={<PerfilUsuarios />} path="/perfil/:id" />
                         <Route element={<PerfilEntrenador />} path="/listaentrenadores/:entrenador_id" />
@@ -65,9 +67,6 @@ const Layout = () => {
                         <Route element={<ListaEntrenadores />} path="/listaentrenadores" />
                         <Route element={<Dieta />} path="/dieta" />
                         <Route element={<Blog />} path="/blog" />
-
-
-
                     </Routes>
                     <Footer />
                 </ScrollToTop>
