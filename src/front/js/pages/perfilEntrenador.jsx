@@ -4,36 +4,47 @@ import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/perfilEntrenador.css";
 
-
 export const PerfilEntrenador = () => {
 	const { store, actions } = useContext(Context);
-	const { entrenadorId } = useParams();
+	const { entrenador_id } = useParams();
 	const [entrenador, setEntrenador] = useState(null);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(null);
+	const [showFelicidades, setShowFelicidades] = useState(false);
 
 	useEffect(() => {
-        actions.obtenerPerfilEntrenador(entrenadorId)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Error al obtener el perfil del entrenador');
-                }
-                return response.json();
-            })
-            .then(data => {
-                setEntrenador(data);
-                console.log(data);
-            })
-            .catch(error => {
-                console.error("Error al obtener el perfil del entrenador:", error);
-            });
-    }, []);
+		if (entrenador_id) {
+			actions.obtenerPerfilEntrenador(entrenador_id)
+				.then(response => {
+					if (!response.ok) {
+						throw new Error('Error al obtener el perfil del entrenador');
+					}
+					return response.json();
+				})
+				.then(data => {
+					setEntrenador(data);
+				})
+				.catch(error => {
+					console.error("Error al obtener el perfil del entrenador:", error);
+					setError(error);
+				})
+				.finally(() => {
+					setLoading(false);
+				});
+		}
+	}, [entrenador_id, actions]);
 
-    if (!entrenador) {
-        return <div>Cargando...</div>;
-    };
+	if (loading) {
+		return <div>Cargando...</div>;
+	}
 
+	if (error) {
+		return <div>Error al cargar los datos del entrenador: {error.message}</div>;
+	}
 
-
-	const [showFelicidades, setShowFelicidades] = useState(false);
+	if (!entrenador) {
+		return <div>Entrenador no encontrado</div>;
+	}
 
 	const selectPlan = (plan) => {
 		setShowFelicidades(true);
@@ -47,12 +58,13 @@ export const PerfilEntrenador = () => {
 		felicidadesModal.show();
 	};
 
+
+
 	return (
 		<div>
 			<nav className="navbarEntrenador">
 				<div className="container-fluidEntrenador d-flex justify-content-center">
-					<span className="navbarNombre">ALEX GONZALEZ Trainer</span>
-
+					<span className="navbarNombre">{entrenador.nombre}</span>
 				</div>
 			</nav>
 
@@ -101,19 +113,19 @@ export const PerfilEntrenador = () => {
 				</button>
 			</div>
 
-
 			<blockquote className="blockquote">
 				<h1>Tu tiempo vale mucho, y cuidar tu salud es la mejor inversión;</h1>
 			</blockquote>
+
 			<div className="container mt-5">
 				<div className="row">
 					<div className="col-sm-4">
 						<div className="card">
 							<div className="card-body">
 								<h5 className="card-title">Información Personal</h5>
-								<p className="card-text">Email: </p>
-								<p className="card-text">Edad: </p>
-								<p className="card-text">Género: </p>
+								<p className="card-text">Email: {entrenador.email}</p>
+								<p className="card-text">Edad: {entrenador.edad}</p>
+								<p className="card-text">Género: {entrenador.genero}</p>
 							</div>
 						</div>
 					</div>
@@ -121,7 +133,7 @@ export const PerfilEntrenador = () => {
 						<div className="card">
 							<div className="card-body">
 								<h5 className="card-title">Tipos de Entrenamiento</h5>
-								<p className="card-text"></p>
+								{/* Aquí deberías renderizar los tipos de entrenamiento del entrenador */}
 							</div>
 						</div>
 					</div>
@@ -146,9 +158,9 @@ export const PerfilEntrenador = () => {
 							<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div className="modal-body">
-							<button type="button" className="btnPlanes" onClick={() => selectPlan('semanal')}>Plan Semanal</button>
-							<button type="button" className="btnPlanes" onClick={() => selectPlan('mensual')}>Plan Mensual</button>
-							<button type="button" className="btnPlanes" onClick={() => selectPlan('anual')}>Plan Anual</button>
+							<button type="button" className="btnPlanes" onClick={() => { selectPlan('semanal'); }}>Plan Semanal</button>
+							<button type="button" className="btnPlanes" onClick={() => { selectPlan('mensual'); }}>Plan Mensual</button>
+							<button type="button" className="btnPlanes" onClick={() => { selectPlan('anual'); }}>Plan Anual</button>
 						</div>
 					</div>
 				</div>
@@ -173,3 +185,4 @@ export const PerfilEntrenador = () => {
 		</div>
 	);
 };
+
