@@ -13,7 +13,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			// Archivo Contactanos
 			handleSubmitContactanos: (contactoFormulario) => {
-				return fetch('https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/contactanos', {
+				return fetch(`${process.env.BACKEND_URL}/contactanos`, {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json'
@@ -40,9 +40,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 
-			HandleRegistro: async ({ email, password, rol }) => {
+			HandleRegistro: async ({ email, password, rol, nombre, telefono }) => {
 				try {
-					const response = await fetch('https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/registro', {
+					const response = await fetch(`${process.env.BACKEND_URL}/registro`, {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json',
@@ -51,27 +51,35 @@ const getState = ({ getStore, getActions, setStore }) => {
 						body: JSON.stringify({
 							email: email,
 							password: password,
-							rol: rol ? true : false
+							rol: rol ? true : false,
+							nombre: nombre,
+							telefono: telefono
 						}),
 					});
 
 					if (response.ok) {
-						return true;
+						// Si el registro es exitoso, obtenemos la respuesta del backend
+						const responseData = await response.json();
+						// Extraemos el ID de usuario de la respuesta
+						const userId = responseData.userId;
+						// Devolvemos un objeto con el valor booleano y el ID de usuario
+						return { success: true, userId: userId };
 					} else {
 						const errorData = await response.json();
 						console.log(errorData);
-						return false;
+						return { success: false };
 					}
 				} catch (error) {
 					console.log('Error:', error);
-					return false;
+					return { success: false };
 				}
 			},
 
 
+
 			HandleInicioSesion: async ({ email, password }) => {
 				try {
-					const response = await fetch('https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/login', {
+					const response = await fetch(`${process.env.BACKEND_URL}/login`, {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json',
@@ -123,7 +131,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			GetUsuarios: async () => {
 				try {
-					const response = await fetch("https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/users", {
+					const response = await fetch(`${process.env.BACKEND_URL}/users`, {
 						method: 'GET'
 					})
 					if (response.ok) {
@@ -138,13 +146,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//`/perfilusuario/${usuarioID}`
 			GetUsuarioUnico: async (id) => {
 				try {
-					const response = await fetch(`https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/users/${id}`, {
+					const response = await fetch(`${process.env.BACKEND_URL}/Usuarios/${id}`, {
 						method: 'GET'
 					})
 					if (response.ok) {
 						const data = await response.json();
 						console.log(data)
-						setStore({ usuarioUnico: data })
+						return setStore({ usuarioUnico: data })
+					}
+				} catch (error) {
+					console.log('Error:', error);
+				}
+			},
+
+			GetEntrenadorUnico: async (id) => {
+				try {
+					const response = await fetch(`${process.env.BACKEND_URL}/listaentrenadores/${id}`, {
+						method: 'GET'
+					})
+					if (response.ok) {
+						const data = await response.json();
+						console.log(data)
+						return setStore({ usuarioUnico: data })
 					}
 				} catch (error) {
 					console.log('Error:', error);
@@ -175,8 +198,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			// para lista de entrenadores 
 			obtenerListaEntrenadores: async () => {
+				console.log (process.env.BACKEND_URL)
 				try {
-					const response = await fetch('https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/listaentrenadores');
+					const response = await fetch(`${process.env.BACKEND_URL}/listaentrenadores`);
 					if (!response.ok) {
 						throw new Error('Error al obtener la lista de entrenadores');
 					}
@@ -189,24 +213,68 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			obtenerPerfilEntrenador: async (user_id) => {
+			obtenerPerfilEntrenador: async (entrenador_id) => {
 				try {
-					const response = await fetch(`https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/listaentrenadores/${user_id}`, {
-						method: 'GET'
-					})
-					if (!response.ok) {
-						throw new Error('Error al obtener el perfil del entrenador');
-					}
-					const data = await response.json();
-					console.log(data)
-					return data;  // Retorna los datos del entrenador
+					const response = await fetch(`${process.env.BACKEND_URL}/listaentrenadores/${entrenador_id}`, {
+						method: 'GET',
+						headers: {
+							'Content-Type': 'application/json',
+							'accept': 'application/json',
+						},
+					});
+					return response;
 				} catch (error) {
 					console.error('Error al obtener el perfil del entrenador:', error);
-					throw error;  // Lanza el error para manejarlo en el componente que use esta acción
+					throw error;
 				}
 			},
 
+			RecuperarContraseña: async (email) =>{
+				try {
+					const response = await fetch(`${process.env.BACKEND_URL}/users/solicitud`, {
+					  method: "POST",
+					  headers: {
+						"Content-Type": "application/json",
+					  },
+					  body: JSON.stringify({email : email}),
+					});
+					if (response.ok) {
+						console.log(response)
+					  return true
+					} else {
+						console.log(response)
+					  return false
+					}
+				  } catch (error) {
+					console.log("Error:", error);
+					return false
+				  }
+				},
 
+			ModificarContraseña: async(password) =>{
+				try {
+					const token = window.location.pathname.split('/').pop(); // Obtener el token de la URL
+					const response = await fetch(`${process.env.BACKEND_URL}/listaentrenadores/${token}`, {
+						method: 'PATCH',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify({
+							password: password
+						})
+					});
+					if (response.ok) {
+						alert("Contraseña actualizada exitosamente.");
+						// Redireccionar a la página de inicio de sesión o a donde desees
+					} else {
+						const error = await response.json();
+						throw new Error(error.message || 'Hubo un error al procesar tu solicitud.');
+					}
+				} catch (error) {
+					console.log("Error:", error);
+					alert(error.message || "Hubo un error al procesar tu solicitud. Por favor, inténtalo de nuevo más tarde.");
+				}
+			}
 		}
 	};
 };

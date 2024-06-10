@@ -1,0 +1,14 @@
+pipenv run reset_db
+pipenv run migrate
+pipenv run upgrade
+pipenv run start
+
+npm run start
+
+
+correo 
+ajrfittitans@gmail.com
+
+
+mi api
+https://opulent-doodle-977rpqgx6j64hp4p9-3001.app.github.dev/
