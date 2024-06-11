@@ -21,7 +21,7 @@ export const ListaEntrenadores = () => {
   return (
     <div className="container mt-5 containerEntrenadores">
       <ul className="list-group mb-5">
-        {listaEntrenadores.map((entrenador, index) => (
+        {store.entrenadores.map((entrenador, index) => (
           <li key={index} className="list-group-item bg-dark text-light">
             <div className="row align-items-center">
               <div className="fotoContainer col-4">

@@ -46,6 +46,7 @@ export const PerfilEntrenador = () => {
 		return <div>Entrenador no encontrado</div>;
 	}
 
+
 	const selectPlan = (plan) => {
 		setShowFelicidades(true);
 		// Cierra el modal de planes
@@ -57,8 +58,6 @@ export const PerfilEntrenador = () => {
 		const felicidadesModal = new window.bootstrap.Modal(felicidadesModalElement);
 		felicidadesModal.show();
 	};
-
-
 
 	return (
 		<div>
@@ -158,9 +157,9 @@ export const PerfilEntrenador = () => {
 							<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div className="modal-body">
-							<button type="button" className="btnPlanes" onClick={() => { selectPlan('semanal'); }}>Plan Semanal</button>
-							<button type="button" className="btnPlanes" onClick={() => { selectPlan('mensual'); }}>Plan Mensual</button>
-							<button type="button" className="btnPlanes" onClick={() => { selectPlan('anual'); }}>Plan Anual</button>
+							<button type="button" className="btnPlanes" onClick={() => { selectPlan('semanal'); ContratarEntrenador(); }}>Plan Semanal</button>
+							<button type="button" className="btnPlanes" onClick={() => { selectPlan('mensual'); ContratarEntrenador(); }}>Plan Mensual</button>
+							<button type="button" className="btnPlanes" onClick={() => { selectPlan('anual'); ContratarEntrenador(); }}>Plan Anual</button>
 						</div>
 					</div>
 				</div>
