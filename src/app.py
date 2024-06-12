@@ -14,13 +14,11 @@ from flask_cors import CORS
 from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token, JWTManager
 import jwt
 import uuid
-from api.models import db, User, Perfil_entrenador
 from flask_mail import Mail, Message
 from datetime import datetime, timedelta
 import bcrypt
 from dotenv import load_dotenv
 load_dotenv()
-
 
 import smtplib
 from email.mime.multipart import MIMEMultipart
@@ -247,15 +245,15 @@ def update_user(id):
     return jsonify(user.serialize()), 200
 
 
-#para contratar entrenador
 @app.route('/contratar', methods=['POST'])
 def contratar_entrenador():
     data = request.get_json()
     entrenador_id = data.get('entrenador_id')
     usuario_id = data.get('usuario_id')
-    plan_entrenamiento = data.get('plan_entrenamiento')
+    plan_entrenamiento= data.get ('plan_entrenamiento')
+    print(data)
 
-    if not entrenador_id or not usuario_id or not plan_entrenamiento:
+    if not entrenador_id or not usuario_id:
         return jsonify({"error": "Faltan datos"}), 400
 
     entrenador = User.query.get(entrenador_id)
@@ -266,11 +264,13 @@ def contratar_entrenador():
 
     if not entrenador.rol or usuario.rol:
         return jsonify({"error": "Roles incorrectos"}), 400
+    
+    
 
     asignacion = Asignacion_entrenador(
         entrenador_id=entrenador_id,
         usuario_id=usuario_id,
-        plan_entrenamiento=plan_entrenamiento
+        plan_entrenamiento=plan_entrenamiento,
     )
 
     db.session.add(asignacion)
