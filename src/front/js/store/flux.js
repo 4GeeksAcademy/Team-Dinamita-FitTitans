@@ -7,6 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			id: [],
 			usuarioUnico: [],
 			entrenadores: [],
+			clientes: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -160,22 +161,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			EditarUsuario2: async (id, updatedData) => {
 				try {
-					console.log("Datos actualizados:", updatedData);
-					const response = await fetch(`https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/listaentrenadores/${id}`, {
-						method: "PUT",
-						headers: {
-							"Content-Type": "application/json"
-						},
-						body: JSON.stringify(updatedData)
-					});
-					const data = await response.json();
-					console.log("Respuesta del servidor:", data);
-					setStore({ usuarioUnico: data });
+					const response = await fetch(`${process.env.BACKEND_URL}/listaentrenadores/${id}`, {
+						method: 'GET'
+					})
+					if (response.ok) {
+						const data = await response.json();
+						console.log(data)
+						return setStore({ usuarioUnico: data })
+					}
 				} catch (error) {
-					console.error("Error updating user data:", error);
+					console.log('Error:', error);
 				}
 			},
-
 			GetEntrenadorUnico: async (id) => {
 				try {
 					const response = await fetch(`${process.env.BACKEND_URL}/listaentrenadores/${id}`, {
@@ -209,6 +206,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+
+			contratarEntrenador: (entrenador_id, usuario_id, seleccionarPlan,) => {
+				return fetch(`${process.env.BACKEND_URL}/contratar`, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						entrenador_id: entrenador_id,
+						usuario_id: usuario_id,
+						plan_entrenamiento: seleccionarPlan,
+					})
+				})
+					.then(response => 
+						{console.log(response); response.json()})
+					.catch(error => console.error("Error:", error));
+			},
+      
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
@@ -233,7 +248,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			// para lista de entrenadores 
 			obtenerListaEntrenadores: async () => {
-				console.log (process.env.BACKEND_URL)
+				console.log(process.env.BACKEND_URL)
 				try {
 					const response = await fetch(`${process.env.BACKEND_URL}/listaentrenadores`);
 					if (!response.ok) {
@@ -248,6 +263,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 					throw error;
 				}
 			},
+
+			// para lista de clientes 
+			obtenerListaClientes: async (id) => {
+				console.log(process.env.BACKEND_URL)
+				try {
+					const response = await fetch(`${process.env.BACKEND_URL}/listaentrenadores/${id}/clientes`);
+					if (!response.ok) {
+						throw new Error('Error al obtener la lista de clientes');
+					}
+					const data = await response.json();
+					console.log(data)
+					// setStore({ entrenadores: data.entrenadores }); // Actualiza el estado con los datos de los entrenadores
+					// return data;  // Retorna los datos de los entrenadores DESCOMENTAR Y CAMBIAR X CLIENTES (ANNA)!!
+				} catch (error) {
+					console.error('Error al obtener la lista de clientes', error);
+					throw error;
+				}
+			},
+
 
 			obtenerPerfilEntrenador: async (entrenador_id) => {
 				try {
@@ -267,55 +301,56 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 			RecuperarContraseña: async (email) => {
-                try {
-                    const response = await fetch('https://glowing-spork-jj94vv5pq7p2ppw7-3001.app.github.dev/solicitud', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ email: email })
-                    });
+				try {
+					const response = await fetch('https://glowing-spork-jj94vv5pq7p2ppw7-3001.app.github.dev/solicitud', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify({ email: email })
+					});
 
-                    if (!response.ok) {
+					if (!response.ok) {
 						console.log(response)
-                        console.error('Error al enviar datos');
-                        throw new Error('Error al enviar datos');
+						console.error('Error al enviar datos');
+						throw new Error('Error al enviar datos');
 						return false
-                    }
+					}
 
-                    const data = await response.json();
-                    console.log('Correo de recuperación enviado:', data);
+					const data = await response.json();
+					console.log('Correo de recuperación enviado:', data);
 					return true
-                } catch (error) {
-                    console.error('Error:', error);
-                }
-            },
+				} catch (error) {
+					console.error('Error:', error);
+				}
+			},
 
 			ModificarContraseña: async (password, user_uuid) => {
-                try {
-                    const response = await fetch('https://glowing-spork-jj94vv5pq7p2ppw7-3001.app.github.dev/reset-password/', {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            //'Authorization': `Bearer ${token}`
-                        },
-                        body: JSON.stringify({ password, user_uuid })
-                    });
+				try {
+					const response = await fetch(`${process.env.BACKEND_URL}/reset-password/', {
+						method: 'PUT',
+						headers: {
+							'Content-Type': 'application/json',
+							//'Authorization': `Bearer ${token}`
+						},
+						body: JSON.stringify({ password, user_uuid })
 
-                    if (!response.ok) {
-                        console.error('Error al enviar datos');
-                        throw new Error('Error al enviar datos');
+					});
+
+					if (!response.ok) {
+						console.error('Error al enviar datos');
+						throw new Error('Error al enviar datos');
 						return false
-                    }
+					}
 
-                    const data = await response.json();
-                    console.log('Contraseña restablecida:', data);
+					const data = await response.json();
+					console.log('Contraseña restablecida:', data);
 					return true
-                } catch (error) {
-                    console.error('Error:', error);
+				} catch (error) {
+					console.error('Error:', error);
 					return false
-                }
-            },
+				}
+			},
 
 			ContratarEntrenador: async (usuarioId, entrenadorId) => {
 				try {

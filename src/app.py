@@ -15,13 +15,17 @@ from flask_cors import CORS
 from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token, JWTManager
 import jwt
 import uuid
-from api.models import db, User, Perfil_entrenador
 from flask_mail import Mail, Message
 from datetime import datetime, timedelta
 import bcrypt
 from dotenv import load_dotenv
 load_dotenv()
 
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from itsdangerous import URLSafeTimedSerializer
+from api.models import db, User, Asignacion_entrenador
 
 
 ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
@@ -235,21 +239,61 @@ def update_user(id):
     user.edad = data.get('edad', user.edad)
     user.genero = data.get('genero', user.genero)
     user.altura = data.get('altura', user.altura)
-    user.tipo_entrenamiento = data.get('edad', user.tipo_entrenamiento)
+    user.tipo_entrenamiento = data.get('tipo_entrenamiento', user.tipo_entrenamiento)
     user.foto = data.get('foto', user.foto)
-    
     db.session.commit()
 
     return jsonify(user.serialize()), 200
 
+# // Para obtener los clientes de un entrenador 
+@app.route("/listaentrenadores/<int:entrenador_id>/clientes", methods=["GET"])
+def get_clientes_by_entrenador_id(entrenador_id):
+    # Obtener los client_ids para el entrenador dado
+    client_ids = db.session.query(Asignacion_entrenador.usuario_id).filter_by(entrenador_id=entrenador_id).all()
+    client_ids = [client_id[0] for client_id in client_ids]  # Extraer los IDs de los resultados
+
+
+@app.route('/contratar', methods=['POST'])
+def contratar_entrenador():
+    data = request.get_json()
+    entrenador_id = data.get('entrenador_id')
+    usuario_id = data.get('usuario_id')
+    plan_entrenamiento= data.get ('plan_entrenamiento')
+    print(data)
+
+    if not entrenador_id or not usuario_id:
+        return jsonify({"error": "Faltan datos"}), 400
+
+    entrenador = User.query.get(entrenador_id)
+    usuario = User.query.get(usuario_id)
+
+    if not entrenador or not usuario:
+        return jsonify({"error": "Usuario o entrenador no encontrado"}), 404
+
+    if not entrenador.rol or usuario.rol:
+        return jsonify({"error": "Roles incorrectos"}), 400
+    
+    
+
+    asignacion = Asignacion_entrenador(
+        entrenador_id=entrenador_id,
+        usuario_id=usuario_id,
+        plan_entrenamiento=plan_entrenamiento,
+    )
+
+    db.session.add(asignacion)
+    db.session.commit()
+
+    return jsonify({"message": "Entrenador contratado exitosamente"}), 200
 
 
 
 
-# this only runs if `$ python src/main.py` is executed
-if __name__ == '__main__':
-    PORT = int(os.environ.get('PORT', 3001))
-    app.run(host='0.0.0.0', port=PORT, debug=True)
+
+
+
+
+
 
 
 # Configurar Flask-Mail para usar Mailtrap
