@@ -7,8 +7,8 @@ npm run start
 
 
 correo 
-ajrfittitans@gmail.com
+fittitans@outlook.com
 
 
 mi api
-https://opulent-doodle-977rpqgx6j64hp4p9-3001.app.github.dev/
+https://glowing-spork-jj94vv5pq7p2ppw7-3001.app.github.dev/
