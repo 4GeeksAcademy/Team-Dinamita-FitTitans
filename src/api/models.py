@@ -28,7 +28,7 @@ class User(db.Model):
             "nombre": self.nombre,
             "telefono": self.telefono,
             "user_uuid": self.user_uuid
-            **perfil_entrenador_data  # Añado los datos del perfil del entrenador
+           
         }
     
     

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const ListaDeClientes = ({ entrenadorId }) => {
+export const ListaDeClientes = ({ entrenadorId }) => {
   const [clientes, setClientes] = useState([]);
 
   useEffect(() => {
@@ -27,4 +27,4 @@ const ListaDeClientes = ({ entrenadorId }) => {
   );
 }
 
-export default ListaDeClientes;
+

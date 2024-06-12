@@ -2,6 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from api.RecuperarContraseña import enviar_correo
+from api.EmailBienvenida import enviar_correo_bienvenida
 import os
 from flask import Flask, request, jsonify, url_for, send_from_directory, render_template, flash, redirect
 from flask_migrate import Migrate
@@ -115,10 +116,10 @@ def registro():
         return jsonify({'message': 'Username and password are required'}), 400
 
     hashed_password = hash_password(password)
-    
     # Convertir el valor de rol a un booleano si es true sera entrenador, si es false usuario
     rol_booleano = True if rol else False
     user_uuid = str(uuid.uuid4())
+    enviar_correo_bienvenida(email)
     new_user = User(email=email, password=hashed_password, rol=rol_booleano, nombre=nombre, telefono=telefono, user_uuid = user_uuid)
     db.session.add(new_user)
     db.session.commit()
@@ -291,10 +292,10 @@ def forgot_password():
     if user:
         user_uuid = user.user_uuid
         reset_link = f"https://glowing-spork-jj94vv5pq7p2ppw7-3000.app.github.dev/reset-password/{user_uuid}"
-        msg = Message("Password Reset Request",
-                      sender="ajrfittitans@gmail.com",  # Cambiar por tu correo
-                      recipients=[email])
-        msg.body = f"To reset your password, visit the following link: {reset_link}"
+       # msg = Message("Password Reset Request",
+        #              sender="ajrfittitans@gmail.com",  # Cambiar por tu correo
+         #             recipients=[email])
+        #msg.body = f"To reset your password, visit the following link: {reset_link}"
         #mail.send(msg)
         enviar_correo(email, reset_link)
 

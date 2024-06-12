@@ -14,7 +14,7 @@ export const Navbar = () => {
 	const [inicioSesion, setInicioSesion] = useState(null);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const { store, actions } = useContext(Context);
-
+	const [tipoUsuario, setTipoUsuario] = useState(null);
 
 	const navigate = useNavigate();
 
@@ -32,6 +32,15 @@ export const Navbar = () => {
 		}else
 			{actions.logout()}
 	},[])
+
+	useEffect(()=>{
+		const usuarioTipo = localStorage.getItem("user_rol")
+		if (usuarioTipo === "true")
+			{setTipoUsuario(true)}
+		else {setTipoUsuario(false)}
+
+		console.log(tipoUsuario)
+	}, [])
 
 	const openModal = () => {
 		setIsModalOpen(true);
@@ -63,8 +72,8 @@ export const Navbar = () => {
 					<div className="botonesNavbar navbar-nav ms-auto">
 
 						<div className="botonNavbar">
-							<Link to="/listaentrenadores">
-								<button className="btn btn-Navbar">Lista Entrenadores</button>
+							<Link to={tipoUsuario ? "/listaclientes" : "/listaentrenadores"}>
+								<button className="btn btn-Navbar">{tipoUsuario ? "Lista Usuarios" : "Lista Entrenadores"}</button>
 							</Link>
 						</div>
 						{store.seInicio ? (
