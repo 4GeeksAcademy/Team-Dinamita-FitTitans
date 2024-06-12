@@ -17,7 +17,7 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from itsdangerous import URLSafeTimedSerializer
-from api.models import db, User
+from api.models import db, User, Asignacion_entrenador
 
 
 ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
@@ -240,9 +240,26 @@ def update_user(id):
 
     return jsonify(user.serialize()), 200
 
+# // Para obtener los clientes de un entrenador 
+@app.route("/listaentrenadores/<int:entrenador_id>/clientes", methods=["GET"])
+def get_clientes_by_entrenador_id(entrenador_id):
+    # Obtener los client_ids para el entrenador dado
+    client_ids = db.session.query(Asignacion_entrenador.usuario_id).filter_by(entrenador_id=entrenador_id).all()
+    client_ids = [client_id[0] for client_id in client_ids]  # Extraer los IDs de los resultados
 
+    # Obtener la información de los usuarios para esos clientes_ids
+    clients_info = User.query.filter(User.id.in_(client_ids)).all()
+    
+    return jsonify (clients_info), 200
 
+# aannnaaa. @app.route('/rutinas/cliente', methods=['POST'])
+# def ():
+#     # //// obtener parametros del body (entrenadorId, UsusariID, Rutina)
 
+   
+#         return jsonify({'message': 'Ok'}), 200
+
+    
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
