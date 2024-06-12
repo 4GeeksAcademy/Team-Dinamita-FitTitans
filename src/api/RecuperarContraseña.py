@@ -6,8 +6,8 @@ from email.mime.text import MIMEText
 
 load_dotenv()  # carga las propiedades de entorno de .env
 def enviar_correo (email, reset_url) :
-    email_envio = os.getenv("EMAIL")
-    contraseña = os.getenv("PASSWORD")
+    email_envio = os.getenv('GMAIL')
+    contraseña = os.getenv('GMAILPASS')
     email_recibe = email
 
     # Crear cuerpo del mensaje
@@ -20,7 +20,7 @@ def enviar_correo (email, reset_url) :
     # Leer y personalizar el archivo HTML
     with open('email.html', 'r') as archivo:
         html = archivo.read()
-        html_personalizado = html.format(email=email, reset_url=reset_url)
+        html_personalizado = html.replace('{{email}}', email).replace('{{reset_url}}', reset_url)
 
     # Adjuntar archivo HTML personalizado
     mensaje.attach(MIMEText(html_personalizado, 'html'))
@@ -32,5 +32,5 @@ def enviar_correo (email, reset_url) :
     server.login(email_envio, contraseña)
 
     # Enviar correo
-    server.sendmail(email_envio, email_recibe, mensaje.as_string())
+    server.sendmail(email_envio, email_recibe, mensaje.as_string().encode('utf-8'))
     server.quit()
