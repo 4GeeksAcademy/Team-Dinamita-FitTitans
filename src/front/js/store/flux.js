@@ -77,8 +77,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-
-
 			HandleInicioSesion: async ({ email, password }) => {
 				try {
 					const response = await fetch(`${process.env.BACKEND_URL}/login`, {
@@ -208,6 +206,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+
 			contratarEntrenador: (entrenador_id, usuario_id, seleccionarPlan,) => {
 				return fetch(`${process.env.BACKEND_URL}/contratar`, {
 					method: "POST",
@@ -224,12 +223,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						{console.log(response); response.json()})
 					.catch(error => console.error("Error:", error));
 			},
-
-
-
-
-
-
+      
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
