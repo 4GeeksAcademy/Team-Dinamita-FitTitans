@@ -9,6 +9,7 @@ class User(db.Model):
     rol = db.Column(db.Boolean(), unique=False, nullable=False, default=True)
     nombre =  db.Column(db.String(120), unique=False, nullable=False)
     telefono = db.Column(db.String(120), unique=True, nullable=False)
+    user_uuid= db.Column(db.String(250), nullable=True)
 
     perfil_entrenador = db.relationship('Perfil_entrenador', backref='user', uselist=False) #el nombre del backref es el nombre que yo le pongo a la relacion de las tablas
     
@@ -25,6 +26,7 @@ class User(db.Model):
             "rol": self.rol,
             "nombre": self.nombre,
             "telefono": self.telefono,
+            "user_uuid": self.user_uuid
             **perfil_entrenador_data  # Añado los datos del perfil del entrenador
         }
     
