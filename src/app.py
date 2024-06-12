@@ -17,7 +17,7 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from itsdangerous import URLSafeTimedSerializer
-from api.models import db, User, Perfil_entrenador
+from api.models import db, User
 
 
 ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
@@ -168,12 +168,28 @@ def get_user_by_id(user_id):
 @app.route('/Usuarios', methods=['GET'])
 def obtener_usuarios():
     try:
-        # Filtrar usuarios por su rol de usuario que seria true
         usuarios = User.query.filter_by(rol=False).all()
         usuarios_data = [usuarios.serialize() for usuarios in usuarios]
         return jsonify(usuarios_data)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+@app.route('/Usuarios/<int:id>', methods=['PUT'])
+def actualizar_user(id):
+    user = User.query.get(id)
+    if not user:
+        return jsonify({"msg": "User not found"}), 404
+
+    data = request.get_json()
+    print("Datos recibidos:", data)
+    user.email = data.get('email', user.email)
+    user.nombre = data.get('nombre', user.nombre)
+    user.telefono = data.get('telefono', user.telefono)
+    user.rol = data.get('rol', user.rol)
+    
+    db.session.commit()
+
+    return jsonify(user.serialize()), 200
 
 
 @app.route("/perfiles", methods=["GET"])
@@ -184,15 +200,15 @@ def show_email():
     return jsonify({"email": user.email, "id": user.id, "response": "That is your data up there!"}), 200
 
 
-@app.route('/listaentrenadores', methods=['GET'])
-def obtener_entrenadores():
-    try:
-        entrenadores = User.query.filter_by(rol=True).all()
-        lista_entrenadores = [entrenador.serialize() for entrenador in entrenadores]
-        return jsonify(lista_entrenadores)
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
 
+#PARA ENTRENADORES 
+@app.route('/listaentrenadores', methods=['GET'])
+def get_entrenadores_usuarios():
+    users = User.query.all()
+    entrenadores = [user.serialize() for user in users if user.rol]  # filtra solo los usuarios que tienen el campo rol igual a True, lo que probablemente indica que son entrenadores.
+    return jsonify({
+        "entrenadores": entrenadores,
+    }), 200
 
 @app.route("/listaentrenadores/<int:entrenador_id>", methods=["GET"])
 def get_entrenador_by_id(entrenador_id):
@@ -200,6 +216,31 @@ def get_entrenador_by_id(entrenador_id):
     if user is None:
         return jsonify({"message": "User not found"}), 404
     return jsonify(user.serialize()), 200 
+
+
+@app.route('/listaentrenadores/<int:id>', methods=['PUT'])
+def update_user(id):
+    user = User.query.get(id)
+    if not user:
+        return jsonify({"msg": "User not found"}), 404
+
+    data = request.get_json()
+    print("Datos recibidos:", data)
+    user.email = data.get('email', user.email)
+    user.nombre = data.get('nombre', user.nombre)
+    user.telefono = data.get('telefono', user.telefono)
+    user.rol = data.get('rol', user.rol)
+    user.edad = data.get('edad', user.edad)
+    user.genero = data.get('genero', user.genero)
+    user.altura = data.get('altura', user.altura)
+    user.tipo_entrenamiento = data.get('edad', user.tipo_entrenamiento)
+    user.foto = data.get('foto', user.foto)
+    
+    db.session.commit()
+
+    return jsonify(user.serialize()), 200
+
+
 
 
 
