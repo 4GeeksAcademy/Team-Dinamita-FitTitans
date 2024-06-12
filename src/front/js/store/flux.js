@@ -42,7 +42,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			HandleRegistro: async ({ email, password, rol, nombre, telefono }) => {
 				try {
-					const response = await fetch('https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/registro', {
+					const response = await fetch('https://glowing-spork-jj94vv5pq7p2ppw7-3001.app.github.dev/registro', {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json',
@@ -79,7 +79,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			HandleInicioSesion: async ({ email, password }) => {
 				try {
-					const response = await fetch('https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/login', {
+					const response = await fetch('https://glowing-spork-jj94vv5pq7p2ppw7-3001.app.github.dev/login', {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json',
@@ -228,52 +228,56 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			RecuperarContraseña: async (email) =>{
-				try {
-					const response = await fetch("https://opulent-doodle-977rpqgx6j64hp4p9-3001.app.github.dev/users/solicitud", {
-					  method: "POST",
-					  headers: {
-						"Content-Type": "application/json",
-					  },
-					  body: JSON.stringify({email : email}),
-					});
-					if (response.ok) {
-						console.log(response)
-					  return true
-					} else {
-						console.log(response)
-					  return false
-					}
-				  } catch (error) {
-					console.log("Error:", error);
-					return false
-				  }
-				},
+			RecuperarContraseña: async (email) => {
+                try {
+                    const response = await fetch('https://glowing-spork-jj94vv5pq7p2ppw7-3001.app.github.dev/solicitud', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ email: email })
+                    });
 
-			ModificarContraseña: async(password) =>{
-				try {
-					const token = window.location.pathname.split('/').pop(); // Obtener el token de la URL
-					const response = await fetch(`https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/listaentrenadores/${token}`, {
-						method: 'PATCH',
-						headers: {
-							'Content-Type': 'application/json'
-						},
-						body: JSON.stringify({
-							password: password
-						})
-					});
-					if (response.ok) {
-						alert("Contraseña actualizada exitosamente.");
-						// Redireccionar a la página de inicio de sesión o a donde desees
-					} else {
-						const error = await response.json();
-						throw new Error(error.message || 'Hubo un error al procesar tu solicitud.');
-					}
-				} catch (error) {
-					console.log("Error:", error);
-					alert(error.message || "Hubo un error al procesar tu solicitud. Por favor, inténtalo de nuevo más tarde.");
-				}
-			}
+                    if (!response.ok) {
+						console.log(response)
+                        console.error('Error al enviar datos');
+                        throw new Error('Error al enviar datos');
+						return false
+                    }
+
+                    const data = await response.json();
+                    console.log('Correo de recuperación enviado:', data);
+					return true
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            },
+
+			ModificarContraseña: async (password, user_uuid) => {
+                try {
+                    const response = await fetch('https://glowing-spork-jj94vv5pq7p2ppw7-3001.app.github.dev/reset-password/', {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            //'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify({ password, user_uuid })
+                    });
+
+                    if (!response.ok) {
+                        console.error('Error al enviar datos');
+                        throw new Error('Error al enviar datos');
+						return false
+                    }
+
+                    const data = await response.json();
+                    console.log('Contraseña restablecida:', data);
+					return true
+                } catch (error) {
+                    console.error('Error:', error);
+					return false
+                }
+            },
 		}
 	};
 };
