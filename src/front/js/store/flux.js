@@ -159,6 +159,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			EditarUsuario2: async (id, updatedData) => {
+				try {
+					console.log("Datos actualizados:", updatedData);
+					const response = await fetch(`https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/listaentrenadores/${id}`, {
+						method: "PUT",
+						headers: {
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify(updatedData)
+					});
+					const data = await response.json();
+					console.log("Respuesta del servidor:", data);
+					setStore({ usuarioUnico: data });
+				} catch (error) {
+					console.error("Error updating user data:", error);
+				}
+			},
+
 			GetEntrenadorUnico: async (id) => {
 				try {
 					const response = await fetch(`${process.env.BACKEND_URL}/listaentrenadores/${id}`, {
@@ -173,6 +191,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log('Error:', error);
 				}
 			},
+
+			EditarUsuario: async (id, updatedData) => {
+				try {
+					console.log("Datos actualizados:", updatedData);
+					const response = await fetch(`https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/listaentrenadores/${id}`, {
+						method: "PUT",
+						headers: {
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify(updatedData)
+					});
+					const data = await response.json();
+					console.log("Respuesta del servidor:", data);
+					setStore({ usuarioUnico: data });
+				} catch (error) {
+					console.error("Error updating user data:", error);
+				}
+			},
+
+
+
+
+
+
+
 
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
@@ -205,7 +248,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						throw new Error('Error al obtener la lista de entrenadores');
 					}
 					const data = await response.json();
-					setStore({ entrenadores: data }); // Actualiza el estado con los datos de los entrenadores
+					console.log(data.entrenadores)
+					setStore({ entrenadores: data.entrenadores }); // Actualiza el estado con los datos de los entrenadores
 					return data;  // Retorna los datos de los entrenadores
 				} catch (error) {
 					console.error('Error al obtener la lista de entrenadores:', error);
@@ -229,29 +273,63 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			RecuperarContraseña: async (email) =>{
+
+
+			ContratarEntrenador: async (usuarioId, entrenadorId) => {
 				try {
+					const response = await fetch('https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/contratar-entrenador', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+							'accept': 'application/json'
+						},
+						body: JSON.stringify({
+							usuario_id: usuarioId,
+							entrenador_id: entrenadorId
+						}),
+					});
+
+					if (response.ok) {
+						// Si la contratación es exitosa, obtenemos la respuesta del backend
+						const responseData = await response.json();
+						// Devolvemos un objeto con el valor booleano y cualquier otro dato que necesites
+						return { success: true, message: responseData.message };
+					} else {
+						const errorData = await response.json();
+						console.log(errorData);
+						return { success: false, error: errorData.message };
+					}
+				} catch (error) {
+					console.log('Error:', error);
+					return { success: false, error: 'Error al enviar la solicitud de contratación.' };
+				}
+			},
+
+			RecuperarContraseña: async (email) => {
+				try {
+
 					const response = await fetch(`${process.env.BACKEND_URL}/users/solicitud`, {
 					  method: "POST",
 					  headers: {
 						"Content-Type": "application/json",
 					  },
 					  body: JSON.stringify({email : email}),
+
 					});
 					if (response.ok) {
 						console.log(response)
-					  return true
+						return true
 					} else {
 						console.log(response)
-					  return false
+						return false
 					}
-				  } catch (error) {
+				} catch (error) {
 					console.log("Error:", error);
 					return false
-				  }
-				},
+				}
+			},
 
-			ModificarContraseña: async(password) =>{
+			ModificarContraseña: async (password) => {
 				try {
 					const token = window.location.pathname.split('/').pop(); // Obtener el token de la URL
 					const response = await fetch(`${process.env.BACKEND_URL}/listaentrenadores/${token}`, {
@@ -274,7 +352,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error:", error);
 					alert(error.message || "Hubo un error al procesar tu solicitud. Por favor, inténtalo de nuevo más tarde.");
 				}
-			}
+			},
+
+
+
+
 		}
 	};
 };
