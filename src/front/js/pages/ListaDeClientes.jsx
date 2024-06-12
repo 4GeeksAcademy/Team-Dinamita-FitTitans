@@ -1,21 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect, useContext } from 'react';
+import { Context } from "../store/appContext";
 
-const ListaDeClientes = ({ entrenadorId }) => {
+
+
+export const ListaDeClientes = ({ entrenadorId }) => {
+  const { store, actions } = useContext(Context);
   const [clientes, setClientes] = useState([]);
 
   useEffect(() => {
-    // Obtengo la lista de clientes del entrenador desde el servidor
-    axios.get(`/entrenador/${entrenadorId}/clientes`)
-      .then(response => {
-        setClientes(response.data);
+    actions.obtenerListaClientes(1)
+      .then(data => {
+        // setListaEntrenadores(data);  // Actualiza el estado con los datos de los entrenadores LO DESCOMENTO CON SETLISTACLIENTES
+        console.log(data)
       })
       .catch(error => {
-        console.error('Error al obtener la lista de clientes:', error);
+        console.error("Error al obtener la lista de clientes", error);
       });
-  }, [entrenadorId]);
+  }, [entrenadorId]); 
 
   return (
+    
     <div>
       <h2>Lista de Clientes</h2>
       <ul>

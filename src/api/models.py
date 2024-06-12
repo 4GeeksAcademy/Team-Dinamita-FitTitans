@@ -61,3 +61,4 @@ class Asignacion_entrenador(db.Model):
             "dieta": self.dieta,
             "rutina": self.rutina   
         }
+
