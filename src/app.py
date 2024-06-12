@@ -14,7 +14,6 @@ from flask_cors import CORS
 from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token, JWTManager
 import jwt
 import uuid
-from api.models import db, User, Perfil_entrenador
 from flask_mail import Mail, Message
 from datetime import datetime, timedelta
 import bcrypt
