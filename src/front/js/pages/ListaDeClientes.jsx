@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Context } from "../store/appContext";
 
 
-
 export const ListaDeClientes = ({ entrenadorId }) => {
   const { store, actions } = useContext(Context);
   const [clientes, setClientes] = useState([]);
@@ -31,4 +30,4 @@ export const ListaDeClientes = ({ entrenadorId }) => {
   );
 }
 
-export default ListaDeClientes;
+

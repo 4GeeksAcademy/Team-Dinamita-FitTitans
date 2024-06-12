@@ -126,7 +126,7 @@ export const PerfilEntrenador = () => {
 					<span className="visually-hidden">Next</span>
 				</button>
 			</div>
-
+		
 			<blockquote className="blockquote">
 				<h1>Tu tiempo vale mucho, y cuidar tu salud es la mejor inversión;</h1>
 			</blockquote>

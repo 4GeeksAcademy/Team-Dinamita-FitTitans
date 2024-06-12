@@ -46,6 +46,7 @@ export const Registro = ({ closeModal }) => {
     // Actualiza el objeto de usuario con el valor de 'rol' convertido a booleano
     const usuarioConRolBooleano = { ...usuario, rol: rolBooleano };
     const registroExitoso = await actions.HandleRegistro(usuarioConRolBooleano);
+    console.log(registroExitoso.success)
     if (registroExitoso.success) {
       alert("success");
       closeModal();
