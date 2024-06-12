@@ -13,7 +13,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			// Archivo Contactanos
 			handleSubmitContactanos: (contactoFormulario) => {
-				return fetch('https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/contactanos', {
+				return fetch(`${process.env.BACKEND_URL}/contactanos`, {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json'
@@ -42,7 +42,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			HandleRegistro: async ({ email, password, rol, nombre, telefono }) => {
 				try {
-					const response = await fetch('https://glowing-spork-jj94vv5pq7p2ppw7-3001.app.github.dev/registro', {
+					const response = await fetch(`${process.env.BACKEND_URL}/registro`, {
+
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json',
@@ -79,7 +80,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			HandleInicioSesion: async ({ email, password }) => {
 				try {
-					const response = await fetch('https://glowing-spork-jj94vv5pq7p2ppw7-3001.app.github.dev/login', {
+					const response = await fetch(`${process.env.BACKEND_URL}/login`, {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json',
@@ -131,7 +132,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			GetUsuarios: async () => {
 				try {
-					const response = await fetch("https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/users", {
+					const response = await fetch(`${process.env.BACKEND_URL}/users`, {
 						method: 'GET'
 					})
 					if (response.ok) {
@@ -146,7 +147,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//`/perfilusuario/${usuarioID}`
 			GetUsuarioUnico: async (id) => {
 				try {
-					const response = await fetch(`https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/Usuarios/${id}`, {
+					const response = await fetch(`${process.env.BACKEND_URL}/Usuarios/${id}`, {
 						method: 'GET'
 					})
 					if (response.ok) {
@@ -159,9 +160,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			EditarUsuario2: async (id, updatedData) => {
+				try {
+					console.log("Datos actualizados:", updatedData);
+					const response = await fetch(`https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/listaentrenadores/${id}`, {
+						method: "PUT",
+						headers: {
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify(updatedData)
+					});
+					const data = await response.json();
+					console.log("Respuesta del servidor:", data);
+					setStore({ usuarioUnico: data });
+				} catch (error) {
+					console.error("Error updating user data:", error);
+				}
+			},
+
 			GetEntrenadorUnico: async (id) => {
 				try {
-					const response = await fetch(`https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/listaentrenadores/${id}`, {
+					const response = await fetch(`${process.env.BACKEND_URL}/listaentrenadores/${id}`, {
 						method: 'GET'
 					})
 					if (response.ok) {
@@ -173,6 +192,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log('Error:', error);
 				}
 			},
+
+			EditarUsuario: async (id, updatedData) => {
+				try {
+					console.log("Datos actualizados:", updatedData);
+					const response = await fetch(`https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/listaentrenadores/${id}`, {
+						method: "PUT",
+						headers: {
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify(updatedData)
+					});
+					const data = await response.json();
+					console.log("Respuesta del servidor:", data);
+					setStore({ usuarioUnico: data });
+				} catch (error) {
+					console.error("Error updating user data:", error);
+				}
+			},
+
+
+
+
+
+
+
 
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
@@ -198,13 +242,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			// para lista de entrenadores 
 			obtenerListaEntrenadores: async () => {
+				console.log (process.env.BACKEND_URL)
 				try {
-					const response = await fetch('https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/listaentrenadores');
+					const response = await fetch(`${process.env.BACKEND_URL}/listaentrenadores`);
 					if (!response.ok) {
 						throw new Error('Error al obtener la lista de entrenadores');
 					}
 					const data = await response.json();
-					setStore({ entrenadores: data }); // Actualiza el estado con los datos de los entrenadores
+					console.log(data.entrenadores)
+					setStore({ entrenadores: data.entrenadores }); // Actualiza el estado con los datos de los entrenadores
 					return data;  // Retorna los datos de los entrenadores
 				} catch (error) {
 					console.error('Error al obtener la lista de entrenadores:', error);
@@ -214,7 +260,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			obtenerPerfilEntrenador: async (entrenador_id) => {
 				try {
-					const response = await fetch(`https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/listaentrenadores/${entrenador_id}`, {
+					const response = await fetch(`${process.env.BACKEND_URL}/listaentrenadores/${entrenador_id}`, {
 						method: 'GET',
 						headers: {
 							'Content-Type': 'application/json',
@@ -227,6 +273,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					throw error;
 				}
 			},
+
 
 			RecuperarContraseña: async (email) => {
                 try {
@@ -278,6 +325,36 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return false
                 }
             },
+
+			ContratarEntrenador: async (usuarioId, entrenadorId) => {
+				try {
+					const response = await fetch('https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/contratar-entrenador', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+							'accept': 'application/json'
+						},
+						body: JSON.stringify({
+							usuario_id: usuarioId,
+							entrenador_id: entrenadorId
+						}),
+					});
+
+					if (response.ok) {
+						// Si la contratación es exitosa, obtenemos la respuesta del backend
+						const responseData = await response.json();
+						// Devolvemos un objeto con el valor booleano y cualquier otro dato que necesites
+						return { success: true, message: responseData.message };
+					} else {
+						const errorData = await response.json();
+						console.log(errorData);
+						return { success: false, error: errorData.message };
+					}
+				} catch (error) {
+					console.log('Error:', error);
+					return { success: false, error: 'Error al enviar la solicitud de contratación.' };
+				}
+			},
 		}
 	};
 };
