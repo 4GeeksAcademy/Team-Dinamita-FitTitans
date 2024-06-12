@@ -210,7 +210,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-
+			contratarEntrenador: (entrenador_id, usuario_id, plan_entrenamiento) => {
+				return fetch(`https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev`, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						entrenador_id: entrenador_id,
+						usuario_id: usuario_id,
+						plan_entrenamiento: plan_entrenamiento
+					})
+				})
+					.then(response => response.json())
+					.catch(error => console.error("Error:", error));
+			},
 
 
 

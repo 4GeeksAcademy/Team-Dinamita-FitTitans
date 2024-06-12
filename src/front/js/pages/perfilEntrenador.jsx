@@ -11,6 +11,7 @@ export const PerfilEntrenador = () => {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 	const [showFelicidades, setShowFelicidades] = useState(false);
+	const [seleccionarPlan, setSeleccionarPlan] = useState(null);
 
 	useEffect(() => {
 		if (entrenador_id) {
@@ -34,6 +35,24 @@ export const PerfilEntrenador = () => {
 		}
 	}, [entrenador_id, actions]);
 
+	const contratarEntrenador = () => {
+		const usuario_id = store.usuarioUnico.id;
+		actions.contratarEntrenador(entrenador_id, usuario_id, seleccionarPlan)
+			.then(response => {
+				if (response.error) {
+					throw new Error(response.error);
+				}
+				setShowFelicidades(true);
+				const felicidadesModalElement = document.getElementById("felicidadesModal");
+				const felicidadesModal = new window.bootstrap.Modal(felicidadesModalElement);
+				felicidadesModal.show();
+			})
+			.catch(error => {
+				console.error("Error al contratar al entrenador:", error);
+				setError(error);
+			});
+	};
+
 	if (loading) {
 		return <div>Cargando...</div>;
 	}
@@ -48,15 +67,10 @@ export const PerfilEntrenador = () => {
 
 
 	const selectPlan = (plan) => {
-		setShowFelicidades(true);
-		// Cierra el modal de planes
+		setSeleccionarPlan(plan);
 		const planModalElement = document.getElementById("planModal");
 		const planModal = new window.bootstrap.Modal(planModalElement);
 		planModal.hide();
-		// Abre el modal de felicitaciones
-		const felicidadesModalElement = document.getElementById("felicidadesModal");
-		const felicidadesModal = new window.bootstrap.Modal(felicidadesModalElement);
-		felicidadesModal.show();
 	};
 
 	return (
@@ -157,9 +171,10 @@ export const PerfilEntrenador = () => {
 							<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div className="modal-body">
-							<button type="button" className="btnPlanes" onClick={() => { selectPlan('semanal'); ContratarEntrenador(); }}>Plan Semanal</button>
-							<button type="button" className="btnPlanes" onClick={() => { selectPlan('mensual'); ContratarEntrenador(); }}>Plan Mensual</button>
-							<button type="button" className="btnPlanes" onClick={() => { selectPlan('anual'); ContratarEntrenador(); }}>Plan Anual</button>
+							<button type="button" className="btnPlanes" onClick={() => { selectPlan('semanal'); }}>Plan Semanal</button>
+							<button type="button" className="btnPlanes" onClick={() => { selectPlan('mensual'); }}>Plan Mensual</button>
+							<button type="button" className="btnPlanes" onClick={() => { selectPlan('anual'); }}>Plan Anual</button>
+							<button type="button" className="btnContratar" onClick={contratarEntrenador}>Contratar</button>
 						</div>
 					</div>
 				</div>
