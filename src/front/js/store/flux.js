@@ -303,6 +303,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			RecuperarContraseña: async (email) => {
 				try {
+
 					const response = await fetch(`${process.env.BACKEND_URL}/users/solicitud`, {
 						method: "POST",
 						headers: {
