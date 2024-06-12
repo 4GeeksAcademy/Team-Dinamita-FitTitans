@@ -1,6 +1,7 @@
 """
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
+from api.RecuperarContraseña import enviar_correo
 import os
 from flask import Flask, request, jsonify, url_for, send_from_directory, render_template, flash, redirect
 from flask_migrate import Migrate
@@ -10,8 +11,14 @@ from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
 from flask_cors import CORS
-import bcrypt
 from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token, JWTManager
+import jwt
+import uuid
+from flask_mail import Mail, Message
+from datetime import datetime, timedelta
+import bcrypt
+from dotenv import load_dotenv
+load_dotenv()
 
 import smtplib
 from email.mime.multipart import MIMEMultipart
@@ -30,9 +37,7 @@ app.url_map.strict_slashes = False
 app.config['SECRET_KEY'] = 'fit_titans_ajr'  # Cambia esto por una clave secreta segura
 app.config['SECURITY_PASSWORD_SALT'] = 'fit_titans_ajr'  # Cambia esto por un salt seguro
 
-# Configuraciones de email
-app.config['EMAIL'] = os.getenv("EMAIL")
-app.config['PASSWORD'] = os.getenv("PASSWORD")
+
 
 # database condiguration
 db_url = os.getenv("DATABASE_URL")
@@ -117,8 +122,8 @@ def registro():
     
     # Convertir el valor de rol a un booleano si es true sera entrenador, si es false usuario
     rol_booleano = True if rol else False
-
-    new_user = User(email=email, password=hashed_password, rol=rol_booleano, nombre=nombre, telefono=telefono)
+    user_uuid = str(uuid.uuid4())
+    new_user = User(email=email, password=hashed_password, rol=rol_booleano, nombre=nombre, telefono=telefono, user_uuid = user_uuid)
     db.session.add(new_user)
     db.session.commit()
     
@@ -233,9 +238,8 @@ def update_user(id):
     user.edad = data.get('edad', user.edad)
     user.genero = data.get('genero', user.genero)
     user.altura = data.get('altura', user.altura)
-    user.tipo_entrenamiento = data.get('edad', user.tipo_entrenamiento)
+    user.tipo_entrenamiento = data.get('tipo_entrenamiento', user.tipo_entrenamiento)
     user.foto = data.get('foto', user.foto)
-    
     db.session.commit()
 
     return jsonify(user.serialize()), 200
@@ -247,126 +251,115 @@ def get_clientes_by_entrenador_id(entrenador_id):
     client_ids = db.session.query(Asignacion_entrenador.usuario_id).filter_by(entrenador_id=entrenador_id).all()
     client_ids = [client_id[0] for client_id in client_ids]  # Extraer los IDs de los resultados
 
-    # Obtener la información de los usuarios para esos clientes_ids
-    clients_info = User.query.filter(User.id.in_(client_ids)).all()
-    
-    return jsonify (clients_info), 200
 
-# aannnaaa. @app.route('/rutinas/cliente', methods=['POST'])
-# def ():
-#     # //// obtener parametros del body (entrenadorId, UsusariID, Rutina)
-
-   
-#         return jsonify({'message': 'Ok'}), 200
-
-    
-
-# this only runs if `$ python src/main.py` is executed
-if __name__ == '__main__':
-    PORT = int(os.environ.get('PORT', 3001))
-    app.run(host='0.0.0.0', port=PORT, debug=True)
-
-
-
-# recuperar contraseña
-def generate_password_reset_token(email):
-    serializer = URLSafeTimedSerializer(app.config['SECRET_KEY'])
-    return serializer.dumps(email, salt=app.config['SECURITY_PASSWORD_SALT'])
-
-def verify_password_reset_token(token, expiration=3600):
-    serializer = URLSafeTimedSerializer(app.config['SECRET_KEY'])
-    try:
-        email = serializer.loads(
-            token,
-            salt=app.config['SECURITY_PASSWORD_SALT'],
-            max_age=expiration
-        )
-    except:
-        return False
-    return email
-
-# Ruta de Solicitud de Recuperación de Contraseña
-@app.route('/users/solicitud', methods=['POST'])
-def solicitar_recuperacion():
-    data = request.get_json(force=True)
-    print("data", data)
-
-    email = data.get('email')
-
-    if not email:
-        return jsonify({'message': 'Email es requerido'}), 400
-
-    user = User.query.filter_by(email=email).first()
-    
-    if not user:
-        return jsonify({'message': 'Usuario no encontrado'}), 404
-
-    token = generate_password_reset_token(email)
-    reset_url = url_for('reset_password', token=token, _external=True)
-
-    # Configurar el correo electrónico
-    email_envio = app.config['EMAIL']
-    contraseña = app.config['PASSWORD']
-    mensaje = MIMEMultipart()
-    mensaje['Subject'] = "Recuperación de Contraseña"
-    mensaje['From'] = email_envio
-    mensaje['To'] = email
-
-    # Crear el contenido del correo
-    html_content = f"""
-    <html>
-        <head></head>
-        <body>
-            <p>Hola,</p>
-            <p>Hemos recibido una solicitud para restablecer la contraseña de tu cuenta.</p>
-            <p>Para restablecer tu contraseña, haz clic en el siguiente enlace:</p>
-            <p><a href="{reset_url}">{reset_url}</a></p>
-            <p>Si no solicitaste este restablecimiento de contraseña, puedes ignorar este correo.</p>
-            <p>Gracias,</p>
-            <p>El equipo de Fit Titans</p>
-        </body>
-    </html>
-    """
-
-    # Adjuntar el contenido HTML al correo
-    mensaje.attach(MIMEText(html_content, 'html'))
-
-    # Enviar correo
-    try:
-        server = smtplib.SMTP('smtp.gmail.com', 587)
-        server.starttls()
-        server.login(email_envio, contraseña)
-        server.sendmail(email_envio, email, mensaje.as_string())
-        server.quit()
-        return jsonify({'message': 'Correo de recuperación enviado'}), 200
-    except Exception as e:
-        return jsonify({'message': 'Error al enviar correo', 'error': str(e)}), 500
-    
-
-# Ruta de Restablecimiento de Contraseña
-@app.route('/reset-password/<token>', methods=['PATCH'])
-def reset_password(token):
+@app.route('/contratar', methods=['POST'])
+def contratar_entrenador():
     data = request.get_json()
-    new_password = data.get('password')
+    entrenador_id = data.get('entrenador_id')
+    usuario_id = data.get('usuario_id')
+    plan_entrenamiento= data.get ('plan_entrenamiento')
+    print(data)
 
-    if not new_password:
-        return jsonify({'message': 'La contraseña es requerida'}), 400
+    if not entrenador_id or not usuario_id:
+        return jsonify({"error": "Faltan datos"}), 400
 
-    email = verify_password_reset_token(token)
-    if not email:
-        return jsonify({'message': 'Token inválido o expirado'}), 400
+    entrenador = User.query.get(entrenador_id)
+    usuario = User.query.get(usuario_id)
 
-    user = User.query.filter_by(email=email).first()
-    if not user:
-        return jsonify({'message': 'Usuario no encontrado'}), 404
+    if not entrenador or not usuario:
+        return jsonify({"error": "Usuario o entrenador no encontrado"}), 404
 
-    user.password = hash_password(new_password)
+    if not entrenador.rol or usuario.rol:
+        return jsonify({"error": "Roles incorrectos"}), 400
+    
+    
+
+    asignacion = Asignacion_entrenador(
+        entrenador_id=entrenador_id,
+        usuario_id=usuario_id,
+        plan_entrenamiento=plan_entrenamiento,
+    )
+
+    db.session.add(asignacion)
     db.session.commit()
 
-    return jsonify({'message': 'Contraseña actualizada exitosamente'}), 200
-
-if __name__ == '__main__':
-    PORT = int(os.environ.get('PORT', 3001))
-    app.run(host='0.0.0.0', port=PORT, debug=True)
+    return jsonify({"message": "Entrenador contratado exitosamente"}), 200
 
 
+
+
+
+
+
+
+
+
+
+# Configurar Flask-Mail para usar Mailtrap
+def configure_mail(app):
+    app.config['MAIL_SERVER']='sandbox.smtp.mailtrap.io'
+    app.config['MAIL_PORT'] = 2525
+    app.config['MAIL_USERNAME'] = '41f4804efd3283'
+    app.config['MAIL_PASSWORD'] = '4bd4cccf66d78e'
+    app.config['MAIL_USE_TLS'] = True
+    app.config['MAIL_USE_SSL'] = False
+
+configure_mail(app)
+mail = Mail(app)
+
+# Función para generar un token de restablecimiento de contraseña
+def generate_reset_token(email):
+    payload = {
+        'sub': email,
+        'exp': datetime.utcnow() + timedelta(minutes=10)
+    }
+    secret_key = 'short_secret'
+    return jwt.encode(payload, secret_key, algorithm='HS256')
+
+# Función para decodificar el token de restablecimiento de contraseña
+def decode_reset_token(token):
+    try:
+        payload = jwt.decode(token, 'short_secret', algorithms=['HS256'])
+        return payload['sub']
+    except jwt.ExpiredSignatureError:
+        return None
+    except jwt.InvalidTokenError:
+        return None
+
+# Ruta para solicitar la recuperación de contraseña
+@app.route('/solicitud', methods=['POST'])
+def forgot_password():
+    email = request.json.get('email')
+    user = User.query.filter_by(email=email).first()
+
+    if user:
+        user_uuid = user.user_uuid
+        reset_link = f"https://glowing-spork-jj94vv5pq7p2ppw7-3000.app.github.dev/reset-password/{user_uuid}"
+        msg = Message("Password Reset Request",
+                      sender="ajrfittitans@gmail.com",  # Cambiar por tu correo
+                      recipients=[email])
+        msg.body = f"To reset your password, visit the following link: {reset_link}"
+        #mail.send(msg)
+        enviar_correo(email, reset_link)
+
+        return jsonify({"msg": "Password reset link sent"}, reset_link), 200
+
+    return jsonify({"msg": "Email not found"}), 404
+
+@app.route('/reset-password', methods=['PUT'])
+def recovery_password():
+    data = request.get_json(force=True)
+    try:
+        user_uuid = data.get('user_uuid')
+        new_password = data.get('password')
+        user = User.query.filter_by(user_uuid=user_uuid).first()
+        hashed_password = hash_password(new_password)
+        if user:
+            user.password = hashed_password
+            db.session.commit()
+            return jsonify({"message": "Usuario confirmado exitosamente"}), 200
+        else:
+            return jsonify({"error": "Usuario no encontrado"}), 404
+    except Exception as e:
+        return jsonify({"error": f"Error al confirmar el usuario: {str(e)}"}), 500
+#}
