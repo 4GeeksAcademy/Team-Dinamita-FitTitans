@@ -172,13 +172,6 @@ export const PerfilEntrenadorPrivado = () => {
                     onChange={manejarCambio}
                     defaultValue={usuario.tipo_entrenamiento}
                   />
-
-
-
-
-
-
-
                   <button onClick={() => manejarEditarUsuario(usuario.id)}>Guardar</button>
                 </>
               ) : (

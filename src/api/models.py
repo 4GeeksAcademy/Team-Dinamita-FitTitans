@@ -37,6 +37,7 @@ class Asignacion_entrenador(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     entrenador_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     usuario_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    plan_entrenamiento = db.Column(db.String(50), nullable=False)
     dieta = db.Column(db.String(100), nullable=True)
     rutina = db.Column(db.String(100), nullable=True)
 

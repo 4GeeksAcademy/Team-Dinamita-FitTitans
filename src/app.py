@@ -17,7 +17,7 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from itsdangerous import URLSafeTimedSerializer
-from api.models import db, User
+from api.models import db, User, Asignacion_entrenador
 
 
 ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
@@ -233,21 +233,52 @@ def update_user(id):
     user.edad = data.get('edad', user.edad)
     user.genero = data.get('genero', user.genero)
     user.altura = data.get('altura', user.altura)
-    user.tipo_entrenamiento = data.get('edad', user.tipo_entrenamiento)
+    user.tipo_entrenamiento = data.get('tipo_entrenamiento', user.tipo_entrenamiento)
     user.foto = data.get('foto', user.foto)
-    
     db.session.commit()
 
     return jsonify(user.serialize()), 200
 
 
+#para contratar entrenador
+@app.route('/contratar', methods=['POST'])
+def contratar_entrenador():
+    data = request.get_json()
+    entrenador_id = data.get('entrenador_id')
+    usuario_id = data.get('usuario_id')
+    plan_entrenamiento = data.get('plan_entrenamiento')
+
+    if not entrenador_id or not usuario_id or not plan_entrenamiento:
+        return jsonify({"error": "Faltan datos"}), 400
+
+    entrenador = User.query.get(entrenador_id)
+    usuario = User.query.get(usuario_id)
+
+    if not entrenador or not usuario:
+        return jsonify({"error": "Usuario o entrenador no encontrado"}), 404
+
+    if not entrenador.rol or usuario.rol:
+        return jsonify({"error": "Roles incorrectos"}), 400
+
+    asignacion = Asignacion_entrenador(
+        entrenador_id=entrenador_id,
+        usuario_id=usuario_id,
+        plan_entrenamiento=plan_entrenamiento
+    )
+
+    db.session.add(asignacion)
+    db.session.commit()
+
+    return jsonify({"message": "Entrenador contratado exitosamente"}), 200
 
 
 
-# this only runs if `$ python src/main.py` is executed
-if __name__ == '__main__':
-    PORT = int(os.environ.get('PORT', 3001))
-    app.run(host='0.0.0.0', port=PORT, debug=True)
+
+
+
+
+
+
 
 
 
