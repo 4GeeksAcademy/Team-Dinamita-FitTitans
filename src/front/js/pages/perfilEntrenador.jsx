@@ -49,17 +49,21 @@ export const PerfilEntrenador = () => {
 		return <div>Entrenador no encontrado</div>;
 	}
 
-    const selectPlan = (plan) => {
-        setShowFelicidades(true);
-        // Cierra el modal de planes
-        const planModalElement = document.getElementById("planModal");
-        const planModal = new window.bootstrap.Modal(planModalElement);
-        planModal.hide();
-        // Abre el modal de felicitaciones
-        const felicidadesModalElement = document.getElementById("felicidadesModal");
-        const felicidadesModal = new window.bootstrap.Modal(felicidadesModalElement);
-        felicidadesModal.show();
-    };
+
+
+	const selectPlan = (plan) => {
+		setShowFelicidades(true);
+		// Cierra el modal de planes
+		const planModalElement = document.getElementById("planModal");
+		const planModal = new window.bootstrap.Modal(planModalElement);
+		planModal.hide();
+		// Abre el modal de felicitaciones
+		const felicidadesModalElement = document.getElementById("felicidadesModal");
+		const felicidadesModal = new window.bootstrap.Modal(felicidadesModalElement);
+		felicidadesModal.show();
+	};
+
+	
 
     return (
         <div>
@@ -243,9 +247,9 @@ export const PerfilEntrenador = () => {
 							<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div className="modal-body">
-							<button type="button" className="btnPlanes" onClick={() => { selectPlan('semanal'); }}>Plan Semanal</button>
-							<button type="button" className="btnPlanes" onClick={() => { selectPlan('mensual'); }}>Plan Mensual</button>
-							<button type="button" className="btnPlanes" onClick={() => { selectPlan('anual'); }}>Plan Anual</button>
+							<button type="button" className="btnPlanes" onClick={() => { selectPlan('semanal'); ContratarEntrenador(); }}>Plan Semanal</button>
+							<button type="button" className="btnPlanes" onClick={() => { selectPlan('mensual'); ContratarEntrenador(); }}>Plan Mensual</button>
+							<button type="button" className="btnPlanes" onClick={() => { selectPlan('anual'); ContratarEntrenador(); }}>Plan Anual</button>
 						</div>
 					</div>
 				</div>
