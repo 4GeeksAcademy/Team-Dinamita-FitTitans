@@ -90,10 +90,10 @@ export const PerfilUsuarios = () => {
                 <ul className="list-group list-group-flush">
                   <li className="list-group-item">Email: {usuario.email}</li>
                   <li className="list-group-item">Nombre: {usuario.nombre}</li>
-                  <li className="list-group-item">Movil: {usuario.telefono}</li>
+                  <li className="list-group-item">Telefono: {usuario.telefono}</li>
                   <li className="list-group-item">edad: {usuario.edad}</li>
-                  <li className="list-group-item">Especialidad: {usuario.tipo_entrenamiento}</li>
                   <li className="list-group-item">Genero: {usuario.genero}</li>
+                  <li className="list-group-item">Altura: {usuario.altura}</li>
                 </ul>
                 <div className="card-body">
                   <div className="form-check">
@@ -135,6 +135,33 @@ export const PerfilUsuarios = () => {
                     placeholder="Telefono"
                     onChange={manejarCambio}
                     defaultValue={usuario.telefono}
+                  />
+                  <input
+                    type="number"
+                    name="edad"
+                    className="form-control"
+                    placeholder="Edad"
+                    onChange={manejarCambio}
+                    defaultValue={usuario.edad}
+                  />
+                  <select
+                    name="genero"
+                    className="form-select"
+                    onChange={manejarCambio}
+                    defaultValue={usuario.genero}
+                  >
+                    <option value="">Seleccionar</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                    <option value="Otro">Otro</option>
+                  </select>
+                  <input
+                    type="text"
+                    name="altura"
+                    className="form-control"
+                    placeholder="Altura"
+                    onChange={manejarCambio}
+                    defaultValue={usuario.altura}
                   />
                   <button onClick={() => manejarEditarUsuario(usuario.id)}>Guardar</button>
                 </>
