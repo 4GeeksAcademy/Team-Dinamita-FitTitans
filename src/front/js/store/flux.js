@@ -76,8 +76,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-
-
 			HandleInicioSesion: async ({ email, password }) => {
 				try {
 					const response = await fetch(`${process.env.BACKEND_URL}/login`, {
@@ -196,7 +194,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			EditarUsuario: async (id, updatedData) => {
 				try {
 					console.log("Datos actualizados:", updatedData);
-					const response = await fetch(`https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/listaentrenadores/${id}`, {
+					const response = await fetch(`${process.env.BACKEND_URL}/listaentrenadores/${id}`, {
 						method: "PUT",
 						headers: {
 							"Content-Type": "application/json"
@@ -210,13 +208,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.error("Error updating user data:", error);
 				}
 			},
-
-
-
-
-
-
-
 
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
