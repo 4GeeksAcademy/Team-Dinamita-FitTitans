@@ -7,6 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			id: [],
 			usuarioUnico: [],
 			entrenadores: [],
+			clientes: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -162,22 +163,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			EditarUsuario2: async (id, updatedData) => {
 				try {
-					console.log("Datos actualizados:", updatedData);
-					const response = await fetch(`https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/listaentrenadores/${id}`, {
-						method: "PUT",
-						headers: {
-							"Content-Type": "application/json"
-						},
-						body: JSON.stringify(updatedData)
-					});
-					const data = await response.json();
-					console.log("Respuesta del servidor:", data);
-					setStore({ usuarioUnico: data });
+					const response = await fetch(`${process.env.BACKEND_URL}/listaentrenadores/${id}`, {
+						method: 'GET'
+					})
+					if (response.ok) {
+						const data = await response.json();
+						console.log(data)
+						return setStore({ usuarioUnico: data })
+					}
 				} catch (error) {
-					console.error("Error updating user data:", error);
+					console.log('Error:', error);
 				}
 			},
-
 			GetEntrenadorUnico: async (id) => {
 				try {
 					const response = await fetch(`${process.env.BACKEND_URL}/listaentrenadores/${id}`, {
@@ -196,7 +193,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			EditarUsuario: async (id, updatedData) => {
 				try {
 					console.log("Datos actualizados:", updatedData);
-					const response = await fetch(`https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/listaentrenadores/${id}`, {
+					const response = await fetch(`${process.env.BACKEND_URL}/listaentrenadores/${id}`, {
 						method: "PUT",
 						headers: {
 							"Content-Type": "application/json"
@@ -273,6 +270,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			// para lista de clientes 
+			obtenerListaClientes: async (id) => {
+				console.log(process.env.BACKEND_URL)
+				try {
+					const response = await fetch(`${process.env.BACKEND_URL}/listaentrenadores/${id}/clientes`);
+					if (!response.ok) {
+						throw new Error('Error al obtener la lista de clientes');
+					}
+					const data = await response.json();
+					console.log(data)
+					// setStore({ entrenadores: data.entrenadores }); // Actualiza el estado con los datos de los entrenadores
+					// return data;  // Retorna los datos de los entrenadores DESCOMENTAR Y CAMBIAR X CLIENTES (ANNA)!!
+				} catch (error) {
+					console.error('Error al obtener la lista de clientes', error);
+					throw error;
+				}
+			},
+
+
 			obtenerPerfilEntrenador: async (entrenador_id) => {
 				try {
 					const response = await fetch(`${process.env.BACKEND_URL}/listaentrenadores/${entrenador_id}`, {
@@ -317,13 +333,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			ModificarContraseña: async (password, user_uuid) => {
 				try {
-					const response = await fetch('https://glowing-spork-jj94vv5pq7p2ppw7-3001.app.github.dev/reset-password/', {
+					const response = await fetch(`${process.env.BACKEND_URL}/reset-password/', {
 						method: 'PUT',
 						headers: {
 							'Content-Type': 'application/json',
 							//'Authorization': `Bearer ${token}`
 						},
 						body: JSON.stringify({ password, user_uuid })
+
 					});
 
 					if (!response.ok) {

@@ -30,6 +30,8 @@ import { Perfiles } from "/workspaces/Team-Dinamita-FitTitans/src/front/js/pages
 import { PerfilEntrenadorPrivado } from "./component/PerfilEntrenadorPrivado.js";
 import { RecuperarContraseña } from "./pages/RecuperarContraseña.jsx";
 import { SolicitudRecuperacion } from "./pages/SolicitudRecuperarcion.jsx";
+import { ListaDeClientes } from "./pages/ListaDeClientes.jsx";
+
 
 //create your first component
 const Layout = () => {
@@ -51,6 +53,7 @@ const Layout = () => {
                         <Route element={<h1>Not found!</h1>} />
                         <Route element={<IniciarSesion />} path="login" />
                         <Route element={<Registro />} path="/registro" />
+
                         <Route element={<RecuperarContraseña />} path="/reset-password/:user_uuid"/>
                         <Route element={<SolicitudRecuperacion />} path="/solicitud" />
                         <Route element={<Perfiles />} path="/perfiles/:id" />
@@ -67,6 +70,7 @@ const Layout = () => {
                         <Route element={<ListaEntrenadores />} path="/listaentrenadores" />
                         <Route element={<Dieta />} path="/dieta" />
                         <Route element={<Blog />} path="/blog" />
+                        <Route element={<ListaDeClientes />} path="/entrenador/:entrenador_id/clientes" />
                     </Routes>
                     <Footer />
                 </ScrollToTop>
