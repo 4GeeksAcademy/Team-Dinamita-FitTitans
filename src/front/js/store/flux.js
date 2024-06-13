@@ -264,7 +264,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			// para lista de clientes 
+			// ANNNAAAA// para lista de clientes 
+			// obtenerListaClientes: async (id) => {
+			// 	console.log(process.env.BACKEND_URL)
+			// 	try {
+			// 		const response = await fetch(`${process.env.BACKEND_URL}/listaentrenadores/${id}/clientes`);
+			// 		if (!response.ok) {
+			// 			throw new Error('Error al obtener la lista de clientes');
+			// 		}
+			// 		const data = await response.json();
+			// 		console.log(data)
+			// 		// setStore({ entrenadores: data.entrenadores }); // Actualiza el estado con los datos de los entrenadores
+			// 		// return data;  // Retorna los datos de los entrenadores DESCOMENTAR Y CAMBIAR X CLIENTES (ANNA)!!
+			// 	} catch (error) {
+			// 		console.error('Error al obtener la lista de clientes', error);
+			// 		throw error;
+			// 	}
+			// },
+
+						// para lista de clientes 
 			obtenerListaClientes: async (id) => {
 				console.log(process.env.BACKEND_URL)
 				try {
@@ -274,13 +292,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 					const data = await response.json();
 					console.log(data)
-					// setStore({ entrenadores: data.entrenadores }); // Actualiza el estado con los datos de los entrenadores
-					// return data;  // Retorna los datos de los entrenadores DESCOMENTAR Y CAMBIAR X CLIENTES (ANNA)!!
+					return data;  // Retorna los datos de los clientes
 				} catch (error) {
 					console.error('Error al obtener la lista de clientes', error);
 					throw error;
 				}
 			},
+
+
+
+
+
+
 
 
 			obtenerPerfilEntrenador: async (entrenador_id) => {

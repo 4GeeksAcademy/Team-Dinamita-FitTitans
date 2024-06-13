@@ -9,7 +9,7 @@ export const ListaDeClientes = ({ entrenadorId }) => {
   useEffect(() => {
     actions.obtenerListaClientes(1)
       .then(data => {
-        // setListaEntrenadores(data);  // Actualiza el estado con los datos de los entrenadores LO DESCOMENTO CON SETLISTACLIENTES
+        setClientes(data);  // Actualiza el estado con los datos de los entrenadores LO DESCOMENTO CON SETLISTACLIENTES
         console.log(data)
       })
       .catch(error => {
@@ -17,13 +17,15 @@ export const ListaDeClientes = ({ entrenadorId }) => {
       });
   }, [entrenadorId]); 
 
+
+  
   return (
     
     <div>
       <h2>Lista de Clientes</h2>
       <ul>
         {clientes.map(cliente => (
-          <li key={cliente.id}>{cliente.nombre}</li>
+          <li key={cliente.id}>{cliente.nombre} </li>
         ))}
       </ul>
     </div>
