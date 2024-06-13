@@ -82,6 +82,11 @@ export const PerfilEntrenador = () => {
 
 	return (
 		<div>
+			{error && (
+				<div className="alert alert-danger" role="alert">
+					{error}
+				</div>
+			)}
 			<nav className="navbarEntrenador">
 				<div className="container-fluidEntrenador d-flex justify-content-center">
 					<span className="navbarNombre">{entrenador.nombre}</span>
@@ -126,7 +131,7 @@ export const PerfilEntrenador = () => {
 					<span className="visually-hidden">Next</span>
 				</button>
 			</div>
-		
+
 			<blockquote className="blockquote">
 				<h1>Tu tiempo vale mucho, y cuidar tu salud es la mejor inversión;</h1>
 			</blockquote>
