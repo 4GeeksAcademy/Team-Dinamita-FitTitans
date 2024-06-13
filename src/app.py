@@ -289,13 +289,6 @@ def contratar_entrenador():
 
 
 
-
-
-
-
-
-
-
 # Configurar Flask-Mail para usar Mailtrap
 def configure_mail(app):
     app.config['MAIL_SERVER']='sandbox.smtp.mailtrap.io'

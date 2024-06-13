@@ -14,7 +14,7 @@ export const Navbar = () => {
 	const [inicioSesion, setInicioSesion] = useState(null);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const { store, actions } = useContext(Context);
-	const [tipoUsuario, setTipoUsuario] = useState(null);
+	const [tipoUsuario, setTipoUsuario] = useState(false);
 
 	const navigate = useNavigate();
 
@@ -33,14 +33,14 @@ export const Navbar = () => {
 			{actions.logout()}
 	},[])
 
+	const usuarioTipo = localStorage.getItem("user_rol")
 	useEffect(()=>{
-		const usuarioTipo = localStorage.getItem("user_rol")
 		if (usuarioTipo === "true")
 			{setTipoUsuario(true)}
 		else {setTipoUsuario(false)}
 
 		console.log(tipoUsuario)
-	}, [])
+	}, [tipoUsuario])
 
 	const openModal = () => {
 		setIsModalOpen(true);
