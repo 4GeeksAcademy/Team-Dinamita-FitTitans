@@ -219,17 +219,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 						plan_entrenamiento: seleccionarPlan,
 					})
 				})
-					.then(response => 
-						{console.log(response); response.json()})
-					.catch(error => console.error("Error:", error));
-			},
-      
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
-
-			videosEntrenador: () => {
-				//post al DB del entrenador, que actualize la lista de videos
+					.then(response => response.json())
+					.then(data => {
+						if (data.error) {
+							throw new Error(data.error);
+						}
+						return data;
+					})
+					.catch(error => {
+						console.error("Error:", error);
+						return { error: error.message };
+					});
 			},
 
 			getMessage: async () => {
@@ -327,7 +327,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			ModificarContraseña: async (password, user_uuid) => {
 				try {
-					const response = await fetch(`${process.env.BACKEND_URL}/reset-password/', {
+					const response = await fetch(`${process.env.BACKEND_URL}/reset-password/`, {
 						method: 'PUT',
 						headers: {
 							'Content-Type': 'application/json',
