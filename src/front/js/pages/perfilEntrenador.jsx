@@ -13,6 +13,8 @@ export const PerfilEntrenador = () => {
 	const [error, setError] = useState(null);
 	const [showFelicidades, setShowFelicidades] = useState(false);
 	const [seleccionarPlan, setSeleccionarPlan] = useState(null);
+	const usuario_id = localStorage.getItem("user_id")
+	const user_role = localStorage.getItem("user_role");
 
 	useEffect(() => {
 		if (entrenador_id) {
@@ -39,7 +41,10 @@ export const PerfilEntrenador = () => {
 	}, [entrenador_id, actions]);
 
 	const contratarEntrenador = () => {
-		const usuario_id = localStorage.getItem("user_id")
+		if (!usuario_id) {
+			setError(new Error("Debes estar registrado para contratar a un entrenador"));
+			return;
+		}
 		actions.contratarEntrenador(entrenador_id, usuario_id, seleccionarPlan)
 			.then(response => {
 				if (response.error) {
@@ -161,8 +166,11 @@ export const PerfilEntrenador = () => {
 							<div className="card-body">
 								<h5 className="card-title">Podemos alcanzarlo juntos</h5>
 								<p className="card-textEntrenador">El último paso para poder estar más cerca de tu nuevo estilo de vida</p>
-								<button type="button" className="btnContratame" data-bs-toggle="modal" data-bs-target="#planModal">Contrátame</button>
-
+								{usuario_id && user_role !== "entrenador" ? (
+									<button type="button" className="btnContratame" data-bs-toggle="modal" data-bs-target="#planModal">Contrátame</button>
+								) : (
+									<p className="text-danger">Debes estar registrado y no ser un entrenador para contratar a un entrenador</p>
+								)}
 							</div>
 						</div>
 					</div>
@@ -180,6 +188,7 @@ export const PerfilEntrenador = () => {
 							<button type="button" className="btnPlanes" onClick={() => { selectPlan('semanal'); }}>Plan Semanal</button>
 							<button type="button" className="btnPlanes" onClick={() => { selectPlan('mensual'); }}>Plan Mensual</button>
 							<button type="button" className="btnPlanes" onClick={() => { selectPlan('anual'); }}>Plan Anual</button>
+
 							<button type="button" className="btnContratar" onClick={contratarEntrenador}>Contratar</button>
 						</div>
 					</div>

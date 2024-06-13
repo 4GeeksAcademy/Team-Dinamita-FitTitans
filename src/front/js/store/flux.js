@@ -265,22 +265,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			// para lista de clientes 
-			obtenerListaClientes: async (id) => {
-				console.log(process.env.BACKEND_URL)
+			obtenerListaClientes: async (entrenador_id) => {
 				try {
-					const response = await fetch(`${process.env.BACKEND_URL}/listaentrenadores/${id}/clientes`);
+					//concateno la URL como un parametro de consulta y se añade a la URL, esto me permite enviar informacion adicional al servidor, en este caso envio el ID del entrenador (entrenador_id).
+					const response = await fetch(`${process.env.BACKEND_URL}/clientes?entrenador_id=${entrenador_id}`);
 					if (!response.ok) {
 						throw new Error('Error al obtener la lista de clientes');
 					}
 					const data = await response.json();
-					console.log(data)
-					// setStore({ entrenadores: data.entrenadores }); // Actualiza el estado con los datos de los entrenadores
-					// return data;  // Retorna los datos de los entrenadores DESCOMENTAR Y CAMBIAR X CLIENTES (ANNA)!!
+					return data; // Retorno los datos de los clientes
+
 				} catch (error) {
-					console.error('Error al obtener la lista de clientes', error);
+					console.error('Error al obtener la lista de clientes:', error);
 					throw error;
 				}
 			},
+
 
 
 			obtenerPerfilEntrenador: async (entrenador_id) => {
