@@ -327,7 +327,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			ModificarContraseña: async (password, user_uuid) => {
 				try {
-					const response = await fetch(`${process.env.BACKEND_URL}/reset-password/', {
+					const response = await fetch(`${process.env.BACKEND_URL}/reset-password/`, {
 						method: 'PUT',
 						headers: {
 							'Content-Type': 'application/json',
