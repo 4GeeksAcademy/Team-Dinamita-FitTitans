@@ -53,7 +53,7 @@ const Layout = () => {
                         <Route element={<IniciarSesion />} path="login" />
                         <Route element={<Registro />} path="/registro" />
 
-                        <Route element={<RecuperarContraseña />} path="/reset-password/:user_uuid"/>
+                        <Route element={<RecuperarContraseña />} path="/reset-password/:user_uuid" />
                         <Route element={<SolicitudRecuperacion />} path="/solicitud" />
                         <Route element={<Perfiles />} path="/perfiles/:id" />
                         <Route element={<PerfilUsuarios />} path="/perfil/:id" />
@@ -67,7 +67,7 @@ const Layout = () => {
                         <Route element={<FormulaCalorias />} path="/formulacalorias" />
                         <Route element={<Rutinas />} path="/rutinas" />
                         <Route element={<ListaEntrenadores />} path="/listaentrenadores" />
-                        <Route element={<ListaDeClientes />} path="/listaclientes" />
+                        <Route element={<ListaDeClientes />} path="/entrenador/:entrenador_id/clientes" />
                         <Route element={<Dieta />} path="/dieta" />
                         <Route element={<Blog />} path="/blog" />
                         <Route element={<ListaDeClientes />} path="/entrenador/:entrenador_id/clientes" />
