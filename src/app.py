@@ -208,6 +208,7 @@ def show_email():
 
 
 #PARA ENTRENADORES 
+# para mostrar la lista de entrenadores
 @app.route('/listaentrenadores', methods=['GET'])
 def get_entrenadores_usuarios():
     users = User.query.all()
@@ -216,6 +217,7 @@ def get_entrenadores_usuarios():
         "entrenadores": entrenadores,
     }), 200
 
+#para mostrar en el perfil del entrenador detallado
 @app.route("/listaentrenadores/<int:entrenador_id>", methods=["GET"])
 def get_entrenador_by_id(entrenador_id):
     user = User.query.get(entrenador_id)
@@ -223,7 +225,7 @@ def get_entrenador_by_id(entrenador_id):
         return jsonify({"message": "User not found"}), 404
     return jsonify(user.serialize()), 200 
 
-
+#para editar el perfil del usuario entrenador
 @app.route('/listaentrenadores/<int:id>', methods=['PUT'])
 def update_user(id):
     user = User.query.get(id)
@@ -253,6 +255,7 @@ def get_clientes_by_entrenador_id(entrenador_id):
     client_ids = [client_id[0] for client_id in client_ids]  # Extraer los IDs de los resultados
 
 
+# para contratar a un entrenador
 @app.route('/contratar', methods=['POST'])
 def contratar_entrenador():
     data = request.get_json()
@@ -273,8 +276,11 @@ def contratar_entrenador():
     if not entrenador.rol or usuario.rol:
         return jsonify({"error": "Roles incorrectos"}), 400
     
+    # Verificar si ya existe una asignación
+    asignacion_existente = Asignacion_entrenador.query.filter_by(entrenador_id=entrenador_id, usuario_id=usuario_id).first()
+    if asignacion_existente:
+        return jsonify({"error": "El usuario ya ha contratado a este entrenador"}), 400
     
-
     asignacion = Asignacion_entrenador(
         entrenador_id=entrenador_id,
         usuario_id=usuario_id,
@@ -285,15 +291,6 @@ def contratar_entrenador():
     db.session.commit()
 
     return jsonify({"message": "Entrenador contratado exitosamente"}), 200
-
-
-
-
-
-
-
-
-
 
 
 # Configurar Flask-Mail para usar Mailtrap

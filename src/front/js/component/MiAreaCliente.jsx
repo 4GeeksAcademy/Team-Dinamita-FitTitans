@@ -5,7 +5,7 @@ import "../../styles/MiAreaCliente.css";
 
 export const MiAreaCliente = () => {
     const { store, actions } = useContext(Context);
-    
+
 
     const usuarioID = localStorage.getItem("user_id");
 
@@ -22,7 +22,7 @@ export const MiAreaCliente = () => {
                 </div>
                 <div className="col-md-4 columnaDietaCliente">
                     <div className="tituloDietaCliente">
-                        <Link to="/" className="linkDietaCliente">DIETA</Link>
+                        <Link to="/dieta" className="linkDietaCliente">DIETA</Link>
                     </div>
                 </div>
                 <div className="col-md-4 columnaRutinasCliente">
