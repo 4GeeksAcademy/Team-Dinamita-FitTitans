@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "../../styles/Navbar.css";
 import "/workspaces/Team-Dinamita-FitTitans/src/front/styles/IniciarSesion.css"
 import { useNavigate, Link} from "react-router-dom";
