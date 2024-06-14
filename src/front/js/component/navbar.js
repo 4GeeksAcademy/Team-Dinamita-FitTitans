@@ -33,14 +33,17 @@ export const Navbar = () => {
 			{actions.logout()}
 	},[])
 
-	const usuarioTipo = localStorage.getItem("user_rol")
-	useEffect(()=>{
-		if (usuarioTipo === "true")
-			{setTipoUsuario(true)}
-		else {setTipoUsuario(false)}
+	useEffect(() => {
+		const usuarioTipo = localStorage.getItem("user_rol");
+		setTipoUsuario(usuarioTipo === "true");
+	}, []);
 
-		console.log(tipoUsuario)
-	}, [tipoUsuario])
+	useEffect(() => {
+		if (store.seInicio) {
+			const usuarioTipo = localStorage.getItem("user_rol");
+			setTipoUsuario(usuarioTipo === "true");
+		}
+	}, [store.seInicio]);
 
 	const openModal = () => {
 		setIsModalOpen(true);
@@ -55,6 +58,7 @@ export const Navbar = () => {
 		//signOut(auth);
 		actions.logout();
 		navigate("/")
+		setTipoUsuario(false)
 	};
 
 	return (
