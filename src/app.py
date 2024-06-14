@@ -155,7 +155,7 @@ def login():
     
 # GETTING ALL THE USERS
 @app.route("/users", methods=["GET"])
-@jwt_required()
+
 def get_all_users():
     all_users = User.query.all()
     mapped_users = list(map(lambda index: index.serialize(), all_users))
@@ -276,7 +276,7 @@ def get_cliente_detalle(cliente_id):
 
 # para contratar a un entrenador
 @app.route('/contratar', methods=['POST'])
-@jwt_required()
+
 def contratar_entrenador():
     data = request.get_json()
     entrenador_id = data.get('entrenador_id')
