@@ -270,14 +270,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			// para lista de entrenadores 
 			obtenerListaEntrenadores: async () => {
-				console.log(process.env.BACKEND_URL)
 				try {
 					const response = await fetch(`${process.env.BACKEND_URL}/listaentrenadores`);
 					if (!response.ok) {
 						throw new Error('Error al obtener la lista de entrenadores');
 					}
 					const data = await response.json();
-					console.log(data.entrenadores)
 					setStore({ entrenadores: data.entrenadores }); // Actualiza el estado con los datos de los entrenadores
 					return data;  // Retorna los datos de los entrenadores
 				} catch (error) {
@@ -315,25 +313,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					throw error;
 				}
 			},
-
-			obtenerPerfilEntrenador: async (entrenador_id) => {
-				try {
-					const response = await fetch(`${process.env.BACKEND_URL}/listaentrenadores/${entrenador_id}`, {
-						method: 'GET',
-						headers: {
-							'Content-Type': 'application/json',
-							'accept': 'application/json',
-						},
-					});
-					return response;
-				} catch (error) {
-					console.error('Error al obtener el perfil del entrenador:', error);
-					throw error;
-				}
-			},
-
-
-
 
 			RecuperarContraseña: async (email) => {
 				try {

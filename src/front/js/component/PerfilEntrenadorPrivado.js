@@ -2,16 +2,18 @@ import React, { useEffect, useState, useContext } from "react";
 import { useParams } from 'react-router-dom';
 import { Context } from "../store/appContext";
 import "/workspaces/Team-Dinamita-FitTitans/src/front/styles/Perfiles.css"
+import "../../styles/PerfilEntrenadorPrivado.css";
 
 export const PerfilEntrenadorPrivado = () => {
   const [usuarios, setUsuarios] = useState([]);
   const [editar, setEditar] = useState(false);
   const [datosFormulario, setDatosFormulario] = useState({});
-  const [rol, setRol] = useState(null)
   const { id } = useParams();
   const { store, actions } = useContext(Context);
+  const [usuarioLog, setUsuariosLog] = useState(null);
 
-  const token = localStorage.getItem("token")
+  const token = localStorage.getItem("jwt-token")
+
   const handleSubirImagen = async (userId, file) => {
     const data = new FormData();
     data.append("file", file);
@@ -31,7 +33,9 @@ export const PerfilEntrenadorPrivado = () => {
       console.log(secureUrl)
       const updatedUsuarios = usuarios.map((usuario) => {
         if (usuario.id === userId) {
+
           actions.EditarFotos(id ,secureUrl, token)
+
           alert("foto actualizada correctamente")
           return { ...usuario, foto: responseData.secure_url };
         }
@@ -63,29 +67,27 @@ export const PerfilEntrenadorPrivado = () => {
   };
 
   useEffect(() => {
+    if (store.id == id){
     const fetchUsuarioUnico = async () => {
       await actions.GetEntrenadorUnico(id);
       const usuariofinal = store.usuarioUnico;
-      console.log(store.usuarioUnico);
-      console.log(usuariofinal);
       if (usuariofinal && Array.isArray(usuariofinal)) {
         setUsuarios(usuariofinal);
       } else {
         setUsuarios([usuariofinal]); // Si no es un array, lo envuelve en uno
       }
     };
-      const tomarRol= localStorage.getItem("user_rol")
-        if (tomarRol == "true") {
-          setRol(true)
-        }else {setRol(false)}
-    fetchUsuarioUnico();
-  }, [editar, usuarios.foto, ]);
 
-  console.log(usuarios);
+    setUsuariosLog(true);
+    fetchUsuarioUnico();
+      }else {setUsuariosLog(false), "deja de jode"}
+  }, [editar, usuarios.foto]);
+
+
 
   return (
   <>
-  {rol ?(
+  {usuarioLog ?(
     <div className="container d-flex justify-content-center">
       <ul>
         {Array.isArray(usuarios) && usuarios.map((usuario) => (
@@ -113,8 +115,8 @@ export const PerfilEntrenadorPrivado = () => {
                     <label className="form-check-label" htmlFor="flexCheckDefault">
                       Default checkbox
                     </label>
+
                   </div>
-                  <a href="#" className="card-link">Another link</a>
                 </div>
               </div>
               <input
@@ -193,8 +195,9 @@ export const PerfilEntrenadorPrivado = () => {
         ))}
       </ul>
     </div>
-   ) : (<h1> ERROR </h1>)}
- 
+   ) : (<h1> ERROR, Vuelve a Iniciar Sesion </h1>)}
     </>
-  ); 
+
+
+  );
 };
