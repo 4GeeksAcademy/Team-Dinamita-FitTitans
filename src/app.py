@@ -225,7 +225,7 @@ def get_entrenador_by_id(entrenador_id):
 
 #para editar el perfil del usuario entrenador
 @app.route('/listaentrenadores/<int:id>', methods=['PUT'])
-
+@jwt_required()
 def update_user(id):
     user = User.query.get(id)
     if not user:
