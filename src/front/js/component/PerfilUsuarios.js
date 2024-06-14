@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from 'react-router-dom';
 import { Context } from "../store/appContext";
+import "/workspaces/Team-Dinamita-FitTitans/src/front/styles/Perfiles.css"
 
 export const PerfilUsuarios = () => {
   const [usuarios, setUsuarios] = useState([]);
@@ -8,6 +9,7 @@ export const PerfilUsuarios = () => {
   const [datosFormulario, setDatosFormulario] = useState({});
   const { id } = useParams();
   const { store, actions } = useContext(Context);
+  const [rol, setRol] = useState(null);
 
   const handleSubirImagen = async (userId, file) => {
     const data = new FormData();
@@ -24,10 +26,13 @@ export const PerfilUsuarios = () => {
       );
 
       const responseData = await response.json();
-      console.log(responseData)
+      const secureUrl = responseData.secure_url;
+      console.log(secureUrl)
       const updatedUsuarios = usuarios.map((usuario) => {
         if (usuario.id === userId) {
-          return { ...usuario, imagen: responseData.secure_url };
+          actions.EditarFotos(id ,secureUrl)
+          alert("foto actualizada correctamente")
+          return { ...usuario, foto: responseData.secure_url };
         }
         return usuario;
       });
@@ -58,7 +63,7 @@ export const PerfilUsuarios = () => {
 
   useEffect(() => {
     const fetchUsuarioUnico = async () => {
-      await actions.GetEntrenadorUnico(id);
+      await actions.GetUsuarioUnico(id);
       const usuariofinal = store.usuarioUnico;
       console.log(store.usuarioUnico);
       console.log(usuariofinal);
@@ -69,24 +74,28 @@ export const PerfilUsuarios = () => {
       }
     };
 
+    const tomarRol= localStorage.getItem("user_rol")
+    console.log(tomarRol)
+    if (tomarRol === "false") { // esto es false porque usuario es false
+      setRol(true)
+    }else {setRol(false)}
+fetchUsuarioUnico();
     fetchUsuarioUnico();
-  }, [editar]);
+  }, [editar, usuarios.foto, rol]);
 
   console.log(usuarios);
 
   return (
-    <div className="container d-flex justify-content-center">
+    <>
+    {rol ? (
+<div className="container d-flex justify-content-center align-items-center mt-5">
       <ul>
         {Array.isArray(usuarios) && usuarios.map((usuario) => (
-          <li key={usuario.id}>
-            <h1>{usuario.nombre}</h1>
-            <div>
+          <li className=""key={usuario.id}>
+            <h1 className="d-flex justify-content-center">{usuario.nombre}</h1>
+            <div className="caja">
               <div className="card">
-                <img src={usuario.imagen} className="card-img-top" alt={`Imagen de ${usuario.nombre}`} />
-                <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
-                  <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
+                <img src={usuario.foto} className="card-img-top" alt={`Imagen de ${usuario.nombre}`} />
                 <ul className="list-group list-group-flush">
                   <li className="list-group-item">Email: {usuario.email}</li>
                   <li className="list-group-item">Nombre: {usuario.nombre}</li>
@@ -95,20 +104,15 @@ export const PerfilUsuarios = () => {
                   <li className="list-group-item">Genero: {usuario.genero}</li>
                   <li className="list-group-item">Altura: {usuario.altura}</li>
                 </ul>
-                <div className="card-body">
-                  <div className="form-check">
-                    <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                    <label className="form-check-label" htmlFor="flexCheckDefault">
-                      Default checkbox
-                    </label>
-                  </div>
-                  <a href="#" className="card-link">Another link</a>
-                </div>
               </div>
+              <label htmlFor={`file-input-${usuario.id}`}>
+                Subir Imagen &#11015;
+              </label>
               <input
                 type="file"
                 accept="image/*"
-                onChange={(e) => manejarSubirImagen(usuario.id, e.target.files[0])}
+                placeholder="cambiar o subir imagen"
+                onChange={(e) => handleSubirImagen(usuario.id, e.target.files[0])}
               />
               {editar ? (
                 <>
@@ -173,5 +177,9 @@ export const PerfilUsuarios = () => {
         ))}
       </ul>
     </div>
+    ) : (<h1> ERROR </h1>)}
+    
+    </>
+    
   );
 };
