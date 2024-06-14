@@ -155,7 +155,7 @@ def login():
     
 # GETTING ALL THE USERS
 @app.route("/users", methods=["GET"])
-@jwt_required()
+
 def get_all_users():
     all_users = User.query.all()
     mapped_users = list(map(lambda index: index.serialize(), all_users))
@@ -165,7 +165,7 @@ def get_all_users():
 
 
 @app.route("/Usuarios/<int:user_id>", methods=["GET"])
-@jwt_required()
+
 def get_user_by_id(user_id):
     user = User.query.get(user_id)
     usuarios = User.query.filter_by(rol=False).all()
@@ -175,7 +175,7 @@ def get_user_by_id(user_id):
 
 
 @app.route('/Usuarios', methods=['GET'])
-@jwt_required()
+
 def obtener_usuarios():
     try:
         usuarios = User.query.filter_by(rol=False).all()
@@ -185,7 +185,6 @@ def obtener_usuarios():
         return jsonify({"error": str(e)}), 500
 
 @app.route('/Usuarios/<int:id>', methods=['PUT'])
-@jwt_required()
 def actualizar_user(id):
     user = User.query.get(id)
     if not user:
@@ -226,7 +225,7 @@ def get_entrenador_by_id(entrenador_id):
 
 #para editar el perfil del usuario entrenador
 @app.route('/listaentrenadores/<int:id>', methods=['PUT'])
-@jwt_required()
+
 def update_user(id):
     user = User.query.get(id)
     if not user:
@@ -250,7 +249,7 @@ def update_user(id):
   
 #  para el entrenador obtener sus clientes :
 @app.route("/listaentrenadores/<int:entrenador_id>/clientes", methods=["GET"])
-@jwt_required()
+
 def get_clientes_by_entrenador_id(entrenador_id):
     # Obtener los clientes asignados a un entrenador dado
     asignaciones = db.session.query(Asignacion_entrenador).filter_by(entrenador_id=entrenador_id).all()
@@ -281,7 +280,7 @@ def get_cliente_detalle(cliente_id):
 
 # para contratar a un entrenador
 @app.route('/contratar', methods=['POST'])
-@jwt_required()
+
 def contratar_entrenador():
     data = request.get_json()
     entrenador_id = data.get('entrenador_id')

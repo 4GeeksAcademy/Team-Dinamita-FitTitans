@@ -11,6 +11,7 @@ export const PerfilUsuarios = () => {
   const { store, actions } = useContext(Context);
   const [rol, setRol] = useState(null);
 
+  const token = localStorage.getItem("token")
   const handleSubirImagen = async (userId, file) => {
     const data = new FormData();
     data.append("file", file);
@@ -30,7 +31,7 @@ export const PerfilUsuarios = () => {
       console.log(secureUrl)
       const updatedUsuarios = usuarios.map((usuario) => {
         if (usuario.id === userId) {
-          actions.EditarFotos(id ,secureUrl)
+          actions.EditarFotos(id ,secureUrl, token)
           alert("foto actualizada correctamente")
           return { ...usuario, foto: responseData.secure_url };
         }
