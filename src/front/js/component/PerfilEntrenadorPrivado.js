@@ -1,11 +1,13 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from 'react-router-dom';
 import { Context } from "../store/appContext";
+import "/workspaces/Team-Dinamita-FitTitans/src/front/styles/Perfiles.css"
 
 export const PerfilEntrenadorPrivado = () => {
   const [usuarios, setUsuarios] = useState([]);
   const [editar, setEditar] = useState(false);
   const [datosFormulario, setDatosFormulario] = useState({});
+  const [rol, setRol] = useState(null)
   const { id } = useParams();
   const { store, actions } = useContext(Context);
 
@@ -24,10 +26,13 @@ export const PerfilEntrenadorPrivado = () => {
       );
 
       const responseData = await response.json();
-      console.log(responseData)
+      const secureUrl = responseData.secure_url;
+      console.log(secureUrl)
       const updatedUsuarios = usuarios.map((usuario) => {
         if (usuario.id === userId) {
-          return { ...usuario, imagen: responseData.secure_url };
+          actions.EditarFotos(id ,secureUrl)
+          alert("foto actualizada correctamente")
+          return { ...usuario, foto: responseData.secure_url };
         }
         return usuario;
       });
@@ -68,13 +73,18 @@ export const PerfilEntrenadorPrivado = () => {
         setUsuarios([usuariofinal]); // Si no es un array, lo envuelve en uno
       }
     };
-
+      const tomarRol= localStorage.getItem("user_rol")
+        if (tomarRol == "true") {
+          setRol(true)
+        }else {setRol(false)}
     fetchUsuarioUnico();
-  }, [editar]);
+  }, [editar, usuarios.foto, ]);
 
   console.log(usuarios);
 
   return (
+  <>
+  {rol ?(
     <div className="container d-flex justify-content-center">
       <ul>
         {Array.isArray(usuarios) && usuarios.map((usuario) => (
@@ -82,7 +92,7 @@ export const PerfilEntrenadorPrivado = () => {
             <h1>{usuario.nombre}</h1>
             <div>
               <div className="card">
-                <img src={usuario.imagen} className="card-img-top" alt={`Imagen de ${usuario.nombre}`} />
+                <img src={usuario.foto} className="card-img-top" alt={`Imagen de ${usuario.nombre}`} />
                 <div className="card-body">
                   <h5 className="card-title">Card title</h5>
                   <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -109,7 +119,7 @@ export const PerfilEntrenadorPrivado = () => {
               <input
                 type="file"
                 accept="image/*"
-                onChange={(e) => manejarSubirImagen(usuario.id, e.target.files[0])}
+                onChange={(e) => handleSubirImagen(usuario.id, e.target.files[0])}
               />
               {editar ? (
                 <>
@@ -182,5 +192,8 @@ export const PerfilEntrenadorPrivado = () => {
         ))}
       </ul>
     </div>
-  );
+   ) : (<h1> ERROR </h1>)}
+ 
+    </>
+  ); 
 };
