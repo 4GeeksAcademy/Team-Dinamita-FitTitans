@@ -75,7 +75,7 @@ export const IniciarSesion = () => {
     console.log(verificar)
     if (verificar === true){
       alert("funciono")
-      navigate("/")
+      navigate("/miarea")
     }else{
       alert("error")
     }

@@ -7,11 +7,12 @@ export const PerfilEntrenadorPrivado = () => {
   const [usuarios, setUsuarios] = useState([]);
   const [editar, setEditar] = useState(false);
   const [datosFormulario, setDatosFormulario] = useState({});
-  const [rol, setRol] = useState(null)
   const { id } = useParams();
   const { store, actions } = useContext(Context);
+  const [usuarioLog, setUsuariosLog] = useState(null);
 
-  const token = localStorage.getItem("token")
+  const token = localStorage.getItem("jwt-token")
+
   const handleSubirImagen = async (userId, file) => {
     const data = new FormData();
     data.append("file", file);
@@ -63,29 +64,25 @@ export const PerfilEntrenadorPrivado = () => {
   };
 
   useEffect(() => {
+    if (store.id == id){
     const fetchUsuarioUnico = async () => {
       await actions.GetEntrenadorUnico(id);
       const usuariofinal = store.usuarioUnico;
-      console.log(store.usuarioUnico);
-      console.log(usuariofinal);
       if (usuariofinal && Array.isArray(usuariofinal)) {
         setUsuarios(usuariofinal);
       } else {
         setUsuarios([usuariofinal]); // Si no es un array, lo envuelve en uno
       }
     };
-      const tomarRol= localStorage.getItem("user_rol")
-        if (tomarRol == "true") {
-          setRol(true)
-        }else {setRol(false)}
+    setUsuariosLog(true);
     fetchUsuarioUnico();
-  }, [editar, usuarios.foto, ]);
+      }else {setUsuariosLog(false), "deja de jode"}
+  }, [editar, usuarios.foto]);
 
-  console.log(usuarios);
 
   return (
   <>
-  {rol ?(
+  {usuarioLog ?(
     <div className="container d-flex justify-content-center">
       <ul>
         {Array.isArray(usuarios) && usuarios.map((usuario) => (
@@ -193,7 +190,7 @@ export const PerfilEntrenadorPrivado = () => {
         ))}
       </ul>
     </div>
-   ) : (<h1> ERROR </h1>)}
+   ) : (<h1> ERROR, Vuelve a Iniciar Sesion </h1>)}
  
     </>
   ); 
