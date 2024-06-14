@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Context } from "../store/appContext";
-
+import { Link } from 'react-router-dom';
 
 export const ListaDeClientes = ({ entrenadorId }) => {
   const { store, actions } = useContext(Context);
@@ -9,21 +9,24 @@ export const ListaDeClientes = ({ entrenadorId }) => {
   useEffect(() => {
     actions.obtenerListaClientes(1)
       .then(data => {
-        // setListaEntrenadores(data);  // Actualiza el estado con los datos de los entrenadores LO DESCOMENTO CON SETLISTACLIENTES
+        setClientes(data);  // Actualiza el estado con los datos de los entrenadores
         console.log(data)
       })
       .catch(error => {
         console.error("Error al obtener la lista de clientes", error);
       });
-  }, [entrenadorId]); 
+  }, [entrenadorId]);
 
   return (
-    
     <div>
       <h2>Lista de Clientes</h2>
       <ul>
         {clientes.map(cliente => (
-          <li key={cliente.id}>{cliente.nombre}</li>
+          <li key={cliente.id}>
+            <Link to={`/clientes/${cliente.id}`}>
+              {cliente.nombre}
+            </Link>
+          </li>
         ))}
       </ul>
     </div>

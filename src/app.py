@@ -247,13 +247,36 @@ def update_user(id):
 
     return jsonify(user.serialize()), 200
 
-# // Para obtener los clientes de un entrenador 
+  
+#  para el entrenador obtener sus clientes :
 @app.route("/listaentrenadores/<int:entrenador_id>/clientes", methods=["GET"])
 @jwt_required()
 def get_clientes_by_entrenador_id(entrenador_id):
-    # Obtener los client_ids para el entrenador dado
-    client_ids = db.session.query(Asignacion_entrenador.usuario_id).filter_by(entrenador_id=entrenador_id).all()
-    client_ids = [client_id[0] for client_id in client_ids]  # Extraer los IDs de los resultados
+    # Obtener los clientes asignados a un entrenador dado
+    asignaciones = db.session.query(Asignacion_entrenador).filter_by(entrenador_id=entrenador_id).all()
+    clientes = [User.query.get(asignacion.usuario_id).serialize() for asignacion in asignaciones]
+
+    return jsonify(clientes), 200
+
+#para obtener los planes del cliente rutina, dieta etc
+@app.route("/clientes/<int:cliente_id>", methods=["GET"])
+def get_cliente_detalle(cliente_id):
+    cliente = User.query.get(cliente_id)
+    if cliente is None:
+        return jsonify({"message": "Cliente no encontrado"}), 404
+    
+    asignacion = Asignacion_entrenador.query.filter_by(usuario_id=cliente_id).first()
+    if asignacion is None:
+        return jsonify({"message": "Asignación no encontrada"}), 404
+    
+    cliente_detalle = cliente.serialize()
+    cliente_detalle.update({
+        "dieta": asignacion.dieta,
+        "rutina": asignacion.rutina,
+        "plan_entrenamiento": asignacion.plan_entrenamiento
+    })
+
+    return jsonify(cliente_detalle), 200
 
 
 # para contratar a un entrenador
@@ -293,6 +316,77 @@ def contratar_entrenador():
     db.session.commit()
 
     return jsonify({"message": "Entrenador contratado exitosamente"}), 200
+
+
+
+#para editar borrar o modificar rutinas
+@app.route("/clientes/<int:cliente_id>/rutinas", methods=["GET"])
+def get_rutinas_cliente(cliente_id):
+    asignacion = Asignacion_entrenador.query.filter_by(usuario_id=cliente_id).first()
+    if asignacion is None:
+        return jsonify({"message": "Asignación no encontrada"}), 404
+
+    return jsonify({"rutinas": asignacion.rutina.split(';') if asignacion.rutina else []}), 200
+
+@app.route("/clientes/<int:cliente_id>/rutinas", methods=["POST"])
+def add_rutina_cliente(cliente_id):
+    data = request.get_json()
+    nueva_rutina = data.get('rutina', '')
+    if not nueva_rutina:
+        return jsonify({"message": "Rutina no proporcionada"}), 400
+
+    asignacion = Asignacion_entrenador.query.filter_by(usuario_id=cliente_id).first()
+    if asignacion is None:
+        return jsonify({"message": "Asignación no encontrada"}), 404
+
+    rutinas = asignacion.rutina.split(';') if asignacion.rutina else []
+    rutinas.append(nueva_rutina)
+    asignacion.rutina = ';'.join(rutinas)
+    db.session.commit()
+
+    return jsonify({"message": "Rutina añadida exitosamente"}), 201
+
+@app.route("/clientes/<int:cliente_id>/rutinas/<int:rutina_index>", methods=["PUT"])
+def update_rutina_cliente(cliente_id, rutina_index):
+    data = request.get_json()
+    nueva_rutina = data.get('rutina', '')
+    if not nueva_rutina:
+        return jsonify({"message": "Rutina no proporcionada"}), 400
+
+    asignacion = Asignacion_entrenador.query.filter_by(usuario_id=cliente_id).first()
+    if asignacion is None:
+        return jsonify({"message": "Asignación no encontrada"}), 404
+
+    rutinas = asignacion.rutina.split(';') if asignacion.rutina else []
+    if rutina_index < 0 or rutina_index >= len(rutinas):
+        return jsonify({"message": "Índice de rutina inválido"}), 400
+
+    rutinas[rutina_index] = nueva_rutina
+    asignacion.rutina = ';'.join(rutinas)
+    db.session.commit()
+
+    return jsonify({"message": "Rutina actualizada exitosamente"}), 200
+
+@app.route("/clientes/<int:cliente_id>/rutinas/<int:rutina_index>", methods=["DELETE"])
+def delete_rutina_cliente(cliente_id, rutina_index):
+    asignacion = Asignacion_entrenador.query.filter_by(usuario_id=cliente_id).first()
+    if asignacion is None:
+        return jsonify({"message": "Asignación no encontrada"}), 404
+
+    rutinas = asignacion.rutina.split(';') if asignacion.rutina else []
+    if rutina_index < 0 or rutina_index >= len(rutinas):
+        return jsonify({"message": "Índice de rutina inválido"}), 400
+
+    del rutinas[rutina_index]
+    asignacion.rutina = ';'.join(rutinas)
+    db.session.commit()
+
+    return jsonify({"message": "Rutina eliminada exitosamente"}), 200
+
+
+
+
+
 
 
 # Configurar Flask-Mail para usar Mailtrap

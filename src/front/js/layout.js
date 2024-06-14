@@ -31,6 +31,7 @@ import { PerfilEntrenadorPrivado } from "./component/PerfilEntrenadorPrivado.js"
 import { RecuperarContraseña } from "./pages/RecuperarContraseña.jsx";
 import { SolicitudRecuperacion } from "./pages/SolicitudRecuperarcion.jsx";
 import { ListaDeClientes } from "./pages/ListaDeClientes.jsx";
+import { DetalleCliente } from "./pages/DetalleCliente.jsx";
 
 //create your first component
 const Layout = () => {
@@ -70,6 +71,12 @@ const Layout = () => {
                         <Route element={<Dieta />} path="/dieta" />
                         <Route element={<Blog />} path="/blog" />
                         <Route element={<ListaDeClientes />} path="/entrenador/:entrenador_id/clientes" />
+
+                        <Route element={<DetalleCliente />} path="/clientes/:cliente_id" />                      
+                        <Route element={<Dieta />} path="/clientes/:cliente_id/dieta" />
+                        <Route element={<Rutinas />} path="/clientes/:cliente_id/rutina" />
+
+
                     </Routes>
                     <Footer />
                 </ScrollToTop>
