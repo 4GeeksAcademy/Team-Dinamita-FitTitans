@@ -152,7 +152,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (response.ok) {
 						const data = await response.json();
 						console.log(data)
-						return setStore({ usuarioUnico: data })
+						const rol = localStorage.getItem("user_rol")
+						if(rol === "false"){
+							return setStore({ usuarioUnico: data })
+						}else return setStore({usuarioUnico : ""})
 					}
 				} catch (error) {
 					console.log('Error:', error);
@@ -181,10 +184,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (response.ok) {
 						const data = await response.json();
 						console.log(data)
-						return setStore({ usuarioUnico: data })
+						const rol = localStorage.getItem("user_rol")
+						if(rol === "true"){
+							return setStore({ usuarioUnico: data })
+						}else return setStore({usuarioUnico : ""})
 					}
 				} catch (error) {
 					console.log('Error:', error);
+				}
+			},
+
+			EditarFotos: async (id, secureUrl) => {
+				try {
+					console.log("Datos actualizados:", secureUrl);
+					const response = await fetch(`${process.env.BACKEND_URL}/listaentrenadores/${id}`, {
+						method: "PUT",
+						headers: {
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify({foto:secureUrl})
+					});
+					const data = await response.json();
+					console.log("Respuesta del servidor:", data);
+					setStore({ usuarioUnico: data });
+				} catch (error) {
+					console.error("Error updating user data:", error);
 				}
 			},
 
