@@ -45,7 +45,7 @@ export const PerfilUsuarios = () => {
   };
 
   const manejarEditarUsuario = async (usuarioId) => {
-    await actions.EditarUsuario(usuarioId, datosFormulario);
+    await actions.EditarUsuario(usuarioId, datosFormulario, token);
     setEditar(false);
     // Actualizar localmente los datos del usuario editado
     const usuarioActualizado = usuarios.map((usuario) => {
@@ -80,7 +80,7 @@ export const PerfilUsuarios = () => {
     if (tomarRol === "false") { // esto es false porque usuario es false
       setRol(true)
     }else {setRol(false)}
-fetchUsuarioUnico();
+
     fetchUsuarioUnico();
   }, [editar, usuarios.foto, rol]);
 
