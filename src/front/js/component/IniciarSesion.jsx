@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import "../../styles/Navbar.css";
 import "/workspaces/Team-Dinamita-FitTitans/src/front/styles/IniciarSesion.css"
-import { useNavigate, Link} from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Registro } from "./Registro";
 import { MiAreaUsuarioRegistrado } from "//workspaces/Team-Dinamita-FitTitans/src/front/js/pages/MiAreaUsuarioRegistrado.jsx"
 import firebaseApp from "../../../firebase/credenciales";
@@ -26,37 +26,37 @@ export const IniciarSesion = () => {
   const { store, actions } = useContext(Context);
 
 
- /* const getRol = async (uid) => {
-    const documentoRef = doc(firestore, `/usuarios/${uid}`);
-    const documentoCif = await getDoc(documentoRef);
-    const infoFinal = documentoCif.data().rol;
-    return infoFinal
-  };*/
+  /* const getRol = async (uid) => {
+     const documentoRef = doc(firestore, `/usuarios/${uid}`);
+     const documentoCif = await getDoc(documentoRef);
+     const infoFinal = documentoCif.data().rol;
+     return infoFinal
+   };*/
 
   //const EstadoUsuarioFirebase = (usuarioFirebase) => {
-    
-    /*getRol(usuarioFirebase.uid).then((rol) => {
-      const dataUsuario = {
-        uid: usuarioFirebase.uid,
-        email: usuarioFirebase.email,
-        rol: rol,
-      }
-      setSession(dataUsuario);
-      console.log(dataUsuario)
-    })
-  }
-  onAuthStateChanged(auth, (usuarioFirebase) => {
-    if (usuarioFirebase) {
-      if (!sesion) {
-        EstadoUsuarioFirebase(usuarioFirebase);
-      } else navigate("/")
-    } else {
-      setSession(null)
-    }
-  });*/
 
-  const idUsuario = () =>{
-    
+  /*getRol(usuarioFirebase.uid).then((rol) => {
+    const dataUsuario = {
+      uid: usuarioFirebase.uid,
+      email: usuarioFirebase.email,
+      rol: rol,
+    }
+    setSession(dataUsuario);
+    console.log(dataUsuario)
+  })
+}
+onAuthStateChanged(auth, (usuarioFirebase) => {
+  if (usuarioFirebase) {
+    if (!sesion) {
+      EstadoUsuarioFirebase(usuarioFirebase);
+    } else navigate("/")
+  } else {
+    setSession(null)
+  }
+});*/
+
+  const idUsuario = () => {
+
   };
 
 
@@ -73,10 +73,10 @@ export const IniciarSesion = () => {
     //signInWithEmailAndPassword(auth, usuarios.correo, usuarios.contraseña)
     const verificar = await actions.HandleInicioSesion(usuarios);
     console.log(verificar)
-    if (verificar === true){
+    if (verificar === true) {
       alert("funciono")
       navigate("/")
-    }else{
+    } else {
       alert("error")
     }
   };
@@ -118,15 +118,15 @@ export const IniciarSesion = () => {
               <div className="botonNavbar container d-flex justify-content-center">
                 <input
                   type="submit"
-                  value={"iniciar Sesion"}
+                  value={"Iniciar Sesion"}
                   className="btn btn-Navbar mx-3 "
                 />
                 <Link to="/solicitud">
-                <input
-                  type="submit"
-                  value={"Recuperar Contraseña"}
-                  className="btn btn-Navbar mx-3 "
-                />
+                  <input
+                    type="submit"
+                    value={"Recuperar Contraseña"}
+                    className="btn btn-Navbar mx-3 "
+                  />
                 </Link>
               </div>
 
