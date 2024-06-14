@@ -7,7 +7,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			id: [],
 			usuarioUnico: [],
 			entrenadores: [],
-			clientes: []
+			clientes: [],
+			rutinas: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -264,21 +265,35 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-obtenerListaClientes: async (id) => {
-                console.log(process.env.BACKEND_URL)
-                try {
-                    const response = await fetch(`${process.env.BACKEND_URL}/listaentrenadores/${id}/clientes`);
-                    if (!response.ok) {
-                        throw new Error(‘Error al obtener la lista de clientes’);
-                    }
-                    const data = await response.json();
-                    console.log(data)
-                    return data;  // Retorna los datos de los clientes
-                } catch (error) {
-                    console.error(‘Error al obtener la lista de clientes’, error);
-                    throw error;
-                }
-            },
+			obtenerListaClientes: async (id) => {
+				console.log(process.env.BACKEND_URL)
+				try {
+					const response = await fetch(`${process.env.BACKEND_URL}/listaentrenadores/${id}/clientes`);
+					if (!response.ok) {
+						throw new Error("Error al obtener la lista de clientes");
+					}
+					const data = await response.json();
+					console.log(data)
+					return data;  // Retorna los datos de los clientes
+				} catch (error) {
+					console.error("Error al obtener la lista de clientes", error);
+					throw error;
+				}
+			},
+
+			obtenerDetalleCliente: async (cliente_id) => {
+				try {
+					const response = await fetch(`${process.env.BACKEND_URL}/clientes/${cliente_id}`);
+					if (!response.ok) {
+						throw new Error('Error al obtener los detalles del cliente');
+					}
+					const data = await response.json();
+					return data;
+				} catch (error) {
+					console.error('Error al obtener los detalles del cliente:', error);
+					throw error;
+				}
+			},
 
 			obtenerPerfilEntrenador: async (entrenador_id) => {
 				try {
@@ -295,6 +310,8 @@ obtenerListaClientes: async (id) => {
 					throw error;
 				}
 			},
+
+
 
 
 			RecuperarContraseña: async (email) => {
@@ -378,6 +395,85 @@ obtenerListaClientes: async (id) => {
 					return { success: false, error: 'Error al enviar la solicitud de contratación.' };
 				}
 			},
+
+
+
+
+
+			// para eliminar modificar y crear rutina
+			obtenerRutinasCliente: async (cliente_id) => {
+				try {
+					const response = await fetch(`${process.env.BACKEND_URL}/clientes/${cliente_id}/rutinas`);
+					if (!response.ok) {
+						throw new Error("Error al obtener las rutinas del cliente");
+					}
+					const data = await response.json();
+					return data.rutinas;
+				} catch (error) {
+					console.error("Error al obtener las rutinas del cliente", error);
+					throw error;
+				}
+			},
+
+			crearRutinaCliente: async (cliente_id, rutina) => {
+				try {
+					const response = await fetch(`${process.env.BACKEND_URL}/clientes/${cliente_id}/rutinas`, {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify({ rutina })
+					});
+					if (!response.ok) {
+						throw new Error("Error al crear la rutina del cliente");
+					}
+					const data = await response.json();
+					return data.message;
+				} catch (error) {
+					console.error("Error al crear la rutina del cliente", error);
+					throw error;
+				}
+			},
+
+			actualizarRutinaCliente: async (cliente_id, rutinaIndex, rutina) => {
+				try {
+					const response = await fetch(`${process.env.BACKEND_URL}/clientes/${cliente_id}/rutinas/${rutinaIndex}`, {
+						method: "PUT",
+						headers: {
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify({ rutina })
+					});
+					if (!response.ok) {
+						throw new Error("Error al actualizar la rutina del cliente");
+					}
+					const data = await response.json();
+					return data.message;
+				} catch (error) {
+					console.error("Error al actualizar la rutina del cliente", error);
+					throw error;
+				}
+			},
+
+			eliminarRutinaCliente: async (cliente_id, rutinaIndex) => {
+				try {
+					const response = await fetch(`${process.env.BACKEND_URL}/clientes/${cliente_id}/rutinas/${rutinaIndex}`, {
+						method: "DELETE"
+					});
+					if (!response.ok) {
+						throw new Error("Error al eliminar la rutina del cliente");
+					}
+					const data = await response.json();
+					return data.message;
+				} catch (error) {
+					console.error("Error al eliminar la rutina del cliente", error);
+					throw error;
+				}
+			},
+
+
+
+
 		}
 	};
 };
