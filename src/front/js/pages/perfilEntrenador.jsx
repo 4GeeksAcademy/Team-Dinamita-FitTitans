@@ -75,7 +75,6 @@ export const PerfilEntrenador = () => {
 
 
 
-
 	const selectPlan = (plan) => {
 		setSeleccionarPlan(plan);
 		const planModalElement = document.getElementById("planModal");
