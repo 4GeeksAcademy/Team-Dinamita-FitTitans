@@ -165,7 +165,6 @@ def get_all_users():
 
 
 @app.route("/Usuarios/<int:user_id>", methods=["GET"])
-
 def get_user_by_id(user_id):
     user = User.query.get(user_id)
     usuarios = User.query.filter_by(rol=False).all()
@@ -175,7 +174,6 @@ def get_user_by_id(user_id):
 
 
 @app.route('/Usuarios', methods=['GET'])
-
 def obtener_usuarios():
     try:
         usuarios = User.query.filter_by(rol=False).all()
@@ -225,7 +223,6 @@ def get_entrenador_by_id(entrenador_id):
 
 #para editar el perfil del usuario entrenador
 @app.route('/listaentrenadores/<int:id>', methods=['PUT'])
-@jwt_required()
 def update_user(id):
     user = User.query.get(id)
     if not user:
@@ -249,7 +246,6 @@ def update_user(id):
   
 #  para el entrenador obtener sus clientes :
 @app.route("/listaentrenadores/<int:entrenador_id>/clientes", methods=["GET"])
-
 def get_clientes_by_entrenador_id(entrenador_id):
     # Obtener los clientes asignados a un entrenador dado
     asignaciones = db.session.query(Asignacion_entrenador).filter_by(entrenador_id=entrenador_id).all()
@@ -348,9 +344,9 @@ def add_rutina_cliente(cliente_id):
 @app.route("/clientes/<int:cliente_id>/rutinas/<int:rutina_index>", methods=["PUT"])
 def update_rutina_cliente(cliente_id, rutina_index):
     data = request.get_json()
-    nueva_rutina = data.get('rutina', '')
-    if not nueva_rutina:
-        return jsonify({"message": "Rutina no proporcionada"}), 400
+    nuevo_nombre_rutina = data.get('rutina', '')
+    if not nuevo_nombre_rutina:
+        return jsonify({"message": "Nombre de rutina no proporcionado"}), 400
 
     asignacion = Asignacion_entrenador.query.filter_by(usuario_id=cliente_id).first()
     if asignacion is None:
@@ -360,11 +356,11 @@ def update_rutina_cliente(cliente_id, rutina_index):
     if rutina_index < 0 or rutina_index >= len(rutinas):
         return jsonify({"message": "Índice de rutina inválido"}), 400
 
-    rutinas[rutina_index] = nueva_rutina
+    rutinas[rutina_index] = nuevo_nombre_rutina
     asignacion.rutina = ';'.join(rutinas)
     db.session.commit()
 
-    return jsonify({"message": "Rutina actualizada exitosamente"}), 200
+    return jsonify({"message": "Nombre de rutina actualizado exitosamente"}), 200
 
 @app.route("/clientes/<int:cliente_id>/rutinas/<int:rutina_index>", methods=["DELETE"])
 def delete_rutina_cliente(cliente_id, rutina_index):
