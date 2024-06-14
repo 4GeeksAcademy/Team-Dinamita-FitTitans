@@ -206,8 +206,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.error("Error updating user data:", error);
 				}
 			},
-
-
+			
+			
 			contratarEntrenador: (entrenador_id, usuario_id, seleccionarPlan,) => {
 				return fetch(`${process.env.BACKEND_URL}/contratar`, {
 					method: "POST",
