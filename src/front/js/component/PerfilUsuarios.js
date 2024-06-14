@@ -12,6 +12,7 @@ export const PerfilUsuarios = () => {
   const { store, actions } = useContext(Context);
   const [rol, setRol] = useState(null);
 
+  const token = localStorage.getItem("token")
   const handleSubirImagen = async (userId, file) => {
     const data = new FormData();
     data.append("file", file);
@@ -31,7 +32,7 @@ export const PerfilUsuarios = () => {
       console.log(secureUrl)
       const updatedUsuarios = usuarios.map((usuario) => {
         if (usuario.id === userId) {
-          actions.EditarFotos(id ,secureUrl)
+          actions.EditarFotos(id ,secureUrl, token)
           alert("foto actualizada correctamente")
           return { ...usuario, foto: responseData.secure_url };
         }
@@ -45,7 +46,7 @@ export const PerfilUsuarios = () => {
   };
 
   const manejarEditarUsuario = async (usuarioId) => {
-    await actions.EditarUsuario(usuarioId, datosFormulario);
+    await actions.EditarUsuario(usuarioId, datosFormulario, token);
     setEditar(false);
     // Actualizar localmente los datos del usuario editado
     const usuarioActualizado = usuarios.map((usuario) => {
@@ -80,7 +81,7 @@ export const PerfilUsuarios = () => {
     if (tomarRol === "false") { // esto es false porque usuario es false
       setRol(true)
     }else {setRol(false)}
-fetchUsuarioUnico();
+
     fetchUsuarioUnico();
   }, [editar, usuarios.foto, rol]);
 
