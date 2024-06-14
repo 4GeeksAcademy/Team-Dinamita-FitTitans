@@ -12,6 +12,7 @@ export const PerfilEntrenadorPrivado = () => {
   const { id } = useParams();
   const { store, actions } = useContext(Context);
 
+  const token = localStorage.getItem("token")
   const handleSubirImagen = async (userId, file) => {
     const data = new FormData();
     data.append("file", file);
@@ -31,7 +32,9 @@ export const PerfilEntrenadorPrivado = () => {
       console.log(secureUrl)
       const updatedUsuarios = usuarios.map((usuario) => {
         if (usuario.id === userId) {
-          actions.EditarFotos(id, secureUrl)
+
+          actions.EditarFotos(id ,secureUrl, token)
+
           alert("foto actualizada correctamente")
           return { ...usuario, foto: responseData.secure_url };
         }
@@ -44,8 +47,8 @@ export const PerfilEntrenadorPrivado = () => {
     }
   };
 
-  const manejarEditarUsuario = async (usuarioId) => {
-    await actions.EditarUsuario(usuarioId, datosFormulario);
+  const manejarEditarUsuario = async (usuarioId, token) => {
+    await actions.EditarUsuario(usuarioId, datosFormulario, token);
     setEditar(false);
     // Actualizar localmente los datos del usuario editado
     const usuarioActualizado = usuarios.map((usuario) => {
