@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { useParams } from 'react-router-dom';
 import { Context } from "../store/appContext";
 import "/workspaces/Team-Dinamita-FitTitans/src/front/styles/Perfiles.css"
+import "../../styles/PerfilEntrenadorPrivado.css";
 
 export const PerfilEntrenadorPrivado = () => {
   const [usuarios, setUsuarios] = useState([]);
@@ -31,7 +32,9 @@ export const PerfilEntrenadorPrivado = () => {
       console.log(secureUrl)
       const updatedUsuarios = usuarios.map((usuario) => {
         if (usuario.id === userId) {
+
           actions.EditarFotos(id ,secureUrl, token)
+
           alert("foto actualizada correctamente")
           return { ...usuario, foto: responseData.secure_url };
         }
@@ -74,127 +77,130 @@ export const PerfilEntrenadorPrivado = () => {
         setUsuarios([usuariofinal]); // Si no es un array, lo envuelve en uno
       }
     };
-      const tomarRol= localStorage.getItem("user_rol")
-        if (tomarRol == "true") {
-          setRol(true)
-        }else {setRol(false)}
+    const tomarRol = localStorage.getItem("user_rol")
+    if (tomarRol == "true") {
+      setRol(true)
+    } else { setRol(false) }
     fetchUsuarioUnico();
-  }, [editar, usuarios.foto, ]);
+  }, [editar, usuarios.foto,]);
 
   console.log(usuarios);
 
   return (
-  <>
-  {rol ?(
-    <div className="container d-flex justify-content-center">
-      <ul>
-        {Array.isArray(usuarios) && usuarios.map((usuario) => (
-          <li key={usuario.id}>
-            <h1>{usuario.nombre}</h1>
-            <div>
-              <div className="card">
-                <img src={usuario.foto} className="card-img-top" alt={`Imagen de ${usuario.nombre}`} />
-                <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
-                  <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-                <ul className="list-group list-group-flush">
-                  <li className="list-group-item">Email: {usuario.email}</li>
-                  <li className="list-group-item">Nombre: {usuario.nombre}</li>
-                  <li className="list-group-item">Telefono: {usuario.telefono}</li>
-                  <li className="list-group-item">edad: {usuario.edad}</li>
-                  <li className="list-group-item">Genero: {usuario.genero}</li>
-                  <li className="list-group-item">Altura: {usuario.altura}</li>
-                  <li className="list-group-item">Tipo De Entrenamiento: {usuario.tipo_entrenamiento}</li>
-                </ul>
-                <div className="card-body">
-                  <div className="form-check">
-                    <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                    <label className="form-check-label" htmlFor="flexCheckDefault">
-                      Default checkbox
-                    </label>
+    <>
+      {rol ? (
+        <div className="container contenedorPerfil">
+          <div className="contenedorTituloPerfil">
+            <div className="form-group TituloPerfil">PERFIL</div>
+          </div>
+          <ul className="contenedorListaUsuarios">
+            {Array.isArray(usuarios) && usuarios.map((usuario) => (
+              <li key={usuario.id} className="usuarioItem">
+                <div className="card perfilCard">
+                  <img src={usuario.foto} className="card-img-top" alt={`Imagen de ${usuario.nombre}`} />
+                  <div className="card-body">
+                    <h5 className="card-title">{usuario.nombre}</h5>
+                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                   </div>
-                  <a href="#" className="card-link">Another link</a>
+                  <ul className="list-group list-group-flush">
+                    <li className="list-group-item">Email: {usuario.email}</li>
+                    <li className="list-group-item">Nombre: {usuario.nombre}</li>
+                    <li className="list-group-item">Teléfono: {usuario.telefono}</li>
+                    <li className="list-group-item">Edad: {usuario.edad}</li>
+                    <li className="list-group-item">Género: {usuario.genero}</li>
+                    <li className="list-group-item">Altura: {usuario.altura}</li>
+                    <li className="list-group-item">Tipo De Entrenamiento: {usuario.tipo_entrenamiento}</li>
+                  </ul>
+                  <div className="card-body">
+                    <div className="form-check">
+                      <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                      <label className="form-check-label" htmlFor="flexCheckDefault">
+                        Default checkbox
+                      </label>
+                    </div>
+                    <a href="#" className="card-link">Another link</a>
+                  </div>
                 </div>
-              </div>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={(e) => handleSubirImagen(usuario.id, e.target.files[0])}
-              />
-              {editar ? (
-                <>
-                  <input
-                    type="text"
-                    name="email"
-                    className="form-control"
-                    placeholder="Email"
-                    onChange={manejarCambio}
-                    defaultValue={usuario.email}
-                  />
-                  <input
-                    type="text"
-                    name="nombre"
-                    className="form-control"
-                    placeholder="Nombre"
-                    onChange={manejarCambio}
-                    defaultValue={usuario.nombre}
-                  />
-                  <input
-                    type="text"
-                    name="telefono"
-                    className="form-control"
-                    placeholder="Telefono"
-                    onChange={manejarCambio}
-                    defaultValue={usuario.telefono}
-                  />
-                  <input
-                    type="number"
-                    name="edad"
-                    className="form-control"
-                    placeholder="Edad"
-                    onChange={manejarCambio}
-                    defaultValue={usuario.edad}
-                  />
-                  <select
-                    name="genero"
-                    className="form-select"
-                    onChange={manejarCambio}
-                    defaultValue={usuario.genero}
-                  >
-                    <option value="">Seleccionar</option>
-                    <option value="Masculino">Masculino</option>
-                    <option value="Femenino">Femenino</option>
-                    <option value="Otro">Otro</option>
-                  </select>
-                  <input
-                    type="text"
-                    name="altura"
-                    className="form-control"
-                    placeholder="Altura"
-                    onChange={manejarCambio}
-                    defaultValue={usuario.altura}
-                  />
-                  <input
-                    type="text"
-                    name="tipo_entrenamiento"
-                    className="form-control"
-                    placeholder="Tipo de entrenamiento"
-                    onChange={manejarCambio}
-                    defaultValue={usuario.tipo_entrenamiento}
-                  />
-                  <button onClick={() => manejarEditarUsuario(usuario.id)}>Guardar</button>
-                </>
-              ) : (
-                <button onClick={() => setEditar(true)}>Editar</button>
-              )}
-            </div>
-          </li>
-        ))}
-      </ul>
-    </div>
-   ) : (<h1> ERROR </h1>)}
- 
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => handleSubirImagen(usuario.id, e.target.files[0])}
+                />
+                {editar ? (
+                  <>
+                    <input className="inputImagen"
+                      type="text"
+                      name="email"
+                      className="form-control"
+                      placeholder="Email"
+                      onChange={manejarCambio}
+                      defaultValue={usuario.email}
+                    />
+                    <input
+                      type="text"
+                      name="nombre"
+                      className="form-control"
+                      placeholder="Nombre"
+                      onChange={manejarCambio}
+                      defaultValue={usuario.nombre}
+                    />
+                    <input
+                      type="text"
+                      name="telefono"
+                      className="form-control"
+                      placeholder="Teléfono"
+                      onChange={manejarCambio}
+                      defaultValue={usuario.telefono}
+                    />
+                    <input
+                      type="number"
+                      name="edad"
+                      className="form-control"
+                      placeholder="Edad"
+                      onChange={manejarCambio}
+                      defaultValue={usuario.edad}
+                    />
+                    <select
+                      name="genero"
+                      className="form-select"
+                      onChange={manejarCambio}
+                      defaultValue={usuario.genero}
+                    >
+                      <option value="">Seleccionar</option>
+                      <option value="Masculino">Masculino</option>
+                      <option value="Femenino">Femenino</option>
+                      <option value="Otro">Otro</option>
+                    </select>
+                    <input
+                      type="text"
+                      name="altura"
+                      className="form-control"
+                      placeholder="Altura"
+                      onChange={manejarCambio}
+                      defaultValue={usuario.altura}
+                    />
+                    <input
+                      type="text"
+                      name="tipo_entrenamiento"
+                      className="form-control"
+                      placeholder="Tipo de entrenamiento"
+                      onChange={manejarCambio}
+                      defaultValue={usuario.tipo_entrenamiento}
+                    />
+                    <button className="subirEditar" onClick={() => manejarEditarUsuario(usuario.id)}>Guardar</button>
+                  </>
+                ) : (
+                  <button className="subirEditar" onClick={() => setEditar(true)}>Editar</button>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : (
+        <h1> ERROR </h1>
+      )}
     </>
-  ); 
+
+
+  );
 };
