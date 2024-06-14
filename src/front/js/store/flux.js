@@ -195,14 +195,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			EditarFotos: async (id, secureUrl) => {
+			EditarFotos: async (id, secureUrl, token) => {
 				try {
 					console.log("Datos actualizados:", secureUrl);
 					const response = await fetch(`${process.env.BACKEND_URL}/listaentrenadores/${id}`, {
 						method: "PUT",
 						headers: {
-							"Content-Type": "application/json"
-						},
+							"Content-Type": "application/json",
+							Authorization: `Bearer ${token}`,
+						  },
 						body: JSON.stringify({foto:secureUrl})
 					});
 					const data = await response.json();
