@@ -1,0 +1,103 @@
+.contenedorPerfil {
+    margin-bottom: 50px;
+    
+}
+
+.contenedorTituloPerfil {
+    text-align: center;
+}
+
+.TituloPerfil {
+    color: #e7a33e;
+    font-size: 50px;
+    margin-top: 2%;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.9);
+    border-radius: 5px;
+    display: inline-block;
+    padding: 15px;
+    max-width: 100%;
+    overflow: hidden;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.contenedorListaUsuarios {
+    background-color: rgba(0, 0, 0, 0.9);
+    border: 3px solid #e7a33e;
+    border-radius: 5px;
+    padding: 30px;
+    margin-top: 1%;
+    margin-bottom: 2%;
+    max-width: 100%;
+    overflow: hidden;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    font-size: 15px;
+}
+
+.usuarioItem {
+    margin-bottom: 20px;
+    padding: 30px;
+    border-radius: 5px;
+
+}
+
+.perfilCard {
+    background-color: rgba(0, 0, 0, 0.9);
+    border: 1px solid #e7a33e;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.TituloFormulario {
+    color: white;
+    font-size: 20px;
+    margin-top: 2%;
+}
+
+.textoFormulario {
+    margin-bottom: 1%;
+}
+
+.botonEnviarFormulario {
+    text-align: center;
+}
+
+.btn-FormContactanos {
+    background: #e7a33e;
+    white-space: nowrap;
+    font-size: 15px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-top: 3%;
+    padding: 1%;
+    width: 80px;
+}
+
+@media (max-width: 768px) {
+    .TituloPerfil {
+        font-size: 32px;
+    }
+}
+
+@media (max-width: 480px) {
+    .TituloPerfil {
+        font-size: 25px;
+    }
+}
+
+.inputImagen {
+    margin: 30%;
+    padding: 40%;
+}
+
+.subirEditar {
+    background: #e7a33e;
+    white-space: nowrap;
+    /* Evita que el texto se divida en líneas */
+    font-size: 15px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
