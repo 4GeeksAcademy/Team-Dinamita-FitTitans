@@ -1,11 +1,7 @@
-// usuarioFirebase, lo tendría que modificar por isAdmin, pq esas ventajas las tendrá el admin 
-// mismo estilo que la navbar con ternario
-
-import React, { useState, useEffect } from "react";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import firebaseApp from "../../../firebase/credenciales";
+import React, { useState, useEffect, useContext } from "react";
+import { useParams } from "react-router-dom";
+import { Context } from "../store/appContext";
 import "../../styles/Rutinas.css";
-
 
 export const RutinaBloque = ({ bloqueIndex, agregarRutina, eliminarRutina, editarRutina, rutinas, isEntrenador }) => {
     const [inputValue, setInputValue] = useState("");
@@ -14,10 +10,12 @@ export const RutinaBloque = ({ bloqueIndex, agregarRutina, eliminarRutina, edita
     const [editValue, setEditValue] = useState("");
 
     const handleAgregarRutina = () => {
-        if (inputValue.length >= 5) {
-            agregarRutina(bloqueIndex, inputValue);
-            setInputValue("");
+        if (inputValue.trim() === "") {
+            return;  // No permitir rutinas vacías
         }
+
+        agregarRutina(bloqueIndex, inputValue);
+        setInputValue("");
     };
 
     const startEditing = (index, value) => {
@@ -27,12 +25,20 @@ export const RutinaBloque = ({ bloqueIndex, agregarRutina, eliminarRutina, edita
     };
 
     const handleEditRutina = () => {
-        if (editValue.length >= 5) {
-            editarRutina(bloqueIndex, editIndex, editValue);
-            setIsEditing(false);
-            setEditIndex(null);
-            setEditValue("");
+        if (editValue.trim() === "") {
+            return;  // No permitir rutinas vacías
         }
+
+        editarRutina(bloqueIndex, editIndex, editValue);
+        setIsEditing(false);
+        setEditIndex(null);
+        setEditValue("");
+    };
+
+    const handleCancelarEdicion = () => {
+        setIsEditing(false);
+        setEditIndex(null);
+        setEditValue("");
     };
 
     return (
@@ -58,7 +64,7 @@ export const RutinaBloque = ({ bloqueIndex, agregarRutina, eliminarRutina, edita
                 {rutinas.map((item, rutinaIndex) => (
                     <div className="Rutina" key={rutinaIndex}>
                         <li>
-                            <span className="escritoRutina">{item} {""}</span>
+                            <span className="escritoRutina">{item}</span>
                             {isEntrenador ? (
                                 <>
                                     <i
@@ -97,6 +103,7 @@ export const RutinaBloque = ({ bloqueIndex, agregarRutina, eliminarRutina, edita
                         placeholder="Edita el Ejercicio"
                     />
                     <button className="botonGuardar" onClick={handleEditRutina}>Guardar</button>
+                    <button className="botonCancelar" onClick={handleCancelarEdicion}>Cancelar</button>
                 </div>
             )}
             <div className="contenedorTasksEjercicios">
@@ -106,36 +113,74 @@ export const RutinaBloque = ({ bloqueIndex, agregarRutina, eliminarRutina, edita
     );
 };
 
-
 export const Rutinas = () => {
-    const [bloques, setBloques] = useState([[]]);
+    const { store, actions } = useContext(Context);
+    const [bloques, setBloques] = useState([[]]); // Inicializar con un solo bloque vacío
     const [isEntrenador, setIsEntrenador] = useState(false);
+    const { cliente_id } = useParams();
 
     useEffect(() => {
         const verificar = localStorage.getItem("user_rol");
         setIsEntrenador(verificar === "true");
-    }, []);
+
+        if (cliente_id) {
+            actions.obtenerRutinasCliente(cliente_id)
+                .then(rutinas => {
+                    const bloquesInicializados = rutinas.map(rutina => [rutina]);
+                    setBloques(bloquesInicializados);
+                })
+                .catch(error => console.error("Error al obtener las rutinas", error));
+        }
+    }, [cliente_id, actions]);
 
     const agregarRutina = (bloqueIndex, rutina) => {
-        const nuevosBloques = [...bloques];
-        nuevosBloques[bloqueIndex] = [...nuevosBloques[bloqueIndex], rutina];
-        setBloques(nuevosBloques);
+        const newBloques = [...bloques];
+        newBloques[bloqueIndex] = [...newBloques[bloqueIndex], rutina];
+        setBloques(newBloques);
+
+        actions.crearRutinaCliente(cliente_id, rutina)
+            .then(() => actions.obtenerRutinasCliente(cliente_id))
+            .then(rutinas => {
+                const updatedBloques = [...bloques];
+                updatedBloques[bloqueIndex] = rutinas;
+                setBloques(updatedBloques);
+            })
+            .catch(error => console.error("Error al agregar la rutina", error));
     };
 
     const eliminarRutina = (bloqueIndex, rutinaIndex) => {
-        const nuevosBloques = [...bloques];
-        nuevosBloques[bloqueIndex] = nuevosBloques[bloqueIndex].filter((_, i) => i !== rutinaIndex);
-        setBloques(nuevosBloques);
+        const newBloques = [...bloques];
+        const newRutinas = newBloques[bloqueIndex].filter((_, index) => index !== rutinaIndex);
+        newBloques[bloqueIndex] = newRutinas;
+        setBloques(newBloques);
+
+        actions.eliminarRutinaCliente(cliente_id, rutinaIndex)
+            .then(() => actions.obtenerRutinasCliente(cliente_id))
+            .then(rutinas => {
+                const updatedBloques = [...bloques];
+                updatedBloques[bloqueIndex] = rutinas;
+                setBloques(updatedBloques);
+            })
+            .catch(error => console.error("Error al eliminar la rutina", error));
     };
 
     const editarRutina = (bloqueIndex, rutinaIndex, nuevaRutina) => {
-        const nuevosBloques = [...bloques];
-        nuevosBloques[bloqueIndex][rutinaIndex] = nuevaRutina;
-        setBloques(nuevosBloques);
+        const newBloques = [...bloques];
+        newBloques[bloqueIndex][rutinaIndex] = nuevaRutina;
+        setBloques(newBloques);
+
+        actions.actualizarRutinaCliente(cliente_id, rutinaIndex, nuevaRutina)
+            .then(() => actions.obtenerRutinasCliente(cliente_id))
+            .then(rutinas => {
+                const updatedBloques = [...bloques];
+                updatedBloques[bloqueIndex] = rutinas;
+                setBloques(updatedBloques);
+            })
+            .catch(error => console.error("Error al editar la rutina", error));
     };
 
     const agregarBloque = () => {
-        setBloques([...bloques, []]);
+        setBloques([...bloques, []]); // Agregar un nuevo bloque vacío
     };
 
     return (
@@ -161,6 +206,11 @@ export const Rutinas = () => {
         </div>
     );
 };
+
+
+
+
+
 
 
 
