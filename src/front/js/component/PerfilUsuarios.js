@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from 'react-router-dom';
 import { Context } from "../store/appContext";
-import "/workspaces/Team-Dinamita-FitTitans/src/front/styles/Perfiles.css"
+
+import "../../styles/PerfilEntrenadorPrivado.css";
 
 export const PerfilUsuarios = () => {
   const [usuarios, setUsuarios] = useState([]);
@@ -9,9 +10,9 @@ export const PerfilUsuarios = () => {
   const [datosFormulario, setDatosFormulario] = useState({});
   const { id } = useParams();
   const { store, actions } = useContext(Context);
-  const [rol, setRol] = useState(null);
+  const [usuarioLog, setUsuariosLog] = useState(null);
+  const token = localStorage.getItem("jwt-token");
 
-  const token = localStorage.getItem("token")
   const handleSubirImagen = async (userId, file) => {
     const data = new FormData();
     data.append("file", file);
@@ -63,32 +64,25 @@ export const PerfilUsuarios = () => {
   };
 
   useEffect(() => {
-    const fetchUsuarioUnico = async () => {
-      await actions.GetUsuarioUnico(id);
-      const usuariofinal = store.usuarioUnico;
-      console.log(store.usuarioUnico);
-      console.log(usuariofinal);
-      if (usuariofinal && Array.isArray(usuariofinal)) {
-        setUsuarios(usuariofinal);
-      } else {
-        setUsuarios([usuariofinal]); // Si no es un array, lo envuelve en uno
-      }
-    };
 
-    const tomarRol= localStorage.getItem("user_rol")
-    console.log(tomarRol)
-    if (tomarRol === "false") { // esto es false porque usuario es false
-      setRol(true)
-    }else {setRol(false)}
-
-    fetchUsuarioUnico();
-  }, [editar, usuarios.foto, rol]);
-
-  console.log(usuarios);
+   if (store.id == id){
+     const fetchUsuarioUnico = async () => {
+       await actions.GetUsuarioUnico(id);
+       const usuariofinal = store.usuarioUnico;
+       if (usuariofinal && Array.isArray(usuariofinal)) {
+         setUsuarios(usuariofinal);
+       } else {
+         setUsuarios([usuariofinal]); // Si no es un array, lo envuelve en uno
+       }
+     };
+     setUsuariosLog(true)
+     fetchUsuarioUnico();
+   }else { setUsuariosLog(false),"deja de jode"}
+  }, [editar, usuarios.foto]);
 
   return (
     <>
-    {rol ? (
+    {usuarioLog ? (
 <div className="container d-flex justify-content-center align-items-center mt-5">
       <ul>
         {Array.isArray(usuarios) && usuarios.map((usuario) => (
@@ -96,23 +90,23 @@ export const PerfilUsuarios = () => {
             <h1 className="d-flex justify-content-center">{usuario.nombre}</h1>
             <div className="caja">
               <div className="card">
+
                 <img src={usuario.foto} className="card-img-top" alt={`Imagen de ${usuario.nombre}`} />
+                <div className="card-body">
+                  <h5 className="card-title">{usuario.nombre}</h5>
+                </div>
                 <ul className="list-group list-group-flush">
                   <li className="list-group-item">Email: {usuario.email}</li>
                   <li className="list-group-item">Nombre: {usuario.nombre}</li>
-                  <li className="list-group-item">Telefono: {usuario.telefono}</li>
-                  <li className="list-group-item">edad: {usuario.edad}</li>
-                  <li className="list-group-item">Genero: {usuario.genero}</li>
+                  <li className="list-group-item">Teléfono: {usuario.telefono}</li>
+                  <li className="list-group-item">Edad: {usuario.edad}</li>
+                  <li className="list-group-item">Género: {usuario.genero}</li>
                   <li className="list-group-item">Altura: {usuario.altura}</li>
                 </ul>
               </div>
-              <label htmlFor={`file-input-${usuario.id}`}>
-                Subir Imagen &#11015;
-              </label>
               <input
                 type="file"
                 accept="image/*"
-                placeholder="cambiar o subir imagen"
                 onChange={(e) => handleSubirImagen(usuario.id, e.target.files[0])}
               />
               {editar ? (
@@ -137,7 +131,7 @@ export const PerfilUsuarios = () => {
                     type="text"
                     name="telefono"
                     className="form-control"
-                    placeholder="Telefono"
+                    placeholder="Teléfono"
                     onChange={manejarCambio}
                     defaultValue={usuario.telefono}
                   />
@@ -168,19 +162,21 @@ export const PerfilUsuarios = () => {
                     onChange={manejarCambio}
                     defaultValue={usuario.altura}
                   />
-                  <button onClick={() => manejarEditarUsuario(usuario.id)}>Guardar</button>
+                  <button className="subirEditar" onClick={() => manejarEditarUsuario(usuario.id)}>Guardar</button>
                 </>
               ) : (
-                <button onClick={() => setEditar(true)}>Editar</button>
+                <button className="subirEditar" onClick={() => setEditar(true)}>Editar</button>
               )}
+
             </div>
           </li>
         ))}
       </ul>
     </div>
-    ) : (<h1> ERROR </h1>)}
+    ) : (<h1> ERROR, Vuelve a Iniciar Sesion </h1>)}
     
     </>
     
   );
 };
+

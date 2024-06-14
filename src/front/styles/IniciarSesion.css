@@ -1,8 +1,50 @@
-#inicio {
-    margin-top: 8vh !important;
+.InicioSesion {
+    padding: 20px;
+    /* Ajusta el padding según sea necesario */
     background-color: rgba(0, 0, 0, 0.9);
+    /* Fondo negro */
+    border-radius: 5px;
+    margin-top: 50px;
+    /* Espacio superior */
+    margin-bottom: 50px;
+    /* Espacio inferior */
 }
 
-#fin {
-    margin-bottom: 25vh;
+.InicioSesion .form-group {
+    margin-bottom: 20px;
+    /* Espacio inferior entre los campos del formulario */
+}
+
+.InicioSesion .form-label {
+    margin-bottom: 10px;
+    /* Espacio entre la etiqueta y el campo de entrada */
+}
+
+.InicioSesion .botonNavbar {
+    margin-top: 30px;
+    /* Espacio superior antes de los botones */
+}
+
+.InicioSesion .btn-Navbar {
+    background: #e7a33e;
+    white-space: nowrap;
+    font-size: 15px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px 20px;
+    /* Espacio interno del botón */
+}
+
+@media (max-width: 768px) {
+    .InicioSesion {
+        padding: 15px;
+        /* Ajusta el padding para pantallas pequeñas */
+    }
+}
+
+@media (max-width: 480px) {
+    .InicioSesion {
+        padding: 10px;
+        /* Ajusta el padding para pantallas muy pequeñas */
+    }
 }
