@@ -75,8 +75,9 @@ onAuthStateChanged(auth, (usuarioFirebase) => {
     console.log(verificar)
     if (verificar === true) {
       alert("funciono")
-      navigate("/")
-    } else {
+
+      navigate("/miarea")
+    }else{
       alert("error")
     }
   };
