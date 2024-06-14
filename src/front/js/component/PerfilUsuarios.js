@@ -9,9 +9,9 @@ export const PerfilUsuarios = () => {
   const [datosFormulario, setDatosFormulario] = useState({});
   const { id } = useParams();
   const { store, actions } = useContext(Context);
-  const [rol, setRol] = useState(null);
+  const [usuarioLog, setUsuariosLog] = useState(null);
+  const token = localStorage.getItem("jwt-token");
 
-  const token = localStorage.getItem("token")
   const handleSubirImagen = async (userId, file) => {
     const data = new FormData();
     data.append("file", file);
@@ -63,32 +63,25 @@ export const PerfilUsuarios = () => {
   };
 
   useEffect(() => {
-    const fetchUsuarioUnico = async () => {
-      await actions.GetUsuarioUnico(id);
-      const usuariofinal = store.usuarioUnico;
-      console.log(store.usuarioUnico);
-      console.log(usuariofinal);
-      if (usuariofinal && Array.isArray(usuariofinal)) {
-        setUsuarios(usuariofinal);
-      } else {
-        setUsuarios([usuariofinal]); // Si no es un array, lo envuelve en uno
-      }
-    };
 
-    const tomarRol= localStorage.getItem("user_rol")
-    console.log(tomarRol)
-    if (tomarRol === "false") { // esto es false porque usuario es false
-      setRol(true)
-    }else {setRol(false)}
-
-    fetchUsuarioUnico();
-  }, [editar, usuarios.foto, rol]);
-
-  console.log(usuarios);
+   if (store.id == id){
+     const fetchUsuarioUnico = async () => {
+       await actions.GetUsuarioUnico(id);
+       const usuariofinal = store.usuarioUnico;
+       if (usuariofinal && Array.isArray(usuariofinal)) {
+         setUsuarios(usuariofinal);
+       } else {
+         setUsuarios([usuariofinal]); // Si no es un array, lo envuelve en uno
+       }
+     };
+     setUsuariosLog(true)
+     fetchUsuarioUnico();
+   }else { setUsuariosLog(false),"deja de jode"}
+  }, [editar, usuarios.foto]);
 
   return (
     <>
-    {rol ? (
+    {usuarioLog ? (
 <div className="container d-flex justify-content-center align-items-center mt-5">
       <ul>
         {Array.isArray(usuarios) && usuarios.map((usuario) => (
@@ -178,7 +171,7 @@ export const PerfilUsuarios = () => {
         ))}
       </ul>
     </div>
-    ) : (<h1> ERROR </h1>)}
+    ) : (<h1> ERROR, Vuelve a Iniciar Sesion </h1>)}
     
     </>
     
