@@ -153,10 +153,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (response.ok) {
 						const data = await response.json();
 						console.log(data)
-						const rol = localStorage.getItem("user_rol")
-						if(rol === "false"){
-							return setStore({ usuarioUnico: data })
-						}else return setStore({usuarioUnico : ""})
+						return setStore({ usuarioUnico: data })
 					}
 				} catch (error) {
 					console.log('Error:', error);
@@ -185,15 +182,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if (response.ok) {
 						const data = await response.json();
 						console.log(data)
-						const rol = localStorage.getItem("user_rol")
-						if(rol === "true"){
-							return setStore({ usuarioUnico: data })
-						}else return setStore({usuarioUnico : ""})
+						return setStore({ usuarioUnico: data })
 					}
 				} catch (error) {
 					console.log('Error:', error);
 				}
 			},
+
 
 			EditarFotos: async (id, secureUrl, token) => { // solicita token para que nadie pueda
 				try {
