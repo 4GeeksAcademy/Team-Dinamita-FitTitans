@@ -52,7 +52,6 @@ const Layout = () => {
                         <Route element={<h1>Not found!</h1>} />
                         <Route element={<IniciarSesion />} path="login" />
                         <Route element={<Registro />} path="/registro" />
-
                         <Route element={<RecuperarContraseña />} path="/reset-password/:user_uuid"/>
                         <Route element={<SolicitudRecuperacion />} path="/solicitud" />
                         <Route element={<Perfiles />} path="/perfiles/:id" />

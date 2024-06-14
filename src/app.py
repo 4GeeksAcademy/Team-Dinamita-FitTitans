@@ -155,6 +155,7 @@ def login():
     
 # GETTING ALL THE USERS
 @app.route("/users", methods=["GET"])
+@jwt_required()
 def get_all_users():
     all_users = User.query.all()
     mapped_users = list(map(lambda index: index.serialize(), all_users))
@@ -164,14 +165,17 @@ def get_all_users():
 
 
 @app.route("/Usuarios/<int:user_id>", methods=["GET"])
+@jwt_required()
 def get_user_by_id(user_id):
     user = User.query.get(user_id)
-    if user is None:
+    usuarios = User.query.filter_by(rol=False).all()
+    if user is None and usuarios is True:
         return jsonify({"message": "User not found"}), 404
     return jsonify(user.serialize()), 200 
 
 
 @app.route('/Usuarios', methods=['GET'])
+@jwt_required()
 def obtener_usuarios():
     try:
         usuarios = User.query.filter_by(rol=False).all()
@@ -181,6 +185,7 @@ def obtener_usuarios():
         return jsonify({"error": str(e)}), 500
 
 @app.route('/Usuarios/<int:id>', methods=['PUT'])
+@jwt_required()
 def actualizar_user(id):
     user = User.query.get(id)
     if not user:
@@ -198,13 +203,6 @@ def actualizar_user(id):
     return jsonify(user.serialize()), 200
 
 
-@app.route("/perfiles", methods=["GET"])
-@jwt_required()
-def show_email():
-    current_user_id = get_jwt_identity()
-    user = User.filter.get(current_user_id)
-    return jsonify({"email": user.email, "id": user.id, "response": "That is your data up there!"}), 200
-
 
 
 #PARA ENTRENADORES 
@@ -212,7 +210,7 @@ def show_email():
 @app.route('/listaentrenadores', methods=['GET'])
 def get_entrenadores_usuarios():
     users = User.query.all()
-    entrenadores = [user.serialize() for user in users if user.rol]  # filtra solo los usuarios que tienen el campo rol igual a True, lo que probablemente indica que son entrenadores.
+    entrenadores = [user.serialize() for user in users if user.rol] # filtra solo los usuarios que tienen el campo rol igual a True, lo que probablemente indica que son entrenadores.
     return jsonify({
         "entrenadores": entrenadores,
     }), 200
@@ -221,12 +219,14 @@ def get_entrenadores_usuarios():
 @app.route("/listaentrenadores/<int:entrenador_id>", methods=["GET"])
 def get_entrenador_by_id(entrenador_id):
     user = User.query.get(entrenador_id)
-    if user is None:
+    usuarios = User.query.filter_by(rol="true").all()
+    if user is None and usuarios is "false":
         return jsonify({"message": "User not found"}), 404
     return jsonify(user.serialize()), 200 
 
 #para editar el perfil del usuario entrenador
 @app.route('/listaentrenadores/<int:id>', methods=['PUT'])
+@jwt_required()
 def update_user(id):
     user = User.query.get(id)
     if not user:
@@ -249,6 +249,7 @@ def update_user(id):
 
 # // Para obtener los clientes de un entrenador 
 @app.route("/listaentrenadores/<int:entrenador_id>/clientes", methods=["GET"])
+@jwt_required()
 def get_clientes_by_entrenador_id(entrenador_id):
     # Obtener los client_ids para el entrenador dado
     client_ids = db.session.query(Asignacion_entrenador.usuario_id).filter_by(entrenador_id=entrenador_id).all()
@@ -257,6 +258,7 @@ def get_clientes_by_entrenador_id(entrenador_id):
 
 # para contratar a un entrenador
 @app.route('/contratar', methods=['POST'])
+@jwt_required()
 def contratar_entrenador():
     data = request.get_json()
     entrenador_id = data.get('entrenador_id')
