@@ -189,14 +189,35 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			EditarUsuario: async (id, updatedData) => {
+
+			EditarFotos: async (id, secureUrl, token) => { // solicita token para que nadie pueda
+				try {
+					console.log("Datos actualizados:", secureUrl);
+					const response = await fetch(`${process.env.BACKEND_URL}/listaentrenadores/${id}`, {
+						method: "PUT",
+						headers: {
+							"Content-Type": "application/json",
+							Authorization: `Bearer ${token}`,
+						  },
+						body: JSON.stringify({foto:secureUrl})
+					});
+					const data = await response.json();
+					console.log("Respuesta del servidor:", data);
+					setStore({ usuarioUnico: data });
+				} catch (error) {
+					console.error("Error updating user data:", error);
+				}
+			},
+
+			EditarUsuario: async (id, updatedData, token) => {
 				try {
 					console.log("Datos actualizados:", updatedData);
 					const response = await fetch(`${process.env.BACKEND_URL}/listaentrenadores/${id}`, {
 						method: "PUT",
 						headers: {
-							"Content-Type": "application/json"
-						},
+							"Content-Type": "application/json",
+							Authorization: `Bearer ${token}`,
+						  },
 						body: JSON.stringify(updatedData)
 					});
 					const data = await response.json();
