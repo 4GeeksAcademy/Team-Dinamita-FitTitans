@@ -276,7 +276,6 @@ def get_cliente_detalle(cliente_id):
 
 # para contratar a un entrenador
 @app.route('/contratar', methods=['POST'])
-
 def contratar_entrenador():
     data = request.get_json()
     entrenador_id = data.get('entrenador_id')
@@ -322,6 +321,7 @@ def get_rutinas_cliente(cliente_id):
         return jsonify({"message": "Asignación no encontrada"}), 404
 
     return jsonify({"rutinas": asignacion.rutina.split(';') if asignacion.rutina else []}), 200
+    
 
 @app.route("/clientes/<int:cliente_id>/rutinas", methods=["POST"])
 def add_rutina_cliente(cliente_id):
