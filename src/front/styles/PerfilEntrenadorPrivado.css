@@ -1,6 +1,10 @@
-.contenedorPerfil {
+.contenedorPerfilPrivado {
     margin-bottom: 50px;
-    
+
+}
+
+.card-titlePrivado {
+    font-size: 30px;
 }
 
 .contenedorTituloPerfil {
@@ -84,7 +88,7 @@
 
 @media (max-width: 480px) {
     .TituloPerfil {
-        font-size: 25px;
+        font-size: 15px;
     }
 }
 
@@ -99,5 +103,46 @@
     /* Evita que el texto se divida en líneas */
     font-size: 15px;
     border: 1px solid black;
+    border-radius: 5px;
+    font-size: 15px;
+    padding: .375rem .75rem;
+}
+
+.subirEditar:hover,
+.subirEditar:focus {
+    background: #e7a33e;
+    color: white;
+    /* Cambiar el color del texto si lo deseas */
+    outline: none;
+    /* Elimina el borde azul de enfoque */
+    box-shadow: none;
+}
+
+.list-group-itemDatosPersonales {
+    position: relative;
+    display: block;
+    padding: .5rem 1rem;
+    color: #212529;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, .125);
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+.input-containerSubirImagen {
+    font-size: 18px;
+    padding: 1%;
+    border-radius: 5px;
+}
+
+.card-img-topEntrenador {
+    width: 100%;
+    height: auto;
+    max-width: 80%;
+    /* Establecer un tamaño máximo */
+    max-height: 80%;
+    /* Establecer un tamaño máximo */
+    object-fit: cover;
     border-radius: 5px;
 }

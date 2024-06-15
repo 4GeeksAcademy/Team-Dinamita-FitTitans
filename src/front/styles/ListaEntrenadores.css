@@ -17,7 +17,7 @@
 }
 
 p {
-    font-size: 60%;
+    font-size: 18px;
     padding: none;
     margin: 0px;
     margin-left: 15px;
@@ -55,5 +55,18 @@ p {
 
 .modal-bodyEntrenador {
     color: black;
+
+}
+.fotoMiniEntrenador {
+    width: 150px; 
+    height: 150px; 
+    border-radius: 50%;
+    object-fit: cover; 
+    border: 1px solid #e7a33e; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    
 
 }
