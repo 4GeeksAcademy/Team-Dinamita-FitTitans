@@ -24,6 +24,8 @@ border-radius: 10px;
     margin-left: 15px;
 }
 
+
+
 .Nombre,
 .Apellido {
     color: #e7a33e;
@@ -46,6 +48,7 @@ border-radius: 10px;
     color: black;
 
 }
+
 
 .nombreListaEntrenadores {
     font-size: 140%;
@@ -95,3 +98,18 @@ border-radius: 10px;
     background: #e7a33e;
     color: white;
   }
+=======
+.fotoMiniEntrenador {
+    width: 150px; 
+    height: 150px; 
+    border-radius: 50%;
+    object-fit: cover; 
+    border: 1px solid #e7a33e; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    
+
+}
+
