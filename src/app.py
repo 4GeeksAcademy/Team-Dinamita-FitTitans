@@ -31,7 +31,9 @@ from api.models import db, User, Asignacion_entrenador
 ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
 static_file_dir = os.path.join(os.path.dirname(
     os.path.realpath(__file__)), '../public/')
+
 app = Flask(__name__)
+
 app.url_map.strict_slashes = False
 
 # Configuración de la aplicación
@@ -212,14 +214,6 @@ def get_entrenadores_usuarios():
         "entrenadores": entrenadores,
     }), 200
 
-#para mostrar en el perfil del entrenador detallado
-@app.route("/listaentrenadores/<int:entrenador_id>", methods=["GET"])
-def get_entrenador_by_id(entrenador_id):
-    user = User.query.get(entrenador_id)
-    usuarios = User.query.filter_by(rol="true").all()
-    if user is None and usuarios is "false":
-        return jsonify({"message": "User not found"}), 404
-    return jsonify(user.serialize()), 200 
 
 #para editar el perfil del usuario entrenador
 @app.route('/listaentrenadores/<int:id>', methods=['PUT'])
@@ -311,8 +305,6 @@ def contratar_entrenador():
 
     return jsonify({"message": "Entrenador contratado exitosamente"}), 200
 
-
-
 #para editar borrar o modificar rutinas
 @app.route("/clientes/<int:cliente_id>/rutinas", methods=["GET"])
 def get_rutinas_cliente(cliente_id):
@@ -381,6 +373,54 @@ def delete_rutina_cliente(cliente_id, rutina_index):
 
 
 
+# DIETA para ver, crear, editar y eliminar
+@app.route('/asignacion/<int:asignacion_id>/dieta', methods=['GET'])
+def obtener_dieta(asignacion_id):
+    asignacion = Asignacion_entrenador.query.get(asignacion_id)
+    print("Asignacion:", asignacion_id)
+    if not asignacion:
+        return jsonify({"error": "Asignación no encontrada"}), 404
+
+    return jsonify({"dieta": asignacion.dieta}), 200
+
+@app.route('/asignacion/<int:asignacion_id>/dieta', methods=['POST'])
+def crear_dieta(asignacion_id):
+    data = request.get_json()
+    nueva_dieta = data.get('dieta')
+
+    asignacion = Asignacion_entrenador.query.get(asignacion_id)
+    if not asignacion:
+        return jsonify({"error": "Asignación no encontrada"}), 404
+
+    asignacion.dieta = nueva_dieta
+    db.session.commit()
+
+    return jsonify({"message": "Dieta creada correctamente"}), 201
+
+@app.route('/asignacion/<int:asignacion_id>/dieta', methods=['PUT'])
+def actualizar_dieta(asignacion_id):
+    data = request.get_json()
+    nueva_dieta = data.get('dieta')
+
+    asignacion = Asignacion_entrenador.query.get(asignacion_id)
+    if not asignacion:
+        return jsonify({"error": "Asignación no encontrada"}), 404
+
+    asignacion.dieta = nueva_dieta
+    db.session.commit()
+
+    return jsonify({"message": "Dieta actualizada correctamente"}), 200
+
+@app.route('/asignacion/<int:asignacion_id>/dieta', methods=['DELETE'])
+def eliminar_dieta(asignacion_id):
+    asignacion = Asignacion_entrenador.query.get(asignacion_id)
+    if not asignacion:
+        return jsonify({"error": "Asignación no encontrada"}), 404
+
+    asignacion.dieta = None
+    db.session.commit()
+
+    return jsonify({"message": "Dieta eliminada correctamente"}), 200
 
 
 
@@ -451,4 +491,12 @@ def recovery_password():
             return jsonify({"error": "Usuario no encontrado"}), 404
     except Exception as e:
         return jsonify({"error": f"Error al confirmar el usuario: {str(e)}"}), 500
-#}
+
+
+
+
+
+#no borrar
+if __name__ == '__main__':
+    PORT = int(os.environ.get('PORT', 3001))
+    app.run(host='0.0.0.0', port=PORT, debug=True)

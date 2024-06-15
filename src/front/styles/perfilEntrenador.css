@@ -54,17 +54,7 @@ body {
   margin-bottom: 30px;
 }
 
-.btnContratame {
-  width: 100%;
-  text-align: center;
-  margin-top: 10px;
-  background: #e7a33e;
-  padding: 10px;
-  color: black;
-  font-size: 15px;
-  border: 1px solid black;
-  border-radius: 5px;
-}
+
 
 .btnPlanes, .btnCerrar {
   margin-top: 10px;
@@ -75,9 +65,8 @@ body {
   border: 1px solid black;
   border-radius: 5px;
 }
-.btnContratame:hover,
+
 .btnPlanes:hover,
-.btnContratame:focus,
 .btnPlanes:focus 
 .btnCerrar:hover, .btnCerrar:focus {
   background: #e7a33e;
