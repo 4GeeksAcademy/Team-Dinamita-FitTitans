@@ -1,6 +1,9 @@
-.contenedorPerfil {
+.contenedorPerfilPrivado {
     margin-bottom: 50px;
     
+}
+.card-titlePrivado{
+    font-size: 30px;
 }
 
 .contenedorTituloPerfil {
