@@ -8,7 +8,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			usuarioUnico: [],
 			entrenadores: [],
 			clientes: [],
-			rutinas: []
+			rutinas: [],
+			dieta: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -198,8 +199,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						headers: {
 							"Content-Type": "application/json",
 							Authorization: `Bearer ${token}`,
-						  },
-						body: JSON.stringify({foto:secureUrl})
+						},
+						body: JSON.stringify({ foto: secureUrl })
 					});
 					const data = await response.json();
 					console.log("Respuesta del servidor:", data);
@@ -217,7 +218,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						headers: {
 							"Content-Type": "application/json",
 							Authorization: `Bearer ${token}`,
-						  },
+						},
 						body: JSON.stringify(updatedData)
 					});
 					const data = await response.json();
@@ -227,8 +228,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.error("Error updating user data:", error);
 				}
 			},
-			
-			
+
+
 			contratarEntrenador: (entrenador_id, usuario_id, seleccionarPlan,) => {
 				return fetch(`${process.env.BACKEND_URL}/contratar`, {
 					method: "POST",
@@ -366,40 +367,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			ContratarEntrenador: async (usuarioId, entrenadorId) => {
-				try {
-					const response = await fetch('https://vigilant-invention-7vv6g76ww4543x9xg-3001.app.github.dev/contratar-entrenador', {
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json',
-							'accept': 'application/json'
-						},
-						body: JSON.stringify({
-							usuario_id: usuarioId,
-							entrenador_id: entrenadorId
-						}),
-					});
-
-					if (response.ok) {
-						// Si la contratación es exitosa, obtenemos la respuesta del backend
-						const responseData = await response.json();
-						// Devolvemos un objeto con el valor booleano y cualquier otro dato que necesites
-						return { success: true, message: responseData.message };
-					} else {
-						const errorData = await response.json();
-						console.log(errorData);
-						return { success: false, error: errorData.message };
-					}
-				} catch (error) {
-					console.log('Error:', error);
-					return { success: false, error: 'Error al enviar la solicitud de contratación.' };
-				}
-			},
-
-
-
-
-
 			// para eliminar modificar y crear rutina
 			obtenerRutinasCliente: async (cliente_id) => {
 				try {
@@ -471,6 +438,93 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+
+
+			// DIETA ver, crear, modificar, eliminar
+			obtenerDieta: async (asignacion_id) => {
+				try {
+					console.log("Asignacion ID:", asignacion_id);
+					const response = await fetch(`${process.env.BACKEND_URL}/asignacion/${asignacion_id}/dieta`, {
+						method: 'GET',
+						headers: {
+							'Content-Type': 'application/json'
+						}
+					});
+
+					if (!response.ok) {
+						throw new Error("Error al obtener la dieta del servidor");
+					}
+
+					const data = await response.json();
+					setStore({ dieta: data.dieta });
+					return { success: true, dieta: data.dieta };
+				} catch (error) {
+					console.error("Error obteniendo la dieta:", error);
+					return { success: false, error: 'Error al obtener la dieta.' };
+				}
+			},
+
+			crearDieta: async (asignacion_id, dieta) => {
+				try {
+					const response = await fetch(`${process.env.BACKEND_URL}/asignacion/${asignacion_id}/dieta`, {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify({ dieta })
+					});
+					const data = await response.json();
+					if (response.ok) {
+						return { success: true, message: data.message };
+					} else {
+						return { success: false, error: data.error };
+					}
+				} catch (error) {
+					console.error("Error creando la dieta:", error);
+					return { success: false, error: 'Error al crear la dieta.' };
+				}
+			},
+
+			actualizarDieta: async (asignacion_id, dieta) => {
+				try {
+					const response = await fetch(`${process.env.BACKEND_URL}/asignacion/${asignacion_id}/dieta`, {
+						method: 'PUT',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify({ dieta })
+					});
+					const data = await response.json();
+					if (response.ok) {
+						return { success: true, message: data.message };
+					} else {
+						return { success: false, error: data.error };
+					}
+				} catch (error) {
+					console.error("Error actualizando la dieta:", error);
+					return { success: false, error: 'Error al actualizar la dieta.' };
+				}
+			},
+
+			eliminarDieta: async (asignacion_id) => {
+				try {
+					const response = await fetch(`${process.env.BACKEND_URL}/asignacion/${asignacion_id}/dieta`, {
+						method: 'DELETE',
+						headers: {
+							'Content-Type': 'application/json'
+						}
+					});
+					const data = await response.json();
+					if (response.ok) {
+						return { success: true, message: data.message };
+					} else {
+						return { success: false, error: data.error };
+					}
+				} catch (error) {
+					console.error("Error eliminando la dieta:", error);
+					return { success: false, error: 'Error al eliminar la dieta.' };
+				}
+			},
 
 
 

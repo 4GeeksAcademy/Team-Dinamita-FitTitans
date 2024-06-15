@@ -5,25 +5,26 @@ import "../../styles/ListaEntrenadores.css";
 
 export const ListaEntrenadores = () => {
   const { store, actions } = useContext(Context);
-  const [showFelicidades, setShowFelicidades] = useState(false);
   const [seleccionarPlan, setSeleccionarPlan] = useState(null);
   const [currentEntrenadorId, setCurrentEntrenadorId] = useState(null);
+  const [error, setError] = useState(null);
+  const [loaded, setLoaded] = useState(false);
+  const [showFelicidades, setShowFelicidades] = useState(false);
+
   const usuario_id = localStorage.getItem("user_id");
   const user_role = localStorage.getItem("user_role");
-  const [error, setError] = useState(null);
-  const [loaded, setLoaded] = useState(false); // Estado para controlar la carga inicial
 
   useEffect(() => {
     if (!loaded) {
       actions.obtenerListaEntrenadores()
         .then(data => {
-          setLoaded(true); // Marca que la carga inicial ha sido completada
+          setLoaded(true);
         })
         .catch(error => {
           console.error("Error al obtener la lista de entrenadores:", error);
         });
     }
-  }, [actions, loaded]); // Asegúrate de que actions y loaded sean las únicas dependencias
+  }, [actions, loaded]);
 
   const contratarEntrenador = () => {
     if (!usuario_id) {
@@ -66,21 +67,32 @@ export const ListaEntrenadores = () => {
 
   return (
     <div className="container mt-5 containerEntrenadores">
-      <ul className="list-group mb-5">
+      <ul className="list-group mb-5 contenedortarjetalistaEntrenadores">
         {store.entrenadores.map((entrenador, index) => (
-          <li key={index} className="list-group-item bg-dark text-light">
-            <div className="row align-items-center">
-              <div className="fotoContainer col-4">
+          <li key={index} className="list-group-item bg-dark text-light contenedortarjetalistaEntrenadores">
+            <div className="row align-items-start align-items-md-center">
+              <div className="col-md-4 mb-3 mb-md-0 text-center text-md-start"> {/* Aquí ajustamos el tamaño de columna para pantallas medianas y grandes */}
                 <Link to={`/listaentrenadores/${entrenador.id}`}>
                   <img src={entrenador.foto} alt="User" className="fotoMiniEntrenador" />
                 </Link>
               </div>
-              <div className="col-8 overflow-hidden">
-                <p className="Nombre">Nombre: {entrenador.nombre}</p>
-                <p>Edad: {entrenador.edad}</p>
-                <p>Género: {entrenador.genero}</p>
-                <p>Tipo de entrenamiento: {entrenador.tipo_entrenamiento}</p>
-                <div className="mt-2">
+              <div className="col-md-8">
+                <div className="nombreListaEntrenadores">
+                  <p className="Nombre">{entrenador.nombre}</p>
+                </div>
+                <div className="infoListaEntrenadores">
+                  <p>Edad: {entrenador.edad}</p>
+                </div>
+                <div className="infoListaEntrenadores">
+                  <p>Altura: {entrenador.altura}</p>
+                </div>
+                <div className="infoListaEntrenadores">
+                  <p>Género: {entrenador.genero}</p>
+                </div>
+                <div className="infoListaEntrenadores">
+                  <p>Tipo de entrenamiento: {entrenador.tipo_entrenamiento}</p>
+                </div>
+                <div className="mt-2 contenedorBotonContratame">
                   {usuario_id && user_role !== "entrenador" ? (
                     <button type="button" className="btnContratame" onClick={() => openPlanModal(entrenador.id)}>Contrátame</button>
                   ) : (
@@ -92,7 +104,6 @@ export const ListaEntrenadores = () => {
           </li>
         ))}
       </ul>
-
       <div className="modal fade" id="planModal" tabIndex="-1" aria-labelledby="planModalLabel" aria-hidden="true">
         <div className="modal-dialog">
           <div className="modal-content">
@@ -109,7 +120,6 @@ export const ListaEntrenadores = () => {
           </div>
         </div>
       </div>
-
       <div className="modal fade" id="felicidadesModal" tabIndex="-1" aria-labelledby="felicidadesModalLabel" aria-hidden="true">
         <div className="modal-dialog">
           <div className="modal-content">
