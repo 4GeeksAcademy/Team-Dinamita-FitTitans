@@ -68,14 +68,13 @@ const Layout = () => {
                         <Route element={<Rutinas />} path="/rutinas" />
                         <Route element={<ListaEntrenadores />} path="/listaentrenadores" />
                         <Route element={<ListaDeClientes />} path="/listaclientes" />
-                        <Route element={<Dieta />} path="/dieta" />
                         <Route element={<Blog />} path="/blog" />
                         <Route element={<ListaDeClientes />} path="/entrenador/:entrenador_id/clientes" />
-
                         <Route element={<DetalleCliente />} path="/clientes/:cliente_id" />                      
-                        <Route element={<Dieta />} path="/clientes/:cliente_id/dieta" />
+                        
                         <Route element={<Rutinas />} path="/clientes/:cliente_id/rutina" />
 
+                        <Route element={<Dieta />} path="/asignacion/:asignacion_id/dieta" />
 
                     </Routes>
                     <Footer />
