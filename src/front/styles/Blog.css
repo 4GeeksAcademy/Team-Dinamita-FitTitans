@@ -1,27 +1,96 @@
-.App {
-    text-align: center;
+.contenedorBlog {
+  margin-bottom: 50px;
+}
+
+.contenedorTituloBlog {
+  text-align: center;
+}
+
+.TituloBlog {
+  color: #e7a33e;
+  font-size: 50px;
+  margin-top: 2%;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.9);
+  border-radius: 5px;
+  display: inline-block;
+  padding: 15px;
+  max-width: 100%;
+  overflow: hidden;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.contenedorFormularioBlog {
+  background-color: rgba(0, 0, 0, 0.9);
+  border: 3px solid #e7a33e;
+  border-radius: 5px;
+  padding: 30px;
+  margin-top: 1%;
+  margin-bottom: 2%;
+  max-width: 100%;
+  overflow: hidden;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.textareaBlog {
+  margin-bottom: 10px;
+  width: 100%;
+  border-radius: 5px;
+  padding: 10px;
+  border: 1px solid #e7a33e;
+  background-color: #fff;
+}
+
+.botonPublicarBlog {
+  text-align: center;
+}
+
+.btn-FormBlog {
+  background: #e7a33e;
+  white-space: nowrap;
+  font-size: 15px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-top: 3%;
+  padding: .375rem .75rem;
+  width: 100px;
+}
+.btn-FormBlog:hover {
+  color: white;
+  background-color: #e7a33e;
+  color: white;
+  /* Cambiar el color del texto si lo deseas */
+  outline: none;
+  /* Elimina el borde azul de enfoque */
+  box-shadow: none;
+}
+
+.postBlog {
+  border: 1px solid #e7a33e;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+.comment {
+  margin-left: 20px;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .TituloBlog {
+      font-size: 32px;
   }
-  
-  .App-header {
-    background-color: #282c34;
-    padding: 20px;
-    color: white;
+}
+
+@media (max-width: 480px) {
+  .TituloBlog {
+      font-size: 25px;
   }
-  
-  textarea {
-    width: 80%;
-    height: 50px;
-    margin-bottom: 10px;
-  }
-  
-  button {
-    padding: 10px 20px;
-    background-color: #61dafb;
-    border: none;
-    cursor: pointer;
-    margin-left: 10px;
-  }
-  
-  button:hover {
-    background-color: #21a1f1;
-  }
+}
+.parrafoBlog {
+  font-size:15px;
+}

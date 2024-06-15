@@ -94,19 +94,19 @@ export const PerfilEntrenadorPrivado = () => {
             {Array.isArray(usuarios) && usuarios.map((usuario) => (
               <li key={usuario.id} className="usuarioItem">
                 <div className="card perfilCard">
-                  <img src={usuario.foto} className="card-img-top" alt={`Imagen de ${usuario.nombre}`} />
+                  <img src={usuario.foto} className="card-img-topEntrenador" alt={`Imagen de ${usuario.nombre}`} />
                   <div className="card-body">
                     <h5 className="card-titlePrivado">{usuario.nombre}</h5>
                     <p className="card-text">Datos Personales</p>
                   </div>
                   <ul className="list-group list-group-flush">
-                    <li className="list-group-item">Email: {usuario.email}</li>
-                    <li className="list-group-item">Nombre: {usuario.nombre}</li>
-                    <li className="list-group-item">Teléfono: {usuario.telefono}</li>
-                    <li className="list-group-item">Edad: {usuario.edad}</li>
-                    <li className="list-group-item">Género: {usuario.genero}</li>
-                    <li className="list-group-item">Altura: {usuario.altura}</li>
-                    <li className="list-group-item">Tipo De Entrenamiento: {usuario.tipo_entrenamiento}</li>
+                    <li className="list-group-itemDatosPersonales">Email: {usuario.email}</li>
+                    <li className="list-group-itemDatosPersonales">Nombre: {usuario.nombre}</li>
+                    <li className="list-group-itemDatosPersonales">Teléfono: {usuario.telefono}</li>
+                    <li className="list-group-itemDatosPersonales">Edad: {usuario.edad}</li>
+                    <li className="list-group-itemDatosPersonales">Género: {usuario.genero}</li>
+                    <li className="list-group-itemDatosPersonales">Altura: {usuario.altura}</li>
+                    <li className="list-group-itemDatosPersonales">Tipo De Entrenamiento: {usuario.tipo_entrenamiento}</li>
                   </ul>
                   <div className="card-body">
                     <div className="form-check">
@@ -118,11 +118,14 @@ export const PerfilEntrenadorPrivado = () => {
                     <a href="#" className="card-link">Ir arriba</a>
                   </div>
                 </div>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => handleSubirImagen(usuario.id, e.target.files[0])}
-                />
+
+                <div class="input-containerSubirImagen">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => handleSubirImagen(usuario.id, e.target.files[0])}
+                  />
+                </div>
                 {editar ? (
                   <>
                     <input className="inputImagen"
