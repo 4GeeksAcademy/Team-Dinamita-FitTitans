@@ -29,7 +29,7 @@ export const DetalleCliente = () => {
       <p><strong>Altura:</strong> {cliente.altura}</p>
       <p><strong>Plan de entrenamiento:</strong> {cliente.plan_entrenamiento}</p>
       <div>
-        <Link to={`/clientes/${cliente_id}/dieta`}><p><strong>Dieta</strong></p></Link>
+        <Link to={`/asignacion/:asignacion_id/dieta`}><p><strong>Dieta</strong></p></Link>
         <Link to={`/clientes/${cliente_id}/rutina`}> <p><strong>Rutina</strong></p></Link>
       </div>
     </div>
