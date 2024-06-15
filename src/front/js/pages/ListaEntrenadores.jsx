@@ -73,7 +73,7 @@ export const ListaEntrenadores = () => {
             <div className="row align-items-start align-items-md-center">
               <div className="col-md-4 mb-3 mb-md-0 text-center text-md-start"> {/* Aquí ajustamos el tamaño de columna para pantallas medianas y grandes */}
                 <Link to={`/listaentrenadores/${entrenador.id}`}>
-                  <img src={entrenador.foto} alt="User" className="img-fluid rounded-circle" />
+                  <img src={entrenador.foto} alt="User" className="fotoMiniEntrenador" />
                 </Link>
               </div>
               <div className="col-md-8">

@@ -55,8 +55,15 @@
 .btn-ConoceEntrenadores:hover,
 .btn-RegistrarEntrenador:hover,
 .btn-tipEntrenamientoNuevo:hover,
-.btn-tipNutricionNuevo:hover {
+.btn-tipNutricionNuevo:hover,
+.btn-tipEntrenamientoNuevo:hover {
   color: white;
+  background-color: #e7a33e;
+  color: white;
+  /* Cambiar el color del texto si lo deseas */
+  outline: none;
+  /* Elimina el borde azul de enfoque */
+  box-shadow: none;
 }
 
 .row-fila2 {
@@ -126,6 +133,7 @@
   border: 1px solid black;
   border-radius: 5px;
   padding: 10px;
+
 }
 
 .col-columna4 {
@@ -442,8 +450,5 @@
     font-size: 16px;
   }
 
-  .btn-tipEntrenamientoNuevo,
-  .btn-tipNutricionNuevo {
-    font-size: 12px;
-  }
+
 }
