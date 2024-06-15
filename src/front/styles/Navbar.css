@@ -34,7 +34,13 @@
 }
 
 .btn-Navbar:hover {
-    color: white
+    color: white;
+    background-color: #e7a33e;
+    color: white;
+    /* Cambiar el color del texto si lo deseas */
+    outline: none;
+    /* Elimina el borde azul de enfoque */
+    box-shadow: none;
 }
 
 .btn-Navbar {
@@ -44,6 +50,7 @@
     font-size: 15px;
     border: 1px solid black;
     border-radius: 5px;
+
 }
 
 @media screen and (max-width: 600px) {

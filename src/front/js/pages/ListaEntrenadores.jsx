@@ -72,7 +72,7 @@ export const ListaEntrenadores = () => {
             <div className="row align-items-center">
               <div className="fotoContainer col-4">
                 <Link to={`/listaentrenadores/${entrenador.id}`}>
-                  <img src={entrenador.foto} alt="User" className="img-fluid rounded-circle" />
+                  <img src={entrenador.foto} alt="User" className="fotoMiniEntrenador" />
                 </Link>
               </div>
               <div className="col-8 overflow-hidden">
