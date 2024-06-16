@@ -1,74 +1,118 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Context } from '../store/appContext';
+import '../../styles/Dieta.css';
 
 export const Dieta = () => {
-    const { actions, store } = useContext(Context); 
-    const { asignacion_id } = useParams();
-    const [dieta, setDieta] = useState(""); 
-    const [mensaje, setMensaje] = useState(""); 
+    const { actions } = useContext(Context);
+    const { cliente_id, usuario_id } = useParams();
+    const [comidas, setComidas] = useState([]);
+    const [nuevaComida, setNuevaComida] = useState("");
+    const [mensaje, setMensaje] = useState("");
+    const [editIndex, setEditIndex] = useState(null);
+    const [editComida, setEditComida] = useState("");
 
     useEffect(() => {
-        const obtenerDieta = async () => {
-            const resultado = await actions.obtenerDieta(asignacion_id); 
+        const fetchDieta = async () => {
+            const resultado = await actions.obtenerDieta(cliente_id);
             if (resultado.success) {
-                setDieta(resultado.dieta || ""); 
+                setComidas(resultado.dieta || []);
             } else {
                 setMensaje(`Error: ${resultado.error}`);
             }
         };
-        obtenerDieta();
-    }, [asignacion_id, actions]); 
+        fetchDieta();
+    }, [cliente_id, actions]);
 
-    
-    const manejarCrearDieta = async () => {
-        if (!dieta.trim()) {
-            setMensaje("Por favor ingresa una dieta válida");
-            return;
+    const manejarAgregarComida = () => {
+        if (nuevaComida.trim()) {
+            const nuevasComidas = [nuevaComida, ...comidas];
+            setComidas(nuevasComidas);
+            setNuevaComida("");
+        } else {
+            setMensaje("Por favor ingresa una comida válida");
         }
+    };
 
-        const resultado = await actions.crearDieta(asignacion_id, dieta); 
+    const manejarGuardarDieta = async () => {
+        const resultado = await actions.actualizarDieta(cliente_id, comidas);
         if (resultado.success) {
-            setDieta(dieta); 
-            setMensaje("Dieta creada correctamente");
+            setMensaje("Dieta guardada correctamente");
         } else {
             setMensaje(`Error: ${resultado.error}`);
         }
     };
 
-    const manejarSubmit = async (e) => {
-        e.preventDefault();
-        if (!dieta.trim()) {
-            setMensaje("Por favor ingresa una dieta válida");
-            return;
-        }
-        const resultado = await actions.actualizarDieta(asignacion_id, dieta); 
-        if (resultado.success) {
-            setMensaje("Dieta actualizada correctamente");
-        } else {
-            setMensaje(`Error: ${resultado.error}`);
-        }
+    const manejarEliminarComida = (index) => {
+        const nuevasComidas = comidas.filter((_, i) => i !== index);
+        setComidas(nuevasComidas);
     };
 
-    const manejarEliminar = async () => {
-        const resultado = await actions.eliminarDieta(asignacion_id);
-        if (resultado.success) {
-            setDieta(""); 
-            setMensaje("Dieta eliminada correctamente");
-        } else {
-            setMensaje(`Error: ${resultado.error}`);
-        }
+    const manejarEditarComida = (index) => {
+        setEditIndex(index);
+        setEditComida(comidas[index]);
+    };
+
+    const manejarGuardarEdicion = () => {
+        const nuevasComidas = comidas.map((comida, index) =>
+            index === editIndex ? editComida : comida
+        );
+        setComidas(nuevasComidas);
+        setEditIndex(null);
+        setEditComida("");
+    };
+
+    const manejarCancelarEdicion = () => {
+        setEditIndex(null);
+        setEditComida("");
     };
 
     return (
-        <div>
-            <form onSubmit={manejarSubmit}>
-                <textarea value={dieta} onChange={(e) => setDieta(e.target.value)} />
-                <button type="submit">Guardar Dieta</button>
-                <button type="button" onClick={manejarEliminar}>Eliminar Dieta</button>
-            </form>
-            <button onClick={manejarCrearDieta}>Crear Nueva Dieta</button>
-            {mensaje && <p>{mensaje}</p>}
+        <div className="containerPrincipalDieta">
+            <div className="contenedorTituloDietaPrivada">
+                <div className="tituloDietaPrivada">
+                    DIETA
+                </div>
+            </div>
+            <div className="formularioDieta">
+                <textarea
+                    value={nuevaComida}
+                    onChange={(e) => setNuevaComida(e.target.value)}
+                    placeholder="Ingrese una comida"
+                    rows={4}
+                    cols={50}
+                />
+                <button onClick={manejarAgregarComida}>Agregar Comida</button>
+                {mensaje && <p className="mensajeDieta">{mensaje}</p>}
+                <div className="listaComidas">
+                    {comidas.map((comida, index) => (
+                        <div key={index} className="comidaItem">
+                            {editIndex === index ? (
+                                <div>
+                                    <textarea
+                                        value={editComida}
+                                        onChange={(e) => setEditComida(e.target.value)}
+                                        rows={4}
+                                        cols={50}
+                                    />
+                                    <button onClick={manejarGuardarEdicion}>Guardar</button>
+                                    <button onClick={manejarCancelarEdicion}>Cancelar</button>
+                                </div>
+                            ) : (
+                                <div>
+                                    <pre>{comida}</pre>
+                                    <div className="botonesEditarEliminar">
+                                        <button onClick={() => manejarEditarComida(index)}>Editar</button>
+                                        <button onClick={() => manejarEliminarComida(index)}>Eliminar</button>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    ))}
+                </div>
+                <button onClick={manejarGuardarDieta}>Guardar Dieta</button>
+            </div>
+
         </div>
     );
 };
