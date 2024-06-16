@@ -67,32 +67,21 @@ export const ListaEntrenadores = () => {
 
   return (
     <div className="container mt-5 containerEntrenadores">
-      <ul className="list-group mb-5 contenedortarjetalistaEntrenadores">
+      <ul className="list-group mb-5">
         {store.entrenadores.map((entrenador, index) => (
-          <li key={index} className="list-group-item bg-dark text-light contenedortarjetalistaEntrenadores">
-            <div className="row align-items-start align-items-md-center">
-              <div className="col-md-4 mb-3 mb-md-0 text-center text-md-start"> {/* Aquí ajustamos el tamaño de columna para pantallas medianas y grandes */}
+          <li key={index} className="list-group-item bg-dark text-light">
+            <div className="row align-items-center">
+              <div className="fotoContainer col-4">
                 <Link to={`/listaentrenadores/${entrenador.id}`}>
                   <img src={entrenador.foto} alt="User" className="fotoMiniEntrenador" />
                 </Link>
               </div>
-              <div className="col-md-8">
-                <div className="nombreListaEntrenadores">
-                  <p className="Nombre">{entrenador.nombre}</p>
-                </div>
-                <div className="infoListaEntrenadores">
-                  <p>Edad: {entrenador.edad}</p>
-                </div>
-                <div className="infoListaEntrenadores">
-                  <p>Altura: {entrenador.altura}</p>
-                </div>
-                <div className="infoListaEntrenadores">
-                  <p>Género: {entrenador.genero}</p>
-                </div>
-                <div className="infoListaEntrenadores">
-                  <p>Tipo de entrenamiento: {entrenador.tipo_entrenamiento}</p>
-                </div>
-                <div className="mt-2 contenedorBotonContratame">
+              <div className="col-8 overflow-hidden">
+                <p className="Nombre">Nombre: {entrenador.nombre}</p>
+                <p>Edad: {entrenador.edad}</p>
+                <p>Género: {entrenador.genero}</p>
+                <p>Tipo de entrenamiento: {entrenador.tipo_entrenamiento}</p>
+                <div className="mt-2">
                   {usuario_id && user_role !== "entrenador" ? (
                     <button type="button" className="btnContratame" onClick={() => openPlanModal(entrenador.id)}>Contrátame</button>
                   ) : (
@@ -139,7 +128,3 @@ export const ListaEntrenadores = () => {
     </div>
   );
 };
-
-
-
-
