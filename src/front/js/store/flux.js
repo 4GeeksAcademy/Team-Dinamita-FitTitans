@@ -1,3 +1,5 @@
+import { video } from "@cloudinary/url-gen/qualifiers/source";
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -9,7 +11,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			entrenadores: [],
 			clientes: [],
 			rutinas: [],
-			dieta: []
+			dieta: [],
+			videos: [],
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -122,10 +125,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				return !!token;
 			},
 
-			//getRol: () => {
-			//const rol = localStorage.getItem("user_rol")
-
-			//},
 			logout: () => {
 				localStorage.clear();
 				setStore({ seInicio: false })
@@ -204,7 +203,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 					const data = await response.json();
 					console.log("Respuesta del servidor:", data);
-					setStore({ usuarioUnico: data });
+					
 				} catch (error) {
 					console.error("Error updating user data:", error);
 				}
@@ -438,8 +437,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-
-
 			// DIETA ver, crear, modificar, eliminar
 			obtenerDieta: async (asignacion_id) => {
 				try {
@@ -526,8 +523,75 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			/*sendMessage: async (messageContent, receiverId) => {
+                const senderId = getStore().currentUserId;
+                try {
+                    const response = await fetch(`${process.env.BACKEND_URL}/api/messages`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ sender_id: senderId, receiver_id: receiverId, content: messageContent })
+                    });
+                    if (!response.ok) {
+                        throw new Error('Error sending message');
+                    }
+                    return true;
+                } catch (error) {
+                    console.error('Error sending message:', error);
+                    return false;
+                }
+            },
 
+            fetchUserMessages: async (userId) => {
+                try {
+                    const response = await fetch(`${process.env.BACKEND_URL}/api/messages/${userId}`);
+                    if (!response.ok) {
+                        throw new Error('Error fetching messages');
+                    }
+                    const data = await response.json();
+                    setStore({ messages: data });
+                    return data;
+                } catch (error) {
+                    console.error('Error fetching messages:', error);
+                }
+            },*/
 
+			
+			Videos :async (id, secureUrl, token, titulo) => { // solicita token para que nadie pueda
+					try {
+						console.log("Datos actualizados:", secureUrl);
+						const response = await fetch(`${process.env.BACKEND_URL}/agregarVideo/${id}`, {
+							method: 'POST',
+							headers: {
+								"Content-Type": "application/json",
+								Authorization: `Bearer ${token}`,
+							},
+							body: JSON.stringify({ url: secureUrl, titulo : titulo})
+						});
+						const data = await response.json();
+						console.log("Respuesta del servidor:", data);
+					} catch (error) {
+						console.error("Error updating user data:", error);
+					}
+				},
+
+			ObtenerVideos :async (id, token) => { // solicita token para que nadie pueda
+					try {
+						const response = await fetch(`${process.env.BACKEND_URL}/usuarios/${id}/entrenadores`, {
+							method: 'GET',
+							headers: {
+								"Content-Type": "application/json",
+								Authorization: `Bearer ${token}`,
+							},	
+						});
+						const data = await response.json();
+						setStore({videos : data})
+						console.log("Respuesta del servidor:", data);
+					} catch (error) {
+						console.error("Error updating user data:", error);
+					}
+				},
 		}
 	};
 };
