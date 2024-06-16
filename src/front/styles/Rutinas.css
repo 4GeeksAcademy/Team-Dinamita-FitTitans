@@ -20,7 +20,7 @@
     border-radius: 5px;
 }
 
-h1 {
+#h1 {
     color: #e7a33e;
     font-size: 50px;
     margin-top: 2%;
@@ -30,7 +30,7 @@ h1 {
     padding: 15px;
 }
 
-ul li {
+#ul-li {
     border: 1px solid rgb(172, 169, 169);
     font-size: 30px;
     list-style-type: none;
