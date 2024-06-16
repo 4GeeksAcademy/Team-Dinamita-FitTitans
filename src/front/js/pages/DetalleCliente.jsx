@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Context } from "../store/appContext";
 import { useParams, Link } from 'react-router-dom';
+import "../../styles/DetalleCliente.css";
 
 export const DetalleCliente = () => {
   const { cliente_id } = useParams();
@@ -20,18 +21,22 @@ export const DetalleCliente = () => {
   if (!cliente) return <div>Cargando...</div>;
 
   return (
-    <div>
-      <h2>Detalle del Cliente</h2>
-      <p><strong>Nombre:</strong> {cliente.nombre}</p>
-      <p><strong>Email:</strong> {cliente.email}</p>
-      <p><strong>Edad:</strong> {cliente.edad}</p>
-      <p><strong>Género:</strong> {cliente.genero}</p>
-      <p><strong>Altura:</strong> {cliente.altura}</p>
-      <p><strong>Plan de entrenamiento:</strong> {cliente.plan_entrenamiento}</p>
-      <div>
-        <Link to={`/asignacion/:asignacion_id/dieta`}><p><strong>Dieta</strong></p></Link>
-        <Link to={`/clientes/${cliente_id}/rutina`}> <p><strong>Rutina</strong></p></Link>
+    <div className="container contenedorDetalleCliente">
+      <div className="contenedorTituloDetalleCliente">
+        <div className="form-group TituloDetalleCliente">Detalle del Cliente</div>
+      </div>
+      <div className="contenedorContenidoDetalleCliente">
+        <p><strong>Nombre:</strong> {cliente.nombre}</p>
+        <p><strong>Email:</strong> {cliente.email}</p>
+        <p><strong>Edad:</strong> {cliente.edad}</p>
+        <p><strong>Género:</strong> {cliente.genero}</p>
+        <p><strong>Altura:</strong> {cliente.altura}</p>
+        <p><strong>Plan de entrenamiento:</strong> {cliente.plan_entrenamiento}</p>
+        <div className="detalleLinks">
+          <Link to={`/clientes/${cliente.id}/dieta`} className="detalleLink"><p><strong>DIETA</strong></p></Link>
+          <Link to={`/clientes/${cliente.id}/rutina`} className="detalleLink"><p><strong>RUTINA</strong></p></Link>
+        </div>
       </div>
     </div>
   );
-};
+}

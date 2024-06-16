@@ -13,6 +13,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			rutinas: [],
 			dieta: [],
 			videos: [],
+
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -438,35 +439,55 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			// DIETA ver, crear, modificar, eliminar
-			obtenerDieta: async (asignacion_id) => {
+			obtenerDietaCliente: async (usuario_id) => {
 				try {
-					console.log("Asignacion ID:", asignacion_id);
-					const response = await fetch(`${process.env.BACKEND_URL}/asignacion/${asignacion_id}/dieta`, {
+					const response = await fetch(`${process.env.BACKEND_URL}/clienteasignado/${usuario_id}/dieta`, {
 						method: 'GET',
 						headers: {
-							'Content-Type': 'application/json'
+							'Content-Type': 'application/json',
 						}
 					});
-
-					if (!response.ok) {
-						throw new Error("Error al obtener la dieta del servidor");
-					}
-
 					const data = await response.json();
-					setStore({ dieta: data.dieta });
-					return { success: true, dieta: data.dieta };
+					console.log("Respuesta obtenerDietaCliente:", data);
+					if (response.ok) {
+						return { success: true, dieta: data.dieta };
+					} else {
+						return { success: false, error: data.error };
+					}
 				} catch (error) {
-					console.error("Error obteniendo la dieta:", error);
-					return { success: false, error: 'Error al obtener la dieta.' };
+					console.error("Error al obtener la dieta del cliente:", error);
+					return { success: false, error: "Error de red al obtener la dieta del cliente" };
 				}
 			},
+			
+			
+			// obtenerDieta: async (cliente_id) => {
+			// 	try {
+			// 		const response = await fetch(`${process.env.BACKEND_URL}/clientes/${cliente_id}/dieta`, {
+			// 			method: 'GET',
+			// 			headers: {
+			// 				'Content-Type': 'application/json',
+			// 			}
+			// 		});
+			// 		const data = await response.json();
+			// 		console.log("Respuesta obtenerDieta:", data);
+			// 		if (response.ok) {
+			// 			return { success: true, dieta: data.dieta };
+			// 		} else {
+			// 			return { success: false, error: data.error };
+			// 		}
+			// 	} catch (error) {
+			// 		console.error("Error al obtener la dieta:", error);
+			// 		return { success: false, error: "Error de red al obtener la dieta" };
+			// 	}
+			// },
 
-			crearDieta: async (asignacion_id, dieta) => {
+			crearDieta: async (cliente_id, dieta) => {
 				try {
-					const response = await fetch(`${process.env.BACKEND_URL}/asignacion/${asignacion_id}/dieta`, {
+					const response = await fetch(`${process.env.BACKEND_URL}/clientes/${cliente_id}/dieta`, {
 						method: 'POST',
 						headers: {
-							'Content-Type': 'application/json'
+							'Content-Type': 'application/json',
 						},
 						body: JSON.stringify({ dieta })
 					});
@@ -477,17 +498,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return { success: false, error: data.error };
 					}
 				} catch (error) {
-					console.error("Error creando la dieta:", error);
-					return { success: false, error: 'Error al crear la dieta.' };
+					console.error("Error al crear la dieta:", error);
+					return { success: false, error: "Error de red al crear la dieta" };
 				}
 			},
 
-			actualizarDieta: async (asignacion_id, dieta) => {
+			actualizarDieta: async (cliente_id, dieta) => {
 				try {
-					const response = await fetch(`${process.env.BACKEND_URL}/asignacion/${asignacion_id}/dieta`, {
+					const response = await fetch(`${process.env.BACKEND_URL}/clientes/${cliente_id}/dieta`, {
 						method: 'PUT',
 						headers: {
-							'Content-Type': 'application/json'
+							'Content-Type': 'application/json',
 						},
 						body: JSON.stringify({ dieta })
 					});
@@ -498,17 +519,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return { success: false, error: data.error };
 					}
 				} catch (error) {
-					console.error("Error actualizando la dieta:", error);
-					return { success: false, error: 'Error al actualizar la dieta.' };
+					console.error("Error al actualizar la dieta:", error);
+					return { success: false, error: "Error de red al actualizar la dieta" };
 				}
 			},
 
-			eliminarDieta: async (asignacion_id) => {
+			eliminarDieta: async (cliente_id) => {
 				try {
-					const response = await fetch(`${process.env.BACKEND_URL}/asignacion/${asignacion_id}/dieta`, {
+					const response = await fetch(`${process.env.BACKEND_URL}/clientes/${cliente_id}/dieta`, {
 						method: 'DELETE',
 						headers: {
-							'Content-Type': 'application/json'
+							'Content-Type': 'application/json',
 						}
 					});
 					const data = await response.json();
@@ -518,44 +539,116 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return { success: false, error: data.error };
 					}
 				} catch (error) {
-					console.error("Error eliminando la dieta:", error);
-					return { success: false, error: 'Error al eliminar la dieta.' };
+					console.error("Error al eliminar la dieta:", error);
+					return { success: false, error: "Error de red al eliminar la dieta" };
 				}
 			},
 
-			/*sendMessage: async (messageContent, receiverId) => {
-                const senderId = getStore().currentUserId;
-                try {
-                    const response = await fetch(`${process.env.BACKEND_URL}/api/messages`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ sender_id: senderId, receiver_id: receiverId, content: messageContent })
-                    });
-                    if (!response.ok) {
-                        throw new Error('Error sending message');
-                    }
-                    return true;
-                } catch (error) {
-                    console.error('Error sending message:', error);
-                    return false;
-                }
-            },
+			obtenerDietaCliente: async (usuario_id) => {
+				try {
+					const response = await fetch(`${process.env.BACKEND_URL}/clienteasignado/${usuario_id}/dieta`, {
+						method: 'GET',
+						headers: {
+							'Content-Type': 'application/json',
+						}
+					});
+					const data = await response.json();
+					console.log("Respuesta obtenerDietaCliente:", data);
+					if (response.ok) {
+						return { success: true, dieta: data.dieta };
+					} else {
+						return { success: false, error: data.error };
+					}
+				} catch (error) {
+					console.error("Error al obtener la dieta del cliente:", error);
+					return { success: false, error: "Error de red al obtener la dieta del cliente" };
+				}
+			},
 
-            fetchUserMessages: async (userId) => {
-                try {
-                    const response = await fetch(`${process.env.BACKEND_URL}/api/messages/${userId}`);
-                    if (!response.ok) {
-                        throw new Error('Error fetching messages');
-                    }
-                    const data = await response.json();
-                    setStore({ messages: data });
-                    return data;
-                } catch (error) {
-                    console.error('Error fetching messages:', error);
-                }
-            },*/
+
+
+			obtenerRutina: async (cliente_id) => {
+				try {
+					const response = await fetch(`${process.env.BACKEND_URL}/clientes/${cliente_id}/rutina`, {
+						method: 'GET',
+						headers: {
+							'Content-Type': 'application/json',
+						}
+					});
+					const data = await response.json();
+					console.log("Respuesta obtenerRutina:", data);
+					if (response.ok) {
+						return { success: true, rutina: data.rutina };
+					} else {
+						return { success: false, error: data.error };
+					}
+				} catch (error) {
+					console.error("Error al obtener la rutina:", error);
+					return { success: false, error: "Error de red al obtener la rutina" };
+				}
+			},
+
+			crearRutina: async (cliente_id, rutina) => {
+				try {
+					const response = await fetch(`${process.env.BACKEND_URL}/clientes/${cliente_id}/rutina`, {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify({ rutina })
+					});
+					const data = await response.json();
+					if (response.ok) {
+						return { success: true, message: data.message };
+					} else {
+						return { success: false, error: data.error };
+					}
+				} catch (error) {
+					console.error("Error al crear la rutina:", error);
+					return { success: false, error: "Error de red al crear la rutina" };
+				}
+			},
+
+			actualizarRutina: async (cliente_id, rutina) => {
+				try {
+					const response = await fetch(`${process.env.BACKEND_URL}/clientes/${cliente_id}/rutina`, {
+						method: 'PUT',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify({ rutina })
+					});
+					const data = await response.json();
+					if (response.ok) {
+						return { success: true, message: data.message };
+					} else {
+						return { success: false, error: data.error };
+					}
+				} catch (error) {
+					console.error("Error al actualizar la rutina:", error);
+					return { success: false, error: "Error de red al actualizar la rutina" };
+				}
+			},
+
+			eliminarRutina: async (cliente_id) => {
+				try {
+					const response = await fetch(`${process.env.BACKEND_URL}/clientes/${cliente_id}/rutina`, {
+						method: 'DELETE',
+						headers: {
+							'Content-Type': 'application/json',
+						}
+					});
+					const data = await response.json();
+					if (response.ok) {
+						return { success: true, message: data.message };
+					} else {
+						return { success: false, error: data.error };
+					}
+				} catch (error) {
+					console.error("Error al eliminar la dieta:", error);
+					return { success: false, error: "Error de red al eliminar la rutina" };
+				}
+			},
 
 			
 			Videos :async (id, secureUrl, token, titulo) => { // solicita token para que nadie pueda
@@ -592,6 +685,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.error("Error updating user data:", error);
 					}
 				},
+
 		}
 	};
 };

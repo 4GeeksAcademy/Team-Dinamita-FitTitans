@@ -71,7 +71,6 @@ class Asignacion_entrenador(db.Model):
     dieta = db.Column(db.String(100), nullable=True)
     rutina = db.Column(db.String(100), nullable=True)
 
-
     def __repr__(self):
         return f'<Asignacion_entrenador {self.id}>'
     
