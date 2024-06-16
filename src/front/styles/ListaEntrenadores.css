@@ -92,4 +92,23 @@ btnCerrar {
     border-radius: 5px;
     font-size: 15px;
     margin-top: 1%;
+  }
+  
+  .btnPlanes:hover,
+  .btnPlanes:focus 
+  .btnCerrar:hover, .btnCerrar:focus {
+    background: #e7a33e;
+    color: white;
+  }
+
+.fotoMiniEntrenador {
+    width: 150px; 
+    height: 150px; 
+    border-radius: 50%;
+    object-fit: cover; 
+    border: 1px solid #e7a33e; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+

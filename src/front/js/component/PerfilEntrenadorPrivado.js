@@ -129,9 +129,11 @@ export const PerfilEntrenadorPrivado = () => {
                 {editar ? (
                   <>
                     <input
+
+                      className="inputImagen"
+
                       type="text"
                       name="email"
-                      className="form-control"
                       placeholder="Email"
                       onChange={manejarCambio}
                       defaultValue={usuario.email}

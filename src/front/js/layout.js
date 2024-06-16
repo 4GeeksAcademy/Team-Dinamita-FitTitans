@@ -73,8 +73,9 @@ const Layout = () => {
                         <Route element={<DetalleCliente />} path="/clientes/:cliente_id" />                      
                         
                         <Route element={<Rutinas />} path="/clientes/:cliente_id/rutina" />
-
-                        <Route element={<Dieta />} path="/asignacion/:asignacion_id/dieta" />
+                        <Route element={<Dieta />} path="/clientes/:cliente_id/dieta" />
+                        
+                        <Route element={<Dieta />} path="/clienteasignacion/:usuario_id/dieta" />
 
                     </Routes>
                     <Footer />
