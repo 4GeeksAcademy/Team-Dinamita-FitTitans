@@ -12,3 +12,10 @@ fittitans@outlook.com
 
 mi api
 https://glowing-spork-jj94vv5pq7p2ppw7-3001.app.github.dev/
+
+
+npm install morgan -E
+npm install express -E
+npm install express socket.io
+npm install socket.io-client
+pip install flask flask-socketio
