@@ -25,6 +25,7 @@ import { Rutinas } from "./pages/Rutinas.jsx";
 import {VideosEntrenador} from "/workspaces/Team-Dinamita-FitTitans/src/front/js/pages/VideosEntrenador.jsx"
 import { ListaEntrenadores } from "./pages/ListaEntrenadores.jsx";
 import { Dieta } from "./pages/Dieta.jsx"
+import { DietaCliente } from "./pages/DietaCliente.jsx";
 import { Blog } from "./pages/Blog.jsx"
 import { Perfiles } from "/workspaces/Team-Dinamita-FitTitans/src/front/js/pages/Perfiles.jsx";
 import { PerfilEntrenadorPrivado } from "./component/PerfilEntrenadorPrivado.js";
@@ -54,7 +55,7 @@ const Layout = () => {
                         <Route element={<h1>Not found!</h1>} />
                         <Route element={<IniciarSesion />} path="login" />
                         <Route element={<Registro />} path="/registro" />
-                        <Route element={<RecuperarContraseña />} path="/reset-password/:user_uuid"/>
+                        <Route element={<RecuperarContraseña />} path="/reset-password/:user_uuid" />
                         <Route element={<SolicitudRecuperacion />} path="/solicitud" />
                         <Route element={<Perfiles />} path="/perfiles/:id" />
                         <Route element={<PerfilUsuarios />} path="/perfil/:id" />
@@ -77,6 +78,7 @@ const Layout = () => {
                         <Route element={<VideosEntrenador />} path="/videosentrenador/:id" />
                         <Route element={<Dieta />} path="/asignacion/:asignacion_id/dieta" />
                         <Route element={<VideosUsuarios />} path="/videousuario/:id" />
+
                     </Routes>
                     <Footer />
                 </ScrollToTop>

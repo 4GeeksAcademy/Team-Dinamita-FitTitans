@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import { useParams, Link } from 'react-router-dom';
 import "../../styles/MiAreaCliente.css";
 
 export const MiAreaCliente = () => {
+    const { cliente_id, usuario_id } = useParams();
     const { store, actions } = useContext(Context);
+
 
 
     const usuarioID = localStorage.getItem("user_id");
@@ -22,12 +24,12 @@ export const MiAreaCliente = () => {
                 </div>
                 <div className="col-md-4 columnaDietaCliente">
                     <div className="tituloDietaCliente">
-                        <Link to="/dieta" className="linkDietaCliente">DIETA</Link>
+                        <Link to={`/cliente/dieta/${usuarioID}`} className="linkDietaCliente">DIETA</Link>
                     </div>
                 </div>
                 <div className="col-md-4 columnaRutinasCliente">
                     <div className="tituloRutinasCliente">
-                        <Link to="/rutinas" className="linkRutinasCliente">RUTINAS</Link>
+                        <Link to={`/clientes/${cliente_id}/rutina`} className="linkRutinasCliente">RUTINAS</Link>
                     </div>
                 </div>
             </div>
