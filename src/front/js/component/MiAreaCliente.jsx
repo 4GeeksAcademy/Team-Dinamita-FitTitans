@@ -24,7 +24,7 @@ export const MiAreaCliente = () => {
                 </div>
                 <div className="col-md-4 columnaDietaCliente">
                     <div className="tituloDietaCliente">
-                        <Link to={`/clienteasignacion/${usuario_id}/dieta`} className="linkDietaCliente">DIETA</Link>
+                        <Link to={`/cliente/dieta/${usuarioID}`} className="linkDietaCliente">DIETA</Link>
                     </div>
                 </div>
                 <div className="col-md-4 columnaRutinasCliente">

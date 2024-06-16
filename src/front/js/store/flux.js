@@ -440,26 +440,48 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 			// DIETA ver, crear, modificar, eliminar
-			obtenerDieta: async (cliente_id) => {
+			obtenerDietaCliente: async (usuario_id) => {
 				try {
-					const response = await fetch(`${process.env.BACKEND_URL}/clientes/${cliente_id}/dieta`, {
+					const response = await fetch(`${process.env.BACKEND_URL}/clienteasignado/${usuario_id}/dieta`, {
 						method: 'GET',
 						headers: {
 							'Content-Type': 'application/json',
 						}
 					});
 					const data = await response.json();
-					console.log("Respuesta obtenerDieta:", data);
+					console.log("Respuesta obtenerDietaCliente:", data);
 					if (response.ok) {
 						return { success: true, dieta: data.dieta };
 					} else {
 						return { success: false, error: data.error };
 					}
 				} catch (error) {
-					console.error("Error al obtener la dieta:", error);
-					return { success: false, error: "Error de red al obtener la dieta" };
+					console.error("Error al obtener la dieta del cliente:", error);
+					return { success: false, error: "Error de red al obtener la dieta del cliente" };
 				}
 			},
+			
+			
+			// obtenerDieta: async (cliente_id) => {
+			// 	try {
+			// 		const response = await fetch(`${process.env.BACKEND_URL}/clientes/${cliente_id}/dieta`, {
+			// 			method: 'GET',
+			// 			headers: {
+			// 				'Content-Type': 'application/json',
+			// 			}
+			// 		});
+			// 		const data = await response.json();
+			// 		console.log("Respuesta obtenerDieta:", data);
+			// 		if (response.ok) {
+			// 			return { success: true, dieta: data.dieta };
+			// 		} else {
+			// 			return { success: false, error: data.error };
+			// 		}
+			// 	} catch (error) {
+			// 		console.error("Error al obtener la dieta:", error);
+			// 		return { success: false, error: "Error de red al obtener la dieta" };
+			// 	}
+			// },
 
 			crearDieta: async (cliente_id, dieta) => {
 				try {
