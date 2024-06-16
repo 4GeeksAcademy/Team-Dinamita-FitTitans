@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from 'react-router-dom';
 import { Context } from "../store/appContext";
-import "/workspaces/Team-Dinamita-FitTitans/src/front/styles/Perfiles.css"
+
 import "../../styles/PerfilEntrenadorPrivado.css";
 
 export const PerfilEntrenadorPrivado = () => {
@@ -129,7 +129,9 @@ export const PerfilEntrenadorPrivado = () => {
                 {editar ? (
                   <>
                     <input
+
                       className="inputImagen"
+
                       type="text"
                       name="email"
                       placeholder="Email"

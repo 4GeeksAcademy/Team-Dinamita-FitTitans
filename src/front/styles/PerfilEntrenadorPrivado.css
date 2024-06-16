@@ -140,9 +140,7 @@
     width: 100%;
     height: auto;
     max-width: 80%;
-    /* Establecer un tamaño máximo */
     max-height: 80%;
-    /* Establecer un tamaño máximo */
     object-fit: cover;
     border-radius: 5px;
 }
