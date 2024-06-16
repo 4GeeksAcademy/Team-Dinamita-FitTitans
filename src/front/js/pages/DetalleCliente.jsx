@@ -33,7 +33,7 @@ export const DetalleCliente = () => {
         <p><strong>Altura:</strong> {cliente.altura}</p>
         <p><strong>Plan de entrenamiento:</strong> {cliente.plan_entrenamiento}</p>
         <div className="detalleLinks">
-          <Link to={`/asignacion/${cliente.id}/dieta`} className="detalleLink"><p><strong>DIETA</strong></p></Link>
+          <Link to={`/clientes/${cliente.id}/dieta`} className="detalleLink"><p><strong>DIETA</strong></p></Link>
           <Link to={`/clientes/${cliente.id}/rutina`} className="detalleLink"><p><strong>RUTINA</strong></p></Link>
         </div>
       </div>
