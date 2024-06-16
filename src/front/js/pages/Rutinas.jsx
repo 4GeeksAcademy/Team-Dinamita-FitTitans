@@ -85,12 +85,15 @@ export const RutinaBloque = ({
                             onChange={(e) => setNuevoNombreBloque(e.target.value)}
                             placeholder="Nuevo nombre"
                         />
-                        <button className="botonGuardar" onClick={handleEditNombreBloque}>
-                            Guardar
-                        </button>
-                        <button className="botonCancelar" onClick={() => setIsEditingNombreBloque(false)}>
-                            Cancelar
-                        </button>
+                         <div className="botones-editar-nombre">
+                            <button className="botonGuardar" onClick={handleEditNombreBloque}>
+                                Guardar
+                            </button>
+                            <button className="botonCancelar" onClick={() => setIsEditingNombreBloque(false)}>
+                                Cancelar
+                            </button>
+                         </div>
+                       
                     </div>
                 )}
             </div>
@@ -125,12 +128,15 @@ export const RutinaBloque = ({
                             {isEntrenador ? (
                                 isEditing && editIndex === item.id ? (
                                     <>
-                                        <button className="botonGuardar" onClick={handleEditRutina}>
-                                            Guardar
-                                        </button>
-                                        <button className="botonCancelar" onClick={handleCancelarEdicion}>
-                                            Cancelar
-                                        </button>
+                                        <div className="botones-editar-nombre">
+                                            <button className="botonGuardar" onClick={handleEditRutina}>
+                                                Guardar
+                                            </button>
+                                            <button className="botonCancelar" onClick={handleCancelarEdicion}>
+                                                Cancelar
+                                            </button>
+                                        </div>
+                                        
                                     </>
                                 ) : (
                                     <>
