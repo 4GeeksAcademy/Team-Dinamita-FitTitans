@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { useParams } from 'react-router-dom';
 import { Context } from "../store/appContext";
 
-import "../../styles/PerfilEntrenadorPrivado.css";
+import "../../styles/PerfilUsuario.css";
 
 export const PerfilUsuarios = () => {
   const [usuarios, setUsuarios] = useState([]);

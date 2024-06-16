@@ -1,12 +1,12 @@
-.contenedorContactanos {
+.contenedorClientes {
     margin-bottom: 50px;
 }
 
-.contenedorTituloContactanos {
+.contenedorTituloClientes {
     text-align: center;
 }
 
-.TituloContactanos {
+.TituloClientes {
     color: #e7a33e;
     font-size: 50px;
     margin-top: 2%;
@@ -21,11 +21,8 @@
     overflow-wrap: break-word;
 }
 
-.contenedorFormulario {
+.contenedorListaClientes {
     background-color: rgba(0, 0, 0, 0.9);
-}
-
-.contenedorFormulario {
     border: 3px solid #e7a33e;
     border-radius: 5px;
     padding: 30px;
@@ -35,52 +32,33 @@
     overflow: hidden;
     word-wrap: break-word;
     overflow-wrap: break-word;
-
 }
 
-.TituloFormulario {
-    color: white;
-    font-size: 20px;
-    margin-top: 2%;
-
-}
-
-.textoFormulario {
-    margin-bottom: 1%;
-}
-
-.botonEnviarFormulario {
-    text-align: center;
-}
-
-.btn-FormContactanos {
-    background: #e7a33e;
-    white-space: nowrap;
-    font-size: 15px;
-    border: 1px solid black;
+.clienteItem {
+    margin-bottom: 10px;
     border-radius: 5px;
-    margin-top: 3%;
-    padding: 1%;
-    width: 80px;
 }
-.btn-FormContactanos:hover {
+
+.clienteLink {
     color: white;
-    background-color: #e7a33e;
-    color: white;
-    /* Cambiar el color del texto si lo deseas */
-    outline: none;
-    /* Elimina el borde azul de enfoque */
-    box-shadow: none;
+    text-decoration: none;
+    font-size: 20px;
+    margin-left: 5px;
+
+}
+
+.clienteLink:hover {
+    color: #e7a33e;
 }
 
 @media (max-width: 768px) {
-    .TituloContactanos {
+    .TituloClientes {
         font-size: 32px;
     }
 }
 
 @media (max-width: 480px) {
-    .TituloContactanos {
+    .TituloClientes {
         font-size: 25px;
     }
 }
