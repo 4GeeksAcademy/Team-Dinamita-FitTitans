@@ -367,77 +367,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			// para eliminar modificar y crear rutina
-			obtenerRutinasCliente: async (cliente_id) => {
-				try {
-					const response = await fetch(`${process.env.BACKEND_URL}/clientes/${cliente_id}/rutinas`);
-					if (!response.ok) {
-						throw new Error("Error al obtener las rutinas del cliente");
-					}
-					const data = await response.json();
-					return data.rutinas;
-				} catch (error) {
-					console.error("Error al obtener las rutinas del cliente", error);
-					throw error;
-				}
-			},
-
-			crearRutinaCliente: async (cliente_id, rutina) => {
-				try {
-					const response = await fetch(`${process.env.BACKEND_URL}/clientes/${cliente_id}/rutinas`, {
-						method: "POST",
-						headers: {
-							"Content-Type": "application/json"
-						},
-						body: JSON.stringify({ rutina })
-					});
-					if (!response.ok) {
-						throw new Error("Error al crear la rutina del cliente");
-					}
-					const data = await response.json();
-					return data.message;
-				} catch (error) {
-					console.error("Error al crear la rutina del cliente", error);
-					throw error;
-				}
-			},
-
-			actualizarRutinaCliente: async (cliente_id, rutinaIndex, rutina) => {
-				try {
-					const response = await fetch(`${process.env.BACKEND_URL}/clientes/${cliente_id}/rutinas/${rutinaIndex}`, {
-						method: "PUT",
-						headers: {
-							"Content-Type": "application/json"
-						},
-						body: JSON.stringify({ rutina })
-					});
-					if (!response.ok) {
-						throw new Error("Error al actualizar la rutina del cliente");
-					}
-					const data = await response.json();
-					return data.message;
-				} catch (error) {
-					console.error("Error al actualizar la rutina del cliente", error);
-					throw error;
-				}
-			},
-
-			eliminarRutinaCliente: async (cliente_id, rutinaIndex) => {
-				try {
-					const response = await fetch(`${process.env.BACKEND_URL}/clientes/${cliente_id}/rutinas/${rutinaIndex}`, {
-						method: "DELETE"
-					});
-					if (!response.ok) {
-						throw new Error("Error al eliminar la rutina del cliente");
-					}
-					const data = await response.json();
-					return data.message;
-				} catch (error) {
-					console.error("Error al eliminar la rutina del cliente", error);
-					throw error;
-				}
-			},
-
 			// AQUI OBTIENE LA DIETA EL CLIENTE
 			obtenerDietaCliente: async (usuario_id) => {
 				try {
@@ -460,7 +389,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			// DIETA ver, crear, modificar, eliminar esto es del entrenador
+			// ENTRENADOR DIETA ver, crear, modificar, eliminar esto es del entrenador
 			obtenerDieta: async (cliente_id) => {
 				try {
 					const response = await fetch(`${process.env.BACKEND_URL}/clientes/${cliente_id}/dieta`, {
