@@ -669,9 +669,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				},
 
-			ObtenerVideos :async (id, token) => { // solicita token para que nadie pueda
+			ObtenerVideos :async (token) => { // solicita token para que nadie pueda
 					try {
-						const response = await fetch(`${process.env.BACKEND_URL}/usuarios/${id}/entrenadores`, {
+						const response = await fetch(`${process.env.BACKEND_URL}/listaentrenadores/videos`, {
 							method: 'GET',
 							headers: {
 								"Content-Type": "application/json",
@@ -679,8 +679,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 							},	
 						});
 						const data = await response.json();
-						setStore({videos : data})
-						console.log("Respuesta del servidor:", data);
+						setStore({videos : data.entrenadores})
+						console.log("Respuesta del servidor:", data.entrenadores);
 					} catch (error) {
 						console.error("Error updating user data:", error);
 					}
