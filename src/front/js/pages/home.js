@@ -3,9 +3,19 @@ import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/home.css";
 import { set } from "@cloudinary/url-gen/actions/variable";
+import { Registro } from "/workspaces/Team-Dinamita-FitTitans/src/front/js/component/Registro.js";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
+	const [isModalOpen, setIsModalOpen] = useState(false);
+
+	const openModal = () => {
+		setIsModalOpen(true);
+	};
+
+	const closeModal = () => {
+		setIsModalOpen(false);
+	};
 
 	const tipEntrenamiento = [
 		"Mantente hidratado durante tus entrenamientos.",
@@ -85,7 +95,7 @@ export const Home = () => {
 						</div>
 						<div className="botonRegistrarEntrenador">
 							<Link to="/">
-								<button className="btn btn-RegistrarEntrenador">Registrate</button>
+								<button className="btn btn-RegistrarEntrenador" onClick={openModal}>Registrate</button>
 							</Link>
 						</div>
 					</div>
@@ -171,7 +181,7 @@ export const Home = () => {
 			</div>
 		</div>
 		)}
-		
+		{isModalOpen && <Registro closeModal={closeModal} />}
 		</>
 	);
 };
