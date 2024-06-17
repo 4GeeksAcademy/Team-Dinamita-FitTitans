@@ -1,3 +1,5 @@
+import { video } from "@cloudinary/url-gen/qualifiers/source";
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -9,6 +11,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			entrenadores: [],
 			clientes: [],
 			rutinas: [],
+			dieta: [],
+			videos: [],
+
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -121,10 +126,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				return !!token;
 			},
 
-			//getRol: () => {
-			//const rol = localStorage.getItem("user_rol")
-
-			//},
 			logout: () => {
 				localStorage.clear();
 				setStore({ seInicio: false })
@@ -203,7 +204,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 					const data = await response.json();
 					console.log("Respuesta del servidor:", data);
-					setStore({ usuarioUnico: data });
+					
 				} catch (error) {
 					console.error("Error updating user data:", error);
 				}
@@ -437,29 +438,49 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-
-
 			// DIETA ver, crear, modificar, eliminar
-			obtenerDieta: async (cliente_id) => {
+			obtenerDietaCliente: async (usuario_id) => {
 				try {
-					const response = await fetch(`${process.env.BACKEND_URL}/clientes/${cliente_id}/dieta`, {
+					const response = await fetch(`${process.env.BACKEND_URL}/clienteasignado/${usuario_id}/dieta`, {
 						method: 'GET',
 						headers: {
 							'Content-Type': 'application/json',
 						}
 					});
 					const data = await response.json();
-					console.log("Respuesta obtenerDieta:", data);
+					console.log("Respuesta obtenerDietaCliente:", data);
 					if (response.ok) {
 						return { success: true, dieta: data.dieta };
 					} else {
 						return { success: false, error: data.error };
 					}
 				} catch (error) {
-					console.error("Error al obtener la dieta:", error);
-					return { success: false, error: "Error de red al obtener la dieta" };
+					console.error("Error al obtener la dieta del cliente:", error);
+					return { success: false, error: "Error de red al obtener la dieta del cliente" };
 				}
 			},
+			
+			
+			// obtenerDieta: async (cliente_id) => {
+			// 	try {
+			// 		const response = await fetch(`${process.env.BACKEND_URL}/clientes/${cliente_id}/dieta`, {
+			// 			method: 'GET',
+			// 			headers: {
+			// 				'Content-Type': 'application/json',
+			// 			}
+			// 		});
+			// 		const data = await response.json();
+			// 		console.log("Respuesta obtenerDieta:", data);
+			// 		if (response.ok) {
+			// 			return { success: true, dieta: data.dieta };
+			// 		} else {
+			// 			return { success: false, error: data.error };
+			// 		}
+			// 	} catch (error) {
+			// 		console.error("Error al obtener la dieta:", error);
+			// 		return { success: false, error: "Error de red al obtener la dieta" };
+			// 	}
+			// },
 
 			crearDieta: async (cliente_id, dieta) => {
 				try {
@@ -629,8 +650,41 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			
+			Videos :async (id, secureUrl, token, titulo) => { // solicita token para que nadie pueda
+					try {
+						console.log("Datos actualizados:", secureUrl);
+						const response = await fetch(`${process.env.BACKEND_URL}/agregarVideo/${id}`, {
+							method: 'POST',
+							headers: {
+								"Content-Type": "application/json",
+								Authorization: `Bearer ${token}`,
+							},
+							body: JSON.stringify({ url: secureUrl, titulo : titulo})
+						});
+						const data = await response.json();
+						console.log("Respuesta del servidor:", data);
+					} catch (error) {
+						console.error("Error updating user data:", error);
+					}
+				},
 
-
+			ObtenerVideos :async (id, token) => { // solicita token para que nadie pueda
+					try {
+						const response = await fetch(`${process.env.BACKEND_URL}/usuarios/${id}/entrenadores`, {
+							method: 'GET',
+							headers: {
+								"Content-Type": "application/json",
+								Authorization: `Bearer ${token}`,
+							},	
+						});
+						const data = await response.json();
+						setStore({videos : data})
+						console.log("Respuesta del servidor:", data);
+					} catch (error) {
+						console.error("Error updating user data:", error);
+					}
+				},
 
 		}
 	};

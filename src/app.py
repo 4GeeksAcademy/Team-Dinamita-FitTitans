@@ -4,7 +4,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 from api.RecuperarContraseña import enviar_correo
 from api.EmailBienvenida import enviar_correo_bienvenida
 import os
-from flask import Flask, request, jsonify, url_for, send_from_directory, render_template, flash, redirect
+from flask import Flask, request, jsonify, url_for, send_from_directory, render_template, flash, redirect, render_template
 from flask_migrate import Migrate
 from flask_swagger import swagger
 from api.utils import APIException, generate_sitemap
@@ -20,12 +20,13 @@ from datetime import datetime, timedelta
 import bcrypt
 from dotenv import load_dotenv
 load_dotenv()
+from flask_socketio import SocketIO, emit, join_room, leave_room
 
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from itsdangerous import URLSafeTimedSerializer
-from api.models import db, User, Asignacion_entrenador
+from api.models import db, User, Asignacion_entrenador, Message
 
 
 ENV = "development" if os.getenv("FLASK_DEBUG") == "1" else "production"
@@ -165,7 +166,7 @@ def get_all_users():
     response_body = jsonify(mapped_users)
     return response_body, 200
 
-
+#usuario unico
 @app.route("/Usuarios/<int:user_id>", methods=["GET"])
 def get_user_by_id(user_id):
     user = User.query.get(user_id)
@@ -174,6 +175,14 @@ def get_user_by_id(user_id):
         return jsonify({"message": "User not found"}), 404
     return jsonify(user.serialize()), 200 
 
+#entrenador unico
+@app.route("/listaentrenadores/<int:user_id>", methods=["GET"])
+def entrenadores_id(user_id):
+    user = User.query.get(user_id)
+    usuarios = User.query.filter_by(rol=True).all()
+    if user is None and usuarios is True:
+        return jsonify({"message": "User not found"}), 404
+    return jsonify(user.serialize()), 200 
 
 @app.route('/Usuarios', methods=['GET'])
 def obtener_usuarios():
@@ -233,6 +242,7 @@ def update_user(id):
     user.altura = data.get('altura', user.altura)
     user.tipo_entrenamiento = data.get('tipo_entrenamiento', user.tipo_entrenamiento)
     user.foto = data.get('foto', user.foto)
+    user.videos= data.get('videos', user.videos)
     db.session.commit()
 
     return jsonify(user.serialize()), 200
@@ -363,6 +373,7 @@ def eliminar_rutina(cliente_id):
 
 
 # DIETA para ver, crear, editar y eliminar
+
 @app.route('/clientes/<int:cliente_id>/dieta', methods=['GET'])
 def obtener_dieta(cliente_id):
     asignacion = Asignacion_entrenador.query.filter_by(usuario_id=cliente_id).first()
@@ -417,21 +428,23 @@ def eliminar_dieta(cliente_id):
 
 #para que el cliente vea su dieta
 @app.route('/clienteasignado/<int:cliente_id>/dieta', methods=['GET'])
-def obtener_dieta_cliente(usuario_id):
+def obtener_dieta_cliente(cliente_id):
     # Verificar si el cliente existe en la base de datos
-    cliente = User.query.get(usuario_id)
+    cliente = User.query.get(cliente_id)
     if not cliente:
         return jsonify({"error": "Cliente no encontrado"}), 404
 
     # Verificar si existe una asignación de entrenador para este cliente
-    asignacion = Asignacion_entrenador.query.filter_by(usuario_id=usuario_id).first()
+    asignacion = Asignacion_entrenador.query.filter_by(usuario_id=cliente_id).first()
     if not asignacion:
         return jsonify({"error": "Asignación no encontrada para este cliente"}), 404
+
 
     # Devolver la dieta del cliente si está asignada
     dieta_cliente = asignacion.dieta.split(';') if asignacion.dieta else []
     return jsonify({"dieta": dieta_cliente}), 200
 
+    return jsonify(clientes), 200
 
 # Configurar Flask-Mail para usar Mailtrap
 def configure_mail(app):
@@ -504,6 +517,63 @@ def recovery_password():
 
 
 
+#blog 
+socketio = SocketIO(app, cors_allowed_origins="*")
+
+@socketio.on('connect')
+@jwt_required()  # Verifica que el usuario esté autenticado con un token JWT válido
+def handle_connect():
+    user_id = get_jwt_identity()  # Obtener el ID del usuario autenticado desde el token
+    join_room(str(user_id))  # Unir al usuario a una sala usando su ID
+
+@socketio.on('message')
+@jwt_required()
+def handle_message(data):
+    user_id = get_jwt_identity()  # ID del usuario que envía el mensaje
+    recipient_id = data['recipient_id']  # ID del destinatario del mensaje
+    message = data['message']
+
+    # Verificar si el usuario está asignado a este entrenador
+    if is_user_assigned_to_trainer(user_id, recipient_id):
+        emit('message', {'text': message, 'timestamp': datetime.utcnow()}, room=str(recipient_id))
+    else:
+        emit('error', {'message': 'Unauthorized access to chat'}, room=request.sid)
+
+def is_user_assigned_to_trainer(user_id, trainer_id):
+    # Verificar si hay una asignación entre el usuario y el entrenador
+    assignment = Asignacion_entrenador.query.filter_by(entrenador_id=trainer_id, usuario_id=user_id).first()
+    return assignment is not None
+
+@app.route('/api/messages', methods=['POST'])
+def send_message():
+    data = request.json
+    new_message = Message(sender_id=data['sender_id'], receiver_id=data['receiver_id'], content=data['content'])
+    db.session.add(new_message)
+    db.session.commit()
+    return jsonify({'message': 'Message sent successfully'}), 201
+
+@app.route('/api/messages/<int:user_id>', methods=['GET'])
+def get_user_messages(user_id):
+    messages_sent = Message.query.filter_by(sender_id=user_id).all()
+    messages_received = Message.query.filter_by(receiver_id=user_id).all()
+    return jsonify({'sent': [message.serialize() for message in messages_sent], 'received': [message.serialize() for message in messages_received]})
+
+#videos entrenador
+@app.route('/agregarVideo/<int:id>', methods=['POST'])
+@jwt_required()
+def agregar_video(id):
+    user = User.query.get_or_404(id)
+    data = request.get_json()
+    url = data.get('url')
+    titulo = data.get('titulo')
+
+    if not url or not titulo:
+        return jsonify({"error": "URL y título del video son requeridos"}), 400
+
+    user.add_video(url, titulo)  # Utiliza el método add_video para agregar el URL y título
+    db.session.commit()
+
+    return jsonify({"msg": "Video agregado exitosamente"}), 200
 
 #no borrar
 if __name__ == '__main__':

@@ -24,7 +24,7 @@ export const MiAreaEntrenador = () => {
                 </div>
                 <div className="col-md-4 columnaVideosEntrenamientoEntrenador">
                     <div className="tituloVideosEntrenamientoEntrenador">
-                        <Link to="/" className="linkVideosEntrenamientoEntrenador">VIDEOS DE ENTRENAMIENTO</Link>
+                        <Link to={`/videosentrenador/${usuarioID}`} className="linkVideosEntrenamientoEntrenador">VIDEOS DE ENTRENAMIENTO</Link>
                     </div>
                 </div>
             </div>

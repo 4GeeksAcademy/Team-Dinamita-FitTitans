@@ -25,6 +25,7 @@ cors = "*"
 passlib = "*"
 itsdangerous = "*"
 flask-mail = "*"
+flask-socketio = "*"
 
 [requires]
 python_version = "3.10"
