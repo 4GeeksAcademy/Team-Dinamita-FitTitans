@@ -10,6 +10,7 @@ export const ListaEntrenadores = () => {
   const [error, setError] = useState(null);
   const [loaded, setLoaded] = useState(false);
   const [showFelicidades, setShowFelicidades] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState(null); // Estado local para rastrear el plan seleccionado
 
   const usuario_id = localStorage.getItem("user_id");
   const user_role = localStorage.getItem("user_role");
@@ -52,10 +53,8 @@ export const ListaEntrenadores = () => {
   };
 
   const selectPlan = (plan) => {
-    setSeleccionarPlan(plan);
-    const planModalElement = document.getElementById("planModal");
-    const planModal = new window.bootstrap.Modal(planModalElement);
-    planModal.hide();
+    setSeleccionarPlan(plan); 
+    setSelectedPlan(plan);
   };
 
   const openPlanModal = (entrenadorId) => {
@@ -67,25 +66,34 @@ export const ListaEntrenadores = () => {
 
   return (
     <div className="container mt-5 containerEntrenadores">
-      <ul className="list-group mb-5">
+      <ul className="list-group mb-5 contenedortarjetalistaEntrenadores">
         {store.entrenadores.map((entrenador, index) => (
-          <li key={index} className="list-group-item bg-dark text-light">
-            <div className="row align-items-center">
-              <div className="fotoContainer col-4">
-                <Link to={`/listaentrenadores/${entrenador.id}`}>
-                  <img src={entrenador.foto} alt="User" className="fotoMiniEntrenador" />
-                </Link>
+          <li key={index} className="list-group-item bg-dark text-light contenedortarjetalistaEntrenadores">
+            <div className="row align-items-start align-items-md-center">
+              <div className="col-md-4 mb-3 mb-md-0 d-flex justify-content-center align-items-center">
+                <img src={entrenador.foto} alt="User" className="fotoMiniEntrenador" />
               </div>
-              <div className="col-8 overflow-hidden">
-                <p className="Nombre">Nombre: {entrenador.nombre}</p>
-                <p>Edad: {entrenador.edad}</p>
-                <p>Género: {entrenador.genero}</p>
-                <p>Tipo de entrenamiento: {entrenador.tipo_entrenamiento}</p>
-                <div className="mt-2">
+              <div className="col-md-8">
+                <div className="nombreListaEntrenadores">
+                  <p className="Nombre">{entrenador.nombre}</p>
+                </div>
+                <div className="infoListaEntrenadores">
+                  <p>Edad: {entrenador.edad}</p>
+                </div>
+                <div className="infoListaEntrenadores">
+                  <p>Altura: {entrenador.altura}</p>
+                </div>
+                <div className="infoListaEntrenadores">
+                  <p>Género: {entrenador.genero}</p>
+                </div>
+                <div className="infoListaEntrenadores">
+                  <p>Tipo de entrenamiento: {entrenador.tipo_entrenamiento}</p>
+                </div>
+                <div className="mt-2 contenedorBotonContratame">
                   {usuario_id && user_role !== "entrenador" ? (
                     <button type="button" className="btnContratame" onClick={() => openPlanModal(entrenador.id)}>Contrátame</button>
                   ) : (
-                    <p className="text-danger">Debes estar registrado para contratar a un entrenador</p>
+                    <p className="text-danger">Debes estar registrado para contratar un entrenador</p>
                   )}
                 </div>
               </div>
@@ -101,10 +109,32 @@ export const ListaEntrenadores = () => {
               <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div className="modal-body">
-              <button type="button" className="btnPlanes" onClick={() => selectPlan('semanal')}>Plan Semanal</button>
-              <button type="button" className="btnPlanes" onClick={() => selectPlan('mensual')}>Plan Mensual</button>
-              <button type="button" className="btnPlanes" onClick={() => selectPlan('anual')}>Plan Anual</button>
-              <button type="button" className="btnContratar" onClick={contratarEntrenador}>Contratar</button>
+              <div className="contenedorBotonesPlanes">
+                <button
+                  type="button"
+                  className={`btnPlanes ${selectedPlan === 'semanal' ? 'selected' : ''}`}
+                  onClick={() => selectPlan('semanal')}
+                >
+                  Plan Semanal
+                </button>
+                <button
+                  type="button"
+                  className={`btnPlanes ${selectedPlan === 'mensual' ? 'selected' : ''}`}
+                  onClick={() => selectPlan('mensual')}
+                >
+                  Plan Mensual
+                </button>
+                <button
+                  type="button"
+                  className={`btnPlanes ${selectedPlan === 'anual' ? 'selected' : ''}`}
+                  onClick={() => selectPlan('anual')}
+                >
+                  Plan Anual
+                </button>
+              </div>
+              <div className="contenedorBotonContratame">
+                <button type="button" className="btnContratarListaEntrenadores" onClick={contratarEntrenador}>Contratar</button>
+              </div>
             </div>
           </div>
         </div>
