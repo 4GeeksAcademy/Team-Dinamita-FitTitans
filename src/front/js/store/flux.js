@@ -367,76 +367,100 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			// para eliminar modificar y crear rutina
-			obtenerRutinasCliente: async (cliente_id) => {
-				try {
-					const response = await fetch(`${process.env.BACKEND_URL}/clientes/${cliente_id}/rutinas`);
-					if (!response.ok) {
-						throw new Error("Error al obtener las rutinas del cliente");
-					}
-					const data = await response.json();
-					return data.rutinas;
-				} catch (error) {
-					console.error("Error al obtener las rutinas del cliente", error);
-					throw error;
-				}
-			},
+			// // ENTRENADO: para eliminar modificar y crear rutina
+			// obtenerRutinaCliente: async (cliente_id) => {
+			// 	try {
+			// 		const response = await fetch(`${process.env.BACKEND_URL}/clientes/${cliente_id}/rutinas`);
+			// 		if (!response.ok) {
+			// 			throw new Error("Error al obtener las rutinas del cliente");
+			// 		}
+			// 		const data = await response.json();
+			// 		return data.rutinas;
+			// 	} catch (error) {
+			// 		console.error("Error al obtener las rutinas del cliente", error);
+			// 		throw error;
+			// 	}
+			// },
 
-			crearRutinaCliente: async (cliente_id, rutina) => {
+			// crearRutinaCliente: async (cliente_id, rutina) => {
+			// 	try {
+			// 		const response = await fetch(`${process.env.BACKEND_URL}/clientes/${cliente_id}/rutinas`, {
+			// 			method: "POST",
+			// 			headers: {
+			// 				"Content-Type": "application/json"
+			// 			},
+			// 			body: JSON.stringify({ rutina })
+			// 		});
+			// 		if (!response.ok) {
+			// 			throw new Error("Error al crear la rutina del cliente");
+			// 		}
+			// 		const data = await response.json();
+			// 		return data.message;
+			// 	} catch (error) {
+			// 		console.error("Error al crear la rutina del cliente", error);
+			// 		throw error;
+			// 	}
+			// },
+
+			// actualizarRutinaCliente: async (cliente_id, rutinaIndex, rutina) => {
+			// 	try {
+			// 		const response = await fetch(`${process.env.BACKEND_URL}/clientes/${cliente_id}/rutinas/${rutinaIndex}`, {
+			// 			method: "PUT",
+			// 			headers: {
+			// 				"Content-Type": "application/json"
+			// 			},
+			// 			body: JSON.stringify({ rutina })
+			// 		});
+			// 		if (!response.ok) {
+			// 			throw new Error("Error al actualizar la rutina del cliente");
+			// 		}
+			// 		const data = await response.json();
+			// 		return data.message;
+			// 	} catch (error) {
+			// 		console.error("Error al actualizar la rutina del cliente", error);
+			// 		throw error;
+			// 	}
+			// },
+
+			// eliminarRutinaCliente: async (cliente_id, rutinaIndex) => {
+			// 	try {
+			// 		const response = await fetch(`${process.env.BACKEND_URL}/clientes/${cliente_id}/rutinas/${rutinaIndex}`, {
+			// 			method: "DELETE"
+			// 		});
+			// 		if (!response.ok) {
+			// 			throw new Error("Error al eliminar la rutina del cliente");
+			// 		}
+			// 		const data = await response.json();
+			// 		return data.message;
+			// 	} catch (error) {
+			// 		console.error("Error al eliminar la rutina del cliente", error);
+			// 		throw error;
+			// 	}
+			// },
+
+			// RUTINA ver como cliente
+			obtenerRutinaCliente: async (usuario_id) => {
 				try {
-					const response = await fetch(`${process.env.BACKEND_URL}/clientes/${cliente_id}/rutinas`, {
-						method: "POST",
+					const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/clienteasignado/${usuario_id}/rutina`, {
+						method: 'GET',
 						headers: {
-							"Content-Type": "application/json"
-						},
-						body: JSON.stringify({ rutina })
+							'Content-Type': 'application/json',
+						}
 					});
-					if (!response.ok) {
-						throw new Error("Error al crear la rutina del cliente");
-					}
 					const data = await response.json();
-					return data.message;
+					console.log("Respuesta obtenerRutinaCliente:", data);
+					if (response.ok) {
+						return { success: true, rutina: data.rutina };
+					} else {
+						return { success: false, error: data.error };
+					}
 				} catch (error) {
-					console.error("Error al crear la rutina del cliente", error);
-					throw error;
+					console.log("Error al obtener la rutina del cliente:", error);
+					return { success: false, error: "Error de red al obtener la rutina del cliente" };
 				}
 			},
 
-			actualizarRutinaCliente: async (cliente_id, rutinaIndex, rutina) => {
-				try {
-					const response = await fetch(`${process.env.BACKEND_URL}/clientes/${cliente_id}/rutinas/${rutinaIndex}`, {
-						method: "PUT",
-						headers: {
-							"Content-Type": "application/json"
-						},
-						body: JSON.stringify({ rutina })
-					});
-					if (!response.ok) {
-						throw new Error("Error al actualizar la rutina del cliente");
-					}
-					const data = await response.json();
-					return data.message;
-				} catch (error) {
-					console.error("Error al actualizar la rutina del cliente", error);
-					throw error;
-				}
-			},
 
-			eliminarRutinaCliente: async (cliente_id, rutinaIndex) => {
-				try {
-					const response = await fetch(`${process.env.BACKEND_URL}/clientes/${cliente_id}/rutinas/${rutinaIndex}`, {
-						method: "DELETE"
-					});
-					if (!response.ok) {
-						throw new Error("Error al eliminar la rutina del cliente");
-					}
-					const data = await response.json();
-					return data.message;
-				} catch (error) {
-					console.error("Error al eliminar la rutina del cliente", error);
-					throw error;
-				}
-			},
 
 			// AQUI OBTIENE LA DIETA EL CLIENTE
 			obtenerDietaCliente: async (usuario_id) => {
@@ -455,7 +479,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return { success: false, error: data.error };
 					}
 				} catch (error) {
-					console.error("Error al obtener la dieta del cliente:", error);
+					console.log("Error al obtener la dieta del cliente:", error);
 					return { success: false, error: "Error de red al obtener la dieta del cliente" };
 				}
 			},
