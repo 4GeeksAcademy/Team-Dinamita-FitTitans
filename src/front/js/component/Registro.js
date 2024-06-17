@@ -138,17 +138,6 @@ export const Registro = ({ closeModal }) => {
                   onChange={(e) => setUsuarios({ ...usuario, password: e.target.value })}
                 />
               </div>
-
-              <div className="form-check">
-                <input className="form-check-input" type="checkbox" id="flexCheckDefault" />
-                <label className="form-check-label" htmlFor="flexCheckDefault">
-                  Acepto terminos y condiciones politica de privacidad
-                </label>
-                <div className="info-box">
-                  Acepto que Anna, Jose y Ronald usen mis datos para hacer test de este hover
-                </div>
-              </div>
-
               <div className="d-flex justify-content-center">
                 <input type="submit" value={"Registrarse"} className="btn btn-primary mx-3 text-dark" style={{ background: "#E7A33E" }}></input>
 

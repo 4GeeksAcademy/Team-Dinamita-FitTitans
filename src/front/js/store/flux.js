@@ -631,41 +631,42 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 
-			// PARA SUBIR VIDEOS
-			Videos: async (id, secureUrl, token, titulo) => { // solicita token para que nadie pueda
-				try {
-					console.log("Datos actualizados:", secureUrl);
-					const response = await fetch(`${process.env.BACKEND_URL}/agregarVideo/${id}`, {
-						method: 'POST',
-						headers: {
-							"Content-Type": "application/json",
-							Authorization: `Bearer ${token}`,
-						},
-						body: JSON.stringify({ url: secureUrl, titulo: titulo })
-					});
-					const data = await response.json();
-					console.log("Respuesta del servidor:", data);
-				} catch (error) {
-					console.error("Error updating user data:", error);
-				}
-			},
+			
+			Videos :async (id, secureUrl, token, titulo) => { // solicita token para que nadie pueda
+					try {
+						console.log("Datos actualizados:", secureUrl);
+						const response = await fetch(`${process.env.BACKEND_URL}/agregarVideo/${id}`, {
+							method: 'POST',
+							headers: {
+								"Content-Type": "application/json",
+								Authorization: `Bearer ${token}`,
+							},
+							body: JSON.stringify({ url: secureUrl, titulo : titulo})
+						});
+						const data = await response.json();
+						console.log("Respuesta del servidor:", data);
+					} catch (error) {
+						console.error("Error updating user data:", error);
+					}
+				},
 
-			ObtenerVideos: async (id, token) => { // solicita token para que nadie pueda
-				try {
-					const response = await fetch(`${process.env.BACKEND_URL}/usuarios/${id}/entrenadores`, {
-						method: 'GET',
-						headers: {
-							"Content-Type": "application/json",
-							Authorization: `Bearer ${token}`,
-						},
-					});
-					const data = await response.json();
-					setStore({ videos: data })
-					console.log("Respuesta del servidor:", data);
-				} catch (error) {
-					console.error("Error updating user data:", error);
-				}
-			},
+			ObtenerVideos :async (token) => { // solicita token para que nadie pueda
+					try {
+						const response = await fetch(`${process.env.BACKEND_URL}/listaentrenadores/videos`, {
+							method: 'GET',
+							headers: {
+								"Content-Type": "application/json",
+								Authorization: `Bearer ${token}`,
+							},	
+						});
+						const data = await response.json();
+						setStore({videos : data.entrenadores})
+						console.log("Respuesta del servidor:", data.entrenadores);
+					} catch (error) {
+						console.error("Error updating user data:", error);
+					}
+				},
+
 
 		}
 	};

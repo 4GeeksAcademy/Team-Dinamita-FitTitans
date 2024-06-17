@@ -40,6 +40,7 @@ app.url_map.strict_slashes = False
 # Configuración de la aplicación
 app.config['SECRET_KEY'] = 'fit_titans_ajr'  # Cambia esto por una clave secreta segura
 app.config['SECURITY_PASSWORD_SALT'] = 'fit_titans_ajr'  # Cambia esto por un salt seguro
+app.config['JWT_ACCESS_TOKEN_EXPIRES'] = 3600  # Tiempo de expiración del token en segundos (1 hora)
 
 jwt = JWTManager(app)
 
@@ -363,6 +364,7 @@ def eliminar_rutina(cliente_id):
     return jsonify({"message": "Rutina eliminada correctamente"}), 200 
 
 
+
 # DIETA para ver, crear, editar y eliminar el entrenador 
 @app.route('/clientes/<int:cliente_id>/dieta', methods=['GET'])
 def obtener_dieta(cliente_id):
@@ -560,6 +562,16 @@ def agregar_video(id):
     db.session.commit()
 
     return jsonify({"msg": "Video agregado exitosamente"}), 200
+
+@app.route('/listaentrenadores/videos', methods=['GET'])
+@jwt_required()
+def get_entrenadores_video():
+    users = User.query.all()
+    entrenadores = [user.serialize() for user in users if user.rol] # filtra solo los usuarios que tienen el campo rol igual a True, lo que probablemente indica que son entrenadores.
+    return jsonify({
+        "entrenadores": entrenadores,
+    }), 200
+
 
 #no borrar
 if __name__ == '__main__':
