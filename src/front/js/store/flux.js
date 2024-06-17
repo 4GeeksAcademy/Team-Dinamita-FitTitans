@@ -484,7 +484,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			// DIETA ver, crear, modificar, eliminar esto es del entrenador
+			// ENTRENADOR DIETA ver, crear, modificar, eliminar esto es del entrenador
 			obtenerDieta: async (cliente_id) => {
 				try {
 					const response = await fetch(`${process.env.BACKEND_URL}/clientes/${cliente_id}/dieta`, {
