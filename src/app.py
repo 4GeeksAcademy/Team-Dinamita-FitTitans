@@ -84,7 +84,6 @@ def sitemap():
     return send_from_directory(static_file_dir, 'index.html')
 
 # any other endpoint will try to serve it like a static file
-
 @app.route('/<path:path>', methods=['GET'])
 def serve_any_other_file(path):
     if not os.path.isfile(os.path.join(static_file_dir, path)):
@@ -98,7 +97,6 @@ app.config["JWT_SECRET_KEY"] = "adios-coroto"  # Change this "super secret" with
 jwt = JWTManager(app)
 
  # contraseña hash
-
 def hash_password(plain_password):
     salt = bcrypt.gensalt()
     print(salt)
@@ -138,6 +136,7 @@ def registro():
     # Devuelvo el ID del usuario como parte de la respuesta
     return jsonify({'message': 'User registered successfully', 'userId': user_id}), 201
 
+# para iniciar sesion
 @app.route('/login', methods=['POST'])
 def login():
     data = request.json
@@ -212,8 +211,6 @@ def actualizar_user(id):
     return jsonify(user.serialize()), 200
 
 
-
-
 #PARA ENTRENADORES 
 # para mostrar la lista de entrenadores
 @app.route('/listaentrenadores', methods=['GET'])
@@ -223,7 +220,6 @@ def get_entrenadores_usuarios():
     return jsonify({
         "entrenadores": entrenadores,
     }), 200
-
 
 #para editar el perfil del usuario entrenador
 @app.route('/listaentrenadores/<int:id>', methods=['PUT'])
@@ -248,7 +244,6 @@ def update_user(id):
 
     return jsonify(user.serialize()), 200
 
-  
 #  para el entrenador obtener sus clientes :
 @app.route("/listaentrenadores/<int:entrenador_id>/clientes", methods=["GET"])
 def get_clientes_by_entrenador_id(entrenador_id):
@@ -277,7 +272,6 @@ def get_cliente_detalle(cliente_id):
     })
 
     return jsonify(cliente_detalle), 200
-
 
 # para contratar a un entrenador
 @app.route('/contratar', methods=['POST'])
@@ -316,7 +310,7 @@ def contratar_entrenador():
 
     return jsonify({"message": "Entrenador contratado exitosamente"}), 200
 
-#para editar borrar o modificar rutinas
+#para editar borrar o modificar rutinas el entrenador
 @app.route("/clientes/<int:cliente_id>/rutina", methods=["GET"])
 def obtener_rutina(cliente_id):
     asignacion = Asignacion_entrenador.query.filter_by(usuario_id=cliente_id).first()
@@ -371,8 +365,7 @@ def eliminar_rutina(cliente_id):
 
 
 
-# DIETA para ver, crear, editar y eliminar
-
+# DIETA para ver, crear, editar y eliminar el entrenador 
 @app.route('/clientes/<int:cliente_id>/dieta', methods=['GET'])
 def obtener_dieta(cliente_id):
     asignacion = Asignacion_entrenador.query.filter_by(usuario_id=cliente_id).first()
@@ -432,18 +425,15 @@ def obtener_dieta_cliente(cliente_id):
     cliente = User.query.get(cliente_id)
     if not cliente:
         return jsonify({"error": "Cliente no encontrado"}), 404
-
     # Verificar si existe una asignación de entrenador para este cliente
     asignacion = Asignacion_entrenador.query.filter_by(usuario_id=cliente_id).first()
     if not asignacion:
         return jsonify({"error": "Asignación no encontrada para este cliente"}), 404
-
-
     # Devolver la dieta del cliente si está asignada
     dieta_cliente = asignacion.dieta.split(';') if asignacion.dieta else []
     return jsonify({"dieta": dieta_cliente}), 200
 
-    return jsonify(clientes), 200
+
 
 # Configurar Flask-Mail para usar Mailtrap
 def configure_mail(app):
@@ -512,7 +502,6 @@ def recovery_password():
             return jsonify({"error": "Usuario no encontrado"}), 404
     except Exception as e:
         return jsonify({"error": f"Error al confirmar el usuario: {str(e)}"}), 500
-
 
 
 
