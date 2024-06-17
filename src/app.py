@@ -364,6 +364,27 @@ def eliminar_rutina(cliente_id):
     return jsonify({"message": "Rutina eliminada correctamente"}), 200 
 
 
+# /////#para que el cliente vea su rutina
+@app.route('/clienteasignado/<int:cliente_id>/rutina', methods=['GET'])
+def obtener_rutina_cliente(cliente_id):
+    try:
+        # Verificar si el cliente existe en la base de datos
+        cliente = User.query.get(cliente_id)
+        if not cliente:
+            return jsonify({"error": "Cliente no encontrado"}), 404
+
+        # Verificar si existe una asignación de entrenador para este cliente
+        asignacion = Asignacion_entrenador.query.filter_by(usuario_id=cliente_id).first()
+        if not asignacion:
+            return jsonify({"error": "Asignación no encontrada para este cliente"}), 404
+
+        # Devolver la rutina del cliente si está asignada
+        rutina_cliente = asignacion.rutina.split(';') if asignacion.rutina else []
+        return jsonify({"rutina": rutina_cliente}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
 
 # DIETA para ver, crear, editar y eliminar el entrenador 
 @app.route('/clientes/<int:cliente_id>/dieta', methods=['GET'])
