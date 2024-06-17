@@ -1,0 +1,18 @@
+#chat-base{
+    background-color: none;
+}
+#mensajesLI{
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    list-style-type: none !important; /* Elimina los puntos de lista */
+    width: 100% !important;
+    font-size: 24px;
+}
+/* Estilos del botón */
+.btn {
+    background-color: #e7a33e !important;
+}
+
+.btn:hover {
+    color: white !important;
+}
