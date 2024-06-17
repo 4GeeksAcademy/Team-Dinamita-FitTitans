@@ -462,9 +462,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 
-
-
-			// DIETA ver como cliiente
+			// AQUI OBTIENE LA DIETA EL CLIENTE
 			obtenerDietaCliente: async (usuario_id) => {
 				try {
 					const response = await fetch(`${process.env.BACKEND_URL}/clienteasignado/${usuario_id}/dieta`, {
@@ -486,7 +484,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			// ENTRENADOR DIETA ver, crear, modificar, eliminar
+			// DIETA ver, crear, modificar, eliminar esto es del entrenador
 			obtenerDieta: async (cliente_id) => {
 				try {
 					const response = await fetch(`${process.env.BACKEND_URL}/clientes/${cliente_id}/dieta`, {
@@ -569,30 +567,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return { success: false, error: "Error de red al eliminar la dieta" };
 				}
 			},
-
-			// obtenerDietaCliente: async (usuario_id) => {
-			// 	try {
-			// 		const response = await fetch(`${process.env.BACKEND_URL}/clienteasignado/${usuario_id}/dieta`, {
-			// 			method: 'GET',
-			// 			headers: {
-			// 				'Content-Type': 'application/json',
-			// 			}
-			// 		});
-			// 		const data = await response.json();
-			// 		console.log("Respuesta obtenerDietaCliente:", data);
-			// 		if (response.ok) {
-			// 			return { success: true, dieta: data.dieta };
-			// 		} else {
-			// 			return { success: false, error: data.error };
-			// 		}
-			// 	} catch (error) {
-			// 		console.error("Error al obtener la dieta del cliente:", error);
-			// 		return { success: false, error: "Error de red al obtener la dieta del cliente" };
-			// 	}
-			// },
+			
 
 
-
+			// RUTINAver, crear, modificar, eliminar esto es del entrenador
 			obtenerRutina: async (cliente_id) => {
 				try {
 					const response = await fetch(`${process.env.BACKEND_URL}/clientes/${cliente_id}/rutina`, {
@@ -677,40 +655,42 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 
-			Videos: async (id, secureUrl, token, titulo) => { // solicita token para que nadie pueda
-				try {
-					console.log("Datos actualizados:", secureUrl);
-					const response = await fetch(`${process.env.BACKEND_URL}/agregarVideo/${id}`, {
-						method: 'POST',
-						headers: {
-							"Content-Type": "application/json",
-							Authorization: `Bearer ${token}`,
-						},
-						body: JSON.stringify({ url: secureUrl, titulo: titulo })
-					});
-					const data = await response.json();
-					console.log("Respuesta del servidor:", data);
-				} catch (error) {
-					console.error("Error updating user data:", error);
-				}
-			},
+			
+			Videos :async (id, secureUrl, token, titulo) => { // solicita token para que nadie pueda
+					try {
+						console.log("Datos actualizados:", secureUrl);
+						const response = await fetch(`${process.env.BACKEND_URL}/agregarVideo/${id}`, {
+							method: 'POST',
+							headers: {
+								"Content-Type": "application/json",
+								Authorization: `Bearer ${token}`,
+							},
+							body: JSON.stringify({ url: secureUrl, titulo : titulo})
+						});
+						const data = await response.json();
+						console.log("Respuesta del servidor:", data);
+					} catch (error) {
+						console.error("Error updating user data:", error);
+					}
+				},
 
-			ObtenerVideos: async (id, token) => { // solicita token para que nadie pueda
-				try {
-					const response = await fetch(`${process.env.BACKEND_URL}/usuarios/${id}/entrenadores`, {
-						method: 'GET',
-						headers: {
-							"Content-Type": "application/json",
-							Authorization: `Bearer ${token}`,
-						},
-					});
-					const data = await response.json();
-					setStore({ videos: data })
-					console.log("Respuesta del servidor:", data);
-				} catch (error) {
-					console.error("Error updating user data:", error);
-				}
-			},
+			ObtenerVideos :async (token) => { // solicita token para que nadie pueda
+					try {
+						const response = await fetch(`${process.env.BACKEND_URL}/listaentrenadores/videos`, {
+							method: 'GET',
+							headers: {
+								"Content-Type": "application/json",
+								Authorization: `Bearer ${token}`,
+							},	
+						});
+						const data = await response.json();
+						setStore({videos : data.entrenadores})
+						console.log("Respuesta del servidor:", data.entrenadores);
+					} catch (error) {
+						console.error("Error updating user data:", error);
+					}
+				},
+
 
 		}
 	};

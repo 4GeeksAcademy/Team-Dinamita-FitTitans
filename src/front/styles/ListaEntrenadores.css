@@ -22,12 +22,12 @@
 
 .nombreListaEntrenadores {
     color: #e7a33e;
-    font-size: 140%;
+    font-size: 40px;
     text-align: center;
 }
 
 .infoListaEntrenadores {
-    font-size: 70%;
+    font-size: 25px;
     overflow: hidden;
 }
 
@@ -62,7 +62,7 @@
     background: #e7a33e;
     padding: 10px;
     color: black;
-    font-size: 60%;
+    font-size: 20px;
     border: 1px solid black;
     border-radius: 5px;
 }
