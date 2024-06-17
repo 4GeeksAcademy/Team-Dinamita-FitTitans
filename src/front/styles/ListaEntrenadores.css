@@ -1,43 +1,36 @@
+.list-group-item {
+    margin-bottom: 5%;
+}
+
 .list-group {
     border-radius: 5px;
+    margin-bottom: 5%;
 }
 
-.fotoContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 20%;
-    height: 20%;
-    object-fit: cover;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-left: 15px;
-}
-
-p {
-    font-size: 18px;
-    padding: none;
-    margin: 0px;
-    margin-left: none;
-}
-
-.Nombre,
-.Apellido {
-    color: #e7a33e;
-}
-
-.btnConoceme,
-btnCerrar {
-    background-color: #e7a33e;
-    color: black;
-    font-size: 60%;
-    padding: 0.5%;
+.contenedortarjetalistaEntrenadores {
     border-radius: 5px;
 }
 
-.btnConoceme:hover {
-    color: white;
+
+.fotoMiniEntrenador {
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #e7a33e;
 }
+
+.nombreListaEntrenadores {
+    color: #e7a33e;
+    font-size: 140%;
+    text-align: center;
+}
+
+.infoListaEntrenadores {
+    font-size: 70%;
+    overflow: hidden;
+}
+
 
 .btnCloseEntrenador {
     background-color: #e7a33e;
@@ -56,59 +49,62 @@ btnCerrar {
 
 }
 
-.fotoMiniEntrenador {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 1px solid #e7a33e;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.contenedorBotonContratame {
+    text-align: center;
+    overflow: hidden;
 }
 
 .btnContratame {
+    width: 150px;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
     background: #e7a33e;
-    white-space: nowrap;
-    font-size: 15px;
+    padding: 10px;
+    color: black;
+    font-size: 60%;
     border: 1px solid black;
     border-radius: 5px;
-    font-size: 15px;
-    padding: .375rem .75rem;
 }
 
 .btnContratame:hover {
-    background-color: #e7a33e;
     color: white;
-    outline: none;
-    box-shadow: none;
 }
 
-.btnContratar {
+
+
+.btnPlanes, .btnContratar {
+    margin-top: 10px;
     background: #e7a33e;
-    white-space: nowrap;
+    padding: 10px;
+    color: black;
     font-size: 15px;
     border: 1px solid black;
     border-radius: 5px;
-    font-size: 15px;
-    margin-top: 1%;
-  }
-  
-  .btnPlanes:hover,
-  .btnPlanes:focus 
-  .btnCerrar:hover, .btnCerrar:focus {
-    background: #e7a33e;
-    color: white;
-  }
-
-.fotoMiniEntrenador {
-    width: 150px; 
-    height: 150px; 
-    border-radius: 50%;
-    object-fit: cover; 
-    border: 1px solid #e7a33e; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    margin-right: 5%;
 }
 
+.btnContratarListaEntrenadores {
+    margin-top: 10px;
+    background: #e7a33e;
+    padding: 10px;
+    color: black;
+    font-size: 18px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-right: 5%;
+    width: 40%;
+}
+
+.btnPlanes:hover,
+.btnContratarListaEntrenadores:hover,
+.btnContratar:hover {
+    background: #e7a33e;
+    color: white;
+}
+
+.btnPlanes.selected {
+    background-color: rgba(0, 0, 0, 0.822);
+    color: #e7a33e;
+    border: 2px solid #000;
+}
