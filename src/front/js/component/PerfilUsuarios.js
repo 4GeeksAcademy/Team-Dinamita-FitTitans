@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from 'react-router-dom';
 import { Context } from "../store/appContext";
+import UploadWidgetFoto from '/workspaces/Team-Dinamita-FitTitans/src/front/js/component/UploadWidgetFoto.js';
 
 import "../../styles/PerfilUsuario.css";
 
@@ -107,11 +108,7 @@ export const PerfilUsuarios = () => {
                 </div>
 
                 <div className="input-containerSubirImagen">
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => handleSubirImagen(usuario.id, e.target.files[0])}
-                  />
+                <UploadWidgetFoto userId={usuario.id} onUploadSuccess={handleSubirImagen} />
                 </div>
 
                 {editar ? (

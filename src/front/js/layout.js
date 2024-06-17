@@ -34,7 +34,7 @@ import { RecuperarContraseña } from "./pages/RecuperarContraseña.jsx";
 import { SolicitudRecuperacion } from "./pages/SolicitudRecuperarcion.jsx";
 import { ListaDeClientes } from "./pages/ListaDeClientes.jsx";
 import { DetalleCliente } from "./pages/DetalleCliente.jsx";
-import {Mensajes } from "/workspaces/Team-Dinamita-FitTitans/src/front/js/component/Chat/Chat.jsx"
+import { Mensajes } from "/workspaces/Team-Dinamita-FitTitans/src/front/js/component/Chat/Chat.jsx"
 import { VideosUsuarios } from "./pages/VideosUsuario.jsx";
 //create your first component
 const Layout = () => {
@@ -73,8 +73,8 @@ const Layout = () => {
                         <Route element={<ListaDeClientes />} path="/listaclientes" />
                         <Route element={<Blog />} path="/blog" />
                         <Route element={<ListaDeClientes />} path="/entrenador/:entrenador_id/clientes" />
-                        <Route element={<DetalleCliente />} path="/clientes/:cliente_id" />                      
-                        <Route element={<Mensajes />} path="/chat/:id" />   
+                        <Route element={<DetalleCliente />} path="/clientes/:cliente_id" />
+                        <Route element={<Mensajes />} path="/chat/:id" />
                         <Route element={<Rutinas />} path="/clientes/:cliente_id/rutina" />
                         <Route element={<RutinaCliente />} path="/cliente/rutina/:usuario_id" />
                         <Route element={<VideosEntrenador />} path="/videosentrenador/:id" />
