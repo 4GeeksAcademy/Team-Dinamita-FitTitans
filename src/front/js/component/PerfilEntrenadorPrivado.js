@@ -44,6 +44,9 @@ export const PerfilEntrenadorPrivado = () => {
     }
   };
 
+  
+
+
   const manejarEditarUsuario = async (usuarioId) => {
     await actions.EditarUsuario(usuarioId, datosFormulario);
     setEditar(false);
@@ -63,24 +66,21 @@ export const PerfilEntrenadorPrivado = () => {
   };
 
   useEffect(() => {
-    const fetchUsuarioUnico = async () => {
-      await actions.GetEntrenadorUnico(id);
-      const usuariofinal = store.usuarioUnico;
-      console.log(store.usuarioUnico);
-      console.log(usuariofinal);
-      if (usuariofinal && Array.isArray(usuariofinal)) {
-        setUsuarios(usuariofinal);
-      } else {
-        setUsuarios([usuariofinal]); // Si no es un array, lo envuelve en uno
-      }
-    };
-    const tomarRol = localStorage.getItem("user_rol")
-    if (tomarRol == "true") {
-      setRol(true)
-    } else { setRol(false) }
-    fetchUsuarioUnico();
-  }, [editar, usuarios.foto,]);
 
+    if (store.id == id){
+      const fetchUsuarioUnico = async () => {
+        await actions.GetEntrenadorUnico(id);
+        const usuariofinal = store.usuarioUnico;
+        if (usuariofinal && Array.isArray(usuariofinal)) {
+          setUsuarios(usuariofinal);
+        } else {
+          setUsuarios([usuariofinal]); // Si no es un array, lo envuelve en uno
+        }
+      };
+      setRol(true)
+      fetchUsuarioUnico();
+    }else { setRol(false),"deja de jode"}
+   }, [editar, usuarios.foto]);
   console.log(usuarios);
 
   return (
@@ -118,8 +118,8 @@ export const PerfilEntrenadorPrivado = () => {
                     <a href="#" className="card-link">Ir arriba</a>
                   </div>
                 </div>
-
-                <div class="input-containerSubirImagen">
+                <div className="input-containerSubirImagen">
+                  <h2 className="text-light">subir imagen</h2>
                   <input
                     type="file"
                     accept="image/*"
@@ -128,9 +128,8 @@ export const PerfilEntrenadorPrivado = () => {
                 </div>
                 {editar ? (
                   <>
-                    <input
 
-                      className="inputImagen"
+                    <input className="input form-control"
 
                       type="text"
                       name="email"
@@ -199,7 +198,7 @@ export const PerfilEntrenadorPrivado = () => {
           </ul>
         </div>
       ) : (
-        <h1> ERROR </h1>
+        <h1 className="text-light"> ERROR, inicia sesion de nuevo </h1>
       )}
     </>
 
