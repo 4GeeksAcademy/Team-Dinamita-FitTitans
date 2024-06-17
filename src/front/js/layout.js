@@ -22,7 +22,8 @@ import { MiAreaCliente } from "./component/MiAreaCliente.jsx";
 import { MiAreaEntrenador } from "./component/MiAreaEntrenador.jsx";
 import { FormulaCalorias } from "./pages/FormulaCalorias.jsx";
 import { Rutinas } from "./pages/Rutinas.jsx";
-import { VideosEntrenador } from "/workspaces/Team-Dinamita-FitTitans/src/front/js/pages/VideosEntrenador.jsx"
+import { RutinaCliente } from "./pages/RutinasCliente.jsx";
+import {VideosEntrenador} from "/workspaces/Team-Dinamita-FitTitans/src/front/js/pages/VideosEntrenador.jsx"
 import { ListaEntrenadores } from "./pages/ListaEntrenadores.jsx";
 import { Dieta } from "./pages/Dieta.jsx"
 import { DietaCliente } from "./pages/DietaCliente.jsx";
@@ -75,8 +76,8 @@ const Layout = () => {
                         <Route element={<DetalleCliente />} path="/clientes/:cliente_id" />
                         <Route element={<Mensajes />} path="/chat/:id" />
                         <Route element={<Rutinas />} path="/clientes/:cliente_id/rutina" />
+                        <Route element={<RutinaCliente />} path="/cliente/rutina/:usuario_id" />
                         <Route element={<VideosEntrenador />} path="/videosentrenador/:id" />
-                        <Route element={<Dieta />} path="/asignacion/:asignacion_id/dieta" />
                         <Route element={<VideosUsuarios />} path="/videousuario/:id" />
                         <Route element={<Dieta />} path="/clientes/:cliente_id/dieta" />
                         <Route element={<DietaCliente />} path="/cliente/dieta/:usuario_id" />
