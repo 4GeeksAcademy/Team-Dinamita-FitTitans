@@ -3,9 +3,14 @@
 }
 
 .card-titlePrivado {
-    font-size: 40px;
-}
+    font-size: 45px;
+    color: #e7a33e;
 
+}
+.card-text-Datos {
+    color: #e7a33e;
+    font-size: 15px;
+}
 .contenedorTituloPerfil {
     text-align: center;
 }
@@ -96,12 +101,14 @@
 }
 
 .subirEditar {
+    border-radius: 5px;
     background: #e7a33e;
     white-space: nowrap;
     font-size: 15px;
     border: 1px solid black;
     border-radius: 5px;
-    padding: .375rem .75rem;
+    padding: 10px 10px;
+    margin: 1.5%;
 }
 
 .subirEditar:hover,
@@ -124,11 +131,6 @@
     border-radius: 5px;
 }
 
-.input-containerSubirImagen {
-    font-size: 18px;
-    padding: 1%;
-    border-radius: 5px;
-}
 
 .card-img-topUsuario {
     width: 100%;
@@ -137,5 +139,16 @@
     border-radius: 5px;
     justify-content: center;
     max-width: 100%;
-   height: auto;
+    height: auto;
+    color: white;
+}
+.btnSubir {
+    border-radius: 5px;
+    background: #e7a33e;
+    white-space: nowrap;
+    font-size: 15px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 0.5%;
 }

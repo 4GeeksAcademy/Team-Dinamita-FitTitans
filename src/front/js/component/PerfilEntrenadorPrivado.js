@@ -95,7 +95,7 @@ export const PerfilEntrenadorPrivado = () => {
                   <img src={usuario.foto} className="card-img-topEntrenador" alt={`Imagen de ${usuario.nombre}`} />
                   <div className="card-body">
                     <h5 className="card-titlePrivado">{usuario.nombre}</h5>
-                    <p className="card-text">Datos Personales</p>
+                    <p className="card-text-Datos">Datos Personales</p>
                   </div>
                   <ul className="list-group list-group-flush">
                     <li className="list-group-itemDatosPersonales">Email: {usuario.email}</li>
@@ -106,15 +106,6 @@ export const PerfilEntrenadorPrivado = () => {
                     <li className="list-group-itemDatosPersonales">Altura: {usuario.altura}</li>
                     <li className="list-group-itemDatosPersonales">Tipo De Entrenamiento: {usuario.tipo_entrenamiento}</li>
                   </ul>
-                  <div className="card-body">
-                    <div className="form-check">
-                      <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                      <label className="form-check-label" htmlFor="flexCheckDefault">
-                        Default checkbox
-                      </label>
-                    </div>
-                    <a href="#" className="card-link">Ir arriba</a>
-                  </div>
                 </div>
                 <div className="input-containerSubirImagen">
                 <UploadWidgetFoto userId={usuario.id} onUploadSuccess={handleSubirImagen} />

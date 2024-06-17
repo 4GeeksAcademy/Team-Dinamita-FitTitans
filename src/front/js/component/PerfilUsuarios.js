@@ -95,7 +95,7 @@ export const PerfilUsuarios = () => {
                   <img src={usuario.foto} className="card-img-topUsuario" alt={`Imagen de ${usuario.nombre}`} />
                   <div className="card-body">
                     <h5 className="card-titlePrivado">{usuario.nombre}</h5>
-                    <p className="card-text">Datos Personales</p>
+                    <div className="card-text-Datos">Datos Personales</div>
                   </div>
                   <ul className="list-group list-group-flush">
                     <li className="list-group-itemDatosPersonales">Email: {usuario.email}</li>

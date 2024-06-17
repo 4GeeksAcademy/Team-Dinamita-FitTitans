@@ -1,12 +1,16 @@
 .contenedorPerfilPrivado {
     margin-bottom: 50px;
-
 }
 
 .card-titlePrivado {
-    font-size: 30px;
-}
+    font-size: 45px;
+    color: #e7a33e;
 
+}
+.card-text-Datos {
+    color: #e7a33e;
+    font-size: 15px;
+}
 .contenedorTituloPerfil {
     text-align: center;
 }
@@ -26,7 +30,7 @@
     overflow-wrap: break-word;
 }
 
-.contenedorListaUsuarios {
+.contenedorListaEntrenadores {
     background-color: rgba(0, 0, 0, 0.9);
     border: 3px solid #e7a33e;
     border-radius: 5px;
@@ -40,11 +44,10 @@
     font-size: 15px;
 }
 
-.usuarioItem {
+.entrenadorItem {
     margin-bottom: 20px;
     padding: 30px;
     border-radius: 5px;
-
 }
 
 .perfilCard {
@@ -98,23 +101,21 @@
 }
 
 .subirEditar {
+    border-radius: 5px;
     background: #e7a33e;
     white-space: nowrap;
-    /* Evita que el texto se divida en líneas */
     font-size: 15px;
     border: 1px solid black;
     border-radius: 5px;
-    font-size: 15px;
-    padding: .375rem .75rem;
+    padding: 10px 10px;
+    margin: 1.5%;
 }
 
 .subirEditar:hover,
 .subirEditar:focus {
     background: #e7a33e;
     color: white;
-    /* Cambiar el color del texto si lo deseas */
     outline: none;
-    /* Elimina el borde azul de enfoque */
     box-shadow: none;
 }
 
@@ -130,17 +131,24 @@
     border-radius: 5px;
 }
 
-.input-containerSubirImagen {
-    font-size: 18px;
-    padding: 1%;
-    border-radius: 5px;
-}
 
 .card-img-topEntrenador {
     width: 100%;
     height: auto;
-    max-width: 80%;
-    max-height: 80%;
     object-fit: cover;
     border-radius: 5px;
+    justify-content: center;
+    max-width: 100%;
+    height: auto;
+    color: white;
+}
+.btnSubir {
+    border-radius: 5px;
+    background: #e7a33e;
+    white-space: nowrap;
+    font-size: 15px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 0.5%;
 }
