@@ -152,3 +152,18 @@
     padding: 10px 20px;
     margin: 0.5%;
 }
+.btnSubir:hover {
+    color: white;
+    background-color: #e7a33e;
+    outline: none;
+    box-shadow: none;
+}
+.errorInicio {
+    background: #e7a33e;
+    margin: 1.5%;
+    padding: 1.5%;
+    opacity: 80%;
+    border-radius: 5px;
+    font-size: 25px;
+   
+}
