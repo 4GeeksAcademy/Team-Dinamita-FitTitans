@@ -134,13 +134,13 @@
 
 .card-img-topEntrenador {
     width: 100%;
-    height: auto;
-    object-fit: cover;
-    border-radius: 5px;
-    justify-content: center;
-    max-width: 100%;
-    height: auto;
-    color: white;
+    height: 100%;
+    object-fit: cover; /* Ajusta la imagen para que cubra todo el contenedor sin distorsionarse */
+    object-position: center
+
+   
+
+
 }
 .btnSubir {
     border-radius: 5px;
@@ -151,4 +151,19 @@
     border-radius: 5px;
     padding: 10px 20px;
     margin: 0.5%;
+}
+.btnSubir:hover {
+    color: white;
+    background-color: #e7a33e;
+    outline: none;
+    box-shadow: none;
+}
+.errorInicio {
+    background: #e7a33e;
+    margin: 1.5%;
+    padding: 1.5%;
+    opacity: 80%;
+    border-radius: 5px;
+    font-size: 25px;
+   
 }

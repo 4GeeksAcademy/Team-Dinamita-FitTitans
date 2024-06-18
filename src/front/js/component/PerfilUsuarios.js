@@ -173,7 +173,8 @@ export const PerfilUsuarios = () => {
             ))}
           </ul>
         </div>
-      ) : (<h1> ERROR, Vuelve a Iniciar Sesion </h1>)}
+      ) : (
+      <h1 className="errorInicio"> ERROR, Vuelve a Iniciar Sesion </h1>)}
     </>
   );
 };

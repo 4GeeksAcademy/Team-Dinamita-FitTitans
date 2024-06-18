@@ -182,7 +182,7 @@ export const PerfilEntrenadorPrivado = () => {
           </ul>
         </div>
       ) : (
-        <h1 className="text-light"> ERROR, inicia sesion de nuevo </h1>
+        <h1 className="errorInicio"> ERROR, Vuelve a Iniciar Sesion </h1>
       )}
     </>
 

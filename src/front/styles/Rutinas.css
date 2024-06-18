@@ -1,143 +1,110 @@
-.containerPrincipalRutinas {
-    justify-content: center;
-    text-align: center;
-    min-height: 700px;
-    height: auto;
-    margin-bottom: 50px;
-    border-radius: 5px;
-    margin-top: 150px;
+body,
+pre {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
 }
 
-.containerMayor {
-    width: 80vw;
-    color: #e7a33e;
-    font-size: 10px;
-    margin-top: 2%;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.8);
-    display: inline-block;
-    padding: 15px;
-    border-radius: 5px;
+.containerPrincipalRutina {
+    padding: 20px;
+    max-width: 700px;
+    margin: 0 auto;
+    color: white;
 }
 
-#h1 {
+.contenedorTituloRutinaPrivada {
+    text-align: center;
+}
+
+
+.tituloRutinaPrivada {
     color: #e7a33e;
+    border-radius: 5px;
     font-size: 50px;
     margin-top: 2%;
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.9);
     display: inline-block;
     padding: 15px;
-}
-
-#ul-li {
-    border: 1px solid rgb(172, 169, 169);
-    font-size: 30px;
-    list-style-type: none;
-    background-color: black;
-    color: white
-}
-.Rutina {
-    border-radius: 5px;
-}
-.agregarRutina {
-    font-size: 20px;
-    width: 100%;
-    margin-top: 10px;
-    border-radius: 5px;;
-}
-
-.icono-borrar {
-    float: right;
-    margin-right: 10px;
-    margin-top: 12px;
-    cursor: pointer;
-    font-size: 20px;
-}
-
-.icono-editar {
-    float: right;
-    margin-right: 10px;
-    margin-top: 12px;
-    cursor: pointer;
-    font-size: 20px;
-}
-
-
-.tarea {
-    background: rgb(248, 246, 246);
-}
-
-.escritoTarea {
-    margin-left: 10px;
+    max-width: 100%;
+    overflow: hidden;
     word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
-.contenedorTasksEjercicios {
-    color: #e7a33e;
-    justify-content: center;
-    padding: 10px;
-    font-size: 20px;
-}
-
-.btn-masRutinas {
-    background: #e7a33e;
-    font-size: 20px;
-    border: 1px solid black;
-    border-radius: 5px;
-    margin-top: 3%;
-    padding: 1%;
-}
-
-.editarRutina {
-    font-size: 20px;
-    width: 100%;
-    margin-top: 10px;
-
-}
-
-.botonGuardar {
-    background: #e7a33e;
-    font-size: 20px;
-    border: 1px solid black;
-    border-radius: 5px;
-    margin-top: 1%;
-    padding: 0.5%;
-}
-
-.tituloRutina {
+.formularioRutina {
+    border: 3px solid #e7a33e;
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
+    background-color: rgba(0, 0, 0, 0.92);
+    padding: 30px;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 5%;
+}
+
+.formularioRutina input,
+.formularioRutina textarea {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #333;
+}
+
+.formularioRutina button {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 4px;
+    background-color: #e7a33e;
+    color: black;
+    cursor: pointer;
+}
+
+.formularioRutina button:hover {
+    color: white;
+}
+
+.listaRutinas {
+    width: 100%;
     margin-top: 20px;
 }
 
-.btn-editar-nombre {
-    background: #e7a33e;
-    color: black;
-    font-size: 15px;
-    border: 1px solid black;
-    border-radius: 5px;
+.rutinaItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 10px;
-    margin-top: 3px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: black;
 }
 
-.btn-editar-nombre:hover {
-    background: #e7a33e;
+.rutinaItem p {
+    margin: 0;
+}
+
+.rutinaItem button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #e7a33e;
+    color: black;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.rutinaItem button:hover {
     color: white;
 }
-.botonGuardar, .botonCancelar {
-    flex-direction: row;
-    background: #e7a33e;
-    color: black;
-    font-size: 13px;
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 3%;
-    margin-top: 3px;
-}
-.input-editar-nombre{
-    font-size: 20px;
 
+.mensajeRutina {
+    color: #e7a33e;
+    margin-top: 10px;
 }

@@ -6,17 +6,17 @@ import "../../styles/Rutinas.css";
 export const Rutinas = () => {
     const { actions } = useContext(Context);
     const { cliente_id, usuario_id } = useParams();
-    const [comidas, setComidas] = useState([]);
-    const [nuevaComida, setNuevaComida] = useState("");
+    const [rutinas, setRutinas] = useState([]);
+    const [nuevaRutina, setNuevaRutina] = useState("");
     const [mensaje, setMensaje] = useState("");
     const [editIndex, setEditIndex] = useState(null);
-    const [editComida, setEditComida] = useState("");
+    const [editRutina, setEditRutina] = useState("");
 
     useEffect(() => {
         const fetchRutina = async () => {
             const resultado = await actions.obtenerRutina(cliente_id);
             if (resultado.success) {
-                setComidas(resultado.rutina || []);
+                setRutinas(resultado.rutina || []);
             } else {
                 setMensaje(`Error: ${resultado.error}`);
             }
@@ -25,17 +25,17 @@ export const Rutinas = () => {
     }, [cliente_id, actions]);
 
     const manejarAgregarRutina = () => {
-        if (nuevaComida.trim()) {
-            const nuevasComidas = [nuevaComida, ...comidas];
-            setComidas(nuevasComidas);
-            setNuevaComida("");
+        if (nuevaRutina.trim()) {
+            const nuevasRutinas = [nuevaRutina, ...rutinas];
+            setRutinas(nuevasRutinas);
+            setNuevaRutina("");
         } else {
             setMensaje("Por favor ingresa una rutina válida");
         }
     };
 
     const manejarGuardarRutina = async () => {
-        const resultado = await actions.actualizarRutina(cliente_id, comidas);
+        const resultado = await actions.actualizarRutina(cliente_id, rutinas);
         if (resultado.success) {
             setMensaje("Rutina guardada correctamente");
         } else {
@@ -44,54 +44,54 @@ export const Rutinas = () => {
     };
 
     const manejarEliminarRutina = (index) => {
-        const nuevasComidas = comidas.filter((_, i) => i !== index);
-        setComidas(nuevasComidas);
+        const nuevasRutinas = rutinas.filter((_, i) => i !== index);
+        setRutinas(nuevasRutinas);
     };
 
     const manejarEditarRutina = (index) => {
         setEditIndex(index);
-        setEditComida(comidas[index]);
+        setEditRutina(rutinas[index]);
     };
 
     const manejarGuardarEdicion = () => {
-        const nuevasComidas = comidas.map((comida, index) =>
-            index === editIndex ? editComida : comida
+        const nuevasRutinas = rutinas.map((rutina, index) =>
+            index === editIndex ? editRutina : rutina
         );
-        setComidas(nuevasComidas);
+        setRutinas(nuevasRutinas);
         setEditIndex(null);
-        setEditComida("");
+        setEditRutina("");
     };
 
     const manejarCancelarEdicion = () => {
         setEditIndex(null);
-        setEditComida("");
+        setEditRutina("");
     };
 
     return (
-        <div className="containerPrincipalDieta">
-            <div className="contenedorTituloDietaPrivada">
-                <div className="tituloDietaPrivada">
+        <div className="containerPrincipalRutina">
+            <div className="contenedorTituloRutinaPrivada">
+                <div className="tituloRutinaPrivada">
                     RUTINA
                 </div>
             </div>
-            <div className="formularioDieta">
+            <div className="formularioRutina">
                 <textarea
-                    value={nuevaComida}
-                    onChange={(e) => setNuevaComida(e.target.value)}
+                    value={nuevaRutina}
+                    onChange={(e) => setNuevaRutina(e.target.value)}
                     placeholder="Ingrese una rutina"
                     rows={4}
                     cols={50}
                 />
                 <button onClick={manejarAgregarRutina}>Agregar Rutina</button>
-                {mensaje && <p className="mensajeDieta">{mensaje}</p>}
-                <div className="listaComidas">
-                    {comidas.map((comida, index) => (
-                        <div key={index} className="comidaItem">
+                {mensaje && <p className="mensajeRutina">{mensaje}</p>}
+                <div className="listaRutinas">
+                    {rutinas.map((rutina, index) => (
+                        <div key={index} className="rutinaItem">
                             {editIndex === index ? (
                                 <div>
                                     <textarea
-                                        value={editComida}
-                                        onChange={(e) => setEditComida(e.target.value)}
+                                        value={editRutina}
+                                        onChange={(e) => setEditRutina(e.target.value)}
                                         rows={4}
                                         cols={50}
                                     />
@@ -100,7 +100,7 @@ export const Rutinas = () => {
                                 </div>
                             ) : (
                                 <div>
-                                    <pre>{comida}</pre>
+                                    <pre>{rutina}</pre>
                                     <div className="botonesEditarEliminar">
                                         <button onClick={() => manejarEditarRutina(index)}>Editar</button>
                                         <button onClick={() => manejarEliminarRutina(index)}>Eliminar</button>
