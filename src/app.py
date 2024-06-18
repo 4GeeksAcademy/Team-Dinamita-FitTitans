@@ -20,7 +20,8 @@ from datetime import datetime, timedelta
 import bcrypt
 from dotenv import load_dotenv
 load_dotenv()
-from flask_socketio import SocketIO, emit, join_room, leave_room
+# para el chat
+from flask_socketio import SocketIO, emit, join_room, leave_room, disconnect
 
 import smtplib
 from email.mime.multipart import MIMEMultipart
@@ -40,7 +41,7 @@ app.url_map.strict_slashes = False
 # Configuración de la aplicación
 app.config['SECRET_KEY'] = 'fit_titans_ajr'  # Cambia esto por una clave secreta segura
 app.config['SECURITY_PASSWORD_SALT'] = 'fit_titans_ajr'  # Cambia esto por un salt seguro
-app.config['JWT_ACCESS_TOKEN_EXPIRES'] = 3600  # Tiempo de expiración del token en segundos (1 hora)
+
 
 jwt = JWTManager(app)
 
@@ -518,7 +519,7 @@ def recovery_password():
         if user:
             user.password = hashed_password
             db.session.commit()
-            return jsonify({"message": "Usuario confirmado exitosamente"}), 200
+            return jsonify({"message": "Usuario confirmado exitosamente"}, user.password), 200
         else:
             return jsonify({"error": "Usuario no encontrado"}), 404
     except Exception as e:
@@ -528,44 +529,123 @@ def recovery_password():
 
 #blog 
 socketio = SocketIO(app, cors_allowed_origins="*")
+connected_users = set()
+
+# Configuración de Socket.IO
+socketio = SocketIO(app, cors_allowed_origins="*")
+
+connected_users = set()
 
 @socketio.on('connect')
-@jwt_required()  # Verifica que el usuario esté autenticado con un token JWT válido
 def handle_connect():
-    user_id = get_jwt_identity()  # Obtener el ID del usuario autenticado desde el token
-    join_room(str(user_id))  # Unir al usuario a una sala usando su ID
+    if len(connected_users) < 2:
+        connected_users.add(request.sid)
+        emit('message', {'text': 'User connected'}, broadcast=True)
+    else:
+        emit('message', {'text': 'Chat is full'}, room=request.sid)
+        disconnect()
+
+@socketio.on('disconnect')
+def handle_disconnect():
+    connected_users.discard(request.sid)
+    emit('message', {'text': 'User disconnected'}, broadcast=True)
 
 @socketio.on('message')
-@jwt_required()
 def handle_message(data):
-    user_id = get_jwt_identity()  # ID del usuario que envía el mensaje
-    recipient_id = data['recipient_id']  # ID del destinatario del mensaje
-    message = data['message']
+    try:
+        remitente_id = data.get('remitente_id')
+        destinatario_id = data.get('destinatario_id')
+        text = data.get('text')
 
-    # Verificar si el usuario está asignado a este entrenador
-    if is_user_assigned_to_trainer(user_id, recipient_id):
-        emit('message', {'text': message, 'timestamp': datetime.utcnow()}, room=str(recipient_id))
-    else:
-        emit('error', {'message': 'Unauthorized access to chat'}, room=request.sid)
+        if remitente_id and destinatario_id and text:
+            message = Message(
+                remitente_id=remitente_id, 
+                destinatario_id=destinatario_id, 
+                text=text
+            )
+            db.session.add(message)
+            db.session.commit()
+            
+            emit('message', message.serialize(), broadcast=True)
+        else:
+            emit('error', {'error': 'Invalid message data'}, room=request.sid)
+    except Exception as e:
+        print(f"Error: {e}")
+        emit('error', {'error': 'An error occurred while saving the message'}, room=request.sid)
 
-def is_user_assigned_to_trainer(user_id, trainer_id):
-    # Verificar si hay una asignación entre el usuario y el entrenador
-    assignment = Asignacion_entrenador.query.filter_by(entrenador_id=trainer_id, usuario_id=user_id).first()
-    return assignment is not None
+@app.route('/api/mensajes', methods=['GET'])
+def get_messages():
+    remitente_id = request.args.get('remitente_id')
+    destinatario_id = request.args.get('destinatario_id')
 
-@app.route('/api/messages', methods=['POST'])
-def send_message():
-    data = request.json
-    new_message = Message(sender_id=data['sender_id'], receiver_id=data['receiver_id'], content=data['content'])
-    db.session.add(new_message)
-    db.session.commit()
-    return jsonify({'message': 'Message sent successfully'}), 201
+    if not remitente_id or not destinatario_id:
+        return jsonify({"error": "Both remitente_id and destinatario_id are required"}), 400
 
-@app.route('/api/messages/<int:user_id>', methods=['GET'])
-def get_user_messages(user_id):
-    messages_sent = Message.query.filter_by(sender_id=user_id).all()
-    messages_received = Message.query.filter_by(receiver_id=user_id).all()
-    return jsonify({'sent': [message.serialize() for message in messages_sent], 'received': [message.serialize() for message in messages_received]})
+    try:
+        messages = Message.query.filter(
+            ((Message.remitente_id == remitente_id) & (Message.destinatario_id == destinatario_id)) |
+            ((Message.remitente_id == destinatario_id) & (Message.destinatario_id == remitente_id))
+        ).order_by(Message.timestamp).all()
+
+        return jsonify([message.serialize() for message in messages]), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route('/api/destinatario', methods=['GET'])
+def get_destinatario_id():
+    remitente_id = request.args.get('remitente_id')
+    print(f"El remitente_id recibido es: {remitente_id}")
+    if not remitente_id:
+        return jsonify({"error": "remitente_id is required"}), 400
+
+    try:
+        # Lógica para determinar el destinatario_id basado en el remitente_id
+        es_entrenador = User.query.filter_by(id=remitente_id, rol=True).first() is not None
+
+        if es_entrenador:
+            # Si el remitente es entrenador, buscamos un usuario como destinatario
+            destinatario = Asignacion_entrenador.query.filter(Asignacion_entrenador.usuario_id != remitente_id).first()
+            print(f"El entrenador recibido es: {destinatario}")
+            if not destinatario:
+                return jsonify({"error": "No destinatario found"}), 404
+            destinatario_id = destinatario.usuario_id
+        else:
+            # Si el remitente es usuario, buscamos un entrenador como destinatario
+            destinatario = Asignacion_entrenador.query.filter(Asignacion_entrenador.entrenador_id != remitente_id).first()
+            print(f"El usuario recibido es: {destinatario}")
+            if not destinatario:
+                return jsonify({"error": "No destinatario found"}), 404
+            destinatario_id = destinatario.entrenador_id
+
+        return jsonify({"destinatario_id": destinatario_id}), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+
+if __name__ == '__main__':
+    socketio.run(app, debug=True)
+
+
+
+@app.route('/api/asignaciones_entrenador', methods=['GET'])
+def get_asignaciones_entrenador():
+    try:
+        asignaciones = Asignacion_entrenador.query.all()
+        serialized_asignaciones = [asignacion.serialize() for asignacion in asignaciones]
+        return jsonify(serialized_asignaciones), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+
+
+
+
+
 
 #videos entrenador
 @app.route('/agregarVideo/<int:id>', methods=['POST'])

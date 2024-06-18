@@ -5,13 +5,11 @@ import { useParams, useNavigate } from "react-router-dom";
 
 
 export const RecuperarContraseña = () => {
-    const [usuarios, setUsuarios] = useState({
-        password: "",
-        password2: "",
-    });
-    const [password, setPassword] = useState("")
+    const [verificarContraseña, setVerificarContraseña] = useState("");
+    const [password, setPassword] = useState("");
     const { store, actions } = useContext(Context);
     const { user_uuid } = useParams();
+   
 
     const navigate = useNavigate();
     
@@ -19,12 +17,13 @@ export const RecuperarContraseña = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!validarContraseña(usuarios.password, usuarios.password2)) {
+        if (!validarContraseña(password.primera, verificarContraseña.segunda)) {
             alert("Las contraseñas no coinciden. Por favor, inténtalo de nuevo.");
-            setPassword(usuarios.password2)
-            return;
+        
+            console.log(password, "lo que escribo")
         }
         try {
+            console.log(password, "lo que envio")
             const response = await actions.ModificarContraseña(password, user_uuid)
             if(response){
                 alert("Contraseña Modificada")
@@ -58,7 +57,7 @@ export const RecuperarContraseña = () => {
                         className="form-control"
                         minLength={3}
                         required
-                        onChange={(e) => setUsuarios({ ...usuarios, password: e.target.value })}
+                        onChange={(e) => setPassword(e.target.value)}
                         placeholder="******************"
                     />
                 </div>
@@ -72,7 +71,7 @@ export const RecuperarContraseña = () => {
                         minLength={3}
                         required
                         placeholder="******************"
-                        onChange={(e) => setUsuarios({ ...usuarios, password2: e.target.value })}
+                        onChange={(e) => setVerificarContraseña(e.target.value)}
                     />
                 </div>
                 <div className="botonNavbar container d-flex justify-content-center">

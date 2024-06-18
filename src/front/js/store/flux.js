@@ -13,6 +13,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			rutinas: [],
 			dieta: [],
 			videos: [],
+			currentUser: {},
+            messages: [],
 
 		},
 		actions: {
@@ -329,7 +331,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log(response)
 						console.error('Error al enviar datos');
 						throw new Error('Error al enviar datos');
-						return false
 					}
 
 					const data = await response.json();
@@ -341,21 +342,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			ModificarContraseña: async (password, user_uuid) => {
+				console.log(password, "contraseña", user_uuid, "userID")
 				try {
-					const response = await fetch(`${process.env.BACKEND_URL}/reset-password/`, {
+					const response = await fetch(`${process.env.BACKEND_URL}/reset-password`, {
 						method: 'PUT',
 						headers: {
 							'Content-Type': 'application/json',
 							//'Authorization': `Bearer ${token}`
 						},
-						body: JSON.stringify({ password, user_uuid })
-
+						body: JSON.stringify({ password: password, user_uuid: user_uuid })
+						
 					});
 
 					if (!response.ok) {
 						console.error('Error al enviar datos');
 						throw new Error('Error al enviar datos');
-						return false
 					}
 
 					const data = await response.json();
@@ -367,76 +368,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			// // ENTRENADO: para eliminar modificar y crear rutina
-			// obtenerRutinaCliente: async (cliente_id) => {
-			// 	try {
-			// 		const response = await fetch(`${process.env.BACKEND_URL}/clientes/${cliente_id}/rutinas`);
-			// 		if (!response.ok) {
-			// 			throw new Error("Error al obtener las rutinas del cliente");
-			// 		}
-			// 		const data = await response.json();
-			// 		return data.rutinas;
-			// 	} catch (error) {
-			// 		console.error("Error al obtener las rutinas del cliente", error);
-			// 		throw error;
-			// 	}
-			// },
-
-			// crearRutinaCliente: async (cliente_id, rutina) => {
-			// 	try {
-			// 		const response = await fetch(`${process.env.BACKEND_URL}/clientes/${cliente_id}/rutinas`, {
-			// 			method: "POST",
-			// 			headers: {
-			// 				"Content-Type": "application/json"
-			// 			},
-			// 			body: JSON.stringify({ rutina })
-			// 		});
-			// 		if (!response.ok) {
-			// 			throw new Error("Error al crear la rutina del cliente");
-			// 		}
-			// 		const data = await response.json();
-			// 		return data.message;
-			// 	} catch (error) {
-			// 		console.error("Error al crear la rutina del cliente", error);
-			// 		throw error;
-			// 	}
-			// },
-
-			// actualizarRutinaCliente: async (cliente_id, rutinaIndex, rutina) => {
-			// 	try {
-			// 		const response = await fetch(`${process.env.BACKEND_URL}/clientes/${cliente_id}/rutinas/${rutinaIndex}`, {
-			// 			method: "PUT",
-			// 			headers: {
-			// 				"Content-Type": "application/json"
-			// 			},
-			// 			body: JSON.stringify({ rutina })
-			// 		});
-			// 		if (!response.ok) {
-			// 			throw new Error("Error al actualizar la rutina del cliente");
-			// 		}
-			// 		const data = await response.json();
-			// 		return data.message;
-			// 	} catch (error) {
-			// 		console.error("Error al actualizar la rutina del cliente", error);
-			// 		throw error;
-			// 	}
-			// },
-
-			// eliminarRutinaCliente: async (cliente_id, rutinaIndex) => {
-			// 	try {
-			// 		const response = await fetch(`${process.env.BACKEND_URL}/clientes/${cliente_id}/rutinas/${rutinaIndex}`, {
-			// 			method: "DELETE"
-			// 		});
-			// 		if (!response.ok) {
-			// 			throw new Error("Error al eliminar la rutina del cliente");
-			// 		}
-			// 		const data = await response.json();
-			// 		return data.message;
-			// 	} catch (error) {
-			// 		console.error("Error al eliminar la rutina del cliente", error);
-			// 		throw error;
-			// 	}
-			// },
 
 			// RUTINA ver como cliente
 			obtenerRutinaCliente: async (usuario_id) => {
@@ -690,7 +621,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.error("Error updating user data:", error);
 					}
 				},
-
 
 		}
 	};

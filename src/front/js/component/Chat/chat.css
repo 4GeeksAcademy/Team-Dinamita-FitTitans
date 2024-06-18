@@ -1,0 +1,16 @@
+#caja-chat {
+    background-color: rgba(255, 254, 254, 0.8);
+    margin-top: 15% !important;
+}
+
+#boton{
+    background:  #e7a33e;
+    border-radius: 10px;
+    padding: 8px 16px !important;
+    margin-left: 5px !important;
+    margin-right: 5px !important;
+}
+
+#boton:hover{
+    color: white;
+}
