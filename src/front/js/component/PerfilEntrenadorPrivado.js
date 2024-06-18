@@ -44,7 +44,7 @@ export const PerfilEntrenadorPrivado = () => {
     }
   };
 
-  
+
   const manejarEditarUsuario = async (usuarioId) => {
     await actions.EditarUsuario(usuarioId, datosFormulario);
     setEditar(false);
@@ -65,7 +65,7 @@ export const PerfilEntrenadorPrivado = () => {
 
   useEffect(() => {
 
-    if (store.id == id){
+    if (store.id == id) {
       const fetchUsuarioUnico = async () => {
         await actions.GetEntrenadorUnico(id);
         const usuariofinal = store.usuarioUnico;
@@ -77,8 +77,8 @@ export const PerfilEntrenadorPrivado = () => {
       };
       setRol(true)
       fetchUsuarioUnico();
-    }else { setRol(false),"deja de jode"}
-   }, [editar, usuarios.foto]);
+    } else { setRol(false), "deja de jode" }
+  }, [editar, usuarios.foto]);
   console.log(usuarios);
 
   return (
@@ -92,7 +92,9 @@ export const PerfilEntrenadorPrivado = () => {
             {Array.isArray(usuarios) && usuarios.map((usuario) => (
               <li key={usuario.id} className="usuarioItem">
                 <div className="card perfilCard">
-                  <img src={usuario.foto} className="card-img-topEntrenador" alt={`Imagen de ${usuario.nombre}`} />
+                  <div className="containerTopEntrenador">
+                    <img src={usuario.foto} className="card-img-topEntrenador" alt={`Imagen de ${usuario.nombre}`} />
+                  </div>
                   <div className="card-body">
                     <h5 className="card-titlePrivado">{usuario.nombre}</h5>
                     <p className="card-text-Datos">Datos Personales</p>
@@ -108,7 +110,7 @@ export const PerfilEntrenadorPrivado = () => {
                   </ul>
                 </div>
                 <div className="input-containerSubirImagen">
-                <UploadWidgetFoto userId={usuario.id} onUploadSuccess={handleSubirImagen} />
+                  <UploadWidgetFoto userId={usuario.id} onUploadSuccess={handleSubirImagen} />
                 </div>
                 {editar ? (
                   <>
