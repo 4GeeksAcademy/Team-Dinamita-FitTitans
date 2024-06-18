@@ -19,3 +19,7 @@ npm install express -E
 npm install express socket.io
 npm install socket.io-client
 pip install flask flask-socketio
+
+print(f"El remitente_id recibido es: {remitente_id}")
+print(f"El entrenador recibido es: {destinatario}")
+print(f"El usuario recibido es: {destinatario}")

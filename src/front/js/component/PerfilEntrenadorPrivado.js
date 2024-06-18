@@ -64,8 +64,8 @@ export const PerfilEntrenadorPrivado = () => {
   };
 
   useEffect(() => {
-
-    if (store.id == id){
+    const storeID = localStorage.getItem("user_id")
+    if (storeID == id){
       const fetchUsuarioUnico = async () => {
         await actions.GetEntrenadorUnico(id);
         const usuariofinal = store.usuarioUnico;
