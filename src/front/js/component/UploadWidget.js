@@ -27,7 +27,7 @@ const UploadWidget = ({ onUploadSuccess, titulo }) => {
 
   return (
     <div>
-      <button onClick={() => widgetRef.current.open()}>Subir Video</button>
+      <button className="btn btn-dark" onClick={() => widgetRef.current.open()}>Subir Video</button>
       {secureUrl && (
         <div>
           <p className="text-light">Video subido correctamente!</p>

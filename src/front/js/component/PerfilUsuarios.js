@@ -65,8 +65,8 @@ export const PerfilUsuarios = () => {
   };
 
   useEffect(() => {
-
-   if (store.id == id){
+  const storeID = localStorage.getItem("user_id")
+   if (storeID == id){
      const fetchUsuarioUnico = async () => {
        await actions.GetUsuarioUnico(id);
        const usuariofinal = store.usuarioUnico;
