@@ -3,18 +3,15 @@ pre {
     font-family: 'Inter', sans-serif;
     font-size: 15px;
 }
-
 .containerPrincipalVideo {
     padding: 20px;
     max-width: 900px;
     margin: 0 auto;
     color: white;
 }
-
 .contenedorTituloVideo {
     text-align: center;
 }
-
 .tituloVideo {
     color: #e7a33e;
     border-radius: 5px;
@@ -29,7 +26,6 @@ pre {
     word-wrap: break-word;
     overflow-wrap: break-word;
 }
-
 .formularioVideo {
     border: 3px solid #e7a33e;
     display: flex;
@@ -42,7 +38,6 @@ pre {
     box-sizing: border-box;
     margin-bottom: 5%;
 }
-
 .gridVideos {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -50,7 +45,6 @@ pre {
     width: 100%;
     margin-top: 20px;
 }
-
 .videoItem {
     display: flex;
     flex-direction: column;
@@ -61,43 +55,37 @@ pre {
     background-color: rgba(255, 255, 255, 0.8);
     color: black;
 }
-
 .videoControl {
     max-width: 100%;
     margin-bottom: 10px;
 }
-
 .input-containerSubirVideo {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
 }
-
 .inputTituloVideo {
     width: calc(100% - 20px);
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.8);
     color: #333;
 }
-
 .input-containerSubirVideo h2 {
     color: #e7a33e;
 }
-
 .input-containerSubirVideo input[type="button"] {
     padding: 2%;
     margin: 5px;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     background-color: #e7a33e;
     color: black;
     cursor: pointer;
 }
-
 .input-containerSubirVideo input[type="button"]:hover {
     color: white;
 }

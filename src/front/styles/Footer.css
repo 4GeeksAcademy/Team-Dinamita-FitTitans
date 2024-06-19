@@ -4,7 +4,7 @@
     color: white;
     position: absolute;
     bottom: 0;
-    /* Lo coloca al final de la ventana del navegador */
+    /* /*AL FINAL DEL NAVEGADOR// */
     max-width: 100%;
     overflow: hidden;
     word-wrap: break-word;
