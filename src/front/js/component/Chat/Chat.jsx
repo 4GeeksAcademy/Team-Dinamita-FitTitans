@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
-import "/workspaces/Team-Dinamita-FitTitans/src/front/js/component/Chat/chat.css";
+import "./chat.css";
 
 const socket = io(process.env.BACKEND_URL, {
     transports: ['websocket'], // Forzar la conexión a WebSocket

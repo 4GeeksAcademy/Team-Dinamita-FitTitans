@@ -3,7 +3,7 @@ import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/home.css";
 import { set } from "@cloudinary/url-gen/actions/variable";
-import { Registro } from "/workspaces/Team-Dinamita-FitTitans/src/front/js/component/Registro.js";
+import { Registro } from "../component/Registro.js";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);

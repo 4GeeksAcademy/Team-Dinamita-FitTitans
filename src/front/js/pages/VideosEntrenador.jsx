@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import { Context } from '/workspaces/Team-Dinamita-FitTitans/src/front/js/store/appContext.js';
-import UploadWidget from '/workspaces/Team-Dinamita-FitTitans/src/front/js/component/UploadWidget.js';
-import "/workspaces/Team-Dinamita-FitTitans/src/front/styles/VideosEntrenador.css"
+import { Context } from '../store/appContext.js';
+import UploadWidget from '../component/UploadWidget.js';
+import "../../styles/VideosEntrenador.css"
 
 export const VideosEntrenador = () => {
   const { store, actions } = useContext(Context);

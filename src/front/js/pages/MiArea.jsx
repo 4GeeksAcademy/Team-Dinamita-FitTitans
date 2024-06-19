@@ -1,8 +1,8 @@
 import React, {useContext, useEffect, useState } from 'react';
 import { Context } from "../store/appContext";
 import { Link, useNavigate } from "react-router-dom";
-import {MiAreaCliente} from "/workspaces/Team-Dinamita-FitTitans/src/front/js/component/MiAreaCliente.jsx"
-import {MiAreaEntrenador} from "/workspaces/Team-Dinamita-FitTitans/src/front/js/component/MiAreaEntrenador.jsx"
+import {MiAreaCliente} from "../component/MiAreaCliente.jsx"
+import {MiAreaEntrenador} from "../component/MiAreaEntrenador.jsx"
 
   
 export const MiArea = () => {

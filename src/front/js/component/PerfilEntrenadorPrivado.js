@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams } from 'react-router-dom';
 import { Context } from "../store/appContext";
-import UploadWidgetFoto from '/workspaces/Team-Dinamita-FitTitans/src/front/js/component/UploadWidgetFoto.js';
+import UploadWidgetFoto from './UploadWidgetFoto.js';
 import "../../styles/PerfilEntrenadorPrivado.css";
 
 export const PerfilEntrenadorPrivado = () => {

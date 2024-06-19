@@ -1,9 +1,9 @@
 import React, { useState, useContext, useEffect } from "react";
 import "../../styles/Navbar.css";
-import "/workspaces/Team-Dinamita-FitTitans/src/front/styles/IniciarSesion.css"
+import "../../styles/IniciarSesion.css"
 import { useNavigate, Link } from "react-router-dom";
 import { Registro } from "./Registro";
-import { MiAreaUsuarioRegistrado } from "//workspaces/Team-Dinamita-FitTitans/src/front/js/pages/MiAreaUsuarioRegistrado.jsx"
+
 import firebaseApp from "../../../firebase/credenciales";
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
