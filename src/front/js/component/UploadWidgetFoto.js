@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-
+import "../../styles/PerfilUsuario.css";
 const UploadWidgetFoto = ({ userId, onUploadSuccess }) => {
   const cloudinaryRef = useRef();
   const widgetRef = useRef();
@@ -28,7 +28,7 @@ const UploadWidgetFoto = ({ userId, onUploadSuccess }) => {
 
   return (
     <div>
-      <button onClick={() => widgetRef.current.open()}>Subir Foto</button>
+      <button className= "btnSubir" onClick={() => widgetRef.current.open()}>Subir Foto</button>
       {secureUrl && (
         <div>
           <p className="text-light">Foto subida correctamente!</p>

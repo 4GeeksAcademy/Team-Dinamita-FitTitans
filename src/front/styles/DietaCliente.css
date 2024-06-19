@@ -1,3 +1,9 @@
+body,
+pre {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+}
+
 .containerPrincipalDieta {
     padding: 20px;
     max-width: 700px;
@@ -25,6 +31,7 @@
 }
 
 .formularioDieta {
+    border: 3px solid #e7a33e;
     display: flex;
     flex-direction: column;
     align-items: center;

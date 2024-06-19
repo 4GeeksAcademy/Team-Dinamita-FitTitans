@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import "/workspaces/Team-Dinamita-FitTitans/src/front/styles/VideosEntrenador.css"
 
 const UploadWidget = ({ onUploadSuccess, titulo }) => {
   const cloudinaryRef = useRef();
@@ -27,10 +28,10 @@ const UploadWidget = ({ onUploadSuccess, titulo }) => {
 
   return (
     <div>
-      <button className="btn btn-dark" onClick={() => widgetRef.current.open()}>Subir Video</button>
+      <button className="btnSubir" onClick={() => widgetRef.current.open()}>Subir Video</button>
       {secureUrl && (
         <div>
-          <p className="text-light">Video subido correctamente!</p>
+          <p className="textVideoSubido">Video subido correctamente!</p>
           {titulo && <p className="text-light">Título: {titulo}</p>}
         </div>
       )}
