@@ -13,6 +13,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			rutinas: [],
 			dieta: [],
 			videos: [],
+			currentUser: {},
+            messages: [],
 
 		},
 		actions: {
@@ -329,7 +331,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log(response)
 						console.error('Error al enviar datos');
 						throw new Error('Error al enviar datos');
-						return false
 					}
 
 					const data = await response.json();
@@ -341,21 +342,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			ModificarContraseña: async (password, user_uuid) => {
+				console.log(password, "contraseña", user_uuid, "userID")
 				try {
-					const response = await fetch(`${process.env.BACKEND_URL}/reset-password/`, {
+					const response = await fetch(`${process.env.BACKEND_URL}/reset-password`, {
 						method: 'PUT',
 						headers: {
 							'Content-Type': 'application/json',
 							//'Authorization': `Bearer ${token}`
 						},
-						body: JSON.stringify({ password, user_uuid })
-
+						body: JSON.stringify({ password: password, user_uuid: user_uuid })
+						
 					});
 
 					if (!response.ok) {
 						console.error('Error al enviar datos');
 						throw new Error('Error al enviar datos');
-						return false
 					}
 
 					const data = await response.json();
@@ -620,7 +621,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.error("Error updating user data:", error);
 					}
 				},
-
 
 		}
 	};

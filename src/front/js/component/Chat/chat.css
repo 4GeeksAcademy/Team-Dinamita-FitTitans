@@ -1,20 +1,21 @@
-body, pre {
+body,
+pre {
     font-family: 'Inter', sans-serif;
     font-size: 15px;
 }
-.containerPrincipalDieta {
+
+.containerPrincipalChat {
     padding: 20px;
     max-width: 700px;
     margin: 0 auto;
     color: white;
 }
 
-.contenedorTituloDietaPrivada {
+.contenedorTituloChat {
     text-align: center;
 }
 
-
-.tituloDietaPrivada {
+.tituloChat {
     color: #e7a33e;
     border-radius: 5px;
     font-size: 50px;
@@ -29,7 +30,7 @@ body, pre {
     overflow-wrap: break-word;
 }
 
-.formularioDieta {
+.formularioChat {
     border: 3px solid #e7a33e;
     display: flex;
     flex-direction: column;
@@ -42,67 +43,57 @@ body, pre {
     margin-bottom: 5%;
 }
 
-.formularioDieta input,
-.formularioDieta textarea {
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin-bottom: 10px;
+.cajaChat {
+    height: 400px;
+    overflow-y: scroll;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    margin-bottom: 10px;
+    width: calc(100% - 20px);
+    background-color: rgba(255, 255, 255, 0.8);
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.cajaChat ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.mensajeItem {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: black;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+.inputContainer {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.inputContainer input {
+    flex: 1;
+    margin-right: 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.8);
     color: #333;
 }
 
-.formularioDieta button {
+.inputContainer button {
     padding: 10px 20px;
-    margin: 5px;
     border: none;
-    border-radius: 4px;
-    background-color: #e7a33e;
-    color: black;
-    cursor: pointer;
-}
-
-.formularioDieta button:hover {
-    color: white;
-}
-
-.listaComidas {
-    width: 100%;
-    margin-top: 20px;
-}
-
-.comidaItem {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    border: 1px solid #ccc;
     border-radius: 5px;
-    margin-bottom: 10px;
-    background-color: rgba(255, 255, 255, 0.8);
-    color: black;
-}
-
-.comidaItem p {
-    margin: 0;
-}
-
-.comidaItem button {
-    padding: 5px 10px;
-    border: none;
-    border-radius: 4px;
     background-color: #e7a33e;
     color: black;
     cursor: pointer;
-    transition: color 0.3s ease;
 }
 
-.comidaItem button:hover {
+.inputContainer button:hover {
     color: white;
-}
-
-.mensajeDieta {
-    color: #e7a33e;
-    margin-top: 10px;
 }
