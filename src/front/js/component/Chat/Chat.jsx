@@ -84,26 +84,32 @@ export const Chat = () => {
     };
 
     return (
-        <div className='text-dark ' id='caja-chat' style={{ maxWidth: '600px', margin: 'auto' }}>
-            <h2 id='titulo'>Chat</h2>
-            <div style={{ height: '400px', overflowY: 'scroll', border: '1px solid #ccc', marginBottom: '10px' }}>
-                <ul style={{ listStyleType: 'none', padding: '0' }}>
-                    {messages.map((msg, index) => (
-                        <li key={index} style={{ padding: '8px', borderBottom: '1px solid #eee' }}>
-                            <strong>{msg.remitente_nombre}</strong>: {msg.text} <br /> {msg.timestamp}
-                        </li>
-                    ))}
-                </ul>
+        <div className="containerPrincipalChat">
+            <div className="contenedorTituloChat">
+                <div className="tituloChat">
+                    CHAT
+                </div>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-                <input
-                    type="text"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    style={{ flex: '1', marginRight: '10px', padding: '8px' }}
-                    autoComplete="off"
-                />
-                <button onClick={sendMessage} id='boton'>Send</button>
+            <div className="formularioChat">
+                <div className="cajaChat">
+                    <ul>
+                        {messages.map((msg, index) => (
+                            <li key={index} className="mensajeItem">
+                                <strong>{msg.remitente_nombre}</strong>: {msg.text} <br /> {msg.timestamp}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+                <div className="inputContainer">
+                    <input
+                        type="text"
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                        placeholder="Escribe un mensaje"
+                        autoComplete="off"
+                    />
+                    <button onClick={sendMessage}>Enviar</button>
+                </div>
             </div>
         </div>
     );

@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { Context } from '/workspaces/Team-Dinamita-FitTitans/src/front/js/store/appContext.js';
 import UploadWidget from '/workspaces/Team-Dinamita-FitTitans/src/front/js/component/UploadWidget.js';
+import "/workspaces/Team-Dinamita-FitTitans/src/front/styles/VideosEntrenador.css"
 
 export const VideosEntrenador = () => {
   const { store, actions } = useContext(Context);
@@ -45,34 +46,42 @@ export const VideosEntrenador = () => {
   console.log(videos);
 
   return (
-    <div>
-      {rol ? (
-        <div>
-          {videos.length > 0 ? (
-            <ul>
-              {videos.map((video, index) => (
-                <li key={index}>
-                  <video src={video.url} controls style={{ maxWidth: '300px' }} />
-                  <p className="text-light">Título: {video.titulo}</p>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <h1 className='text-light'>No hay videos aún</h1>
-          )}
+    <div className="containerPrincipalVideo">
+      <div className="contenedorTituloVideo">
+        <div className="tituloVideo">
+          VIDEOS
         </div>
-      ) : (
-        <h1 className='text-light'>No hay videos aún</h1>
-      )}
-      <div className="input-containerSubirImagen">
-        <UploadWidget onUploadSuccess={handleSubirVideo} titulo={tituloVideo} />
-        <h2 className="text-light">Subir video</h2>
-        <input
-          type="text"
-          value={tituloVideo}
-          onChange={(e) => setTituloVideo(e.target.value)}
-          placeholder="Ingrese el título del video"
-        />
+      </div>
+      <div className="formularioVideo">
+        {rol ? (
+          <div>
+            {videos.length > 0 ? (
+              <div className="gridVideos">
+                {videos.map((video, index) => (
+                  <div key={index} className="videoItem">
+                    <video src={video.url} controls className="videoControl" />
+                    <p className="text-light">Título: {video.titulo}</p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <h1 className="text-light">No hay videos aún</h1>
+            )}
+          </div>
+        ) : (
+          <h1 className="text-light">No hay videos aún</h1>
+        )}
+        <div className="input-containerSubirVideo">
+          <UploadWidget onUploadSuccess={handleSubirVideo} titulo={tituloVideo} />
+          <h2 className="text-light">Subir video</h2>
+          <input
+            type="text"
+            value={tituloVideo}
+            onChange={(e) => setTituloVideo(e.target.value)}
+            placeholder="Ingrese el título del video"
+            className="inputTituloVideo"
+          />
+        </div>
       </div>
     </div>
   );
