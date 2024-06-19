@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useNavigate, } from "react-router-dom";
-import "/workspaces/Team-Dinamita-FitTitans/src/front/styles/registro.css"
+import "../../styles/registro.css"
 import firebaseApp from "../../../firebase/credenciales";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore";

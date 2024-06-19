@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/Navbar.css";
-import "/workspaces/Team-Dinamita-FitTitans/src/front/styles/IniciarSesion.css"
+import "../../styles/IniciarSesion.css"
 
 export const SolicitudRecuperacion = () => {
   const [email, setEmail] = useState("");
