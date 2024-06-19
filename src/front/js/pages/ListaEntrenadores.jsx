@@ -53,7 +53,7 @@ export const ListaEntrenadores = () => {
   };
 
   const selectPlan = (plan) => {
-    setSeleccionarPlan(plan); 
+    setSeleccionarPlan(plan);
     setSelectedPlan(plan);
   };
 
@@ -132,7 +132,7 @@ export const ListaEntrenadores = () => {
                   Plan Anual
                 </button>
               </div>
-              <div className="contenedorBotonContratame">
+              <div className="contenedorBotonContratar">
                 <button type="button" className="btnContratarListaEntrenadores" onClick={contratarEntrenador}>Contratar</button>
               </div>
             </div>

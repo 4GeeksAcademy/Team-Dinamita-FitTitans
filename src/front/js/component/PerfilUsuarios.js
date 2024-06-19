@@ -33,7 +33,7 @@ export const PerfilUsuarios = () => {
       console.log(secureUrl)
       const updatedUsuarios = usuarios.map((usuario) => {
         if (usuario.id === userId) {
-          actions.EditarFotos(id ,secureUrl, token)
+          actions.EditarFotos(id, secureUrl, token)
           alert("foto actualizada correctamente")
           return { ...usuario, foto: responseData.secure_url };
         }
@@ -92,10 +92,12 @@ export const PerfilUsuarios = () => {
             {Array.isArray(usuarios) && usuarios.map((usuario) => (
               <li key={usuario.id} className="usuarioItem">
                 <div className="card perfilCard">
-                  <img src={usuario.foto} className="card-img-topUsuario" alt={`Imagen de ${usuario.nombre}`} />
+                  <div className="containerTopUsuario">
+                    <img src={usuario.foto} className="card-img-topUsuario" alt={`Imagen de ${usuario.nombre}`} />
+                  </div>
                   <div className="card-body">
                     <h5 className="card-titlePrivado">{usuario.nombre}</h5>
-                    <p className="card-text">Datos Personales</p>
+                    <div className="card-text-Datos">Datos Personales</div>
                   </div>
                   <ul className="list-group list-group-flush">
                     <li className="list-group-itemDatosPersonales">Email: {usuario.email}</li>
@@ -108,7 +110,7 @@ export const PerfilUsuarios = () => {
                 </div>
 
                 <div className="input-containerSubirImagen">
-                <UploadWidgetFoto userId={usuario.id} onUploadSuccess={handleSubirImagen} />
+                  <UploadWidgetFoto userId={usuario.id} onUploadSuccess={handleSubirImagen} />
                 </div>
 
                 {editar ? (
@@ -173,7 +175,8 @@ export const PerfilUsuarios = () => {
             ))}
           </ul>
         </div>
-      ) : (<h1> ERROR, Vuelve a Iniciar Sesion </h1>)}
+      ) : (
+        <h1 className="errorInicio"> ERROR, Vuelve a Iniciar Sesion </h1>)}
     </>
   );
 };

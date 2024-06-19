@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { Context } from '/workspaces/Team-Dinamita-FitTitans/src/front/js/store/appContext.js';
+import "/workspaces/Team-Dinamita-FitTitans/src/front/styles/VideosEntrenador.css"
 
 export const VideosUsuarios = () => {
   const { store, actions } = useContext(Context);
@@ -41,27 +42,35 @@ export const VideosUsuarios = () => {
     fetchVideos();
   }, [ ]);
 
+
   return (
-    <>
-      {rol ? (
-        <div id="contenedor videos container mt-4">
-          {videos.length > 0 ? (
-            <ul>
-              {videos.map((video, index) => (
-                <li key={index}>
-                  <video src={video.url} controls style={{ maxWidth: '300px' }} />
-                  <p className="text-light">Título: {video.titulo}</p>
-                  <p className="text-light">Subido por: {video.nombreUsuario}</p>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <h1 className='text-light'>No hay videos aún</h1>
-          )}
+    <div className="containerPrincipalVideo">
+        <div className="contenedorTituloVideo">
+            <div className="tituloVideo">
+                VIDEOS
+            </div>
         </div>
-      ) : (
-        <h1 className='text-light'>No hay videos aún</h1>
-      )}
-    </>
-  );
+        <div className="formularioVideo">
+            {rol ? (
+                <div>
+                    {videos.length > 0 ? (
+                        <div className="gridVideos">
+                            {videos.map((video, index) => (
+                                <div key={index} className="videoItem">
+                                    <video src={video.url} controls className="videoControl" />
+                                    <p className="text-light">Título: {video.titulo}</p>
+                                    <p className="text-light">Subido por: {video.nombreUsuario}</p>
+                                </div>
+                            ))}
+                        </div>
+                    ) : (
+                        <h1 className="text-light">No hay videos aún</h1>
+                    )}
+                </div>
+            ) : (
+                <h1 className="text-light">No hay videos aún</h1>
+            )}
+        </div>
+    </div>
+);
 };
