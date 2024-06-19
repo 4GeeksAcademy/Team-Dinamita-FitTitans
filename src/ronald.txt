@@ -1,0 +1,64 @@
+socketio = SocketIO(app, cors_allowed_origins="*")
+
+connected_users = {}
+
+
+@socketio.on('connect')
+def handle_connect():
+    if len(connected_users) < 2:
+        connected_users.add(request.sid)
+        emit('message', {'text': 'User connected'}, broadcast=True)
+    else:
+        emit('message', {'text': 'Chat is full'}, room=request.sid)
+        disconnect()
+
+@socketio.on('disconnect')
+def handle_disconnect():
+    connected_users.discard(request.sid)
+    emit('message', {'text': 'User disconnected'}, broadcast=True)
+
+@socketio.on('message')
+def handle_message(data):
+    try:
+        remitente_id = data.get('remitente_id')
+        destinatario_id = data.get('destinatario_id')
+        text = data.get('text')
+
+        if remitente_id and destinatario_id and text:
+            message = Message(
+                remitente_id=remitente_id, 
+                destinatario_id=destinatario_id, 
+                text=text
+            )
+            db.session.add(message)
+            db.session.commit()
+            
+            emit('message', message.serialize(), broadcast=True)
+        else:
+            emit('error', {'error': 'Invalid message data'}, room=request.sid)
+    except Exception as e:
+        print(f"Error: {e}")
+        emit('error', {'error': 'An error occurred while saving the message'}, room=request.sid)
+
+@app.route('/api/mensajes', methods=['GET'])
+def get_messages():
+    remitente_id = request.args.get('remitente_id')
+    destinatario_id = request.args.get('destinatario_id')
+
+    if not remitente_id or not destinatario_id:
+        return jsonify({"error": "Both remitente_id and destinatario_id are required"}), 400
+
+    try:
+        messages = Message.query.filter(
+            ((Message.remitente_id == remitente_id) & (Message.destinatario_id == destinatario_id)) |
+            ((Message.remitente_id == destinatario_id) & (Message.destinatario_id == remitente_id))
+        ).order_by(Message.timestamp).all()
+
+        return jsonify([message.serialize() for message in messages]), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route('/api/destinatario', methods=['GET'])
+def get_destinatario_id():

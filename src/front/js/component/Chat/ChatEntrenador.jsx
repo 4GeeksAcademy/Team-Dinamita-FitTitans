@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import "/workspaces/Team-Dinamita-FitTitans/src/front/js/component/Chat/chat.css";
+import { useParams } from 'react-router-dom';
 
 const socket = io(process.env.BACKEND_URL, {
     transports: ['websocket'], // Forzar la conexión a WebSocket
@@ -9,40 +10,26 @@ const socket = io(process.env.BACKEND_URL, {
     }
 });
 
-export const Chat = () => {
+export const ChatEntrenador = () => {
     const [remitenteId, setRemitenteId] = useState(null);
     const [destinatarioId, setDestinatarioId] = useState(null);
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState('');
+    const { cliente_id } = useParams();
 
     useEffect(() => {
-        // Obtener el remitenteId del localStorage
         const remitenteIdFromStorage = localStorage.getItem('user_id');
         if (remitenteIdFromStorage) {
-            const remitenteIdInteger = parseInt(remitenteIdFromStorage);
-            setRemitenteId(remitenteIdInteger);
+            setRemitenteId(parseInt(remitenteIdFromStorage));
+        }
+        setDestinatarioId(parseInt(cliente_id));
+    }, [cliente_id]);
 
-            // Función para obtener el destinatario
-            const fetchDestinatarioId = async () => {
+    useEffect(() => {
+        if (remitenteId !== null && destinatarioId !== null) {
+            const fetchMessages = async () => {
                 try {
-                    const response = await fetch(`${process.env.BACKEND_URL}/api/destinatario?remitente_id=${remitenteIdInteger}`);
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    const data = await response.json();
-                    setDestinatarioId(parseInt(data.destinatario_id));
-
-                    // Fetch messages una vez que se establezca destinatarioId
-                    fetchMessages(parseInt(data.destinatario_id));
-                } catch (error) {
-                    console.log('Error fetching destinatario_id:', error);
-                }
-            };
-
-            // Función para obtener los mensajes
-            const fetchMessages = async (destinatarioIdInteger) => {
-                try {
-                    const response = await fetch(`${process.env.BACKEND_URL}/api/mensajes?remitente_id=${remitenteIdInteger}&destinatario_id=${destinatarioIdInteger}`);
+                    const response = await fetch(`${process.env.BACKEND_URL}/api/mensajes?remitente_id=${remitenteId}&destinatario_id=${destinatarioId}`);
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
                     }
@@ -53,23 +40,22 @@ export const Chat = () => {
                 }
             };
 
-            // Llamar a la función para obtener el destinatario si remitenteId está definido
-            if (remitenteIdInteger) {
-                fetchDestinatarioId();
-            }
+            fetchMessages();
+
+            socket.on('message', (msg) => {
+                setMessages((prevMessages) => [...prevMessages, msg]);
+            });
+
+            socket.on('error', (error) => {
+                console.error('Error from server:', error);
+            });
+
+            return () => {
+                socket.off('message');
+                socket.off('error');
+            };
         }
-
-        // Configuración de los listeners del socket.io
-        socket.on('message', (msg) => {
-            setMessages((prevMessages) => [...prevMessages, msg]);
-        });
-
-        socket.on('error', (error) => {
-            console.error('Error from server:', error);
-        });
-
-       
-    }, []); // Dependencia vacía para ejecutar solo una vez al montar el componente
+    }, [remitenteId, destinatarioId]);
 
     const sendMessage = (e) => {
         e.preventDefault();

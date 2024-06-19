@@ -4,7 +4,9 @@ pipenv run upgrade
 pipenv run start
 
 npm run start
-
+pip install pytz
+pip install flask_apscheduler
+pipenv install flask_apscheduler
 
 correo 
 fittitans@outlook.com
@@ -23,3 +25,8 @@ pip install flask flask-socketio
 print(f"El remitente_id recibido es: {remitente_id}")
 print(f"El entrenador recibido es: {destinatario}")
 print(f"El usuario recibido es: {destinatario}")
+
+ // Función de limpieza al desmontar el componente
+        return () => {
+            socket.disconnect();
+        };
