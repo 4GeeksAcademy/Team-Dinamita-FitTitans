@@ -1,7 +1,6 @@
 .list-group {
     border-radius: 5px;
 }
-
 .fotoContainer {
     display: flex;
     justify-content: center;
@@ -13,32 +12,27 @@
     overflow: hidden;
     margin-left: 15px;
 }
-
 p {
     font-size: 18px;
     padding: none;
     margin: 0px;
     margin-left: none;
 }
-
 .Nombre,
 .Apellido {
     color: #e7a33e;
 }
-
 .btnConoceme,
-btnCerrar {
+.btnCerrar {
     background-color: #e7a33e;
     color: black;
     font-size: 60%;
     padding: 0.5%;
     border-radius: 5px;
 }
-
 .btnConoceme:hover {
     color: white;
 }
-
 .btnCloseEntrenador {
     background-color: #e7a33e;
     color: black;
@@ -46,16 +40,12 @@ btnCerrar {
     border-radius: 5px;
     font-size: 60%;
 }
-
 .btnCloseEntrenador:hover {
     color: white;
 }
-
 .modal-bodyEntrenador {
     color: black;
-
 }
-
 .fotoMiniEntrenador {
     width: 150px;
     height: 150px;
@@ -66,7 +56,6 @@ btnCerrar {
     align-items: center;
     justify-content: center;
 }
-
 .btnContratame {
     background: #e7a33e;
     white-space: nowrap;
@@ -76,14 +65,12 @@ btnCerrar {
     font-size: 15px;
     padding: .375rem .75rem;
 }
-
 .btnContratame:hover {
     background-color: #e7a33e;
     color: white;
     outline: none;
     box-shadow: none;
 }
-
 .btnContratar,
 .btnPlanes {
     background: #e7a33e;
@@ -95,13 +82,15 @@ btnCerrar {
     margin: 2%;
     padding: 2%;
 }
-
+.btnPlanes.selected {
+    background-color:rgba(0, 0, 0, 0.8);
+    color: #fff;
+}
 .contenedorBotonContratar,
 .contenedorBotonesPlanes {
     justify-content: center;
     display: flex;
 }
-
 .btnContratarListaEntrenadores {
     background: #e7a33e;
     white-space: nowrap;
@@ -112,5 +101,4 @@ btnCerrar {
     margin: 2%;
     padding: 2%;
     width: 100%;
-
 }

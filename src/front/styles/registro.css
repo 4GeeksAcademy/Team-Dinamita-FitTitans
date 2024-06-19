@@ -2,24 +2,20 @@
     position: relative;
     display: inline-block;
 }
-
 .info-box {
     display: none;
     position: absolute;
-    top: 100%; /* Ajusta según tu diseño */
+    top: 100%;
     left: 0;
     padding: 10px;
     background-color: #f9f9f9;
     border: 1px solid #ccc;
     z-index: 1;
-    width: auto; /* Ajusta el ancho según tu necesidad */
+    width: auto;
 }
-
-
 .form-check-label:hover + .info-box {
     display: block;
 }
-
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -32,7 +28,6 @@
     align-items: center;
     z-index: 1000;
   }
-  
   .modal-content {
     background: white;
     padding: 20px;
