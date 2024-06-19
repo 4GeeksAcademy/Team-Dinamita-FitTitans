@@ -141,7 +141,7 @@ export const Registro = ({ closeModal }) => {
               <div className="d-flex justify-content-center">
                 <input type="submit" value={"Registrarse"} className="btn btn-primary mx-3 text-dark" style={{ background: "#E7A33E" }}></input>
 
-                <button className=" btn btn-primary mx-3 text-dark" style={{ background: "#E7A33E" }} onClick={closeModal}>close</button>
+                <button className=" btn btn-primary mx-3 text-dark" style={{ background: "#E7A33E" }} onClick={closeModal}>Close</button>
               </div>
             </div>
           </form>

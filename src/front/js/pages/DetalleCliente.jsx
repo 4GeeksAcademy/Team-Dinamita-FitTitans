@@ -35,6 +35,7 @@ export const DetalleCliente = () => {
         <div className="detalleLinks">
           <Link to={`/clientes/${cliente.id}/dieta`} className="detalleLink"><p><strong>DIETA</strong></p></Link>
           <Link to={`/clientes/${cliente.id}/rutina`} className="detalleLink"><p><strong>RUTINA</strong></p></Link>
+          <Link to={`/clientes/${cliente.id}/chat`} className="detalleLink"><p><strong>CHAT</strong></p></Link>
         </div>
       </div>
     </div>
