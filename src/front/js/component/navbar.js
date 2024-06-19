@@ -4,6 +4,13 @@ import { useNavigate } from "react-router-dom";
 import "../../styles/Navbar.css";
 import { Registro } from "./Registro";
 import { Context } from "../store/appContext";
+import io from 'socket.io-client';
+const socket = io(process.env.BACKEND_URL, {
+    transports: ['websocket'], // Forzar la conexión a WebSocket
+    query: {
+        user_id: localStorage.getItem('user_id')
+    }
+});
 
 //mport firebaseApp from "../../../firebase/credenciales";
 //import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
@@ -59,6 +66,9 @@ export const Navbar = () => {
 		actions.logout();
 		navigate("/")
 		setTipoUsuario(false)
+		 // Función de limpieza al desmontar el componente
+            socket.disconnect();
+
 	};
 
 	return (
