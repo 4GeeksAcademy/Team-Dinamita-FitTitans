@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import { Context } from '/workspaces/Team-Dinamita-FitTitans/src/front/js/store/appContext.js';
-import "/workspaces/Team-Dinamita-FitTitans/src/front/styles/VideosEntrenador.css"
+import { Context } from '../store/appContext.js';
+import "../../styles/VideosEntrenador.css"
 
 export const VideosUsuarios = () => {
   const { store, actions } = useContext(Context);
