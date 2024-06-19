@@ -1,11 +1,9 @@
 .contenedorContactanos {
     margin-bottom: 50px;
 }
-
 .contenedorTituloContactanos {
     text-align: center;
 }
-
 .TituloContactanos {
     color: #e7a33e;
     font-size: 50px;
@@ -20,11 +18,9 @@
     word-wrap: break-word;
     overflow-wrap: break-word;
 }
-
 .contenedorFormulario {
     background-color: rgba(0, 0, 0, 0.9);
 }
-
 .contenedorFormulario {
     border: 3px solid #e7a33e;
     border-radius: 5px;
@@ -35,24 +31,18 @@
     overflow: hidden;
     word-wrap: break-word;
     overflow-wrap: break-word;
-
 }
-
 .TituloFormulario {
     color: white;
     font-size: 20px;
     margin-top: 2%;
-
 }
-
 .textoFormulario {
     margin-bottom: 1%;
 }
-
 .botonEnviarFormulario {
     text-align: center;
 }
-
 .btn-FormContactanos {
     background: #e7a33e;
     white-space: nowrap;
@@ -67,18 +57,14 @@
     color: white;
     background-color: #e7a33e;
     color: white;
-    /* Cambiar el color del texto si lo deseas */
     outline: none;
-    /* Elimina el borde azul de enfoque */
     box-shadow: none;
 }
-
 @media (max-width: 768px) {
     .TituloContactanos {
         font-size: 32px;
     }
 }
-
 @media (max-width: 480px) {
     .TituloContactanos {
         font-size: 25px;

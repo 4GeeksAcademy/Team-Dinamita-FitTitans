@@ -3,18 +3,15 @@ pre {
     font-family: 'Inter', sans-serif;
     font-size: 15px;
 }
-
 .containerPrincipalDieta {
     padding: 20px;
     max-width: 700px;
     margin: 0 auto;
     color: white;
 }
-
 .contenedorTituloDietaPrivada {
     text-align: center;
 }
-
 .tituloDietaPrivada {
     color: #e7a33e;
     border-radius: 5px;
@@ -29,7 +26,6 @@ pre {
     word-wrap: break-word;
     overflow-wrap: break-word;
 }
-
 .formularioDieta {
     border: 3px solid #e7a33e;
     display: flex;
@@ -42,7 +38,6 @@ pre {
     box-sizing: border-box;
     margin-bottom: 5%;
 }
-
 .formularioDieta input,
 .formularioDieta textarea {
     width: calc(100% - 20px);
@@ -53,7 +48,6 @@ pre {
     background-color: rgba(255, 255, 255, 0.8);
     color: #333;
 }
-
 .formularioDieta button {
     padding: 10px 20px;
     margin: 5px;
@@ -63,17 +57,14 @@ pre {
     color: black;
     cursor: pointer;
 }
-
 .formularioDieta button:hover {
     color: white;
 }
-
 .listaComidas {
     width: 100%;
     margin-top: 20px;
     font-family: 'Inter', sans-serif;
 }
-
 .comidaItem {
     display: flex;
     justify-content: space-between;
@@ -85,11 +76,9 @@ pre {
     background-color: rgba(255, 255, 255, 0.8);
     color: black;
 }
-
 .comidaItem p {
     margin: 0;
 }
-
 .comidaItem button {
     padding: 5px 10px;
     border: none;
@@ -99,11 +88,9 @@ pre {
     cursor: pointer;
     transition: color 0.3s ease;
 }
-
 .comidaItem button:hover {
     color: white;
 }
-
 .mensajeDieta {
     color: #e7a33e;
     margin-top: 10px;
