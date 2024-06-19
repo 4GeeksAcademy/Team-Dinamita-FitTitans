@@ -5,7 +5,6 @@
   margin-left: 5%;
   margin-right: 5%;
 }
-
 .col-columna1,
 .col-columna2 {
   max-width: 100%;
@@ -19,7 +18,6 @@
   justify-content: center;
   height: 550px;
 }
-
 .titulo1,
 .titulo2 {
   background-color: rgba(0, 0, 0, 0.9);
@@ -35,13 +33,11 @@
   align-items: center;
   height: 100%;
 }
-
 .subTitulo1,
 .subTitulo2 {
   font-size: 30px;
   min-width: 0;
 }
-
 .btn-ConoceEntrenadores,
 .btn-RegistrarEntrenador {
   background: #e7a33e;
@@ -51,7 +47,6 @@
   border-radius: 5px;
   padding: 15px;
 }
-
 .btn-ConoceEntrenadores:hover,
 .btn-RegistrarEntrenador:hover,
 .btn-tipEntrenamientoNuevo:hover,
@@ -60,12 +55,9 @@
   color: white;
   background-color: #e7a33e;
   color: white;
-  /* Cambiar el color del texto si lo deseas */
   outline: none;
-  /* Elimina el borde azul de enfoque */
   box-shadow: none;
 }
-
 .row-fila2 {
   display: flex;
   flex-wrap: wrap;
@@ -76,7 +68,6 @@
   border-radius: 5px;
   margin-bottom: 50px;
 }
-
 .col-columna3 {
   background-image: url('https://res.cloudinary.com/dbqq4n3qa/image/upload/v1717006597/tip-entreno11_gruynk.jpg');
   background-size: cover;
@@ -93,7 +84,6 @@
   overflow: hidden;
   position: relative;
 }
-
 .tituloTipsEntrenamiento {
   background-color: rgba(0, 0, 0, 0.9);
   border-radius: 5px;
@@ -102,7 +92,6 @@
   min-width: 0;
   margin-bottom: 2%;
 }
-
 .tipEntrenamiento {
   background-color: rgba(0, 0, 0, 0.9);
   border-radius: 5px;
@@ -116,7 +105,6 @@
   word-wrap: break-word;
   margin-bottom: 2%;
 }
-
 .botonNuevoTipEntrenamiento {
   position: absolute;
   bottom: 0;
@@ -124,7 +112,6 @@
   margin-bottom: 20px;
   margin-left: 20px;
 }
-
 .btn-tipEntrenamientoNuevo,
 .btn-tipNutricionNuevo {
   background: #e7a33e;
@@ -133,9 +120,7 @@
   border: 1px solid black;
   border-radius: 5px;
   padding: 10px;
-
 }
-
 .col-columna4 {
   background-image: url('https://res.cloudinary.com/dbqq4n3qa/image/upload/v1717005663/calculacalorias_zfddnz.jpg');
   background-size: cover;
@@ -154,7 +139,6 @@
   background-position: center;
   overflow: hidden;
 }
-
 .linkHomeCalculaCalorias {
   display: inline-block;
   color: black;
@@ -166,11 +150,9 @@
   border: 2px solid black;
   border-radius: 5px;
 }
-
 .linkHomeCalculaCalorias:hover {
   color: white;
 }
-
 .col-columna5 {
   background-image: url('https://res.cloudinary.com/dbqq4n3qa/image/upload/v1717006089/tipnutricionhome_ccotsz.jpg');
   background-size: cover;
@@ -187,7 +169,6 @@
   overflow: hidden;
   position: relative;
 }
-
 .tituloTipsNutricion {
   background-color: rgba(0, 0, 0, 0.9);
   border-radius: 5px;
@@ -196,7 +177,6 @@
   min-width: 0;
   margin-bottom: 2%;
 }
-
 .tipNutricion {
   background-color: rgba(0, 0, 0, 0.9);
   border-radius: 5px;
@@ -210,7 +190,6 @@
   word-wrap: break-word;
   margin-bottom: 2%;
 }
-
 .botonNuevoTipNutricion {
   position: absolute;
   bottom: 0;
@@ -218,7 +197,6 @@
   margin-bottom: 20px;
   margin-right: 20px;
 }
-
 @media (max-width: 1610px) {
 
   .titulo1,
@@ -237,8 +215,6 @@
     font-size: 18px;
   }
 }
-
-
 @media (max-width: 1495px) {
 
   .col-columna1,
@@ -251,7 +227,6 @@
     font-size: 42px;
     padding: 30px;
   }
-
   .subTitulo1,
   .subTitulo2 {
     font-size: 22px;
@@ -272,9 +247,6 @@
     font-size: 18px;
   }
 }
-
-
-
 @media (max-width: 1090px) {
   .row-fila1 {
     margin-left: 2%;
@@ -307,8 +279,6 @@
     font-size: 16px;
   }
 }
-
-
 @media (max-width: 995px) {
   .row-fila1 {
     margin-left: 2%;
@@ -362,7 +332,6 @@
     font-size: 20px;
   }
 }
-
 @media (max-width: 768px) {
   .row-fila1 {
     margin-left: 2%;
@@ -415,7 +384,6 @@
     font-size: 20px;
   }
 }
-
 @media (max-width: 480px) {
 
   .titulo1,
@@ -449,6 +417,4 @@
   .tipNutricion {
     font-size: 16px;
   }
-
-
 }

@@ -4,12 +4,14 @@ import { useNavigate } from "react-router-dom";
 import "../../styles/Navbar.css";
 import { Registro } from "./Registro";
 import { Context } from "../store/appContext";
+import logofittitans from "/workspaces/Team-Dinamita-FitTitans/src/front/img/logofittitans.png";
 import io from 'socket.io-client';
+
 const socket = io(process.env.BACKEND_URL, {
-    transports: ['websocket'], // Forzar la conexión a WebSocket
-    query: {
-        user_id: localStorage.getItem('user_id')
-    }
+	transports: ['websocket'], // Forzar la conexión a WebSocket
+	query: {
+		user_id: localStorage.getItem('user_id')
+	}
 });
 
 //mport firebaseApp from "../../../firebase/credenciales";
@@ -34,11 +36,10 @@ export const Navbar = () => {
 	})*/
 	useEffect(() => {
 		const token = actions.getToken();
-		if (token){
-			
-		}else
-			{actions.logout()}
-	},[])
+		if (token) {
+
+		} else { actions.logout() }
+	}, [])
 
 	useEffect(() => {
 		const usuarioTipo = localStorage.getItem("user_rol");
@@ -66,8 +67,8 @@ export const Navbar = () => {
 		actions.logout();
 		navigate("/")
 		setTipoUsuario(false)
-		 // Función de limpieza al desmontar el componente
-            socket.disconnect();
+		// Función de limpieza al desmontar el componente
+		socket.disconnect();
 
 	};
 
@@ -76,7 +77,7 @@ export const Navbar = () => {
 			<nav className="navbar navbar-expand-lg navbar-dark bg-dark p-3 navbarPrincipal">
 				<div className="nombreWeb">
 					<Link className="noSubrayadoLink" to="/">
-						<span className="logo ms-2">FIT TITANS</span>
+						<img src={logofittitans} alt="Fit Titans Logo" className="logoFitTitans" />
 					</Link>
 				</div>
 				<button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -134,3 +135,4 @@ export const Navbar = () => {
 		</>
 	);
 };
+

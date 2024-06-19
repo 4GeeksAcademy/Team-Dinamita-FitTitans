@@ -8,11 +8,9 @@ body, pre {
     margin: 0 auto;
     color: white;
 }
-
 .contenedorTituloRutinaPrivada {
     text-align: center;
 }
-
 .tituloRutinaPrivada {
     color: #e7a33e;
     border-radius: 5px;
@@ -27,7 +25,6 @@ body, pre {
     word-wrap: break-word;
     overflow-wrap: break-word;
 }
-
 .formularioRutina {
     border: 3px solid #e7a33e;
     display: flex;
@@ -40,7 +37,6 @@ body, pre {
     box-sizing: border-box;
     margin-bottom: 5%;
 }
-
 .formularioRutina input,
 .formularioRutina textarea {
     width: calc(100% - 20px);
@@ -51,7 +47,6 @@ body, pre {
     background-color: rgba(255, 255, 255, 0.8);
     color: #333;
 }
-
 .formularioRutina button {
     padding: 10px 20px;
     margin: 5px;
@@ -61,17 +56,14 @@ body, pre {
     color: black;
     cursor: pointer;
 }
-
 .formularioRutina button:hover {
     color: white;
 }
-
 .listaRutinas {
     width: 100%;
     margin-top: 20px;
     font-family: 'Inter', sans-serif;
 }
-
 .rutinaItem {
     display: flex;
     justify-content: space-between;
@@ -83,11 +75,9 @@ body, pre {
     background-color: rgba(255, 255, 255, 0.8);
     color: black;
 }
-
 .rutinaItem p {
     margin: 0;
 }
-
 .rutinaItem button {
     padding: 5px 10px;
     border: none;
@@ -97,11 +87,9 @@ body, pre {
     cursor: pointer;
     transition: color 0.3s ease;
 }
-
 .rutinaItem button:hover {
     color: white;
 }
-
 .mensajeRutina {
     color: #e7a33e;
     margin-top: 10px;

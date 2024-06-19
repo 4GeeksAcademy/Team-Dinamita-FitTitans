@@ -2,7 +2,6 @@
     text-align: center;
     margin-bottom: 50px;
 }
-
 .tituloMiAreaCliente {
     color: #e7a33e;
     border-radius: 5px;
@@ -17,7 +16,6 @@
     word-wrap: break-word;
     overflow-wrap: break-word;
 }
-
 .row-filaMiAreaCliente {
     display: flex;
     margin-top: 2%;
@@ -32,7 +30,6 @@
     word-wrap: break-word;
     overflow-wrap: break-word;
 }
-
 .columnaMiAreaPerfilCliente {
     display: flex;
     justify-content: center;
@@ -47,7 +44,6 @@
     background-position: center;
     background-repeat: no-repeat;
 }
-
 .linkPerfilCliente {
     color: black;
     padding: 20px;
@@ -60,11 +56,9 @@
     font-size: 15px;
     min-width: 0;
 }
-
 .linkPerfilCliente:hover {
     color: white;
 }
-
 .columnaDietaCliente {
     display: flex;
     justify-content: center;
@@ -79,7 +73,6 @@
     background-position: center;
     background-repeat: no-repeat;
 }
-
 .linkDietaCliente {
     color: black;
     padding: 20px;
@@ -92,11 +85,9 @@
     font-size: 15px;
     min-width: 0;
 }
-
 .linkDietaCliente:hover {
     color: white;
 }
-
 .columnaRutinasCliente {
     display: flex;
     justify-content: center;
@@ -111,7 +102,6 @@
     background-position: center;
     background-repeat: no-repeat;
 }
-
 .linkRutinasCliente {
     color: black;
     padding: 20px;
@@ -124,11 +114,9 @@
     font-size: 15px;
     min-width: 0;
 }
-
 .linkRutinasCliente:hover {
     color: white;
 }
-
 .row-filaMiAreaCliente2 {
     display: flex;
     border: 2px solid #e7a33e;
@@ -141,7 +129,6 @@
     word-wrap: break-word;
     overflow-wrap: break-word;
 }
-
 .columnaChatCliente {
     display: flex;
     justify-content: center;
@@ -156,7 +143,6 @@
     background-position: center;
     background-repeat: no-repeat;
 }
-
 .linkChatCliente {
     color: black;
     padding: 20px;
@@ -169,11 +155,9 @@
     font-size: 15px;
     min-width: 0;
 }
-
 .linkChatCliente:hover {
     color: white;
 }
-
 .columnaVideosEjercicios {
     display: flex;
     justify-content: center;
@@ -188,7 +172,6 @@
     background-position: center;
     background-repeat: no-repeat;
 }
-
 .linkVideosEjercicios {
     color: black;
     padding: 20px;
@@ -201,11 +184,9 @@
     font-size: 15px;
     min-width: 0;
 }
-
 .linkVideosEjercicios:hover {
     color: white;
 }
-
 .columnaMiAreaCalculaCalorias {
     display: flex;
     justify-content: center;
@@ -220,7 +201,6 @@
     background-position: center;
     background-repeat: no-repeat;
 }
-
 .linkMiAreaCalculaCalorias {
     color: black;
     padding: 20px;
@@ -232,11 +212,9 @@
     border-radius: 8px;
     min-width: 0;
 }
-
 .linkMiAreaCalculaCalorias:hover {
     color: white;
 }
-
 @media (max-width: 1000px) {
 
     .linkPerfilCliente,

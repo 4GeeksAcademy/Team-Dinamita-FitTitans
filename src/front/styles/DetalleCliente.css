@@ -1,11 +1,9 @@
 .contenedorDetalleCliente {
     margin-bottom: 50px;
 }
-
 .contenedorTituloDetalleCliente {
     text-align: center;
 }
-
 .TituloDetalleCliente {
     color: #e7a33e;
     font-size: 50px;
@@ -20,7 +18,6 @@
     word-wrap: break-word;
     overflow-wrap: break-word;
 }
-
 .contenedorContenidoDetalleCliente {
     background-color: rgba(0, 0, 0, 0.9);
     border: 3px solid #e7a33e;
@@ -34,26 +31,21 @@
     overflow-wrap: break-word;
     color: white;
 }
-
 .detalleLinks {
     margin-top: 20px;
 }
-
 .detalleLink {
     color: #e7a33e;
     text-decoration: none;
 }
-
 .detalleLink:hover {
     color: white;
 }
-
 @media (max-width: 768px) {
     .TituloDetalleCliente {
         font-size: 32px;
     }
 }
-
 @media (max-width: 480px) {
     .TituloDetalleCliente {
         font-size: 25px;
