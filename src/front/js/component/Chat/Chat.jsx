@@ -26,6 +26,7 @@ export const Chat = () => {
             const fetchDestinatarioId = async () => {
                 try {
                     const response = await fetch(`${process.env.BACKEND_URL}/api/destinatario?remitente_id=${remitenteIdInteger}`);
+                    console.log(response)
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
                     }
