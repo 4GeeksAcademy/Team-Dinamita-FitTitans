@@ -1,11 +1,9 @@
 .contenedorClientes {
     margin-bottom: 50px;
 }
-
 .contenedorTituloClientes {
     text-align: center;
 }
-
 .TituloClientes {
     color: #e7a33e;
     font-size: 50px;
@@ -20,7 +18,6 @@
     word-wrap: break-word;
     overflow-wrap: break-word;
 }
-
 .contenedorListaClientes {
     background-color: rgba(0, 0, 0, 0.9);
     border: 3px solid #e7a33e;
@@ -33,24 +30,19 @@
     word-wrap: break-word;
     overflow-wrap: break-word;
 }
-
 .clienteItem {
     margin-bottom: 10px;
     border-radius: 5px;
 }
-
 .clienteLink {
     color: white;
     text-decoration: none;
     font-size: 20px;
     margin-left: 5px;
-
 }
-
 .clienteLink:hover {
     color: #e7a33e;
 }
-
 @media (max-width: 768px) {
     .TituloClientes {
         font-size: 32px;
