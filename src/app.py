@@ -16,13 +16,15 @@ from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_tok
 import jwt
 import uuid
 from flask_mail import Mail, Message
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import bcrypt
 from dotenv import load_dotenv
 load_dotenv()
 # para el chat
 from flask_socketio import SocketIO, emit, join_room, leave_room, disconnect
-
+from flask_apscheduler import APScheduler
+import pytz
+# para correos
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -41,9 +43,13 @@ app.url_map.strict_slashes = False
 # Configuración de la aplicación
 app.config['SECRET_KEY'] = 'fit_titans_ajr'  # Cambia esto por una clave secreta segura
 app.config['SECURITY_PASSWORD_SALT'] = 'fit_titans_ajr'  # Cambia esto por un salt seguro
-
+app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(hours=1)
 
 jwt = JWTManager(app)
+
+# Configura el scheduler
+scheduler = APScheduler()
+scheduler.init_app(app)
 
 # database condiguration
 db_url = os.getenv("DATABASE_URL")
@@ -58,7 +64,9 @@ MIGRATE = Migrate(app, db, compare_type=True)
 db.init_app(app)
 
 # Allow CORS requests to this API
-CORS(app)
+# Habilitar CORS para todos los orígenes
+CORS(app, resources={r"/*": {"origins": "*"}})
+socketio = SocketIO(app, cors_allowed_origins="*")
 
 # add the admin
 setup_admin(app)
@@ -96,6 +104,38 @@ def serve_any_other_file(path):
 # Setup the Flask-JWT-Extended extension
 app.config["JWT_SECRET_KEY"] = "adios-coroto"  # Change this "super secret" with something else!
 jwt = JWTManager(app)
+
+#eliminar mensajes de la base de datos
+@app.route('/api/delete_old_messages', methods=['POST'])
+def manually_delete_old_messages():
+    deleted_count = delete_old_messages()
+    return jsonify({"deleted_count": deleted_count}), 200
+
+if __name__ == '__main__':
+    app.run()
+
+@scheduler.task('interval', id='delete_old_messages', hours=1)
+def delete_old_messages():
+    try:
+        # Obtén la zona horaria UTC
+        utc_timezone = pytz.timezone('UTC')
+        
+        # Calcula la fecha límite para eliminar los mensajes (24 horas atrás)
+        cutoff_date = datetime.now(utc_timezone) - timedelta(hours=1)
+        
+        # Elimina los mensajes anteriores a la fecha límite
+        deleted_count = Message.query.filter(Message.timestamp < cutoff_date).delete()
+        db.session.commit()
+        
+        print(f"Deleted {deleted_count} old messages.")
+    except Exception as e:
+        print(f"Error deleting old messages: {str(e)}")
+        db.session.rollback()
+
+if __name__ == '__main__':
+    scheduler.start()
+    app.run()
+
 
  # contraseña hash
 def hash_password(plain_password):
@@ -154,7 +194,7 @@ def login():
     if not check_password(password, user.password) : 
         return jsonify({'message': 'contrasegna incorrecta'}), 402
         
-    token = create_access_token(identity= user.id)
+    token = create_access_token(identity= user.id , expires_delta=timedelta(minutes=60))
     return jsonify({'message': 'Login successful', "token": token, "user_rol" : user.rol, "id" : user.id}), 200
     
 # GETTING ALL THE USERS
@@ -471,9 +511,10 @@ mail = Mail(app)
 
 # Función para generar un token de restablecimiento de contraseña
 def generate_reset_token(email):
+    exp_time = datetime.now(timezone.utc) + timedelta(minutes=30)
     payload = {
         'sub': email,
-        'exp': datetime.utcnow() + timedelta(minutes=10)
+        'exp': exp_time
     }
     secret_key = 'short_secret'
     return jwt.encode(payload, secret_key, algorithm='HS256')
@@ -529,26 +570,25 @@ def recovery_password():
 
 #blog 
 socketio = SocketIO(app, cors_allowed_origins="*")
-connected_users = set()
 
-# Configuración de Socket.IO
-socketio = SocketIO(app, cors_allowed_origins="*")
-
-connected_users = set()
+# Almacenar los usuarios conectados con sus IDs de Socket.IO
+connected_users = {}
 
 @socketio.on('connect')
 def handle_connect():
-    if len(connected_users) < 2:
-        connected_users.add(request.sid)
-        emit('message', {'text': 'User connected'}, broadcast=True)
+    user_id = request.args.get('user_id')
+    if user_id:
+        connected_users[request.sid] = user_id
+        emit('message', {'text': f'User {user_id} connected'}, broadcast=True)
     else:
-        emit('message', {'text': 'Chat is full'}, room=request.sid)
+        emit('message', {'text': 'User ID is required'}, room=request.sid)
         disconnect()
 
 @socketio.on('disconnect')
 def handle_disconnect():
-    connected_users.discard(request.sid)
-    emit('message', {'text': 'User disconnected'}, broadcast=True)
+    user_id = connected_users.pop(request.sid, None)
+    if user_id:
+        emit('message', {'text': f'User {user_id} disconnected'}, broadcast=True)
 
 @socketio.on('message')
 def handle_message(data):
@@ -566,7 +606,8 @@ def handle_message(data):
             db.session.add(message)
             db.session.commit()
             
-            emit('message', message.serialize(), broadcast=True)
+            message_data = message.serialize()
+            emit('message', message_data, broadcast=True)
         else:
             emit('error', {'error': 'Invalid message data'}, room=request.sid)
     except Exception as e:
@@ -592,29 +633,22 @@ def get_messages():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-
 @app.route('/api/destinatario', methods=['GET'])
 def get_destinatario_id():
     remitente_id = request.args.get('remitente_id')
-    print(f"El remitente_id recibido es: {remitente_id}")
     if not remitente_id:
         return jsonify({"error": "remitente_id is required"}), 400
 
     try:
-        # Lógica para determinar el destinatario_id basado en el remitente_id
         es_entrenador = User.query.filter_by(id=remitente_id, rol=True).first() is not None
 
         if es_entrenador:
-            # Si el remitente es entrenador, buscamos un usuario como destinatario
             destinatario = Asignacion_entrenador.query.filter(Asignacion_entrenador.usuario_id != remitente_id).first()
-            print(f"El entrenador recibido es: {destinatario}")
             if not destinatario:
                 return jsonify({"error": "No destinatario found"}), 404
             destinatario_id = destinatario.usuario_id
         else:
-            # Si el remitente es usuario, buscamos un entrenador como destinatario
             destinatario = Asignacion_entrenador.query.filter(Asignacion_entrenador.entrenador_id != remitente_id).first()
-            print(f"El usuario recibido es: {destinatario}")
             if not destinatario:
                 return jsonify({"error": "No destinatario found"}), 404
             destinatario_id = destinatario.entrenador_id
@@ -623,8 +657,6 @@ def get_destinatario_id():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
-
 
 if __name__ == '__main__':
     socketio.run(app, debug=True)

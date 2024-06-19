@@ -7,8 +7,9 @@ export const ListaDeClientes = ({ entrenadorId }) => {
   const { store, actions } = useContext(Context);
   const [clientes, setClientes] = useState([]);
 
+  const idEntrenador = localStorage.getItem("user_id")
   useEffect(() => {
-    actions.obtenerListaClientes(1)
+    actions.obtenerListaClientes(idEntrenador)
       .then(data => {
         setClientes(data);  // Actualiza el estado con los datos de los entrenadores
         console.log(data)
