@@ -82,6 +82,10 @@ p {
     margin: 2%;
     padding: 2%;
 }
+.btnPlanes.selected {
+    background-color:rgba(0, 0, 0, 0.8);
+    color: #fff;
+}
 .contenedorBotonContratar,
 .contenedorBotonesPlanes {
     justify-content: center;
