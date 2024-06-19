@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import "/workspaces/Team-Dinamita-FitTitans/src/front/styles/VideosEntrenador.css"
+import "../../styles/VideosEntrenador.css"
 
 const UploadWidget = ({ onUploadSuccess, titulo }) => {
   const cloudinaryRef = useRef();

@@ -1,7 +1,7 @@
 import React,{ useState, useEffect } from "react";
 import { PerfilEntrenadorPrivado } from "../component/PerfilEntrenadorPrivado";
 import { PerfilUsuarios } from "../component/PerfilUsuarios";
-import "/workspaces/Team-Dinamita-FitTitans/src/front/styles/Perfiles.css"
+import "../../styles/Perfiles.css"
 
 export const Perfiles = () => {
     const [estado, setEstado] = useState(null)
