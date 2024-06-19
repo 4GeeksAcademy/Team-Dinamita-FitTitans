@@ -23,20 +23,20 @@ import { MiAreaEntrenador } from "./component/MiAreaEntrenador.jsx";
 import { FormulaCalorias } from "./pages/FormulaCalorias.jsx";
 import { Rutinas } from "./pages/Rutinas.jsx";
 import { RutinaCliente } from "./pages/RutinasCliente.jsx";
-import {VideosEntrenador} from "/workspaces/Team-Dinamita-FitTitans/src/front/js/pages/VideosEntrenador.jsx"
+import {VideosEntrenador} from "./pages/VideosEntrenador.jsx"
 import { ListaEntrenadores } from "./pages/ListaEntrenadores.jsx";
 import { Dieta } from "./pages/Dieta.jsx"
 import { DietaCliente } from "./pages/DietaCliente.jsx";
 import { Blog } from "./pages/Blog.jsx"
-import { Perfiles } from "/workspaces/Team-Dinamita-FitTitans/src/front/js/pages/Perfiles.jsx";
+import { Perfiles } from "./pages/Perfiles.jsx";
 import { PerfilEntrenadorPrivado } from "./component/PerfilEntrenadorPrivado.js";
 import { RecuperarContraseña } from "./pages/RecuperarContraseña.jsx";
 import { SolicitudRecuperacion } from "./pages/SolicitudRecuperarcion.jsx";
 import { ListaDeClientes } from "./pages/ListaDeClientes.jsx";
 import { DetalleCliente } from "./pages/DetalleCliente.jsx";
-import { Chat } from "/workspaces/Team-Dinamita-FitTitans/src/front/js/component/Chat/Chat.jsx"
+import { Chat } from "./component/Chat/Chat.jsx"
 import { VideosUsuarios } from "./pages/VideosUsuario.jsx";
-import { ChatEntrenador } from "/workspaces/Team-Dinamita-FitTitans/src/front/js/component/Chat/ChatEntrenador.jsx";
+import { ChatEntrenador } from "./component/Chat/ChatEntrenador.jsx";
 //create your first component
 const Layout = () => {
     //the basename is used when your project is published in a subdirectory and not in the root of the domain
