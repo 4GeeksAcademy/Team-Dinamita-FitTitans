@@ -1,6 +1,9 @@
 .logoFitTitans {
-    width: 80px;
-    height: 80px;
+    height: 60px; /* Ajusta la altura según tus necesidades */
+    width: auto; /* Mantiene la proporción de la imagen */
+    display: block; /* Asegura que la imagen se comporte como un bloque */
+    filter: drop-shadow(0 0 20px rgba(1, 0.5, 0.5, 1));
+    border-radius: 5px;
 }
 .navbarPrincipal {
     overflow: hidden;

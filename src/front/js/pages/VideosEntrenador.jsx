@@ -73,7 +73,6 @@ export const VideosEntrenador = () => {
         )}
         <div className="input-containerSubirVideo">
           <UploadWidget onUploadSuccess={handleSubirVideo} titulo={tituloVideo} />
-          <h2 className="text-light">Subir video</h2>
           <input
             type="text"
             value={tituloVideo}
