@@ -65,20 +65,20 @@ export const PerfilUsuarios = () => {
   };
 
   useEffect(() => {
-
-    if (store.id == id) {
-      const fetchUsuarioUnico = async () => {
-        await actions.GetUsuarioUnico(id);
-        const usuariofinal = store.usuarioUnico;
-        if (usuariofinal && Array.isArray(usuariofinal)) {
-          setUsuarios(usuariofinal);
-        } else {
-          setUsuarios([usuariofinal]); // Si no es un array, lo envuelve en uno
-        }
-      };
-      setUsuariosLog(true)
-      fetchUsuarioUnico();
-    } else { setUsuariosLog(false), "deja de jode" }
+  const storeID = localStorage.getItem("user_id")
+   if (storeID == id){
+     const fetchUsuarioUnico = async () => {
+       await actions.GetUsuarioUnico(id);
+       const usuariofinal = store.usuarioUnico;
+       if (usuariofinal && Array.isArray(usuariofinal)) {
+         setUsuarios(usuariofinal);
+       } else {
+         setUsuarios([usuariofinal]); // Si no es un array, lo envuelve en uno
+       }
+     };
+     setUsuariosLog(true)
+     fetchUsuarioUnico();
+   }else { setUsuariosLog(false),"deja de jode"}
   }, [editar, usuarios.foto]);
 
   return (

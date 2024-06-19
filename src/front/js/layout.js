@@ -34,8 +34,9 @@ import { RecuperarContraseña } from "./pages/RecuperarContraseña.jsx";
 import { SolicitudRecuperacion } from "./pages/SolicitudRecuperarcion.jsx";
 import { ListaDeClientes } from "./pages/ListaDeClientes.jsx";
 import { DetalleCliente } from "./pages/DetalleCliente.jsx";
-import { Mensajes } from "/workspaces/Team-Dinamita-FitTitans/src/front/js/component/Chat/Chat.jsx"
+import { Chat } from "/workspaces/Team-Dinamita-FitTitans/src/front/js/component/Chat/Chat.jsx"
 import { VideosUsuarios } from "./pages/VideosUsuario.jsx";
+import { ChatEntrenador } from "/workspaces/Team-Dinamita-FitTitans/src/front/js/component/Chat/ChatEntrenador.jsx";
 //create your first component
 const Layout = () => {
     //the basename is used when your project is published in a subdirectory and not in the root of the domain
@@ -74,13 +75,14 @@ const Layout = () => {
                         <Route element={<Blog />} path="/blog" />
                         <Route element={<ListaDeClientes />} path="/entrenador/:entrenador_id/clientes" />
                         <Route element={<DetalleCliente />} path="/clientes/:cliente_id" />
-                        <Route element={<Mensajes />} path="/chat/:id" />
+                        <Route element={<Chat />} path="/chat/:id" />
                         <Route element={<Rutinas />} path="/clientes/:cliente_id/rutina" />
                         <Route element={<RutinaCliente />} path="/cliente/rutina/:usuario_id" />
                         <Route element={<VideosEntrenador />} path="/videosentrenador/:id" />
                         <Route element={<VideosUsuarios />} path="/videousuario/:id" />
                         <Route element={<Dieta />} path="/clientes/:cliente_id/dieta" />
                         <Route element={<DietaCliente />} path="/cliente/dieta/:usuario_id" />
+                        <Route element={<ChatEntrenador />} path="/clientes/:cliente_id/chat" />
 
                     </Routes>
                     <Footer />
