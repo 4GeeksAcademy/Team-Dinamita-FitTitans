@@ -84,6 +84,9 @@ class Asignacion_entrenador(db.Model):
             "rutina": self.rutina   
         }
 
+
+
+
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(200), nullable=False)
