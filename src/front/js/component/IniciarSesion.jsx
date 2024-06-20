@@ -77,7 +77,7 @@ onAuthStateChanged(auth, (usuarioFirebase) => {
       alert("funciono")
 
       navigate("/miarea")
-    }else{
+    } else {
       alert("error")
     }
   };
@@ -120,13 +120,13 @@ onAuthStateChanged(auth, (usuarioFirebase) => {
                 <input
                   type="submit"
                   value={"Iniciar Sesion"}
-                  className="btn btn-Navbar mx-3 "
+                  className="btn-sm btn-Navbar mx-3 "
                 />
                 <Link to="/solicitud">
                   <input
                     type="submit"
                     value={"Recuperar Contraseña"}
-                    className="btn btn-Navbar mx-3 "
+                    className="btn-sm btn-Navbar mx-3 "
                   />
                 </Link>
               </div>

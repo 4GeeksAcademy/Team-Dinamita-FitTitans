@@ -72,7 +72,7 @@ export const Navbar = () => {
 
 	return (
 		<>
-			<nav className="navbar navbar-expand-lg navbar-dark bg-dark p-3 navbarPrincipal">
+			<nav className="navbar navbar-expand-lg navbar-dark bg-dark p-3 navbarPrincipal fixed-top">
 				<div className="nombreWeb">
 					<Link className="noSubrayadoLink" to="/">
 						<img src={logofittitans} alt="Fit Titans Logo" className="logoFitTitans" />
