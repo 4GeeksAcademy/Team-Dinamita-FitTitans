@@ -4,16 +4,27 @@
     border-radius: 5px;
     margin-top: 50px;
     margin-bottom: 50px;
+
+    max-width: 700px;
+    width: 90%;
+    border: solid #e7a33e;
+    padding: 30px;
+    overflow: hidden;
 }
+
 .InicioSesion .form-group {
     margin-bottom: 20px;
 }
+
 .InicioSesion .form-label {
     margin-bottom: 10px;
 }
+
 .InicioSesion .botonNavbar {
     margin-top: 30px;
+
 }
+
 .InicioSesion .btn-Navbar {
     background: #e7a33e;
     white-space: nowrap;
@@ -22,6 +33,7 @@
     border-radius: 5px;
     padding: 10px 20px;
 }
+
 @media (max-width: 768px) {
     .InicioSesion {
         padding: 15px;
@@ -31,6 +43,12 @@
 @media (max-width: 480px) {
     .InicioSesion {
         padding: 10px;
-        /* Ajusta el padding para pantallas muy pequeñas */
+
     }
+
+    .InicioSesion .btn-Navbar {
+        font-size: 11px;
+        padding: 8px;
+    }
+
 }

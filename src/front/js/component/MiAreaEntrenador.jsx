@@ -9,7 +9,7 @@ export const MiAreaEntrenador = () => {
     return (
         <div className="container contenedorMiAreaEntrenador">
             <div className="tituloMiAreaEntrenador">
-                MI AREA ENTRENADOR
+                MI AREA
             </div>
             <div className="row row-filaMiAreaEntrenador">
                 <div className="col-md-4 columnaPerfilEntrenador">

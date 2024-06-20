@@ -15,7 +15,7 @@ class User(db.Model):
     edad = db.Column(db.Integer, nullable=True)
     genero = db.Column(db.String(10), nullable=True)
     altura = db.Column(db.String(30), nullable=True)
-    tipo_entrenamiento = db.Column(db.String(100), nullable=True)
+    tipo_entrenamiento = db.Column(db.String(500), nullable=True)
     foto = db.Column(db.String(100), nullable=True)
     videos = db.Column(db.Text, nullable=True)  # Mantén el campo como Texto
 
@@ -68,8 +68,8 @@ class Asignacion_entrenador(db.Model):
     entrenador_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     usuario_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     plan_entrenamiento = db.Column(db.String(50), nullable=False)
-    dieta = db.Column(db.String(100), nullable=True)
-    rutina = db.Column(db.String(100), nullable=True)
+    dieta = db.Column(db.Text, nullable=True)
+    rutina = db.Column(db.Text, nullable=True)
 
     def __repr__(self):
         return f'<Asignacion_entrenador {self.id}>'
