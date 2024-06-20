@@ -28,7 +28,7 @@ services:
           - key: DEBUG
             value: true
           - key: BACKEND_URL
-            value: "https://sample-service-name-cbbh.onrender.com"
+            value: "https://sample-service-name-6109.onrender.com"
 
 databases: # Render PostgreSQL database
     - name: postgresql-trapezoidal-42170
