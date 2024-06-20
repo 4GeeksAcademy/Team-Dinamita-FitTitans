@@ -688,7 +688,9 @@ def agregar_video(id):
     url = data.get('url')
     titulo = data.get('titulo')
 
+
     if not url :
+
         return jsonify({"error": "URL y título del video son requeridos"}), 400
 
     user.add_video(url, titulo)  # Utiliza el método add_video para agregar el URL y título
