@@ -43,7 +43,7 @@ app.url_map.strict_slashes = False
 # Configuración de la aplicación
 app.config['SECRET_KEY'] = 'fit_titans_ajr'  # Cambia esto por una clave secreta segura
 app.config['SECURITY_PASSWORD_SALT'] = 'fit_titans_ajr'  # Cambia esto por un salt seguro
-app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(hours=1)
+app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(hours=72)
 
 jwt = JWTManager(app)
 
@@ -114,14 +114,14 @@ def manually_delete_old_messages():
 if __name__ == '__main__':
     app.run()
 
-@scheduler.task('interval', id='delete_old_messages', hours=1)
+@scheduler.task('interval', id='delete_old_messages', hours=72)
 def delete_old_messages():
     try:
         # Obtén la zona horaria UTC
         utc_timezone = pytz.timezone('UTC')
         
         # Calcula la fecha límite para eliminar los mensajes (24 horas atrás)
-        cutoff_date = datetime.now(utc_timezone) - timedelta(hours=1)
+        cutoff_date = datetime.now(utc_timezone) - timedelta(hours=72)
         
         # Elimina los mensajes anteriores a la fecha límite
         deleted_count = Message.query.filter(Message.timestamp < cutoff_date).delete()
