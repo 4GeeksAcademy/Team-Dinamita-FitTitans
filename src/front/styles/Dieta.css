@@ -74,8 +74,11 @@ body, pre {
     background-color: rgba(255, 255, 255, 0.8);
     color: black;
 }
-.comidaItem p {
+.comidaItem pre {
     margin: 0;
+    white-space: pre-wrap; /* Mantener el formato y permitir saltos de línea */
+    overflow-wrap: break-word;
+    width: 90%;
 }
 .comidaItem button {
     padding: 5px 10px;
@@ -93,3 +96,10 @@ body, pre {
     color: #e7a33e;
     margin-top: 10px;
 }
+
+@media (max-width: 480px) {
+    .comidaItem pre {
+        font-size: 12px;
+    }
+
+    }

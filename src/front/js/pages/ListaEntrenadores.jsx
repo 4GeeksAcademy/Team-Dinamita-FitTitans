@@ -66,9 +66,9 @@ export const ListaEntrenadores = () => {
 
   return (
     <div className="container mt-5 containerEntrenadores">
-      <ul className="list-group mb-5 contenedortarjetalistaEntrenadores">
+      <ul className="list-group mb-5 contenedortarjetalistaEntrenadores1">
         {store.entrenadores.map((entrenador, index) => (
-          <li key={index} className="list-group-item bg-dark text-light contenedortarjetalistaEntrenadores">
+          <li key={index} className="list-group-item bg-dark text-light contenedortarjetalistaEntrenadores2">
             <div className="row align-items-start align-items-md-center">
               <div className="col-md-4 mb-3 mb-md-0 d-flex justify-content-center align-items-center">
                 <img src={entrenador.foto} alt="User" className="fotoMiniEntrenador" />
