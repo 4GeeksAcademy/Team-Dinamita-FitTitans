@@ -17,8 +17,11 @@ def enviar_correo_bienvenida (email) :
     mensaje['From'] = email_envio
     mensaje['To'] = email_recibe
 
-    # Leer y personalizar el archivo HTML
-    with open('emailwelcome.html', 'r') as archivo:
+     # Obtener la ruta absoluta del archivo emailwelcome.html
+    file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'emailwelcome.html')
+
+        # Leer y personalizar el archivo HTML
+    with open(file_path, 'r') as archivo:
         html = archivo.read()
         html_personalizado = html.replace('{{email}}', email)
 
