@@ -69,7 +69,13 @@ export const Chat = () => {
             console.error('Error from server:', error);
         });
 
-       
+       // Función de limpieza al desmontar el componente
+       return () => {
+        socket.off('message');
+        socket.off('error');
+        socket.disconnect();
+    };
+
     }, []); // Dependencia vacía para ejecutar solo una vez al montar el componente
 
     const sendMessage = (e) => {
