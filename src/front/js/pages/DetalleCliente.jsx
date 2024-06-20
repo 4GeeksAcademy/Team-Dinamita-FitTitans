@@ -23,7 +23,7 @@ export const DetalleCliente = () => {
   return (
     <div className="container contenedorDetalleCliente">
       <div className="contenedorTituloDetalleCliente">
-        <div className="form-group TituloDetalleCliente">Detalle del Cliente</div>
+        <div className="form-group TituloDetalleCliente">DETALLE DEL CLIENTE</div>
       </div>
       <div className="contenedorContenidoDetalleCliente">
         <p><strong>Nombre:</strong> {cliente.nombre}</p>

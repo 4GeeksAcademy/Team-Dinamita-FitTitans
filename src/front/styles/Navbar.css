@@ -1,33 +1,43 @@
 .logoFitTitans {
-    height: 60px; /* Ajusta la altura según tus necesidades */
-    width: auto; /* Mantiene la proporción de la imagen */
-    display: block; /* Asegura que la imagen se comporte como un bloque */
+    height: 60px;
+    /* Ajusta la altura según tus necesidades */
+    width: auto;
+    /* Mantiene la proporción de la imagen */
+    display: block;
+    /* Asegura que la imagen se comporte como un bloque */
     filter: drop-shadow(0 0 20px rgba(1, 0.5, 0.5, 1));
     border-radius: 5px;
 }
+
 .navbarPrincipal {
     overflow: hidden;
 }
+
 .nombreWeb {
     margin-left: 3%;
 }
+
 .noSubrayadoLink {
     text-decoration: none;
     display: flex;
     align-items: center;
 }
+
 .logo {
     font-size: 40px;
     color: #e7a33e;
 }
+
 .botonesNavbar {
     display: flex;
     flex-wrap: wrap;
     margin-right: 3%;
 }
+
 .botonNavbar {
     margin-right: 10px;
 }
+
 .btn-Navbar:hover {
     color: white;
     background-color: #e7a33e;
@@ -35,6 +45,7 @@
     outline: none;
     box-shadow: none;
 }
+
 .btn-Navbar {
     background: #e7a33e;
     white-space: nowrap;
@@ -42,14 +53,25 @@
     border: 1px solid black;
     border-radius: 5px;
 }
+
+@media (max-width: 995px) {
+    .nombreWeb {
+        margin-left: 0;
+        padding-left: 0;
+    }
+
+
+    .botonNavbar {
+        margin-top: 5px;
+    }
+}
+
 @media screen and (max-width: 600px) {
+
+
     .botonesNavbar {
         display: flex;
         flex-wrap: wrap;
-    }
-
-    .botonNavbar {
-        margin-right: 1px;
     }
 
     .btn-Navbar {

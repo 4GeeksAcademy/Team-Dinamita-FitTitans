@@ -3,15 +3,18 @@ pre {
     font-family: 'Inter', sans-serif;
     font-size: 15px;
 }
+
 .containerPrincipalRutina {
     padding: 20px;
     max-width: 700px;
     margin: 0 auto;
     color: white;
 }
+
 .contenedorTituloRutinaPrivada {
     text-align: center;
 }
+
 .tituloRutinaPrivada {
     color: #e7a33e;
     border-radius: 5px;
@@ -26,6 +29,7 @@ pre {
     word-wrap: break-word;
     overflow-wrap: break-word;
 }
+
 .formularioRutina {
     border: 3px solid #e7a33e;
     display: flex;
@@ -38,6 +42,7 @@ pre {
     box-sizing: border-box;
     margin-bottom: 5%;
 }
+
 .formularioRutina input,
 .formularioRutina textarea {
     width: calc(100% - 20px);
@@ -48,6 +53,7 @@ pre {
     background-color: rgba(255, 255, 255, 0.8);
     color: #333;
 }
+
 .formularioRutina button {
     padding: 10px 20px;
     margin: 5px;
@@ -57,13 +63,16 @@ pre {
     color: black;
     cursor: pointer;
 }
+
 .formularioRutina button:hover {
     color: white;
 }
+
 .listaRutinas {
     width: 100%;
     margin-top: 20px;
 }
+
 .rutinaItem {
     display: flex;
     justify-content: space-between;
@@ -75,9 +84,14 @@ pre {
     background-color: rgba(255, 255, 255, 0.8);
     color: black;
 }
-.rutinaItem p {
+
+.rutinaItem pre {
     margin: 0;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    width: 90%;
 }
+
 .rutinaItem button {
     padding: 5px 10px;
     border: none;
@@ -87,10 +101,24 @@ pre {
     cursor: pointer;
     transition: color 0.3s ease;
 }
+
 .rutinaItem button:hover {
     color: white;
 }
+
 .mensajeRutina {
     color: #e7a33e;
     margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+    .TituloDetalleCliente {
+        font-size: 32px;
+    }
+}
+
+@media (max-width: 480px) {
+    .rutinaItem pre {
+        font-size: 12px;
+    }
 }
