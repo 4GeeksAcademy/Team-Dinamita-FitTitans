@@ -67,8 +67,6 @@ export const Navbar = () => {
 		actions.logout();
 		navigate("/")
 		setTipoUsuario(false)
-		// Función de limpieza al desmontar el componente
-		socket.disconnect();
 
 	};
 
