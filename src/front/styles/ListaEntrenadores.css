@@ -1,3 +1,5 @@
+
+
 .list-group {
     border-radius: 5px;
 }
@@ -5,18 +7,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 20%;
-    height: 20%;
+    width: 30%;
+    height: 30%;
     object-fit: cover;
     border-radius: 50%;
     overflow: hidden;
     margin-left: 15px;
 }
-p {
+.nombreListaEntrenadores {
     font-size: 18px;
-    padding: none;
-    margin: 0px;
-    margin-left: none;
 }
 .Nombre,
 .Apellido {
@@ -47,8 +46,8 @@ p {
     color: black;
 }
 .fotoMiniEntrenador {
-    width: 150px;
-    height: 150px;
+    width: 220px;
+    height: 220px;
     border-radius: 50%;
     object-fit: cover;
     border: 1px solid #e7a33e;
@@ -102,3 +101,4 @@ p {
     padding: 2%;
     width: 100%;
 }
+
