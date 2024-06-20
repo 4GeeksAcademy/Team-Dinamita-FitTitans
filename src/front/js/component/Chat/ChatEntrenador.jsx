@@ -53,8 +53,12 @@ export const ChatEntrenador = () => {
             return () => {
                 socket.off('message');
                 socket.off('error');
+                socket.disconnect();
             };
         }
+        // Función de limpieza al desmontar el componente
+		socket.disconnect();
+
     }, [remitenteId, destinatarioId]);
 
     const sendMessage = (e) => {

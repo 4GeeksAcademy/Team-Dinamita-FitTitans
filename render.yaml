@@ -25,9 +25,14 @@ services:
             fromDatabase:
                 name: postgresql-trapezoidal-42170
                 property: connectionString
+          - key: DEBUG
+            value: true
+          - key: BACKEND_URL
+            value: "https://sample-service-name-6109.onrender.com"
 
 databases: # Render PostgreSQL database
     - name: postgresql-trapezoidal-42170
       region: ohio
       ipAllowList: [] # only allow internal connections
       plan: free # optional; defaults to starter
+## https://sample-service-name-cbbh.onrender.com/
