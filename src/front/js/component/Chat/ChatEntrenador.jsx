@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+/*import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import "./chat.css";
 import { useParams } from 'react-router-dom';
@@ -103,4 +103,4 @@ export const ChatEntrenador = () => {
             </div>
         </div>
     );
-};
+};*/
