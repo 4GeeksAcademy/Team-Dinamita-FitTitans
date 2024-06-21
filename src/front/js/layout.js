@@ -41,7 +41,8 @@ const Layout = () => {
     const basename = process.env.BASENAME || "";
 
     if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL />;
-
+//<Route element={<ChatEntrenador />} path="/clientes/:cliente_id/chat" />
+//<Route element={<Chat />} path="/chat/:id" />
     return (
         <div>
             <BrowserRouter basename={basename}>
@@ -70,14 +71,14 @@ const Layout = () => {
                         <Route element={<Blog />} path="/blog" />
                         <Route element={<ListaDeClientes />} path="/entrenador/:entrenador_id/clientes" />
                         <Route element={<DetalleCliente />} path="/clientes/:cliente_id" />
-                        <Route element={<Chat />} path="/chat/:id" />
+                        
                         <Route element={<Rutinas />} path="/clientes/:cliente_id/rutina" />
                         <Route element={<RutinaCliente />} path="/cliente/rutina/:usuario_id" />
                         <Route element={<VideosEntrenador />} path="/videosentrenador/:id" />
                         <Route element={<VideosUsuarios />} path="/videousuario/:id" />
                         <Route element={<Dieta />} path="/clientes/:cliente_id/dieta" />
                         <Route element={<DietaCliente />} path="/cliente/dieta/:usuario_id" />
-                        <Route element={<ChatEntrenador />} path="/clientes/:cliente_id/chat" />
+                        
 
                     </Routes>
                     <Footer />
