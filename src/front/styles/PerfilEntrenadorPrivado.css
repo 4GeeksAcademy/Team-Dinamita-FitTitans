@@ -1,102 +1,140 @@
 .contenedorPerfilPrivado {
-    margin-bottom: 50px;
+    margin-bottom: 3.125rem;
 }
+
 .card-titlePrivado {
-    font-size: 45px;
+    font-size: 3.1rem;
     color: #e7a33e;
 }
+
 .card-text-Datos {
     color: #e7a33e;
-    font-size: 15px;
+    font-size: 1rem;
 }
+
 .contenedorTituloPerfil {
     text-align: center;
 }
+
 .TituloPerfil {
     color: #e7a33e;
-    font-size: 50px;
+    font-size: 3.125rem;
     margin-top: 2%;
     text-align: center;
     background-color: rgba(0, 0, 0, 0.9);
     border-radius: 5px;
     display: inline-block;
-    padding: 15px;
+    padding: 1rem;
     max-width: 100%;
     overflow: hidden;
     word-wrap: break-word;
     overflow-wrap: break-word;
 }
+
 .contenedorListaEntrenadores {
     background-color: rgba(0, 0, 0, 0.9);
     border: 3px solid #e7a33e;
     border-radius: 5px;
-    padding: 30px;
+    padding: 2rem;
     margin-top: 1%;
     margin-bottom: 2%;
     max-width: 100%;
     overflow: hidden;
     word-wrap: break-word;
     overflow-wrap: break-word;
-    font-size: 15px;
+    font-size: 1rem;
 }
+
 .entrenadorItem {
-    margin-bottom: 20px;
-    padding: 30px;
+    margin-bottom: 1.25rem;
+    padding: 1.875rem;
     border-radius: 5px;
 }
+
 .perfilCard {
     background-color: rgba(0, 0, 0, 0.9);
-    border: 1px solid #e7a33e;
+    border: 0.0625rem solid #e7a33e;
     border-radius: 5px;
-    padding: 20px;
-    margin-bottom: 20px;
-    object-position: center;
+    padding: 1.25rem;
+    margin-bottom: 1.25rem;
 }
+
 .TituloFormulario {
     color: white;
-    font-size: 20px;
+    font-size: 1.25rem;
     margin-top: 2%;
 }
+
 .textoFormulario {
     margin-bottom: 1%;
 }
+
 .botonEnviarFormulario {
     text-align: center;
 }
+
 .btn-FormContactanos {
     background: #e7a33e;
     white-space: nowrap;
-    font-size: 15px;
-    border: 1px solid black;
+    font-size: 1 rem;
+    border: 0.0625rem solid black;
     border-radius: 5px;
     margin-top: 3%;
-    padding: 1%;
-    width: 80px;
+    padding: 0.625rem;
+    width: 5rem;
 }
+
 @media (max-width: 768px) {
     .TituloPerfil {
-        font-size: 32px;
+        font-size: 2rem;
+    }
+
+    .card-titlePrivado {
+        font-size: 2rem;
+    }
+
+    .contenedorListaEntrenadores {
+        padding: 1rem;
+    }
+
+    .entrenadorItem {
+        padding: 1rem;
     }
 }
+
 @media (max-width: 480px) {
     .TituloPerfil {
-        font-size: 15px;
+        font-size: 1.25rem;
+    }
+
+    .card-titlePrivado {
+        font-size: 1.5rem;
+    }
+
+    .contenedorListaEntrenadores {
+        padding: 0.5rem;
+    }
+
+    .entrenadorItem {
+        padding: 0.5rem;
     }
 }
+
 .inputImagen {
     margin: 30%;
     padding: 40%;
 }
+
 .subirEditar {
     border-radius: 5px;
     background: #e7a33e;
     white-space: nowrap;
-    font-size: 15px;
+    font-size: 1rem;
     border: 1px solid black;
-    border-radius: 5px;
-    padding: 10px 10px;
+    padding: 0.5rem;
     margin: 1.5%;
 }
+
 .subirEditar:hover,
 .subirEditar:focus {
     background: #e7a33e;
@@ -104,49 +142,57 @@
     outline: none;
     box-shadow: none;
 }
+
 .list-group-itemDatosPersonales {
     position: relative;
     display: block;
-    padding: .5rem 1rem;
+    padding: 0.5rem 1rem;
     color: #212529;
     text-decoration: none;
     background-color: #fff;
-    border: 1px solid rgba(0, 0, 0, .125);
-    font-size: 18px;
+    border: 0.0625rem solid rgba(0, 0, 0, .125);
+    /* Ajustado a rem */
+    font-size: 1.125rem;
     border-radius: 5px;
 }
+
 .card-img-topEntrenador {
     width: 100%;
     height: 100%;
-    object-fit:contain; 
-    object-position: center; 
+    object-fit: contain;
+    object-position: center;
 }
+
 .containerTopEntrenador {
     width: 100%;
-    height: 400px; 
-    overflow:hidden;
+    height: 25rem;
+    ;
+    overflow: hidden;
 }
+
 .btnSubir {
     border-radius: 5px;
     background: #e7a33e;
     white-space: nowrap;
-    font-size: 15px;
+    font-size: 1rem;
     border: 1px solid black;
     border-radius: 5px;
-    padding: 10px 20px;
+    padding: 0.5rem 1rem;
     margin: 1%;
 }
+
 .btnSubir:hover {
     color: white;
     background-color: #e7a33e;
     outline: none;
     box-shadow: none;
 }
+
 .errorInicio {
     background: #e7a33e;
     margin: 1.5%;
     padding: 1.5%;
     opacity: 80%;
     border-radius: 5px;
-    font-size: 25px;
+    font-size: 1.5rem;
 }

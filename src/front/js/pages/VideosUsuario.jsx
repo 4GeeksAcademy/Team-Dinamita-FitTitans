@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { Context } from '../store/appContext.js';
-import "../../styles/VideosEntrenador.css"
+import "../../styles/VideosUsuario.css"
 
 export const VideosUsuarios = () => {
   const { store, actions } = useContext(Context);
