@@ -1,19 +1,8 @@
-import React, { useState, useContext, useEffect } from "react";
-import "../../styles/Navbar.css";
+import React, { useState, useContext } from "react";
 import "../../styles/IniciarSesion.css"
 import { useNavigate, Link } from "react-router-dom";
 import { Registro } from "./Registro";
-
-import firebaseApp from "../../../firebase/credenciales";
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
-import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { Context } from "../store/appContext";
-
-
-const auth = getAuth(firebaseApp);
-const firestore = getFirestore(firebaseApp);
-
-//
 
 export const IniciarSesion = () => {
   const [usuarios, setUsuarios] = useState({
@@ -25,41 +14,6 @@ export const IniciarSesion = () => {
   const navigate = useNavigate();
   const { store, actions } = useContext(Context);
 
-
-  /* const getRol = async (uid) => {
-     const documentoRef = doc(firestore, `/usuarios/${uid}`);
-     const documentoCif = await getDoc(documentoRef);
-     const infoFinal = documentoCif.data().rol;
-     return infoFinal
-   };*/
-
-  //const EstadoUsuarioFirebase = (usuarioFirebase) => {
-
-  /*getRol(usuarioFirebase.uid).then((rol) => {
-    const dataUsuario = {
-      uid: usuarioFirebase.uid,
-      email: usuarioFirebase.email,
-      rol: rol,
-    }
-    setSession(dataUsuario);
-    console.log(dataUsuario)
-  })
-}
-onAuthStateChanged(auth, (usuarioFirebase) => {
-  if (usuarioFirebase) {
-    if (!sesion) {
-      EstadoUsuarioFirebase(usuarioFirebase);
-    } else navigate("/")
-  } else {
-    setSession(null)
-  }
-});*/
-
-  const idUsuario = () => {
-
-  };
-
-
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -70,7 +24,6 @@ onAuthStateChanged(auth, (usuarioFirebase) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    //signInWithEmailAndPassword(auth, usuarios.correo, usuarios.contraseña)
     const verificar = await actions.HandleInicioSesion(usuarios);
     console.log(verificar)
     if (verificar === true) {

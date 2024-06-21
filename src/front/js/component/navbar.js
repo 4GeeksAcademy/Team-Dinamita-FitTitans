@@ -8,16 +8,11 @@ import logofittitans from "../../img/logofittitans.png";
 import io from 'socket.io-client';
 
 const socket = io(process.env.BACKEND_URL, {
-	transports: ['websocket'], // Forzar la conexión a WebSocket
+	transports: ['websocket'],
 	query: {
 		user_id: localStorage.getItem('user_id')
 	}
 });
-
-//mport firebaseApp from "../../../firebase/credenciales";
-//import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-
-//const auth = getAuth(firebaseApp);
 
 export const Navbar = () => {
 	const [inicioSesion, setInicioSesion] = useState(null);
@@ -26,14 +21,6 @@ export const Navbar = () => {
 	const [tipoUsuario, setTipoUsuario] = useState(false);
 
 	const navigate = useNavigate();
-
-	/*nAuthStateChanged(auth, (usuarioFirebase) => {
-		if (usuarioFirebase) {
-			setinicioSesion(usuarioFirebase)
-		} else {
-			setinicioSesion(null)
-		}
-	})*/
 	useEffect(() => {
 		const token = actions.getToken();
 		if (token) {

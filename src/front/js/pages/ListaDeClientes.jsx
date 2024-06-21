@@ -11,14 +11,13 @@ export const ListaDeClientes = ({ entrenadorId }) => {
   useEffect(() => {
     actions.obtenerListaClientes(idEntrenador)
       .then(data => {
-        setClientes(data);  // Actualiza el estado con los datos de los entrenadores
+        setClientes(data);
         console.log(data)
       })
       .catch(error => {
         console.error("Error al obtener la lista de clientes", error);
       });
   }, [entrenadorId]);
-
 
   return (
     <div className="container contenedorClientes">
@@ -39,21 +38,5 @@ export const ListaDeClientes = ({ entrenadorId }) => {
     </div>
   );
 }
-
-//   return (
-//     <div>
-//       <h2>Lista de Clientes</h2>
-//       <ul>
-//         {clientes.map(cliente => (
-//           <li key={cliente.id}>
-//             <Link to={`/clientes/${cliente.id}`}>
-//               {cliente.nombre}
-//             </Link>
-//           </li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// }
 
 

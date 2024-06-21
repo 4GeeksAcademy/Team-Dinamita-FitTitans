@@ -6,18 +6,14 @@ import "../../styles/Perfiles.css"
 export const Perfiles = () => {
     const [estado, setEstado] = useState(null)
 
-
-
   useEffect (() =>{
 		const verificar = localStorage.getItem("user_rol")
 		if (verificar === "true"){
          setEstado(true)
       }else{
         return setEstado(false)
-      }
-		
-	},[])
-
+      }	
+	},[]) 
   
     return(
       <>
