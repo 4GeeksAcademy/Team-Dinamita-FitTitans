@@ -44,7 +44,6 @@ export const PerfilEntrenadorPrivado = () => {
     }
   };
 
-
   const manejarEditarUsuario = async (usuarioId) => {
     await actions.EditarUsuario(usuarioId, datosFormulario);
     setEditar(false);
@@ -72,7 +71,7 @@ export const PerfilEntrenadorPrivado = () => {
         if (usuariofinal && Array.isArray(usuariofinal)) {
           setUsuarios(usuariofinal);
         } else {
-          setUsuarios([usuariofinal]); // Si no es un array, lo envuelve en uno
+          setUsuarios([usuariofinal]);
         }
       };
       setRol(true)
@@ -114,9 +113,7 @@ export const PerfilEntrenadorPrivado = () => {
                 </div>
                 {editar ? (
                   <>
-
                     <input className="input form-control"
-
                       type="text"
                       name="email"
                       placeholder="Email"
@@ -187,7 +184,5 @@ export const PerfilEntrenadorPrivado = () => {
         <h1 className="errorInicio"> ERROR, Vuelve a Iniciar Sesion </h1>
       )}
     </>
-
-
   );
 };

@@ -1,10 +1,9 @@
 import React, {useContext, useEffect, useState } from 'react';
 import { Context } from "../store/appContext";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {MiAreaCliente} from "../component/MiAreaCliente.jsx"
 import {MiAreaEntrenador} from "../component/MiAreaEntrenador.jsx"
-
-  
+ 
 export const MiArea = () => {
   const { store, actions } = useContext(Context);
   const [estado, setEstado] = useState(null)
@@ -18,10 +17,7 @@ export const MiArea = () => {
       }else{
         return setEstado(false)
       }
-		
 	},[])
-
-
     console.log(estado)
     
   const Return = (e) => {
@@ -38,9 +34,7 @@ export const MiArea = () => {
         <div>
           <button onClick={(e) => Return(e)}> Error Go Home</button>
         </div>
-      )}
-      
-  </>
-      
+      )}  
+  </>     
     );
   };

@@ -118,11 +118,9 @@ if __name__ == '__main__':
 def delete_old_messages():
     try:
         # Obtén la zona horaria UTC
-        utc_timezone = pytz.timezone('UTC')
-        
+        utc_timezone = pytz.timezone('UTC') 
         # Calcula la fecha límite para eliminar los mensajes (24 horas atrás)
         cutoff_date = datetime.now(utc_timezone) - timedelta(hours=72)
-        
         # Elimina los mensajes anteriores a la fecha límite
         deleted_count = Message.query.filter(Message.timestamp < cutoff_date).delete()
         db.session.commit()
@@ -169,11 +167,9 @@ def registro():
     enviar_correo_bienvenida(email)
     new_user = User(email=email, password=hashed_password, rol=rol_booleano, nombre=nombre, telefono=telefono, user_uuid = user_uuid)
     db.session.add(new_user)
-    db.session.commit()
-    
+    db.session.commit()  
     # Obtengo el id del usuario recien creado
-    user_id = new_user.id
-    
+    user_id = new_user.id 
     # Devuelvo el ID del usuario como parte de la respuesta
     return jsonify({'message': 'User registered successfully', 'userId': user_id}), 201
 
@@ -199,11 +195,9 @@ def login():
     
 # GETTING ALL THE USERS
 @app.route("/users", methods=["GET"])
-
 def get_all_users():
     all_users = User.query.all()
     mapped_users = list(map(lambda index: index.serialize(), all_users))
-
     response_body = jsonify(mapped_users)
     return response_body, 200
 
@@ -239,25 +233,21 @@ def actualizar_user(id):
     user = User.query.get(id)
     if not user:
         return jsonify({"msg": "User not found"}), 404
-
     data = request.get_json()
     print("Datos recibidos:", data)
     user.email = data.get('email', user.email)
     user.nombre = data.get('nombre', user.nombre)
     user.telefono = data.get('telefono', user.telefono)
-    user.rol = data.get('rol', user.rol)
-    
+    user.rol = data.get('rol', user.rol) 
     db.session.commit()
-
     return jsonify(user.serialize()), 200
-
 
 #PARA ENTRENADORES 
 # para mostrar la lista de entrenadores
 @app.route('/listaentrenadores', methods=['GET'])
 def get_entrenadores_usuarios():
     users = User.query.all()
-    entrenadores = [user.serialize() for user in users if user.rol] # filtra solo los usuarios que tienen el campo rol igual a True, lo que probablemente indica que son entrenadores.
+    entrenadores = [user.serialize() for user in users if user.rol] # filtra solo los usuarios que tienen el campo rol igual a True, lo que indica que son entrenadores.
     return jsonify({
         "entrenadores": entrenadores,
     }), 200
@@ -291,7 +281,6 @@ def get_clientes_by_entrenador_id(entrenador_id):
     # Obtener los clientes asignados a un entrenador dado
     asignaciones = db.session.query(Asignacion_entrenador).filter_by(entrenador_id=entrenador_id).all()
     clientes = [User.query.get(asignacion.usuario_id).serialize() for asignacion in asignaciones]
-
     return jsonify(clientes), 200
 
 #para obtener los planes del cliente rutina, dieta etc
@@ -311,7 +300,6 @@ def get_cliente_detalle(cliente_id):
         "rutina": asignacion.rutina,
         "plan_entrenamiento": asignacion.plan_entrenamiento
     })
-
     return jsonify(cliente_detalle), 200
 
 # para contratar a un entrenador
@@ -345,10 +333,8 @@ def contratar_entrenador():
         usuario_id=usuario_id,
         plan_entrenamiento=plan_entrenamiento,
     )
-
     db.session.add(asignacion)
     db.session.commit()
-
     return jsonify({"message": "Entrenador contratado exitosamente"}), 200
 
 #para editar borrar o modificar rutinas el entrenador
@@ -357,10 +343,8 @@ def obtener_rutina(cliente_id):
     asignacion = Asignacion_entrenador.query.filter_by(usuario_id=cliente_id).first()
     if asignacion is None:
         return jsonify({"message": "Asignación no encontrada"}), 404
-
     return jsonify({"rutina": asignacion.rutina.split(';') if asignacion.rutina else []}), 200
     
-
 @app.route('/clientes/<int:cliente_id>/rutina', methods=['POST'])
 def crear_rutina(cliente_id):
     data = request.get_json()
@@ -376,7 +360,6 @@ def crear_rutina(cliente_id):
     rutinas.append(nueva_rutina)
     asignacion.rutina = ';'.join(rutinas)
     db.session.commit()
-
     return jsonify({"message": "Rutina añadida exitosamente"}), 201
 
 @app.route('/clientes/<int:cliente_id>/rutina', methods=['PUT'])
@@ -390,7 +373,6 @@ def actualizar_rutina(cliente_id):
 
     asignacion.rutina = ';'.join(nueva_rutina)
     db.session.commit()
-
     return jsonify({"message": "Rutina actualizada correctamente"}), 200
 
 @app.route('/clientes/<int:cliente_id>/rutina', methods=['DELETE'])
@@ -401,31 +383,23 @@ def eliminar_rutina(cliente_id):
 
     asignacion.rutina = None
     db.session.commit()
-
     return jsonify({"message": "Rutina eliminada correctamente"}), 200 
-
 
 # /////#para que el cliente vea su rutina
 @app.route('/clienteasignado/<int:cliente_id>/rutina', methods=['GET'])
 def obtener_rutina_cliente(cliente_id):
     try:
-        # Verificar si el cliente existe en la base de datos
         cliente = User.query.get(cliente_id)
         if not cliente:
             return jsonify({"error": "Cliente no encontrado"}), 404
-
-        # Verificar si existe una asignación de entrenador para este cliente
         asignacion = Asignacion_entrenador.query.filter_by(usuario_id=cliente_id).first()
         if not asignacion:
             return jsonify({"error": "Asignación no encontrada para este cliente"}), 404
 
-        # Devolver la rutina del cliente si está asignada
         rutina_cliente = asignacion.rutina.split(';') if asignacion.rutina else []
         return jsonify({"rutina": rutina_cliente}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
-
 
 # DIETA para ver, crear, editar y eliminar el entrenador 
 @app.route('/clientes/<int:cliente_id>/dieta', methods=['GET'])
@@ -433,7 +407,6 @@ def obtener_dieta(cliente_id):
     asignacion = Asignacion_entrenador.query.filter_by(usuario_id=cliente_id).first()
     if not asignacion:
         return jsonify({"error": "Asignación no encontrada"}), 404
-
     return jsonify({"dieta": asignacion.dieta.split(';') if asignacion.dieta else []}), 200
 
 @app.route('/clientes/<int:cliente_id>/dieta', methods=['POST'])
@@ -451,7 +424,6 @@ def crear_dieta(cliente_id):
     dietas.append(nueva_dieta)
     asignacion.dieta = ';'.join(dietas)
     db.session.commit()
-
     return jsonify({"message": "Dieta añadida exitosamente"}), 201
 
 @app.route('/clientes/<int:cliente_id>/dieta', methods=['PUT'])
@@ -465,7 +437,6 @@ def actualizar_dieta(cliente_id):
 
     asignacion.dieta = ';'.join(nueva_dieta)
     db.session.commit()
-
     return jsonify({"message": "Dieta actualizada correctamente"}), 200
 
 @app.route('/clientes/<int:cliente_id>/dieta', methods=['DELETE'])
@@ -476,26 +447,19 @@ def eliminar_dieta(cliente_id):
 
     asignacion.dieta = None
     db.session.commit()
-
     return jsonify({"message": "Dieta eliminada correctamente"}), 200 
-
 
 #para que el cliente vea su dieta
 @app.route('/clienteasignado/<int:cliente_id>/dieta', methods=['GET'])
 def obtener_dieta_cliente(cliente_id):
-    # Verificar si el cliente existe en la base de datos
     cliente = User.query.get(cliente_id)
     if not cliente:
         return jsonify({"error": "Cliente no encontrado"}), 404
-    # Verificar si existe una asignación de entrenador para este cliente
     asignacion = Asignacion_entrenador.query.filter_by(usuario_id=cliente_id).first()
     if not asignacion:
         return jsonify({"error": "Asignación no encontrada para este cliente"}), 404
-    # Devolver la dieta del cliente si está asignada
     dieta_cliente = asignacion.dieta.split(';') if asignacion.dieta else []
     return jsonify({"dieta": dieta_cliente}), 200
-
-
 
 # Configurar Flask-Mail para usar Mailtrap
 def configure_mail(app):
@@ -538,11 +502,6 @@ def forgot_password():
     if user:
         user_uuid = user.user_uuid
         reset_link = f"https://glowing-spork-jj94vv5pq7p2ppw7-3000.app.github.dev/reset-password/{user_uuid}"
-       # msg = Message("Password Reset Request",
-        #              sender="ajrfittitans@gmail.com",  # Cambiar por tu correo
-         #             recipients=[email])
-        #msg.body = f"To reset your password, visit the following link: {reset_link}"
-        #mail.send(msg)
         enviar_correo(email, reset_link)
 
         return jsonify({"msg": "Password reset link sent"}, reset_link), 200
@@ -566,11 +525,8 @@ def recovery_password():
     except Exception as e:
         return jsonify({"error": f"Error al confirmar el usuario: {str(e)}"}), 500
 
-
-
 #blog 
 socketio = SocketIO(app, cors_allowed_origins="*")
-
 # Almacenar los usuarios conectados con sus IDs de Socket.IO
 connected_users = {}
 
@@ -672,13 +628,6 @@ def get_asignaciones_entrenador():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-
-
-
-
-
-
-
 #videos entrenador
 @app.route('/agregarVideo/<int:id>', methods=['POST'])
 @jwt_required()
@@ -688,9 +637,7 @@ def agregar_video(id):
     url = data.get('url')
     titulo = data.get('titulo')
 
-
     if not url :
-
         return jsonify({"error": "URL y título del video son requeridos"}), 400
 
     user.add_video(url, titulo)  # Utiliza el método add_video para agregar el URL y título
@@ -706,7 +653,6 @@ def get_entrenadores_video():
     return jsonify({
         "entrenadores": entrenadores,
     }), 200
-
 
 #no borrar
 if __name__ == '__main__':

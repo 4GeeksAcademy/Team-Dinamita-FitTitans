@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
-import { Link, useNavigate } from "react-router-dom";
 import "../../styles/Contactanos.css";
 
 export const Contactanos = () => {
