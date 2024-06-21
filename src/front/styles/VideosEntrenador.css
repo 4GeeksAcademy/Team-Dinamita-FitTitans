@@ -1,107 +1,167 @@
 body,
 pre {
     font-family: 'Inter', sans-serif;
-    font-size: 15px;
+    font-size: 1rem;
 }
+
 .containerPrincipalVideo {
-    padding: 20px;
-    max-width: 900px;
+    padding: 1.25rem;
+    max-width: 56.25rem;
     margin: 0 auto;
     color: white;
 }
+
 .contenedorTituloVideo {
     text-align: center;
 }
+
 .tituloVideo {
     color: #e7a33e;
     border-radius: 5px;
-    font-size: 50px;
+    font-size: 3.1rem;
     margin-top: 2%;
     text-align: center;
     background-color: rgba(0, 0, 0, 0.9);
     display: inline-block;
-    padding: 15px;
+    padding: 0.9375rem;
     max-width: 100%;
     overflow: hidden;
     word-wrap: break-word;
     overflow-wrap: break-word;
 }
+
 .formularioVideo {
-    border: 3px solid #e7a33e;
+    border: 0.1875rem solid #e7a33e;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.92);
-    padding: 30px;
+    padding: 1.875rem;
     border-radius: 5px;
     width: 100%;
     box-sizing: border-box;
     margin-bottom: 5%;
 }
+
 .gridVideos {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 1.25rem;
     width: 100%;
-    margin-top: 20px;
+    margin-top: 1.25rem;
 }
+
 .videoItem {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 10px;
-    border: 1px solid #ccc;
+    padding: 0.625rem;
+    border: 0.0625rem solid #ccc;
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.8);
     color: black;
 }
+
 .videoControl {
     max-width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 0.625rem;
 }
+
 .input-containerSubirVideo {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
+    margin-top: 2%;
 }
+
 .inputTituloVideo {
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    width: calc(100% - 1.25rem);
+    padding: 0.625rem;
+    margin-bottom: 0.625rem;
+    border: 0.0625rem solid #ccc;
+    border-radius: 0.3125rem;
     background-color: rgba(255, 255, 255, 0.8);
     color: #333;
 }
+
 .input-containerSubirVideo h2 {
     color: #e7a33e;
 }
+
 .input-containerSubirVideo input[type="button"] {
-    padding: 2%;
-    margin: 5px;
+    width: 100%;
+    padding: 0.625rem;
+    margin: 0.3125rem 0;
     border: none;
     border-radius: 5px;
     background-color: #e7a33e;
     color: black;
     cursor: pointer;
 }
+
 .input-containerSubirVideo input[type="button"]:hover {
     color: white;
 }
+
 .btnSubir {
     border-radius: 5px;
     background: #e7a33e;
     white-space: nowrap;
-    font-size: 15px;
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 10px 20px;
+    font-size: 0.9375rem;
+    border: 0.0625rem solid black;
+    padding: 0.625rem 1.25rem;
     margin: 1%;
+    margin-top: 2%;
 }
+
 .btnSubir:hover {
     color: white;
     background-color: #e7a33e;
     outline: none;
     box-shadow: none;
+}
+
+
+@media (max-width: 768px) {
+    .tituloVideo {
+        font-size: 2rem;
+        padding: 0.625rem;
+    }
+
+    .formularioVideo {
+        padding: 1.25rem;
+    }
+
+    .videoItem {
+        padding: 0.5rem;
+
+    }
+
+    .input-containerSubirVideo input[type="button"] {
+        padding: 0.5rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .tituloVideo {
+        font-size: 1.5rem;
+        padding: 0.5rem;
+    }
+
+    .formularioVideo {
+        padding: 1rem;
+    }
+
+    .videoItem {
+        padding: 0.25rem;
+    }
+
+    .input-containerSubirVideo input[type="button"] {
+        padding: 0.5rem;
+    }
+
+    .btnSubir {
+        margin-top: 1.5rem;
+    }
 }
