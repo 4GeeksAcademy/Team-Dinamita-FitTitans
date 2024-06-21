@@ -5,14 +5,7 @@ import "../../styles/Navbar.css";
 import { Registro } from "./Registro";
 import { Context } from "../store/appContext";
 import logofittitans from "../../img/logofittitans.png";
-import io from 'socket.io-client';
 
-const socket = io(process.env.BACKEND_URL, {
-	transports: ['websocket'],
-	query: {
-		user_id: localStorage.getItem('user_id')
-	}
-});
 
 export const Navbar = () => {
 	const [inicioSesion, setInicioSesion] = useState(null);
