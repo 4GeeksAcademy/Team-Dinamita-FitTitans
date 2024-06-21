@@ -44,7 +44,6 @@ class User(db.Model):
         new_video = f"{url},{titulo};"
         self.videos = current_videos + new_video
 
-
     def serialize(self):
         return {
             "id": self.id,
@@ -61,7 +60,6 @@ class User(db.Model):
             "videos": self.get_videos(),
         }
     
-
 class Asignacion_entrenador(db.Model):
     __tablename__ = "asignacion_entrenador"
     id = db.Column(db.Integer, primary_key=True)
@@ -83,9 +81,6 @@ class Asignacion_entrenador(db.Model):
             "dieta": self.dieta,
             "rutina": self.rutina   
         }
-
-
-
 
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)

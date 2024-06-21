@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/home.css";
-import { set } from "@cloudinary/url-gen/actions/variable";
 import { Registro } from "../component/Registro.js";
 
 export const Home = () => {
@@ -136,7 +135,7 @@ export const Home = () => {
 						<div className="row row-fila1">
 							<div className="col-md col-columna1">
 								<div className="titulo1">
-									¡Bienvenido a Fit Titans!
+									¡Bienvenido a Fit Titans!.
 									<div className="subTitulo1">
 										Aquí encontrarás a los mejores entrenadores personales y nutricionistas listos para ayudarte a alcanzar tus metas. Tu viaje hacia una vida más saludable y en forma comienza ahora.
 									</div>

@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
 import "../../styles/ListaEntrenadores.css";
 
 export const ListaEntrenadores = () => {
@@ -10,8 +9,7 @@ export const ListaEntrenadores = () => {
   const [error, setError] = useState(null);
   const [loaded, setLoaded] = useState(false);
   const [showFelicidades, setShowFelicidades] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState(null); // Estado local para rastrear el plan seleccionado
-
+  const [selectedPlan, setSelectedPlan] = useState(null);
   const usuario_id = localStorage.getItem("user_id");
   const user_role = localStorage.getItem("user_role");
 

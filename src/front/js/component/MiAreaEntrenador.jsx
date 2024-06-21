@@ -1,9 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Context } from "../store/appContext";
-import { Link, useNavigate } from "react-router-dom";
+import React from 'react';
+import { Link } from "react-router-dom";
 import "../../styles/MiAreaEntrenador.css";
 
-//<Link to={`/perfilentrenador/${user.id}`}
 export const MiAreaEntrenador = () => {
     const usuarioID = localStorage.getItem("user_id");
     return (

@@ -19,7 +19,6 @@ export const VideosEntrenador = () => {
       setVideos([...videos, { url: secureUrl, titulo }]); // Agregar el nuevo video al estado local
     } catch (error) {
       console.error("Error al subir el video:", error);
-      // Manejar errores de subida de video aquí
     }
   };
 
