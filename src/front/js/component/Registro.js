@@ -21,7 +21,7 @@ export const Registro = ({ closeModal }) => {
     const rolBooleano = usuario.rol === "1" ? true : false;
     const usuarioConRolBooleano = { ...usuario, rol: rolBooleano };
     const registroExitoso = await actions.HandleRegistro(usuarioConRolBooleano);
-    console.log(registroExitoso.success)
+
     if (registroExitoso.success) {
       alert("success");
       closeModal();
@@ -30,7 +30,7 @@ export const Registro = ({ closeModal }) => {
     }
   };
 
-  console.log(usuario)
+
 
   return (
     <div className="modal-overlay" onClick={closeModal}>

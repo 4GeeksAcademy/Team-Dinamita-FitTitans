@@ -15,7 +15,7 @@ export const VideosUsuarios = () => {
       try {
         await actions.ObtenerVideos(token);
         const usuarios = store.videos; // Asegúrate de que 'store.videos' contiene la estructura correcta
-        console.log(usuarios);
+
 
         if (usuarios && Array.isArray(usuarios)) {
           // Extraer videos de cada usuario junto con el nombre del usuario

@@ -28,7 +28,6 @@ export const PerfilEntrenadorPrivado = () => {
 
       const responseData = await response.json();
       const secureUrl = responseData.secure_url;
-      console.log(secureUrl)
       const updatedUsuarios = usuarios.map((usuario) => {
         if (usuario.id === userId) {
           actions.EditarFotos(id, secureUrl)
@@ -78,7 +77,7 @@ export const PerfilEntrenadorPrivado = () => {
       fetchUsuarioUnico();
     } else { setRol(false), "deja de jode" }
   }, [editar, usuarios.foto]);
-  console.log(usuarios);
+
 
   return (
     <>
