@@ -25,7 +25,7 @@ export const IniciarSesion = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const verificar = await actions.HandleInicioSesion(usuarios);
-    console.log(verificar)
+    
     if (verificar === true) {
       alert("funciono")
 

@@ -18,7 +18,7 @@ const UploadWidgetFoto = ({ userId, onUploadSuccess }) => {
         if (error) {
           console.error("Upload Error:", error);
         } else if (result.event === "success") {
-          console.log("Upload Result:", result.info.secure_url);
+
           setSecureUrl(result.info.secure_url);
           onUploadSuccess(userId, result.info.secure_url); // Pasar userId y secureUrl
         }

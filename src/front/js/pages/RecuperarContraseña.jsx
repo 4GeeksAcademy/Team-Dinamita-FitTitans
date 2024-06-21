@@ -15,10 +15,10 @@ export const RecuperarContraseña = () => {
         if (!validarContraseña(password.primera, verificarContraseña.segunda)) {
             alert("Las contraseñas no coinciden. Por favor, inténtalo de nuevo.");
         
-            console.log(password, "lo que escribo")
+
         }
         try {
-            console.log(password, "lo que envio")
+
             const response = await actions.ModificarContraseña(password, user_uuid)
             if(response){
                 alert("Contraseña Modificada")
@@ -26,7 +26,7 @@ export const RecuperarContraseña = () => {
             }else
                 alert("error chavista")
         } catch (error) {
-            console.log("Error:", error);
+
             alert("Hubo un error al procesar tu solicitud. Por favor, inténtalo de nuevo más tarde.");
         }
     };  

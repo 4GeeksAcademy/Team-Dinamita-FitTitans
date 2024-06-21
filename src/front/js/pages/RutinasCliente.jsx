@@ -8,7 +8,7 @@ export const RutinaCliente = () => {
     const { usuario_id } = useParams();
     const [rutinas, setRutinas] = useState([]);
     const [mensaje, setMensaje] = useState("");
-    console.log (usuario_id)
+
 
     useEffect(() => {
         const fetchRutinaCliente = async () => {

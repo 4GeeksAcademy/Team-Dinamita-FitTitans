@@ -18,7 +18,7 @@ export const MiArea = () => {
         return setEstado(false)
       }
 	},[])
-    console.log(estado)
+
     
   const Return = (e) => {
     e.preventDefault();
