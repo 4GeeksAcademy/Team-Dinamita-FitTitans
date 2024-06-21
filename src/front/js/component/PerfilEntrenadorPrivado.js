@@ -87,9 +87,9 @@ export const PerfilEntrenadorPrivado = () => {
           <div className="contenedorTituloPerfil">
             <div className="form-group TituloPerfil">PERFIL</div>
           </div>
-          <ul className="contenedorListaUsuarios">
+          <ul className="contenedorListaEntrenadores">
             {Array.isArray(usuarios) && usuarios.map((usuario) => (
-              <li key={usuario.id} className="usuarioItem">
+              <li key={usuario.id} className="entrenadorItem">
                 <div className="card perfilCard">
                   <div className="containerTopEntrenador">
                     <img src={usuario.foto} className="card-img-topEntrenador" alt={`Imagen de ${usuario.nombre}`} />
