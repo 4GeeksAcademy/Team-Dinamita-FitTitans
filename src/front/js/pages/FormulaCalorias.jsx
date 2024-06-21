@@ -7,7 +7,7 @@ export const FormulaCalorias = () => {
         peso: "",
         altura: "",
         edad: "",
-        factorActividad: 1.2 // Inicialmente en Poco o ningun ejercicio
+        factorActividad: 1.2
     });
 
     const [resultado, setResultado] = useState("");

@@ -2,7 +2,6 @@ import React, { useEffect, useState, useContext } from "react";
 import { useParams } from 'react-router-dom';
 import { Context } from "../store/appContext";
 import UploadWidgetFoto from './UploadWidgetFoto.js';
-
 import "../../styles/PerfilUsuario.css";
 
 export const PerfilUsuarios = () => {
@@ -108,11 +107,9 @@ export const PerfilUsuarios = () => {
                     <li className="list-group-itemDatosPersonales">Altura: {usuario.altura}</li>
                   </ul>
                 </div>
-
                 <div className="input-containerSubirImagen">
                   <UploadWidgetFoto userId={usuario.id} onUploadSuccess={handleSubirImagen} />
                 </div>
-
                 {editar ? (
                   <>
                     <input

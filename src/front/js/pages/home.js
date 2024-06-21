@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/home.css";
-import { set } from "@cloudinary/url-gen/actions/variable";
 import { Registro } from "../component/Registro.js";
 
 export const Home = () => {

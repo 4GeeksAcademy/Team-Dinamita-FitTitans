@@ -7,7 +7,6 @@ pre {
 .containerPrincipalVideo {
     padding: 20px;
     max-width: 900px;
-    /* Incrementado para acomodar el diseño en cuadrícula */
     margin: 0 auto;
     color: white;
 }

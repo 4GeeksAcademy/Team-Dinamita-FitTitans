@@ -7,7 +7,6 @@ import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { Context } from "../store/appContext";
 const auth = getAuth(firebaseApp)
 
-
 export const Registro = ({ closeModal }) => {
   const { store, actions } = useContext(Context);
   const firestore = getFirestore(firebaseApp);
@@ -19,11 +18,6 @@ export const Registro = ({ closeModal }) => {
     telefono: "",
     nombre: "",
   });
-
-
-  //const email = usuarios.correo;
-  //const rol = usuarios.rol
-
 
   const RegistrarUsuario = async () => {
     navigate("/login"); // esto y la funcion van en el handle submit
@@ -38,12 +32,9 @@ export const Registro = ({ closeModal }) => {
 
   const navigate = useNavigate();
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Convierte el valor de 'rol' a booleano
     const rolBooleano = usuario.rol === "1" ? true : false;
-    // Actualiza el objeto de usuario con el valor de 'rol' convertido a booleano
     const usuarioConRolBooleano = { ...usuario, rol: rolBooleano };
     const registroExitoso = await actions.HandleRegistro(usuarioConRolBooleano);
     console.log(registroExitoso.success)
@@ -78,7 +69,6 @@ export const Registro = ({ closeModal }) => {
                   <option value="1">Entrenador</option>
                 </select>
               </div>
-
               <div className="">
                 <label className="form-label d-flex text-start">
                   <i className="fa fa-user bigicon mx-2" ></i>

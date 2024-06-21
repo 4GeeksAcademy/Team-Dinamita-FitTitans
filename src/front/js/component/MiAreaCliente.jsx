@@ -1,14 +1,8 @@
-import React, { useContext } from "react";
-import { Context } from "../store/appContext";
-import { useParams, Link } from 'react-router-dom';
+import React from "react";
+import { Link } from 'react-router-dom';
 import "../../styles/MiAreaCliente.css";
 
 export const MiAreaCliente = () => {
-    const { cliente_id, usuario_id } = useParams();
-    const { store, actions } = useContext(Context);
-
-
-
     const usuarioID = localStorage.getItem("user_id");
 
     return (
