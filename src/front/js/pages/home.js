@@ -89,7 +89,7 @@ export const Home = () => {
 							<div className="titulo2">
 								¿Eres entrenador/a?
 								<div className="subTitulo2">
-									Potencia tu entrenamiento personal con nuestra app.
+									Potencia tu entrenamiento personal con nuestra app
 									<br />
 									Ven y forma parte de nuestro equipo
 								</div>
