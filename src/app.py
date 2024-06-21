@@ -21,7 +21,7 @@ import bcrypt
 from dotenv import load_dotenv
 load_dotenv()
 # para el chat
-from flask_socketio import SocketIO, emit, join_room, leave_room, disconnect
+#from flask_socketio import SocketIO, emit, join_room, leave_room, disconnect
 from flask_apscheduler import APScheduler
 import pytz
 # para correos
@@ -66,7 +66,7 @@ db.init_app(app)
 # Allow CORS requests to this API
 # Habilitar CORS para todos los orígenes
 CORS(app, resources={r"/*": {"origins": "*"}})
-socketio = SocketIO(app, cors_allowed_origins="*")
+#socketio = SocketIO(app, cors_allowed_origins="*")
 
 # add the admin
 setup_admin(app)
