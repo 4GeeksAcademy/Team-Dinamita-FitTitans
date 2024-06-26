@@ -41,7 +41,8 @@ const Layout = () => {
     const basename = process.env.BASENAME || "";
 
     if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL />;
-
+//<Route element={<ChatEntrenador />} path="/clientes/:cliente_id/chat" />
+//<Route element={<Chat />} path="/chat/:id" />
     return (
         <div>
             <BrowserRouter basename={basename}>

@@ -8,10 +8,10 @@ import logofittitans from "../../img/logofittitans.png";
 import io from 'socket.io-client';
 
 const socket = io(process.env.BACKEND_URL, {
-	transports: ['websocket'],
-	query: {
-		user_id: localStorage.getItem('user_id')
-	}
+    transports: ['websocket'], // Forzar la conexión a WebSocket
+    query: {
+        user_id: localStorage.getItem('user_id')
+    }
 });
 
 export const Navbar = () => {
@@ -54,7 +54,7 @@ export const Navbar = () => {
 		actions.logout();
 		navigate("/")
 		setTipoUsuario(false)
-
+		socket.disconnect();
 	};
 
 	return (

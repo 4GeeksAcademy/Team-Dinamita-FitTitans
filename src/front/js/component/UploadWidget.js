@@ -18,7 +18,7 @@ const UploadWidget = ({ onUploadSuccess, titulo }) => {
         if (error) {
           console.error("Upload Error:", error);
         } else if (result.event === "success") {
-          console.log("Upload Result:", result.info.secure_url);
+
           setSecureUrl(result.info.secure_url);
           onUploadSuccess(result.info.secure_url, titulo); // Enviar URL y título al callback
         }

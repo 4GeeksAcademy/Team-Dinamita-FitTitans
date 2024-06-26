@@ -66,7 +66,7 @@ db.init_app(app)
 # Allow CORS requests to this API
 # Habilitar CORS para todos los orígenes
 CORS(app, resources={r"/*": {"origins": "*"}})
-socketio = SocketIO(app, cors_allowed_origins="*")
+#socketio = SocketIO(app, cors_allowed_origins="*")
 
 # add the admin
 setup_admin(app)
@@ -617,8 +617,7 @@ def get_destinatario_id():
 if __name__ == '__main__':
     socketio.run(app, debug=True)
 
-
-
+    
 @app.route('/api/asignaciones_entrenador', methods=['GET'])
 def get_asignaciones_entrenador():
     try:
@@ -653,6 +652,8 @@ def get_entrenadores_video():
     return jsonify({
         "entrenadores": entrenadores,
     }), 200
+
+
 
 #no borrar
 if __name__ == '__main__':

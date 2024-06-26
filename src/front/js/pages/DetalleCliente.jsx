@@ -19,7 +19,7 @@ export const DetalleCliente = () => {
   }, [cliente_id]);
 
   if (!cliente) return <div>Cargando...</div>;
-
+//{`/clientes/${cliente.id}/chat`}
   return (
     <div className="container contenedorDetalleCliente">
       <div className="contenedorTituloDetalleCliente">

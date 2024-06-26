@@ -9,6 +9,7 @@ export const IniciarSesion = () => {
     email: "",
     password: "",
   });
+
   const [sesion, setSession] = useState(null)
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ export const IniciarSesion = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const verificar = await actions.HandleInicioSesion(usuarios);
-    console.log(verificar)
+    
     if (verificar === true) {
       alert("funciono")
 
@@ -37,7 +38,7 @@ export const IniciarSesion = () => {
 
   return (
     <>
-      {store.seInicio ? (<h1>error</h1>)
+      {store.seInicio ? (<h1 className="text-light">error</h1>)
         : (
           <>
             <form className="container InicioSesion" onSubmit={handleSubmit} id="inicio">

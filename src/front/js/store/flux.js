@@ -104,12 +104,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return false
 					} else if (response.ok) {
 						const data = await response.json();
-						console.log('Datos guardados correctamente:', data);
+						console.log('Datos guardados correctamente:');
 						localStorage.setItem("jwt-token", data.token);
 						localStorage.setItem("user_rol", data.user_rol);
 						localStorage.setItem("user_id", data.id)
 						setStore({ id: data.id })
-						console.log(localStorage.getItem("jwt-token"));
 						setStore({ seInicio: true })
 						setStore({ rol: data.user_rol })
 						return true
@@ -155,7 +154,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					if (response.ok) {
 						const data = await response.json();
-						console.log(data)
 						return setStore({ usuarioUnico: data })
 					}
 				} catch (error) {
@@ -184,7 +182,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					if (response.ok) {
 						const data = await response.json();
-						console.log(data)
+						
 						return setStore({ usuarioUnico: data })
 					}
 				} catch (error) {
@@ -195,7 +193,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			EditarFotos: async (id, secureUrl, token) => { // solicita token para que nadie pueda
 				try {
-					console.log("Datos actualizados:", secureUrl);
+					
 					const response = await fetch(`${process.env.BACKEND_URL}/listaentrenadores/${id}`, {
 						method: "PUT",
 						headers: {
@@ -205,7 +203,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						body: JSON.stringify({ foto: secureUrl })
 					});
 					const data = await response.json();
-					console.log("Respuesta del servidor:", data);
+					console.log("Respuesta del servidor:");
 
 				} catch (error) {
 					console.error("Error updating user data:", error);
@@ -288,14 +286,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			obtenerListaClientes: async (id) => {
-				console.log(process.env.BACKEND_URL)
 				try {
 					const response = await fetch(`${process.env.BACKEND_URL}/listaentrenadores/${id}/clientes`);
 					if (!response.ok) {
 						throw new Error("Error al obtener la lista de clientes");
 					}
 					const data = await response.json();
-					console.log(data)
 					return data;  // Retorna los datos de los clientes
 				} catch (error) {
 					console.error("Error al obtener la lista de clientes", error);
@@ -360,7 +356,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 
 					const data = await response.json();
-					console.log('Contraseña restablecida:', data);
+					console.log('Contraseña restablecida:');
 					return true
 				} catch (error) {
 					console.error('Error:', error);
@@ -403,7 +399,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					});
 					const data = await response.json();
-					console.log("Respuesta obtenerDietaCliente:", data);
+					console.log("Respuesta obtenerDietaCliente:");
 					if (response.ok) {
 						return { success: true, dieta: data.dieta };
 					} else {
@@ -425,7 +421,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					});
 					const data = await response.json();
-					console.log("Respuesta obtenerDieta:", data);
+					console.log("Respuesta obtenerDieta:");
 					if (response.ok) {
 						return { success: true, dieta: data.dieta };
 					} else {
@@ -511,7 +507,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					});
 					const data = await response.json();
-					console.log("Respuesta obtenerRutina:", data);
+					console.log("Respuesta obtenerRutina:");
 					if (response.ok) {
 						return { success: true, rutina: data.rutina };
 					} else {
@@ -589,7 +585,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			
 			Videos :async (id, secureUrl, token, titulo) => { // solicita token para que nadie pueda
 					try {
-						console.log("Datos actualizados:", secureUrl);
 						const response = await fetch(`${process.env.BACKEND_URL}/agregarVideo/${id}`, {
 							method: 'POST',
 							headers: {
@@ -599,7 +594,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							body: JSON.stringify({ url: secureUrl, titulo : titulo})
 						});
 						const data = await response.json();
-						console.log("Respuesta del servidor:", data);
+						console.log("Respuesta del servidor:");
 					} catch (error) {
 						console.error("Error updating user data:", error);
 					}
@@ -616,7 +611,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						});
 						const data = await response.json();
 						setStore({videos : data.entrenadores})
-						console.log("Respuesta del servidor:", data.entrenadores);
 					} catch (error) {
 						console.error("Error updating user data:", error);
 					}

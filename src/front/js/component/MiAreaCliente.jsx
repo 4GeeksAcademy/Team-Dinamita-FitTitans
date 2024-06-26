@@ -4,7 +4,7 @@ import "../../styles/MiAreaCliente.css";
 
 export const MiAreaCliente = () => {
     const usuarioID = localStorage.getItem("user_id");
-
+//{`/chat/${usuarioID}`} 
     return (
         <div className="container contenedorMiAreaCliente">
             <div className="tituloMiAreaCliente">

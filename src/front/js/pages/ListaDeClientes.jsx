@@ -12,7 +12,7 @@ export const ListaDeClientes = ({ entrenadorId }) => {
     actions.obtenerListaClientes(idEntrenador)
       .then(data => {
         setClientes(data);
-        console.log(data)
+
       })
       .catch(error => {
         console.error("Error al obtener la lista de clientes", error);
