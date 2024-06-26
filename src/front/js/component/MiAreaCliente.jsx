@@ -30,7 +30,7 @@ export const MiAreaCliente = () => {
             <div className="row row-filaMiAreaCliente2">
                 <div className="col-md-4 columnaChatCliente">
                     <div className="tituloChatCliente">
-                        <Link to="/"className="linkChatCliente">CHAT</Link>
+                        <Link to={`/chat/${usuarioID}`} className="linkChatCliente">CHAT</Link>
                     </div>
                 </div>
                 <div className="col-md-4 columnaVideosEjercicios">

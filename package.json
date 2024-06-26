@@ -89,6 +89,7 @@
 		"react-polyfills": "0.0.1",
 		"react-router-dom": "^6.23.1",
 		"react-toastify": "^10.0.5",
+		"socket.io": "^4.7.5",
 		"socket.io-client": "^4.7.5"
 	}
 }
