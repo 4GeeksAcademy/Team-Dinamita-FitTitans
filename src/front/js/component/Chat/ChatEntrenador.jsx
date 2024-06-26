@@ -26,20 +26,20 @@ export const ChatEntrenador = () => {
     }, [cliente_id]);
 
     useEffect(() => {
-        if (remitenteId !== null && destinatarioId !== null) {
-            const fetchMessages = async () => {
-                try {
-                    const response = await fetch(`${process.env.BACKEND_URL}/api/mensajes?remitente_id=${remitenteId}&destinatario_id=${destinatarioId}`);
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    const data = await response.json();
-                    setMessages(data);
-                } catch (error) {
-                    console.log('Error fetching messages:', error);
+        const fetchMessages = async () => {
+            try {
+                const response = await fetch(`${process.env.BACKEND_URL}/api/mensajes?remitente_id=${remitenteId}&destinatario_id=${destinatarioId}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
                 }
-            };
+                const data = await response.json();
+                setMessages(data);
+            } catch (error) {
+                console.log('Error fetching messages:', error);
+            }
+        };
 
+        if (remitenteId !== null && destinatarioId !== null) {
             fetchMessages();
 
             socket.on('message', (msg) => {
@@ -53,11 +53,9 @@ export const ChatEntrenador = () => {
             return () => {
                 socket.off('message');
                 socket.off('error');
-                socket.disconnect();
+                
             };
         }
-        // Función de limpieza al desmontar el componente
-		socket.disconnect();
 
     }, [remitenteId, destinatarioId]);
 
@@ -104,3 +102,4 @@ export const ChatEntrenador = () => {
         </div>
     );
 };
+

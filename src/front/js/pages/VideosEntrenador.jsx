@@ -41,8 +41,7 @@ export const VideosEntrenador = () => {
     fetchEntrenadorUnico();
   }, [id]); // Ejecutar efecto cuando cambia el id
 
-  console.log(store.usuarioUnico, "prueba");
-  console.log(videos);
+
 
   return (
     <div className="containerPrincipalVideo">

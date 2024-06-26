@@ -18,11 +18,11 @@ export const SolicitudRecuperacion = () => {
             alert("Hubo un error al procesar tu solicitud. Por favor, inténtalo de nuevo más tarde.");
         }
     } catch (error) {
-        console.log("Error:", error);
+
         alert("Hubo un error al procesar tu solicitud n2. Por favor, inténtalo de nuevo más tarde.");
     }
 };
-console.log(email)
+
 
 return (
     <>

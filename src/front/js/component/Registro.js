@@ -1,15 +1,11 @@
 import React, { useState, useContext } from "react";
 import { useNavigate, } from "react-router-dom";
 import "../../styles/registro.css"
-import firebaseApp from "../../../firebase/credenciales";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { Context } from "../store/appContext";
-const auth = getAuth(firebaseApp)
 
 export const Registro = ({ closeModal }) => {
   const { store, actions } = useContext(Context);
-  const firestore = getFirestore(firebaseApp);
+
 
   const [usuario, setUsuarios] = useState({
     email: "",
@@ -19,25 +15,13 @@ export const Registro = ({ closeModal }) => {
     nombre: "",
   });
 
-  const RegistrarUsuario = async () => {
-    navigate("/login"); // esto y la funcion van en el handle submit
-    const infoUsuario = await createUserWithEmailAndPassword(auth, usuario.email, usuario.password).then(
-      (usuarioFirebase) => { return usuarioFirebase }
-    )
-    console.log(infoUsuario.user.uid)
-
-    const documentoRef = doc(firestore, `/usuarios/${infoUsuario.user.uid}`)
-    setDoc(documentoRef,)//{//email, //rol})
-  };
-
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const rolBooleano = usuario.rol === "1" ? true : false;
     const usuarioConRolBooleano = { ...usuario, rol: rolBooleano };
     const registroExitoso = await actions.HandleRegistro(usuarioConRolBooleano);
-    console.log(registroExitoso.success)
+
     if (registroExitoso.success) {
       alert("success");
       closeModal();
@@ -46,7 +30,7 @@ export const Registro = ({ closeModal }) => {
     }
   };
 
-  console.log(usuario)
+
 
   return (
     <div className="modal-overlay" onClick={closeModal}>
