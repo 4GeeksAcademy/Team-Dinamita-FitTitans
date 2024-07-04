@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/ListaEntrenadores.css";
+import { motion } from 'framer-motion';
 
 export const ListaEntrenadores = () => {
   const { store, actions } = useContext(Context);
@@ -63,6 +64,14 @@ export const ListaEntrenadores = () => {
   };
 
   return (
+    <>
+    <motion.div
+		onClick={(e) => e.stopPropagation()}
+		initial={{ y: -50, opacity: 0 }}
+		animate={{ y: 0, opacity: 1 }}
+		exit={{ y: 50, opacity: 0 }}
+		transition={{ duration: 0.5 }}>
+
     <div className="container mt-5 containerEntrenadores">
       <ul className="list-group mb-5 contenedortarjetalistaEntrenadores1">
         {store.entrenadores.map((entrenador, index) => (
@@ -154,5 +163,7 @@ export const ListaEntrenadores = () => {
         </div>
       </div>
     </div>
+    </motion.div>
+    </>
   );
 };

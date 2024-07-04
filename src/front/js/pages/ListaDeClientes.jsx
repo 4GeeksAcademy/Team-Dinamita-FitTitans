@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Context } from "../store/appContext";
 import { Link } from 'react-router-dom';
 import "../../styles/ListaDeClientes.css";
+import { motion } from 'framer-motion';
 
 export const ListaDeClientes = ({ entrenadorId }) => {
   const { store, actions } = useContext(Context);
@@ -20,6 +21,14 @@ export const ListaDeClientes = ({ entrenadorId }) => {
   }, [entrenadorId]);
 
   return (
+    <>
+    <motion.div
+		onClick={(e) => e.stopPropagation()}
+		initial={{ y: -50, opacity: 0 }}
+		animate={{ y: 0, opacity: 1 }}
+		exit={{ y: 50, opacity: 0 }}
+		transition={{ duration: 0.5 }}>
+
     <div className="container contenedorClientes">
       <div className="contenedorTituloClientes">
         <div className="form-group TituloClientes">LISTA DE CLIENTES</div>
@@ -36,6 +45,9 @@ export const ListaDeClientes = ({ entrenadorId }) => {
         </ul>
       </div>
     </div>
+
+    </motion.div>
+    </>
   );
 }
 

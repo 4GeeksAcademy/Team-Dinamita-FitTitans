@@ -3,6 +3,7 @@ import "../../styles/IniciarSesion.css"
 import { useNavigate, Link } from "react-router-dom";
 import { Registro } from "./Registro";
 import { Context } from "../store/appContext";
+import { motion } from 'framer-motion';
 
 export const IniciarSesion = () => {
   const [usuarios, setUsuarios] = useState({
@@ -38,6 +39,13 @@ export const IniciarSesion = () => {
 
   return (
     <>
+    <motion.div
+		onClick={(e) => e.stopPropagation()}
+		initial={{ y: -50, opacity: 0 }}
+		animate={{ y: 0, opacity: 1 }}
+		exit={{ y: 50, opacity: 0 }}
+		transition={{ duration: 0.5 }}>
+
       {store.seInicio ? (<h1 className="text-light">error</h1>)
         : (
           <>
@@ -88,6 +96,8 @@ export const IniciarSesion = () => {
             </form>
             {isModalOpen && <Registro closeModal={closeModal} />}
           </>)}
+          
+    </motion.div>
     </>
   )
 }

@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/home.css";
 import { Registro } from "../component/Registro.js";
+import { motion } from 'framer-motion';
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
@@ -65,6 +66,12 @@ export const Home = () => {
 	}, [token, estado])
 	return (
 		<>
+		<motion.div
+		onClick={(e) => e.stopPropagation()}
+		initial={{ y: -50, opacity: 0 }}
+		animate={{ y: 0, opacity: 1 }}
+		exit={{ y: 50, opacity: 0 }}
+		transition={{ duration: 0.5 }}>
 			{estado ? (
 				<div className="container-fluid">
 					<div className="row row-fila1">
@@ -179,6 +186,7 @@ export const Home = () => {
 					</div>
 				)}
 			{isModalOpen && <Registro closeModal={closeModal} />}
+		</motion.div>
 		</>
 	);
 };

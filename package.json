@@ -82,6 +82,7 @@
 		"cloudinary": "^2.2.0",
 		"cloudinary-react": "^1.8.1",
 		"express": "^4.19.2",
+		"framer-motion": "^11.2.13",
 		"morgan": "1.10.0",
 		"prop-types": "^15.6.1",
 		"react": "^18.3.1",
