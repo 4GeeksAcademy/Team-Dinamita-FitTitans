@@ -4,6 +4,7 @@ import { Context } from '../store/appContext.js';
 import UploadWidget from '../component/UploadWidget.js';
 import "../../styles/VideosEntrenador.css"
 import { motion } from 'framer-motion';
+import { Toaster, toast } from "sonner";
 
 export const VideosEntrenador = () => {
   const { store, actions } = useContext(Context);
@@ -16,10 +17,10 @@ export const VideosEntrenador = () => {
   const handleSubirVideo = async (secureUrl, titulo) => {
     try {
       await actions.Videos(id, secureUrl, token, titulo);
-      alert("Video subido correctamente");
+      toast.success("Video subido correctamente");
       setVideos([...videos, { url: secureUrl, titulo }]); // Agregar el nuevo video al estado local
     } catch (error) {
-      console.error("Error al subir el video:", error);
+      toast.error("Error al subir el video:", error);
     }
   };
 
@@ -46,6 +47,7 @@ export const VideosEntrenador = () => {
 
   return (
     <>
+    <Toaster position="top-center" richColors/>
     <motion.div
 		onClick={(e) => e.stopPropagation()}
 		initial={{ y: -50, opacity: 0 }}
