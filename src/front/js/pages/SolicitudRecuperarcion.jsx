@@ -26,6 +26,13 @@ export const SolicitudRecuperacion = () => {
 
 return (
     <>
+    <motion.div
+		onClick={(e) => e.stopPropagation()}
+		initial={{ y: -50, opacity: 0 }}
+		animate={{ y: 0, opacity: 1 }}
+		exit={{ y: 50, opacity: 0 }}
+		transition={{ duration: 0.5 }}>
+
         <form className="container InicioSesion" onSubmit={handleSubmit} id="inicio">
             <div className="my-3">
                 <label className="form-label d-flex text-start text-light" id="email">
@@ -49,6 +56,8 @@ return (
                 />
             </div>
         </form>
+
+        </motion.div>
     </>
 );
 };

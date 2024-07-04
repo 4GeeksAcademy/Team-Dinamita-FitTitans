@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Context } from "../store/appContext";
 import { useParams, Link } from 'react-router-dom';
 import "../../styles/DetalleCliente.css";
+import { motion } from 'framer-motion';
 
 export const DetalleCliente = () => {
   const { cliente_id } = useParams();
@@ -21,6 +22,14 @@ export const DetalleCliente = () => {
   if (!cliente) return <div>Cargando...</div>;
 //{`/clientes/${cliente.id}/chat`}
   return (
+    <>
+    <motion.div
+		onClick={(e) => e.stopPropagation()}
+		initial={{ y: -50, opacity: 0 }}
+		animate={{ y: 0, opacity: 1 }}
+		exit={{ y: 50, opacity: 0 }}
+		transition={{ duration: 0.5 }}>
+
     <div className="container contenedorDetalleCliente">
       <div className="contenedorTituloDetalleCliente">
         <div className="form-group TituloDetalleCliente">DETALLE DEL CLIENTE</div>
@@ -39,5 +48,8 @@ export const DetalleCliente = () => {
         </div>
       </div>
     </div>
+
+    </motion.div>
+    </>
   );
 }

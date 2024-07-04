@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../../styles/PerfilUsuario.css";
+import { motion } from 'framer-motion';
 const UploadWidgetFoto = ({ userId, onUploadSuccess }) => {
   const cloudinaryRef = useRef();
   const widgetRef = useRef();
@@ -27,6 +28,13 @@ const UploadWidgetFoto = ({ userId, onUploadSuccess }) => {
   }, [onUploadSuccess, userId]);
 
   return (
+    <>
+    <motion.div
+		onClick={(e) => e.stopPropagation()}
+		initial={{ y: -50, opacity: 0 }}
+		animate={{ y: 0, opacity: 1 }}
+		exit={{ y: 50, opacity: 0 }}
+		transition={{ duration: 0.5 }}>
     <div>
       <button className= "btnSubir" onClick={() => widgetRef.current.open()}>Subir Foto</button>
       {secureUrl && (
@@ -35,6 +43,8 @@ const UploadWidgetFoto = ({ userId, onUploadSuccess }) => {
         </div>
       )}
     </div>
+    </motion.div>
+    </>
   );
 };
 

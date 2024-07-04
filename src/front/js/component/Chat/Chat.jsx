@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import "./chat.css";
+import { motion } from 'framer-motion';
 
 const socket = io(process.env.BACKEND_URL, {
     transports: ['websocket'], // Forzar la conexión a WebSocket
@@ -90,6 +91,14 @@ export const Chat = () => {
     };
 
     return (
+        <>
+         <motion.div
+		onClick={(e) => e.stopPropagation()}
+		initial={{ y: -50, opacity: 0 }}
+		animate={{ y: 0, opacity: 1 }}
+		exit={{ y: 50, opacity: 0 }}
+		transition={{ duration: 0.5 }}>
+
         <div className="containerPrincipalChat">
             <div className="contenedorTituloChat">
                 <div className="tituloChat">
@@ -118,5 +127,8 @@ export const Chat = () => {
                 </div>
             </div>
         </div>
+
+        </motion.div>
+        </>
     );
 };
