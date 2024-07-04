@@ -11,7 +11,7 @@ class User(db.Model):
     password = db.Column(db.String(150), unique=False, nullable=False)
     rol = db.Column(db.Boolean(), unique=False, nullable=False, default=True)
     nombre =  db.Column(db.String(120), unique=False, nullable=False)
-    telefono = db.Column(db.String(120), unique=True, nullable=False)
+    telefono = db.Column(db.String(120), unique=True, nullable=True)
     edad = db.Column(db.Integer, nullable=True)
     genero = db.Column(db.String(10), nullable=True)
     altura = db.Column(db.String(30), nullable=True)
