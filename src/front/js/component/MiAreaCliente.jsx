@@ -1,11 +1,19 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 import "../../styles/MiAreaCliente.css";
+import { motion } from 'framer-motion';
 
 export const MiAreaCliente = () => {
     const usuarioID = localStorage.getItem("user_id");
 //{`/chat/${usuarioID}`} 
     return (
+        <>
+        <motion.div
+		onClick={(e) => e.stopPropagation()}
+		initial={{ y: -50, opacity: 0 }}
+		animate={{ y: 0, opacity: 1 }}
+		exit={{ y: 50, opacity: 0 }}
+		transition={{ duration: 0.5 }}>
         <div className="container contenedorMiAreaCliente">
             <div className="tituloMiAreaCliente">
                 MI AREA
@@ -45,5 +53,7 @@ export const MiAreaCliente = () => {
                 </div>
             </div>
         </div>
+        </motion.div>
+        </>
     );
 };

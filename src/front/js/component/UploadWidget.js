@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../../styles/VideosEntrenador.css"
+import { motion } from 'framer-motion';
 
 const UploadWidget = ({ onUploadSuccess, titulo }) => {
   const cloudinaryRef = useRef();
@@ -27,6 +28,13 @@ const UploadWidget = ({ onUploadSuccess, titulo }) => {
   }, [onUploadSuccess, titulo]); // Incluir 'titulo' como dependencia del efecto
 
   return (
+    <>
+    <motion.div
+		onClick={(e) => e.stopPropagation()}
+		initial={{ y: -50, opacity: 0 }}
+		animate={{ y: 0, opacity: 1 }}
+		exit={{ y: 50, opacity: 0 }}
+		transition={{ duration: 0.5 }}> 
     <div>
       <button className="btnSubir" onClick={() => widgetRef.current.open()}>Subir Video</button>
       {secureUrl && (
@@ -36,6 +44,8 @@ const UploadWidget = ({ onUploadSuccess, titulo }) => {
         </div>
       )}
     </div>
+    </motion.div>
+    </>
   );
 };
 
