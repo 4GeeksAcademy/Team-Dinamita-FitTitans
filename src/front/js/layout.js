@@ -3,8 +3,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 
-import { Demo } from "./pages/demo";
-import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 
 import { Home } from "./pages/home";
@@ -24,7 +22,7 @@ import { VideosEntrenador } from "./pages/VideosEntrenador.jsx"
 import { ListaEntrenadores } from "./pages/ListaEntrenadores.jsx";
 import { Dieta } from "./pages/Dieta.jsx"
 import { DietaCliente } from "./pages/DietaCliente.jsx";
-import { Blog } from "./pages/Blog.jsx"
+
 import { Perfiles } from "./pages/Perfiles.jsx";
 import { PerfilEntrenadorPrivado } from "./component/PerfilEntrenadorPrivado.js";
 import { RecuperarContraseña } from "./pages/RecuperarContraseña.jsx";
@@ -50,8 +48,6 @@ const Layout = () => {
                     <Navbar />
                     <Routes>
                         <Route element={<Home />} path="/" />
-                        <Route element={<Demo />} path="/demo" />
-                        <Route element={<Single />} path="/single/:theid" />
                         <Route element={<h1>Not found!</h1>} />
                         <Route element={<IniciarSesion />} path="login" />
                         <Route element={<Registro />} path="/registro" />
@@ -68,7 +64,6 @@ const Layout = () => {
                         <Route element={<Rutinas />} path="/rutinas" />
                         <Route element={<ListaEntrenadores />} path="/listaentrenadores" />
                         <Route element={<ListaDeClientes />} path="/listaclientes" />
-                        <Route element={<Blog />} path="/blog" />
                         <Route element={<ListaDeClientes />} path="/entrenador/:entrenador_id/clientes" />
                         <Route element={<DetalleCliente />} path="/clientes/:cliente_id" />
                         <Route element={<Chat />} path="/chat/:id" />

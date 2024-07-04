@@ -49,7 +49,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 
-			HandleRegistro: async ({ email, password, rol, nombre, telefono }) => {
+			HandleRegistro: async ({ email, password, rol, nombre }) => {
 				try {
 					const response = await fetch(`${process.env.BACKEND_URL}/registro`, {
 
@@ -63,7 +63,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 							password: password,
 							rol: rol ? true : false,
 							nombre: nombre,
-							telefono: telefono
 						}),
 					});
 

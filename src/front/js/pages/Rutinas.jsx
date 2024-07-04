@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/Rutinas.css";
+import { motion } from 'framer-motion';
 
 export const Rutinas = () => {
     const { actions } = useContext(Context);
@@ -68,6 +69,14 @@ export const Rutinas = () => {
     };
 
     return (
+        <>
+        <motion.div
+		onClick={(e) => e.stopPropagation()}
+		initial={{ y: -50, opacity: 0 }}
+		animate={{ y: 0, opacity: 1 }}
+		exit={{ y: 50, opacity: 0 }}
+		transition={{ duration: 0.5 }}>
+
         <div className="containerPrincipalRutina">
             <div className="contenedorTituloRutinaPrivada">
                 <div className="tituloRutinaPrivada">
@@ -114,5 +123,8 @@ export const Rutinas = () => {
             </div>
 
         </div>
+
+        </motion.div>
+        </>
     );
 };

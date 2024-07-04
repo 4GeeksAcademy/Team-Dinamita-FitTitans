@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Context } from "../store/appContext";
 import UploadWidgetFoto from './UploadWidgetFoto.js';
 import "../../styles/PerfilEntrenadorPrivado.css";
+import { motion } from 'framer-motion';
 
 export const PerfilEntrenadorPrivado = () => {
   const [usuarios, setUsuarios] = useState([]);
@@ -81,6 +82,13 @@ export const PerfilEntrenadorPrivado = () => {
 
   return (
     <>
+    <motion.div
+		onClick={(e) => e.stopPropagation()}
+		initial={{ y: -50, opacity: 0 }}
+		animate={{ y: 0, opacity: 1 }}
+		exit={{ y: 50, opacity: 0 }}
+		transition={{ duration: 0.5 }}>
+
       {rol ? (
         <div className="container contenedorPerfilPrivado">
           <div className="contenedorTituloPerfil">
@@ -182,6 +190,7 @@ export const PerfilEntrenadorPrivado = () => {
       ) : (
         <h1 className="errorInicio"> ERROR, Vuelve a Iniciar Sesion </h1>
       )}
+    </motion.div>
     </>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/Contactanos.css";
+import { motion } from 'framer-motion';
 
 export const Contactanos = () => {
     const { store, actions } = useContext(Context);
@@ -19,6 +20,14 @@ export const Contactanos = () => {
     };
 
     return (
+        <>
+        <motion.div
+		onClick={(e) => e.stopPropagation()}
+		initial={{ y: -50, opacity: 0 }}
+		animate={{ y: 0, opacity: 1 }}
+		exit={{ y: 50, opacity: 0 }}
+		transition={{ duration: 0.5 }}>
+            
         <div className="container contenedorContactanos">
             <div className="contenedorTituloContactanos">
                 <div className="form-group TituloContactanos ">CONTÁCTANOS</div>
@@ -76,5 +85,8 @@ export const Contactanos = () => {
                 </div>
             </form>
         </div>
+        
+        </motion.div>
+        </>
     );
 };
