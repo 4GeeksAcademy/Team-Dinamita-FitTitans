@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/Navbar.css";
 import "../../styles/IniciarSesion.css"
+import { motion } from 'framer-motion';
 import { Toaster, toast } from "sonner";
 
 export const SolicitudRecuperacion = () => {
