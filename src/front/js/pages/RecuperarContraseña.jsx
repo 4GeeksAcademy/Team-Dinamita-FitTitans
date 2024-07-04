@@ -16,24 +16,43 @@ export const RecuperarContraseña = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!validarContraseña(password.primera, verificarContraseña.segunda)) {
-            toast.error("Las contraseñas no coinciden. Por favor, inténtalo de nuevo.");
+        if (!validarContraseña(password, verificarContraseña)) {
+            toast.error("Las contraseñas no coinciden o no cumplen los requisitos.");
+            return;
         }
-
         try {
             const response = await actions.ModificarContraseña(password, user_uuid)
             if(response){
                 toast.success("Contraseña Modificada")
-                navigate("/login")
-            }else
-                toast.error("error al cambiar la contraseña")
+                if(response){
+                    navigate("/login")
+                }
+            } else {
+                toast.error("Error al cambiar la contraseña")
+            }
         } catch (error) {
             toast.error("Hubo un error al procesar tu solicitud. Por favor, inténtalo de nuevo más tarde.");
         }
+
     };  
-    // Función para validar la coincidencia de contraseñas
+
+
+
+    // Función para validar la coincidencia de contraseñas y requisitos adicionales
     const validarContraseña = (password, password2) => {
-        return password === password2;
+        // Validar longitud mínima y coincidencia
+        if (password !== password2 || password.length < 8) {
+            return false;
+        }
+        // Validar al menos un carácter especial y una letra mayúscula
+        const specialChars = /[!@#$%^&*(),.?":{}|<>]/;
+        const uppercaseChars = /[A-Z]/;
+
+        if (!specialChars.test(password) || !uppercaseChars.test(password)) {
+            return false;
+        }
+
+        return true;
     };
 
     const handleCheck = () => {
@@ -58,7 +77,7 @@ export const RecuperarContraseña = () => {
                     <input
                         type={mostrarContraseña ? "text" : "password"}
                         className="form-control"
-                        minLength={3}
+                        minLength={8}
                         required
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="******************"
@@ -71,7 +90,7 @@ export const RecuperarContraseña = () => {
                     <input
                         type={mostrarContraseña ? "text" : "password"}
                         className="form-control"
-                        minLength={3}
+                        minLength={8}
                         required
                         placeholder="******************"
                         onChange={(e) => setVerificarContraseña(e.target.value)}
