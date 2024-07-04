@@ -4,23 +4,33 @@ import { useNavigate } from "react-router-dom";
 import {MiAreaCliente} from "../component/MiAreaCliente.jsx"
 import {MiAreaEntrenador} from "../component/MiAreaEntrenador.jsx"
 import { motion } from 'framer-motion';
+import { Toaster, toast } from "sonner";
  
 export const MiArea = () => {
   const { store, actions } = useContext(Context);
   const [estado, setEstado] = useState(null)
 
   const navigate = useNavigate();
-
+  const token = localStorage.getItem("user_rol")
   useEffect (() =>{
-		const verificar = localStorage.getItem("user_rol")
+		const verificar = token
+    
 		if (verificar === "true"){
          setEstado(true)
-      }else{
+            
+    }else{
         return setEstado(false)
       }
 	},[])
+  
+  const verificardos = store.seInicio
+  useEffect(() =>{
+  
+    if ( verificardos) {
+      toast.success("bienvenido")
+    }
+  }, [])
 
-    
   const Return = (e) => {
     e.preventDefault();
     navigate("/")
@@ -28,6 +38,7 @@ export const MiArea = () => {
 
     return (
   <>
+  <Toaster  position="top-center" richColors />
   <motion.div
 		onClick={(e) => e.stopPropagation()}
 		initial={{ y: -50, opacity: 0 }}
@@ -43,7 +54,6 @@ export const MiArea = () => {
           <button onClick={(e) => Return(e)}> Error Go Home</button>
         </div>
       )}  
-
     </motion.div>
   </>     
     );

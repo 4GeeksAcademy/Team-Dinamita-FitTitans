@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "../../styles/registro.css";
 import { Context } from "../store/appContext";
 import { motion } from 'framer-motion';
+import { Toaster, toast } from "sonner";
 
 export const Registro = ({ closeModal }) => {
   const { store, actions } = useContext(Context);
@@ -25,10 +26,10 @@ export const Registro = ({ closeModal }) => {
 
     
     if (registroExitoso.success) {
-      alert("success");
+      toast.success("success");
       closeModal();
     } else {
-      alert("unexpected error");
+      toast.error("unexpected error");
     }
   };
 
@@ -144,6 +145,7 @@ export const Registro = ({ closeModal }) => {
           </div>
         </form>
       </div>
+      <Toaster position="top-center" richColors/>
     </motion.div>
   </motion.div>
   );

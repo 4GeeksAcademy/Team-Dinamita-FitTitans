@@ -4,6 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { Registro } from "./Registro";
 import { Context } from "../store/appContext";
 import { motion } from 'framer-motion';
+import { Toaster, toast } from "sonner";
 
 export const IniciarSesion = () => {
   const [usuarios, setUsuarios] = useState({
@@ -29,16 +30,15 @@ export const IniciarSesion = () => {
     const verificar = await actions.HandleInicioSesion(usuarios);
     
     if (verificar === true) {
-      alert("funciono")
-
       navigate("/miarea")
     } else {
-      alert("error")
+      toast.error(`Error en Email o Contraseña`)
     }
   };
 
   return (
     <>
+    <Toaster  position="top-center" richColors />
     <motion.div
 		onClick={(e) => e.stopPropagation()}
 		initial={{ y: -50, opacity: 0 }}
