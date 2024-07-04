@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { Context } from "../store/appContext";
 import { useParams, useNavigate } from "react-router-dom";
 import { motion } from 'framer-motion';
+import { Toaster, toast } from "sonner";
 
 export const RecuperarContraseña = () => {
     const [verificarContraseña, setVerificarContraseña] = useState("");
@@ -10,30 +11,48 @@ export const RecuperarContraseña = () => {
     const { store, actions } = useContext(Context);
     const { user_uuid } = useParams(); 
     const navigate = useNavigate(); 
+
     const [mostrarContraseña, setMostrarContraseña] = useState(false);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!validarContraseña(password.primera, verificarContraseña.segunda)) {
-            alert("Las contraseñas no coinciden. Por favor, inténtalo de nuevo.");
-        
-
+        if (!validarContraseña(password, verificarContraseña)) {
+            toast.error("Las contraseñas no coinciden o no cumplen los requisitos.");
+            return;
         }
         try {
-
             const response = await actions.ModificarContraseña(password, user_uuid)
             if(response){
-                alert("Contraseña Modificada")
-                navigate("/login")
-            }else
-                alert("error chavista")
+                toast.success("Contraseña Modificada")
+                if(response){
+                    navigate("/login")
+                }
+            } else {
+                toast.error("Error al cambiar la contraseña")
+            }
         } catch (error) {
-
-            alert("Hubo un error al procesar tu solicitud. Por favor, inténtalo de nuevo más tarde.");
+            toast.error("Hubo un error al procesar tu solicitud. Por favor, inténtalo de nuevo más tarde.");
         }
+
     };  
-    // Función para validar la coincidencia de contraseñas
+
+
+
+    // Función para validar la coincidencia de contraseñas y requisitos adicionales
     const validarContraseña = (password, password2) => {
-        return password === password2;
+        // Validar longitud mínima y coincidencia
+        if (password !== password2 || password.length < 8) {
+            return false;
+        }
+        // Validar al menos un carácter especial y una letra mayúscula
+        const specialChars = /[!@#$%^&*(),.?":{}|<>]/;
+        const uppercaseChars = /[A-Z]/;
+
+        if (!specialChars.test(password) || !uppercaseChars.test(password)) {
+            return false;
+        }
+
+        return true;
     };
 
     const handleCheck = () => {
@@ -42,6 +61,7 @@ export const RecuperarContraseña = () => {
     
     return (
         <>
+        <Toaster position="top-center" richColors/>
         <motion.div
 		onClick={(e) => e.stopPropagation()}
 		initial={{ y: -50, opacity: 0 }}
@@ -57,7 +77,7 @@ export const RecuperarContraseña = () => {
                     <input
                         type={mostrarContraseña ? "text" : "password"}
                         className="form-control"
-                        minLength={3}
+                        minLength={8}
                         required
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="******************"
@@ -70,7 +90,7 @@ export const RecuperarContraseña = () => {
                     <input
                         type={mostrarContraseña ? "text" : "password"}
                         className="form-control"
-                        minLength={3}
+                        minLength={8}
                         required
                         placeholder="******************"
                         onChange={(e) => setVerificarContraseña(e.target.value)}

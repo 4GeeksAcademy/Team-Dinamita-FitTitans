@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Context } from '../store/appContext';
 import '../../styles/RutinaCliente.css'; 
 import { motion } from 'framer-motion';
+import {Toaster, toast } from 'sonner';
 
 export const RutinaCliente = () => {
     const { actions } = useContext(Context);
@@ -18,6 +19,7 @@ export const RutinaCliente = () => {
                 setRutinas(resultado.rutina || []);
             } else {
                 setMensaje(`Error: ${resultado.error}`);
+                toast.error("no hay rutinas")
             }
         };
         fetchRutinaCliente();
@@ -25,6 +27,7 @@ export const RutinaCliente = () => {
 
     return (
         <>
+        <Toaster position="top-center" richColors/>
         <motion.div
 		onClick={(e) => e.stopPropagation()}
 		initial={{ y: -50, opacity: 0 }}

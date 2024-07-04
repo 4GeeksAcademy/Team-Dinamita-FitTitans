@@ -1,0 +1,3 @@
+npm install framer-motion
+
+npm install sonner
