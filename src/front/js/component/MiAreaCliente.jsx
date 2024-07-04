@@ -5,6 +5,8 @@ import { motion } from 'framer-motion';
 
 export const MiAreaCliente = () => {
     const usuarioID = localStorage.getItem("user_id");
+
+    
 //{`/chat/${usuarioID}`} 
     return (
         <>

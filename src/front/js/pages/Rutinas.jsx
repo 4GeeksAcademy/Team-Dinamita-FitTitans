@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/Rutinas.css";
 import { motion } from 'framer-motion';
+import { Toaster, toast } from "sonner";
 
 export const Rutinas = () => {
     const { actions } = useContext(Context);
@@ -32,6 +33,7 @@ export const Rutinas = () => {
             setNuevaRutina("");
         } else {
             setMensaje("Por favor ingresa una rutina válida");
+            toast.error("ingresa rutina valida")
         }
     };
 
@@ -70,6 +72,7 @@ export const Rutinas = () => {
 
     return (
         <>
+        <Toaster position="top-center" richColors/>
         <motion.div
 		onClick={(e) => e.stopPropagation()}
 		initial={{ y: -50, opacity: 0 }}

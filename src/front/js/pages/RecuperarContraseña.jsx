@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { Context } from "../store/appContext";
 import { useParams, useNavigate } from "react-router-dom";
 import { motion } from 'framer-motion';
+import { Toaster, toast } from "sonner";
 
 export const RecuperarContraseña = () => {
     const [verificarContraseña, setVerificarContraseña] = useState("");
@@ -10,25 +11,24 @@ export const RecuperarContraseña = () => {
     const { store, actions } = useContext(Context);
     const { user_uuid } = useParams(); 
     const navigate = useNavigate(); 
+
     const [mostrarContraseña, setMostrarContraseña] = useState(false);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!validarContraseña(password.primera, verificarContraseña.segunda)) {
-            alert("Las contraseñas no coinciden. Por favor, inténtalo de nuevo.");
-        
-
+            toast.error("Las contraseñas no coinciden. Por favor, inténtalo de nuevo.");
         }
-        try {
 
+        try {
             const response = await actions.ModificarContraseña(password, user_uuid)
             if(response){
-                alert("Contraseña Modificada")
+                toast.success("Contraseña Modificada")
                 navigate("/login")
             }else
-                alert("error chavista")
+                toast.error("error al cambiar la contraseña")
         } catch (error) {
-
-            alert("Hubo un error al procesar tu solicitud. Por favor, inténtalo de nuevo más tarde.");
+            toast.error("Hubo un error al procesar tu solicitud. Por favor, inténtalo de nuevo más tarde.");
         }
     };  
     // Función para validar la coincidencia de contraseñas
@@ -42,6 +42,7 @@ export const RecuperarContraseña = () => {
     
     return (
         <>
+        <Toaster position="top-center" richColors/>
         <motion.div
 		onClick={(e) => e.stopPropagation()}
 		initial={{ y: -50, opacity: 0 }}
