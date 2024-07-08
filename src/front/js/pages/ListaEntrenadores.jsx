@@ -13,6 +13,7 @@ export const ListaEntrenadores = () => {
   const [selectedPlan, setSelectedPlan] = useState(null);
   const usuario_id = localStorage.getItem("user_id");
   const user_role = localStorage.getItem("user_role");
+  const [manejar, setManejar] = useState(null)
 
   useEffect(() => {
     if (!loaded) {
@@ -26,6 +27,14 @@ export const ListaEntrenadores = () => {
     }
   }, [actions, loaded]);
 
+  useEffect(() => {
+    const verificar = actions.obtenerListaEntrenadores()
+    if (verificar){
+      setManejar(false)
+    }else{
+      setManejar(true)
+    }
+  })
   const contratarEntrenador = () => {
     if (!usuario_id) {
       setError(new Error("Debes estar registrado para contratar a un entrenador"));
@@ -71,7 +80,11 @@ export const ListaEntrenadores = () => {
 		animate={{ y: 0, opacity: 1 }}
 		exit={{ y: 50, opacity: 0 }}
 		transition={{ duration: 0.5 }}>
-
+    {manejar ? (
+      <div className="container mt-5 " id="sinEntrenador">
+        <p>no hay entrenadores aun</p>
+      </div>
+    ) : (
     <div className="container mt-5 containerEntrenadores">
       <ul className="list-group mb-5 contenedortarjetalistaEntrenadores1">
         {store.entrenadores.map((entrenador, index) => (
@@ -162,7 +175,8 @@ export const ListaEntrenadores = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div>)}
+    
     </motion.div>
     </>
   );

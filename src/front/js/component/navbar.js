@@ -6,6 +6,7 @@ import { Registro } from "./Registro";
 import { Context } from "../store/appContext";
 import logofittitans from "../../img/logofittitans.png";
 import { motion } from 'framer-motion';
+import { Toaster, toast } from "sonner";
 
 
 
@@ -32,6 +33,7 @@ export const Navbar = () => {
 		if (store.seInicio) {
 			const usuarioTipo = localStorage.getItem("user_rol");
 			setTipoUsuario(usuarioTipo === "true");
+			toast.success("bienvenido")
 		}
 	}, [store.seInicio]);
 
@@ -53,6 +55,7 @@ export const Navbar = () => {
 
 	return (
 		<>
+		<Toaster  position="top-center" richColors />
 			<motion.nav
 				className="navbar navbar-expand-lg navbar-dark bg-dark p-3 navbarPrincipal fixed-top"
 				initial={{ y: -100 }}

@@ -155,7 +155,6 @@ def registro():
     password = data.get('password')
     rol = data.get('rol', False)
     nombre = data.get('nombre')
-    telefono = data.get('telefono')
 
     if not email or not password:
         return jsonify({'message': 'Username and password are required'}), 400
@@ -165,7 +164,7 @@ def registro():
     rol_booleano = True if rol else False
     user_uuid = str(uuid.uuid4())
     enviar_correo_bienvenida(email)
-    new_user = User(email=email, password=hashed_password, rol=rol_booleano, nombre=nombre, telefono=telefono, user_uuid = user_uuid)
+    new_user = User(email=email, password=hashed_password, rol=rol_booleano, nombre=nombre,  user_uuid = user_uuid)
     db.session.add(new_user)
     db.session.commit()  
     # Obtengo el id del usuario recien creado
