@@ -9,10 +9,12 @@ pre {
     max-width: 43.75rem;
     margin: 0 auto;
     color: white;
+    background-color: rgba(0, 0, 0, 0.9);
 }
 
 .contenedorTituloDietaPrivada {
     text-align: center;
+    
 }
 
 .tituloDietaPrivada {
@@ -21,7 +23,6 @@ pre {
     font-size: 3.125rem;
     margin-top: 2%;
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.9);
     display: inline-block;
     padding: 0.9375rem;
     max-width: 100%;

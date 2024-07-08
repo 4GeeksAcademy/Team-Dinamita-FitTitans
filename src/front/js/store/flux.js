@@ -277,7 +277,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 					const data = await response.json();
 					setStore({ entrenadores: data.entrenadores }); // Actualiza el estado con los datos de los entrenadores
-					return data;  // Retorna los datos de los entrenadores
+					return true;  // Retorna los datos de los entrenadores
 				} catch (error) {
 					console.error('Error al obtener la lista de entrenadores:', error);
 					throw error;
