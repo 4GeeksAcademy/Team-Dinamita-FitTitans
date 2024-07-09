@@ -77,11 +77,10 @@ export const Home = () => {
 					<div className="row row-fila1">
 						<div className="col-md-7 col-columna1">
 							<div className="titulo1">
-								¿Buscas entrenadores/as personales
+								Encuentra los mejores entrenadores personales y nutricionistas
 								<br />
-								profesionales?
 								<div className="subTitulo1">
-									Este es el espacio donde encontraras preparadores físicos y nutricionistas para cumplir tus objetivos.
+								Transforma tu vida, un entrenamiento a la vez.
 								</div>
 								<div className="botonConoceNuestrosEntrenadores">
 									<Link to="/listaentrenadores">
@@ -90,12 +89,11 @@ export const Home = () => {
 								</div>
 							</div>
 						</div>
-						<div className="col-md-1"></div>
-						<div className="col-md-4 col-columna2">
+						<div className="col-md-5 col-columna2">
 							<div className="titulo2">
 								¿Eres entrenador/a?
 								<div className="subTitulo2">
-									Potencia tu entrenamiento personal con nuestra app
+									Potencia tu entrenamiento personal con nuestra app.
 									<br />
 									Ven y forma parte de nuestro equipo
 								</div>

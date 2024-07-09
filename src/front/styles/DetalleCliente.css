@@ -1,5 +1,9 @@
 .contenedorDetalleCliente {
     margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; 
 }
 .contenedorTituloDetalleCliente {
     text-align: center;
@@ -19,6 +23,7 @@
     overflow-wrap: break-word;
 }
 .contenedorContenidoDetalleCliente {
+    width: 43.75rem;
     background-color: rgba(0, 0, 0, 0.9);
     border: 3px solid #e7a33e;
     border-radius: 5px;
