@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "../../styles/FormulaCalorias.css";
 import { motion } from 'framer-motion';
-
+import {ChatGpt} from "../component/Chat/ChatGpt.jsx"
 export const FormulaCalorias = () => {
     const [datosFormulario, setDatosFormulario] = useState({
         genero: "",
@@ -92,6 +92,7 @@ export const FormulaCalorias = () => {
                 {resultado && <div className="resultado">{resultado}</div>}
             </div>
         </div>
+        <ChatGpt />
         
         </motion.div>
         </>
