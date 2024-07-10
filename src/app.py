@@ -1,6 +1,8 @@
 """
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
+
+import openai
 from api.RecuperarContraseña import enviar_correo
 from api.EmailBienvenida import enviar_correo_bienvenida
 import os
@@ -45,7 +47,6 @@ app.config['SECRET_KEY'] = 'fit_titans_ajr'  # Cambia esto por una clave secreta
 app.config['SECURITY_PASSWORD_SALT'] = 'fit_titans_ajr'  # Cambia esto por un salt seguro
 app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(hours=72)
 
-jwt = JWTManager(app)
 
 # Configura el scheduler
 scheduler = APScheduler()
@@ -124,7 +125,7 @@ def delete_old_messages():
         # Elimina los mensajes anteriores a la fecha límite
         deleted_count = Message.query.filter(Message.timestamp < cutoff_date).delete()
         db.session.commit()
-        
+
         print(f"Deleted {deleted_count} old messages.")
     except Exception as e:
         print(f"Error deleting old messages: {str(e)}")
@@ -178,20 +179,20 @@ def login():
     data = request.json
     email = data.get('email')
     password = data.get('password')
-    
+
     if not email or not password:
         return jsonify({'message': 'Username and password are required'}), 400
-    
+
     user = User.query.filter_by(email=email).first()
-    
+
     if not user:
         return jsonify({'message': 'usuario no encontrado'}), 401
     if not check_password(password, user.password) : 
         return jsonify({'message': 'contrasegna incorrecta'}), 402
-        
+
     token = create_access_token(identity= user.id , expires_delta=timedelta(minutes=60))
     return jsonify({'message': 'Login successful', "token": token, "user_rol" : user.rol, "id" : user.id}), 200
-    
+
 # GETTING ALL THE USERS
 @app.route("/users", methods=["GET"])
 def get_all_users():
@@ -288,11 +289,11 @@ def get_cliente_detalle(cliente_id):
     cliente = User.query.get(cliente_id)
     if cliente is None:
         return jsonify({"message": "Cliente no encontrado"}), 404
-    
+
     asignacion = Asignacion_entrenador.query.filter_by(usuario_id=cliente_id).first()
     if asignacion is None:
         return jsonify({"message": "Asignación no encontrada"}), 404
-    
+
     cliente_detalle = cliente.serialize()
     cliente_detalle.update({
         "dieta": asignacion.dieta,
@@ -321,12 +322,12 @@ def contratar_entrenador():
 
     if not entrenador.rol or usuario.rol:
         return jsonify({"error": "Roles incorrectos"}), 400
-    
+
     # Verifico si ya existe una asignacion
     asignacion_existente = Asignacion_entrenador.query.filter_by(entrenador_id=entrenador_id, usuario_id=usuario_id).first()
     if asignacion_existente:
         return jsonify({"error": "El usuario ya ha contratado a este entrenador"}), 400
-    
+
     asignacion = Asignacion_entrenador(
         entrenador_id=entrenador_id,
         usuario_id=usuario_id,
@@ -343,7 +344,7 @@ def obtener_rutina(cliente_id):
     if asignacion is None:
         return jsonify({"message": "Asignación no encontrada"}), 404
     return jsonify({"rutina": asignacion.rutina.split(';') if asignacion.rutina else []}), 200
-    
+
 @app.route('/clientes/<int:cliente_id>/rutina', methods=['POST'])
 def crear_rutina(cliente_id):
     data = request.get_json()
@@ -560,7 +561,7 @@ def handle_message(data):
             )
             db.session.add(message)
             db.session.commit()
-            
+
             message_data = message.serialize()
             emit('message', message_data, broadcast=True)
         else:
@@ -616,7 +617,7 @@ def get_destinatario_id():
 if __name__ == '__main__':
     socketio.run(app, debug=True)
 
-    
+
 @app.route('/api/asignaciones_entrenador', methods=['GET'])
 def get_asignaciones_entrenador():
     try:
@@ -653,8 +654,35 @@ def get_entrenadores_video():
     }), 200
 
 
+# Configura tu API key de OpenAI
+from openai import OpenAI
 
+@app.route('/chatgpt', methods=['POST'])
+def obtener_respuesta():
+    data = request.get_json()
+    mensaje = data.get('mensaje')
+
+    if not mensaje:
+        return jsonify({"error": "Ingresa mensaje"}), 413
+    
+    client = OpenAI(
+        api_key=os.environ.get("CHATGPT"),
+    )
+
+    completion = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": mensaje}
+        ]
+    )
+    
+    response = completion.choices[0].message.content  # Asegúrate de extraer el contenido del mensaje
+
+    return jsonify({"response": response})  # Devuelve el contenido como JSON
 #no borrar
 if __name__ == '__main__':
     PORT = int(os.environ.get('PORT', 3001))
     app.run(host='0.0.0.0', port=PORT, debug=True)
+
+

@@ -54,7 +54,7 @@ export const ChatEntrenador = () => {
             return () => {
                 socket.off('message');
                 socket.off('error');
-                
+                socket.disconnect();
             };
         }
 

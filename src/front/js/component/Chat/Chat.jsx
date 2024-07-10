@@ -74,6 +74,7 @@ export const Chat = () => {
        return () => {
         socket.off('message');
         socket.off('error');
+        socket.disconnect();
     };
 
     }, []); // Dependencia vacía para ejecutar solo una vez al montar el componente
