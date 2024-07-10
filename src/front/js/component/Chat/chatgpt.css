@@ -27,3 +27,11 @@
     box-sizing: border-box;
     margin-bottom: 5%;
 }
+
+#respuestagpt{
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+#titulo{
+  color: #e7a33e;
+}
