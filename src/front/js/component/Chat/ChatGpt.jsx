@@ -25,19 +25,19 @@ export const ChatGpt = () => {
 
   return (
     <div id='diva'>
-      <h1>Pregúntale a ChatGPT</h1>
+      <h1 id='titulo'>Pregúntale a ChatGPT</h1>
       <textarea
         id='textareas'
-        rows="4"
+        rows="2"
         cols="50"
         placeholder="Escribe tu pregunta aquí..."
         onChange={(e) => setMessage(e.target.value)}
       />
       <br />
       <button onClick={sendMessage}>Enviar</button>
-      <div id='diva'>
-        <h2>Respuesta:</h2>
-        <p>{response}</p>
+      <div >
+        <h2 id='titulo'>Respuesta:</h2>
+        <p id='respuestagpt'>{response} prueba para ver si el texto se ve bien</p>
       </div>
     </div>
   );
