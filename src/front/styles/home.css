@@ -92,6 +92,7 @@ body {
 }
 
 .col-columna3 {
+  background-color: rgba(0, 0, 0, 0.9);
   background-image: url('https://res.cloudinary.com/dbqq4n3qa/image/upload/v1717006597/tip-entreno11_gruynk.jpg');
   background-size: cover;
   background-repeat: no-repeat;
@@ -108,17 +109,20 @@ body {
   position: relative;
 }
 
-.tituloTipsEntrenamiento {
+#cuadroentreno{
   background-color: rgba(0, 0, 0, 0.9);
+  height: auto;
+  width: auto;
+}
+.tituloTipsEntrenamiento {
   border-radius: 5px;
   font-size: 30px;
   padding: 10px;
   min-width: 0;
   margin-bottom: 2%;
 }
-
 .tipEntrenamiento {
-  background-color: rgba(0, 0, 0, 0.9);
+  
   border-radius: 5px;
   font-size: 25px;
   padding: 10px;
@@ -202,7 +206,7 @@ body {
 }
 
 .tituloTipsNutricion {
-  background-color: rgba(0, 0, 0, 0.9);
+ 
   border-radius: 5px;
   font-size: 30px;
   padding: 10px;
@@ -211,7 +215,7 @@ body {
 }
 
 .tipNutricion {
-  background-color: rgba(0, 0, 0, 0.9);
+  
   border-radius: 5px;
   font-size: 25px;
   padding: 10px;

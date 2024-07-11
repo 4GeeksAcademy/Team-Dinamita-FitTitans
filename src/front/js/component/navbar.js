@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "../../styles/Navbar.css";
 import { Registro } from "./Registro";
 import { Context } from "../store/appContext";
-import logofittitans from "../../img/logofittitans.png";
+import logofittitans from "../../img/v2.2.png";
 import { motion } from 'framer-motion';
 import { Toaster, toast } from "sonner";
 
