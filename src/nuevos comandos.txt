@@ -1,6 +1,0 @@
-npm install framer-motion
-
-npm install sonner
-
-pip install openai
-pipenv install openai
