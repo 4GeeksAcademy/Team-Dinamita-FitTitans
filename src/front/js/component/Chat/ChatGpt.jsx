@@ -25,7 +25,7 @@ export const ChatGpt = () => {
 
   return (
     <div id='diva'>
-      <h1 id='titulo'>Pregúntale a ChatGPT</h1>
+      <h1 id='titulo'>Pregúnta por las calorias de tus comidas</h1>
       <textarea
         id='textareas'
         rows="2"
