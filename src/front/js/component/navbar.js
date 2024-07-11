@@ -57,7 +57,9 @@ export const Navbar = () => {
 		actions.logout();
 		navigate("/")
 		setTipoUsuario(false)
-		socket.disconnect();
+		socket.off('message');
+        socket.off('error');
+        socket.disconnect();
 	};
 
 	return (

@@ -70,12 +70,12 @@ export const Chat = () => {
             console.error('Error from server:', error);
         });
 
-       // Función de limpieza al desmontar el componente
-       return () => {
-        socket.off('message');
-        socket.off('error');
-    };
-
+        // Función de limpieza al desmontar el componente
+        /* return () => {
+            socket.off('message');
+            socket.off('error');
+            socket.disconnect();
+        }; */
     }, []); // Dependencia vacía para ejecutar solo una vez al montar el componente
 
     const sendMessage = (e) => {
@@ -92,43 +92,46 @@ export const Chat = () => {
 
     return (
         <>
-         <motion.div
-		onClick={(e) => e.stopPropagation()}
-		initial={{ y: -50, opacity: 0 }}
-		animate={{ y: 0, opacity: 1 }}
-		exit={{ y: 50, opacity: 0 }}
-		transition={{ duration: 0.5 }}>
+            <motion.div
+                onClick={(e) => e.stopPropagation()}
+                initial={{ y: -50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: 50, opacity: 0 }}
+                transition={{ duration: 0.5 }}>
 
-        <div className="containerPrincipalChat">
-            <div className="contenedorTituloChat">
-                <div className="tituloChat">
-                    CHAT
+                <div className="containerPrincipalChat">
+                    <div className="contenedorTituloChat">
+                        <div className="tituloChat">
+                            CHAT
+                        </div>
+                    </div>
+                    <div className="formularioChat">
+                        <div className="cajaChat">
+                            <ul>
+                                {messages.map((msg, index) => (
+                                    <li
+                                        key={index}
+                                        className={`mensajeItem ${msg.remitente_id === remitenteId ? 'mensajeRemitente' : 'mensajeDestinatario'}`}
+                                    >
+                                        <strong>{msg.remitente_nombre}</strong>: {msg.text} <br /> {msg.timestamp}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                        <div className="inputContainer">
+                            <input
+                                type="text"
+                                value={message}
+                                onChange={(e) => setMessage(e.target.value)}
+                                placeholder="Escribe un mensaje"
+                                autoComplete="off"
+                            />
+                            <button onClick={sendMessage}>Enviar</button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div className="formularioChat">
-                <div className="cajaChat">
-                    <ul>
-                        {messages.map((msg, index) => (
-                            <li key={index} className="mensajeItem">
-                                <strong>{msg.remitente_nombre}</strong>: {msg.text} <br /> {msg.timestamp}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-                <div className="inputContainer">
-                    <input
-                        type="text"
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                        placeholder="Escribe un mensaje"
-                        autoComplete="off"
-                    />
-                    <button onClick={sendMessage}>Enviar</button>
-                </div>
-            </div>
-        </div>
 
-        </motion.div>
+            </motion.div>
         </>
     );
 };
