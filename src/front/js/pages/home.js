@@ -105,8 +105,9 @@ export const Home = () => {
 							</div>
 						</div>
 					</div>
-					<div className="row row-fila2">
-						<div className="col-md-4 col-columna3">
+					<div className="row row-fila2" >
+						<div className="col-md-4 col-columna3" >
+						<div id="cuadroentreno">
 							<div className="tituloTipsEntrenamiento">
 								TIP DE ENTRENAMIENTO
 							</div>
@@ -117,12 +118,14 @@ export const Home = () => {
 								<button className="btn-tipEntrenamientoNuevo" onClick={clickGenerarTipEntreno}>Nuevo tip</button>
 							</div>
 						</div>
+						</div>
 						<div className="col-md-4 col-columna4">
 							<div className="tituloCalculaCalorias">
 								<Link to="/formulacalorias" className="linkHomeCalculaCalorias">CALCULA TUS CALORIAS DIARIAS</Link>
 							</div>
 						</div>
 						<div className="col-md-4 col-columna5">
+						<div id="cuadroentreno">
 							<div className="tituloTipsNutricion">
 								TIP DE NUTRICIÓN
 							</div>
@@ -132,6 +135,7 @@ export const Home = () => {
 							<div className="botonNuevoTipNutricion">
 								<button className="btn-tipNutricionNuevo" onClick={clickGenerarTipNutricion}>Nuevo tip</button>
 							</div>
+						</div>
 						</div>
 					</div>
 				</div>) :
