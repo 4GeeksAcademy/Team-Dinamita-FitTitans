@@ -37,7 +37,7 @@ export const ChatGpt = () => {
       <button onClick={sendMessage}>Enviar</button>
       <div >
         <h2 id='titulo'>Respuesta:</h2>
-        <p id='respuestagpt'>{response} prueba para ver si el texto se ve bien</p>
+        <p id='respuestagpt'>{response}</p>
       </div>
     </div>
   );
