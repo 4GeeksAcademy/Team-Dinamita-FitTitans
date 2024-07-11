@@ -25,7 +25,7 @@ export const ChatGpt = () => {
 
   return (
     <div id='diva'>
-      <h1 id='titulo'>Pregúntale a ChatGPT</h1>
+      <h1 id='titulo'>Pregúnta por las calorias de tus comidas</h1>
       <textarea
         id='textareas'
         rows="2"
@@ -37,7 +37,7 @@ export const ChatGpt = () => {
       <button onClick={sendMessage}>Enviar</button>
       <div >
         <h2 id='titulo'>Respuesta:</h2>
-        <p id='respuestagpt'>{response} prueba para ver si el texto se ve bien</p>
+        <p id='respuestagpt'>{response}</p>
       </div>
     </div>
   );

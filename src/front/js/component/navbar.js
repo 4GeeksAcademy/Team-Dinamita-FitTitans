@@ -4,11 +4,17 @@ import { useNavigate } from "react-router-dom";
 import "../../styles/Navbar.css";
 import { Registro } from "./Registro";
 import { Context } from "../store/appContext";
-import logofittitans from "../../img/logofittitans.png";
+import logofittitans from "../../img/v2.2.png";
 import { motion } from 'framer-motion';
 import { Toaster, toast } from "sonner";
+import io from 'socket.io-client';
 
-
+const socket = io(process.env.BACKEND_URL, {
+    transports: ['websocket'], // Forzar la conexión a WebSocket
+    query: {
+        user_id: localStorage.getItem('user_id')
+    }
+});
 
 export const Navbar = () => {
 	const [inicioSesion, setInicioSesion] = useState(null);
@@ -51,6 +57,9 @@ export const Navbar = () => {
 		actions.logout();
 		navigate("/")
 		setTipoUsuario(false)
+		socket.off('message');
+        socket.off('error');
+        socket.disconnect();
 	};
 
 	return (
