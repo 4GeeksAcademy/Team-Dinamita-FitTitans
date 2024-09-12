@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import { Context } from '../store/appContext.js';
 import UploadWidget from '../component/UploadWidget.js';
 import "../../styles/VideosEntrenador.css"
+import { motion } from 'framer-motion';
+import { Toaster, toast } from "sonner";
 
 export const VideosEntrenador = () => {
   const { store, actions } = useContext(Context);
@@ -15,10 +17,10 @@ export const VideosEntrenador = () => {
   const handleSubirVideo = async (secureUrl, titulo) => {
     try {
       await actions.Videos(id, secureUrl, token, titulo);
-      alert("Video subido correctamente");
+      toast.success("Video subido correctamente");
       setVideos([...videos, { url: secureUrl, titulo }]); // Agregar el nuevo video al estado local
     } catch (error) {
-      console.error("Error al subir el video:", error);
+      toast.error("Error al subir el video:", error);
     }
   };
 
@@ -41,46 +43,57 @@ export const VideosEntrenador = () => {
     fetchEntrenadorUnico();
   }, [id]); // Ejecutar efecto cuando cambia el id
 
-  console.log(store.usuarioUnico, "prueba");
-  console.log(videos);
+
 
   return (
-    <div className="containerPrincipalVideo">
-      <div className="contenedorTituloVideo">
-        <div className="tituloVideo">
-          VIDEOS
-        </div>
-      </div>
-      <div className="formularioVideo">
-        {rol ? (
-          <div>
-            {videos.length > 0 ? (
-              <div className="gridVideos">
-                {videos.map((video, index) => (
-                  <div key={index} className="videoItem">
-                    <video src={video.url} controls className="videoControl" />
-                    <p className="text-light">Título: {video.titulo}</p>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <h1 className="text-light">No hay videos aún</h1>
-            )}
+    <>
+    <Toaster position="top-center" richColors/>
+    <motion.div
+		onClick={(e) => e.stopPropagation()}
+		initial={{ y: -50, opacity: 0 }}
+		animate={{ y: 0, opacity: 1 }}
+		exit={{ y: 50, opacity: 0 }}
+		transition={{ duration: 0.5 }}>
+
+      <div className="containerPrincipalVideo">
+        <div className="contenedorTituloVideo">
+          <div className="tituloVideo">
+            VIDEOS
           </div>
-        ) : (
-          <h1 className="text-light">No hay videos aún</h1>
-        )}
-        <div className="input-containerSubirVideo">
-          <UploadWidget onUploadSuccess={handleSubirVideo} titulo={tituloVideo} />
-          <input
-            type="text"
-            value={tituloVideo}
-            onChange={(e) => setTituloVideo(e.target.value)}
-            placeholder="Ingrese el título del video"
-            className="inputTituloVideo"
-          />
+        </div>
+        <div className="formularioVideo">
+          {rol ? (
+            <div>
+              {videos.length > 0 ? (
+                <div className="gridVideos">
+                  {videos.map((video, index) => (
+                    <div key={index} className="videoItem">
+                      <video src={video.url} controls className="videoControl" />
+                      <p className="text-light">Título: {video.titulo}</p>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <h1 className="text-light">No hay videos aún</h1>
+              )}
+            </div>
+          ) : (
+            <h1 className="text-light">No hay videos aún</h1>
+          )}
+          <div className="input-containerSubirVideo">
+            <UploadWidget onUploadSuccess={handleSubirVideo} titulo={tituloVideo} />
+            <input
+              type="text"
+              value={tituloVideo}
+              onChange={(e) => setTituloVideo(e.target.value)}
+              placeholder="Ingrese el título del video"
+              className="inputTituloVideo"
+            />
+          </div>
         </div>
       </div>
-    </div>
+
+    </motion.div>
+    </>
   );
 };

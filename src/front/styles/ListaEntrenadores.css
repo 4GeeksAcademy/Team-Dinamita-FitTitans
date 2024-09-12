@@ -100,3 +100,9 @@
     width: 100%;
 }
 
+#sinEntrenador{
+    background-color:rgba(0, 0, 0, 0.8);
+    color: #e7a33e;
+    text-align: center;
+    font-size: 65px !important;
+}

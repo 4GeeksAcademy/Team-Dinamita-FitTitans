@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/home.css";
 import { Registro } from "../component/Registro.js";
+import { motion } from 'framer-motion';
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
@@ -65,16 +66,21 @@ export const Home = () => {
 	}, [token, estado])
 	return (
 		<>
+		<motion.div
+		onClick={(e) => e.stopPropagation()}
+		initial={{ y: -50, opacity: 0 }}
+		animate={{ y: 0, opacity: 1 }}
+		exit={{ y: 50, opacity: 0 }}
+		transition={{ duration: 0.5 }}>
 			{estado ? (
 				<div className="container-fluid">
 					<div className="row row-fila1">
 						<div className="col-md-7 col-columna1">
 							<div className="titulo1">
-								¿Buscas entrenadores/as personales
+								Encuentra los mejores entrenadores personales y nutricionistas
 								<br />
-								profesionales?
 								<div className="subTitulo1">
-									Este es el espacio donde encontraras preparadores físicos y nutricionistas para cumplir tus objetivos.
+								Transforma tu vida, un entrenamiento a la vez.
 								</div>
 								<div className="botonConoceNuestrosEntrenadores">
 									<Link to="/listaentrenadores">
@@ -83,12 +89,11 @@ export const Home = () => {
 								</div>
 							</div>
 						</div>
-						<div className="col-md-1"></div>
-						<div className="col-md-4 col-columna2">
+						<div className="col-md-5 col-columna2">
 							<div className="titulo2">
 								¿Eres entrenador/a?
 								<div className="subTitulo2">
-									Potencia tu entrenamiento personal con nuestra app
+									Potencia tu entrenamiento personal con nuestra app.
 									<br />
 									Ven y forma parte de nuestro equipo
 								</div>
@@ -100,8 +105,9 @@ export const Home = () => {
 							</div>
 						</div>
 					</div>
-					<div className="row row-fila2">
-						<div className="col-md-4 col-columna3">
+					<div className="row row-fila2" >
+						<div className="col-md-4 col-columna3" >
+						<div id="cuadroentreno">
 							<div className="tituloTipsEntrenamiento">
 								TIP DE ENTRENAMIENTO
 							</div>
@@ -112,12 +118,14 @@ export const Home = () => {
 								<button className="btn-tipEntrenamientoNuevo" onClick={clickGenerarTipEntreno}>Nuevo tip</button>
 							</div>
 						</div>
+						</div>
 						<div className="col-md-4 col-columna4">
 							<div className="tituloCalculaCalorias">
 								<Link to="/formulacalorias" className="linkHomeCalculaCalorias">CALCULA TUS CALORIAS DIARIAS</Link>
 							</div>
 						</div>
 						<div className="col-md-4 col-columna5">
+						<div id="cuadroentreno">
 							<div className="tituloTipsNutricion">
 								TIP DE NUTRICIÓN
 							</div>
@@ -127,6 +135,7 @@ export const Home = () => {
 							<div className="botonNuevoTipNutricion">
 								<button className="btn-tipNutricionNuevo" onClick={clickGenerarTipNutricion}>Nuevo tip</button>
 							</div>
+						</div>
 						</div>
 					</div>
 				</div>) :
@@ -179,6 +188,7 @@ export const Home = () => {
 					</div>
 				)}
 			{isModalOpen && <Registro closeModal={closeModal} />}
+		</motion.div>
 		</>
 	);
 };

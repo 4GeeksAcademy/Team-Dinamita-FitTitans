@@ -17,10 +17,16 @@ def enviar_correo (email, reset_url) :
     mensaje['From'] = email_envio
     mensaje['To'] = email_recibe
 
-    # Leer y personalizar el archivo HTML
-    with open('email.html', 'r') as archivo:
-        html = archivo.read()
-        html_personalizado = html.replace('{{email}}', email).replace('{{reset_url}}', reset_url)
+    # Obtener la ruta absoluta del archivo email.html
+    script_dir = os.path.dirname(__file__)  # Directorio del script actual
+    rel_path = "email.html"  # Ruta relativa al archivo email.html
+    abs_file_path = os.path.join(script_dir, rel_path)
+
+    # Leer y personalizar el archivo HTML si existe
+    if os.path.exists(abs_file_path):
+        with open(abs_file_path, 'r', encoding='utf-8') as archivo:
+            html = archivo.read()
+            html_personalizado = html.replace('{{email}}', email).replace('{{reset_url}}', reset_url)
 
     # Adjuntar archivo HTML personalizado
     mensaje.attach(MIMEText(html_personalizado, 'html'))

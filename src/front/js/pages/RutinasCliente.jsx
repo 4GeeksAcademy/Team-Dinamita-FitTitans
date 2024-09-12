@@ -2,13 +2,15 @@ import React, { useState, useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Context } from '../store/appContext';
 import '../../styles/RutinaCliente.css'; 
+import { motion } from 'framer-motion';
+import {Toaster, toast } from 'sonner';
 
 export const RutinaCliente = () => {
     const { actions } = useContext(Context);
     const { usuario_id } = useParams();
     const [rutinas, setRutinas] = useState([]);
     const [mensaje, setMensaje] = useState("");
-    console.log (usuario_id)
+
 
     useEffect(() => {
         const fetchRutinaCliente = async () => {
@@ -17,12 +19,22 @@ export const RutinaCliente = () => {
                 setRutinas(resultado.rutina || []);
             } else {
                 setMensaje(`Error: ${resultado.error}`);
+                toast.error("no hay rutinas")
             }
         };
         fetchRutinaCliente();
     }, [usuario_id, actions]);
 
     return (
+        <>
+        <Toaster position="top-center" richColors/>
+        <motion.div
+		onClick={(e) => e.stopPropagation()}
+		initial={{ y: -50, opacity: 0 }}
+		animate={{ y: 0, opacity: 1 }}
+		exit={{ y: 50, opacity: 0 }}
+		transition={{ duration: 0.5 }}>
+
         <div className="containerPrincipalRutina">
             <div className="contenedorTituloRutinaPrivada">
                 <div className="tituloRutinaPrivada">
@@ -42,5 +54,8 @@ export const RutinaCliente = () => {
                 )}
             </div>
         </div>
+
+        </motion.div>
+        </>
     );
 };

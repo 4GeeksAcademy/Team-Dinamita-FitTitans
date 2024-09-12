@@ -17,13 +17,16 @@ def enviar_correo_bienvenida (email) :
     mensaje['From'] = email_envio
     mensaje['To'] = email_recibe
 
-     # Obtener la ruta absoluta del archivo emailwelcome.html
-    file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'emailwelcome.html')
+    # Obtener la ruta absoluta del archivo email.html
+    script_dir = os.path.dirname(__file__)  # Directorio del script actual
+    rel_path = "emailwelcome.html"  # Ruta relativa al archivo email.html
+    abs_file_path = os.path.join(script_dir, rel_path)
 
-        # Leer y personalizar el archivo HTML
-    with open(file_path, 'r') as archivo:
-        html = archivo.read()
-        html_personalizado = html.replace('{{email}}', email)
+    # Leer y personalizar el archivo HTML si existe
+    if os.path.exists(abs_file_path):
+        with open(abs_file_path, 'r', encoding='utf-8') as archivo:
+            html = archivo.read()
+            html_personalizado = html.replace('{{email}}', email)
 
     # Adjuntar archivo HTML personalizado
     mensaje.attach(MIMEText(html_personalizado, 'html'))

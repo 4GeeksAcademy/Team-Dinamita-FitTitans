@@ -3,6 +3,8 @@ import { useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/Navbar.css";
 import "../../styles/IniciarSesion.css"
+import { motion } from 'framer-motion';
+import { Toaster, toast } from "sonner";
 
 export const SolicitudRecuperacion = () => {
   const [email, setEmail] = useState("");
@@ -13,19 +15,26 @@ export const SolicitudRecuperacion = () => {
     try {
         const response = await actions.RecuperarContraseña(email)
         if (response === true) {
-            alert("Se ha enviado un correo electrónico con las instrucciones para recuperar tu contraseña.");
+            toast.success("Se ha enviado un correo electrónico con las instrucciones para recuperar tu contraseña.");
         } else {
-            alert("Hubo un error al procesar tu solicitud. Por favor, inténtalo de nuevo más tarde.");
+            toast.error("Hubo un error al procesar tu solicitud. Por favor, inténtalo de nuevo más tarde.");
         }
     } catch (error) {
-        console.log("Error:", error);
-        alert("Hubo un error al procesar tu solicitud n2. Por favor, inténtalo de nuevo más tarde.");
+        toast.error("Hubo un error al procesar tu solicitud n2. Por favor, inténtalo de nuevo más tarde.");
     }
 };
-console.log(email)
+
 
 return (
     <>
+    <Toaster position="top-center" richColors/>
+    <motion.div
+		onClick={(e) => e.stopPropagation()}
+		initial={{ y: -50, opacity: 0 }}
+		animate={{ y: 0, opacity: 1 }}
+		exit={{ y: 50, opacity: 0 }}
+		transition={{ duration: 0.5 }}>
+
         <form className="container InicioSesion" onSubmit={handleSubmit} id="inicio">
             <div className="my-3">
                 <label className="form-label d-flex text-start text-light" id="email">
@@ -49,6 +58,8 @@ return (
                 />
             </div>
         </form>
+
+        </motion.div>
     </>
 );
 };

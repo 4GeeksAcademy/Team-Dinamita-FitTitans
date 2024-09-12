@@ -3,12 +3,15 @@ import "../../styles/IniciarSesion.css"
 import { useNavigate, Link } from "react-router-dom";
 import { Registro } from "./Registro";
 import { Context } from "../store/appContext";
+import { motion } from 'framer-motion';
+import { Toaster, toast } from "sonner";
 
 export const IniciarSesion = () => {
   const [usuarios, setUsuarios] = useState({
     email: "",
     password: "",
   });
+
   const [sesion, setSession] = useState(null)
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
@@ -25,19 +28,25 @@ export const IniciarSesion = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const verificar = await actions.HandleInicioSesion(usuarios);
-    console.log(verificar)
+    
     if (verificar === true) {
-      alert("funciono")
-
       navigate("/miarea")
     } else {
-      alert("error")
+      toast.error(`Error en Email o Contraseña`)
     }
   };
 
   return (
     <>
-      {store.seInicio ? (<h1>error</h1>)
+    <Toaster  position="top-center" richColors />
+    <motion.div
+		onClick={(e) => e.stopPropagation()}
+		initial={{ y: -50, opacity: 0 }}
+		animate={{ y: 0, opacity: 1 }}
+		exit={{ y: 50, opacity: 0 }}
+		transition={{ duration: 0.5 }}>
+
+      {store.seInicio ? (<h1 className="text-light">error</h1>)
         : (
           <>
             <form className="container InicioSesion" onSubmit={handleSubmit} id="inicio">
@@ -87,6 +96,8 @@ export const IniciarSesion = () => {
             </form>
             {isModalOpen && <Registro closeModal={closeModal} />}
           </>)}
+          
+    </motion.div>
     </>
   )
 }

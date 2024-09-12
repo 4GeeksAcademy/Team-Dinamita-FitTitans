@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import { Context } from "../store/appContext";
 import UploadWidgetFoto from './UploadWidgetFoto.js';
 import "../../styles/PerfilEntrenadorPrivado.css";
+import { motion } from 'framer-motion';
+import { Toaster, toast } from "sonner";
 
 export const PerfilEntrenadorPrivado = () => {
   const [usuarios, setUsuarios] = useState([]);
@@ -28,11 +30,10 @@ export const PerfilEntrenadorPrivado = () => {
 
       const responseData = await response.json();
       const secureUrl = responseData.secure_url;
-      console.log(secureUrl)
       const updatedUsuarios = usuarios.map((usuario) => {
         if (usuario.id === userId) {
           actions.EditarFotos(id, secureUrl)
-          alert("foto actualizada correctamente")
+          toast.success("foto actualizada correctamente")
           return { ...usuario, foto: responseData.secure_url };
         }
         return usuario;
@@ -40,7 +41,7 @@ export const PerfilEntrenadorPrivado = () => {
 
       setUsuarios(updatedUsuarios);
     } catch (error) {
-      console.error("Error al subir la imagen:", error);
+      toast.error("Error al subir la imagen:", error);
     }
   };
 
@@ -78,10 +79,18 @@ export const PerfilEntrenadorPrivado = () => {
       fetchUsuarioUnico();
     } else { setRol(false), "deja de jode" }
   }, [editar, usuarios.foto]);
-  console.log(usuarios);
+
 
   return (
     <>
+    <Toaster position="top-center" richColors/>
+    <motion.div
+		onClick={(e) => e.stopPropagation()}
+		initial={{ y: -50, opacity: 0 }}
+		animate={{ y: 0, opacity: 1 }}
+		exit={{ y: 50, opacity: 0 }}
+		transition={{ duration: 0.5 }}>
+
       {rol ? (
         <div className="container contenedorPerfilPrivado">
           <div className="contenedorTituloPerfil">
@@ -183,6 +192,7 @@ export const PerfilEntrenadorPrivado = () => {
       ) : (
         <h1 className="errorInicio"> ERROR, Vuelve a Iniciar Sesion </h1>
       )}
+    </motion.div>
     </>
   );
 };

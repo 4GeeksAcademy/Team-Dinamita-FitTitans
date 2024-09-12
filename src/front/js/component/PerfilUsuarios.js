@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import { Context } from "../store/appContext";
 import UploadWidgetFoto from './UploadWidgetFoto.js';
 import "../../styles/PerfilUsuario.css";
+import { motion } from 'framer-motion';
+import { Toaster, toast } from "sonner";
 
 export const PerfilUsuarios = () => {
   const [usuarios, setUsuarios] = useState([]);
@@ -29,11 +31,11 @@ export const PerfilUsuarios = () => {
 
       const responseData = await response.json();
       const secureUrl = responseData.secure_url;
-      console.log(secureUrl)
+   
       const updatedUsuarios = usuarios.map((usuario) => {
         if (usuario.id === userId) {
           actions.EditarFotos(id, secureUrl, token)
-          alert("foto actualizada correctamente")
+          toast.success("foto actualizada correctamente")
           return { ...usuario, foto: responseData.secure_url };
         }
         return usuario;
@@ -41,7 +43,7 @@ export const PerfilUsuarios = () => {
 
       setUsuarios(updatedUsuarios);
     } catch (error) {
-      console.error("Error al subir la imagen:", error);
+      toast.error("Error al subir la imagen:", error);
     }
   };
 
@@ -82,6 +84,14 @@ export const PerfilUsuarios = () => {
 
   return (
     <>
+    <Toaster position="top-center" richColors/>
+    <motion.div
+		onClick={(e) => e.stopPropagation()}
+		initial={{ y: -50, opacity: 0 }}
+		animate={{ y: 0, opacity: 1 }}
+		exit={{ y: 50, opacity: 0 }}
+		transition={{ duration: 0.5 }}>
+
       {usuarioLog ? (
         <div className="container contenedorPerfilPrivado">
           <div className="contenedorTituloPerfil">
@@ -174,6 +184,8 @@ export const PerfilUsuarios = () => {
         </div>
       ) : (
         <h1 className="errorInicio"> ERROR, Vuelve a Iniciar Sesion </h1>)}
+
+    </motion.div>
     </>
   );
 };

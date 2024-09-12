@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import "./chat.css";
+import { motion } from 'framer-motion';
 
 const socket = io(process.env.BACKEND_URL, {
     transports: ['websocket'], // Forzar la conexión a WebSocket
@@ -69,13 +70,12 @@ export const Chat = () => {
             console.error('Error from server:', error);
         });
 
-       // Función de limpieza al desmontar el componente
-       return () => {
-        socket.off('message');
-        socket.off('error');
-        socket.disconnect();
-    };
-
+        // Función de limpieza al desmontar el componente
+        /* return () => {
+            socket.off('message');
+            socket.off('error');
+            socket.disconnect();
+        }; */
     }, []); // Dependencia vacía para ejecutar solo una vez al montar el componente
 
     const sendMessage = (e) => {
@@ -91,33 +91,47 @@ export const Chat = () => {
     };
 
     return (
-        <div className="containerPrincipalChat">
-            <div className="contenedorTituloChat">
-                <div className="tituloChat">
-                    CHAT
+        <>
+            <motion.div
+                onClick={(e) => e.stopPropagation()}
+                initial={{ y: -50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: 50, opacity: 0 }}
+                transition={{ duration: 0.5 }}>
+
+                <div className="containerPrincipalChat">
+                    <div className="contenedorTituloChat">
+                        <div className="tituloChat">
+                            CHAT
+                        </div>
+                    </div>
+                    <div className="formularioChat">
+                        <div className="cajaChat">
+                            <ul>
+                                {messages.map((msg, index) => (
+                                    <li
+                                        key={index}
+                                        className={`mensajeItem ${msg.remitente_id === remitenteId ? 'mensajeRemitente' : 'mensajeDestinatario'}`}
+                                    >
+                                        <strong>{msg.remitente_nombre}</strong>: {msg.text} <br /> {msg.timestamp}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                        <div className="inputContainer">
+                            <input
+                                type="text"
+                                value={message}
+                                onChange={(e) => setMessage(e.target.value)}
+                                placeholder="Escribe un mensaje"
+                                autoComplete="off"
+                            />
+                            <button onClick={sendMessage}>Enviar</button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div className="formularioChat">
-                <div className="cajaChat">
-                    <ul>
-                        {messages.map((msg, index) => (
-                            <li key={index} className="mensajeItem">
-                                <strong>{msg.remitente_nombre}</strong>: {msg.text} <br /> {msg.timestamp}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-                <div className="inputContainer">
-                    <input
-                        type="text"
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                        placeholder="Escribe un mensaje"
-                        autoComplete="off"
-                    />
-                    <button onClick={sendMessage}>Enviar</button>
-                </div>
-            </div>
-        </div>
+
+            </motion.div>
+        </>
     );
 };
